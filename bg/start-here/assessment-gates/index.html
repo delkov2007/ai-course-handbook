@@ -1,0 +1,3603 @@
+
+<!doctype html>
+<html lang="bg" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Learning-by-doing course, release 2026.11 (content as of October 2026)">
+      
+      
+      
+      
+        <link rel="prev" href="../course-overview/">
+      
+      
+        <link rel="next" href="../competency-matrix/">
+      
+      
+        
+          <link rel="alternate" href="../../../start-here/assessment-gates/" hreflang="en">
+        
+          <link rel="alternate" href="./" hreflang="bg">
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Оценяване и гейтове - AI Solution Developer & Architect — Наръчник за курсиста</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          Към съдържанието
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Горен колонтитул">
+    <a href="../../" title="AI Solution Developer &amp; Architect — Наръчник за курсиста" class="md-header__button md-logo" aria-label="AI Solution Developer & Architect — Наръчник за курсиста" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            AI Solution Developer & Architect — Наръчник за курсиста
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Оценяване и гейтове
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="Избери език">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href="../../../start-here/assessment-gates/" hreflang="en" class="md-select__link">
+              English
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="./" hreflang="bg" class="md-select__link">
+              Български
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Търси" placeholder="Търси" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Търси">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Изчисти" aria-label="Изчисти" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Инициализирано търсене
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Навигация" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../" title="AI Solution Developer &amp; Architect — Наръчник за курсиста" class="md-nav__button md-logo" aria-label="AI Solution Developer & Architect — Наръчник за курсиста" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    AI Solution Developer & Architect — Наръчник за курсиста
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Добре дошли
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Започнете оттук
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Започнете оттук
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../how-to-use/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Как да използвате наръчника
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../course-overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Преглед на курса
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Оценяване и гейтове
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Оценяване и гейтове
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Съдържание">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Съдържание
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Защо гейтове и какво измерват
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Общи правила за всички гейтове
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Общи правила за всички гейтове">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Среда и какво се предоставя
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Задължителни артефакти за предаване (всички гейтове)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Модел на оценяване
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Протокол на устната защита (всички гейтове)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Позиция относно почтеността
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Специални условия
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-g1-evals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Гейт G1 — Изграждане на функционалност чрез Фабриката и доказване с evals
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Гейт G1 — Изграждане на функционалност чрез Фабриката и доказване с evals">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Формат и времева рамка (общо 6 ч)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Какво се предоставя
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Задачи
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#g1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Какво покрива скритият набор (G1)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#g1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Задължителни критерии за G1
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#g1_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Рубрика за оценяване на G1
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-g2-rag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Гейт G2 — Дебъгване и разширяване на система с RAG и агент, която не сте писали
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Гейт G2 — Дебъгване и разширяване на система с RAG и агент, която не сте писали">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#6_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Формат и времева рамка (общо 6 ч)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Какво се предоставя
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Задача за дебъгване
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Задача за разширяване
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gate-reportmd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Таблица с бъговете (в GATE-REPORT.md)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#30" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Защита на дизайна (30 мин)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#g2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Какво покрива скритият набор (G2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#g2_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Задължителни критерии за G2
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#g2_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Рубрика за оценяване на G2
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-g3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Гейт G3 — Експлоатация, атака, миграция, редизайн
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Гейт G3 — Експлоатация, атака, миграция, редизайн">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#6_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Формат и времева рамка (6 ч, един ден, четири блока)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-90" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Блок A — Инцидент в продукция (90 мин)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-red-team-75" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Блок B — Red team (75 мин)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-75" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Блок C — Миграция на модел (75 мин)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#d-60" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Блок D — Преглед на дизайна (60 мин)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#g3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Рубрика за оценяване на G3 (по блокове, плюс една обща)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-evals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Как се гарантира справедливостта на скритите набори от evals
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Правила за повторно явяване и обжалване
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../competency-matrix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Матрица на компетентностите
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Част 1 — Основи (ниво 1)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Част 1 — Основи (ниво 1)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c00-orientation-setup-and-toolchain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C0 — Ориентация, настройка и инструменти
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c01-how-generative-ai-works-an-engineer-s-mental-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C1 — Как работи генеративният AI: мисловен модел за инженери
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c02-your-first-ai-feature-in-net/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C2 — Първата ви AI функционалност в .NET
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c03-prompting-structured-outputs-and-tool-calling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C3 — Промптинг, структуриран изход и извикване на инструменти
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c04-working-with-coding-agents-the-factory-day-one/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C4 — Работа с кодиращи агенти: Фабриката, първи ден
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c05-evals-from-day-one/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C5 — Evals от първия ден
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Част 2 — Градивни елементи (ниво 2)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Част 2 — Градивни елементи (ниво 2)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c06-embeddings-and-vector-search/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C6 — Embeddings и векторно търсене
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c07-rag-from-documents-to-cited-permission-aware-answers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C7 — RAG: от документи до отговори с цитати, съобразени с правата на достъп
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c08-tools-and-the-model-context-protocol/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C8 — Инструменти и Model Context Protocol
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c09-agents-with-microsoft-agent-framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C9 — Агенти с Microsoft Agent Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c10-agents-over-structured-data-text-to-sql-on-sql-server/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C10 — Агенти върху структурирани данни: text-to-SQL върху SQL Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c11-agentic-testing-ai-driven-tdd-mutation-and-e2e-test-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C11 — Агентно тестване: TDD с AI, мутационно тестване и агенти за E2E тестове
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Част 3 — Продукционни системи (ниво 3)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Част 3 — Продукционни системи (ниво 3)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c12-workflows-and-multi-agent-orchestration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C12 — Workflows и многоагентна оркестрация
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c13-context-engineering-advanced-retrieval-and-memory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C13 — Инженеринг на контекста, напреднало извличане и памет
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c14-failure-driven-evals-llm-judges-and-red-teaming/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C14 — Evals, водени от грешките, LLM съдии и red teaming
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c15-observability-genaiops-and-cost/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C15 — Наблюдаемост, GenAIOps и разходи
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c16-security-for-llm-and-agentic-systems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C16 — Сигурност на LLM и агентни системи
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c17-shipping-to-azure-hosting-ai-gateway-iac-and-interop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C17 — Пускане в Azure: хостинг, AI gateway, IaC и оперативна съвместимост
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c18-responsible-ai-and-the-eu-ai-act-in-practice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C18 — Отговорен AI и Актът за изкуствения интелект на ЕС на практика
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c19-the-automated-sdlc-agents-from-issue-to-production/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C19 — Автоматизираният SDLC: агенти от issue до продукция
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Част 4 — Експертна специализация: AI Solution Developer
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Част 4 — Експертна специализация: AI Solution Developer
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d01-model-customization-and-small-local-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D1 — Адаптиране на модели и малки/локални модели
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d02-long-running-durable-and-autonomous-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D2 — Дълго работещи, устойчиви и автономни агенти
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d03-multimodal-and-realtime-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D3 — Мултимодални агенти и агенти в реално време
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d04-agent-ux-and-front-ends/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D4 — UX и фронтенди за агенти
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d05-performance-and-cost-engineering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D5 — Инженеринг на производителността и разходите
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d06-building-your-own-agent-tooling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D6 — Изграждане на собствени инструменти за агенти
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d07-agent-reliability-engineering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D7 — Инженеринг на надеждността на агенти
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Част 5 — Експертна специализация: AI Solution Architect
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Част 5 — Експертна специализация: AI Solution Architect
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a01-ai-strategy-use-case-discovery-and-business-case/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A1 — AI стратегия, откриване на сценарии на употреба и бизнес обосновка
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a02-azure-ai-reference-architectures-and-well-architected-for-ai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A2 — Референтни AI архитектури в Azure и Well-Architected за AI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a03-enterprise-knowledge-and-data-architecture-for-ai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A3 — Корпоративна архитектура на знанията и данните за AI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a04-agent-platform-and-integration-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A4 — Платформа за агенти и интеграционна архитектура
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a05-reliability-scale-model-lifecycle-and-finops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A5 — Надеждност, мащаб, жизнен цикъл на моделите и FinOps
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a06-ai-governance-risk-and-compliance-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A6 — Архитектура за управление на AI, риска и съответствието
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a07-the-architect-s-craft-in-ai-programmes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A7 — Занаятът на архитекта в AI програми
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Част 6 — Съвместен финален проект
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Част 6 — Съвместен финален проект
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capstone/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Финален проект
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Приложение
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Приложение
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Речник на термините
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/references/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Допълнителна литература
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Съдържание">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Съдържание
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Защо гейтове и какво измерват
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Общи правила за всички гейтове
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Общи правила за всички гейтове">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Среда и какво се предоставя
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Задължителни артефакти за предаване (всички гейтове)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Модел на оценяване
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Протокол на устната защита (всички гейтове)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Позиция относно почтеността
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Специални условия
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-g1-evals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Гейт G1 — Изграждане на функционалност чрез Фабриката и доказване с evals
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Гейт G1 — Изграждане на функционалност чрез Фабриката и доказване с evals">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Формат и времева рамка (общо 6 ч)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Какво се предоставя
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Задачи
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#g1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Какво покрива скритият набор (G1)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#g1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Задължителни критерии за G1
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#g1_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Рубрика за оценяване на G1
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-g2-rag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Гейт G2 — Дебъгване и разширяване на система с RAG и агент, която не сте писали
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Гейт G2 — Дебъгване и разширяване на система с RAG и агент, която не сте писали">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#6_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Формат и времева рамка (общо 6 ч)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Какво се предоставя
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Задача за дебъгване
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Задача за разширяване
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gate-reportmd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Таблица с бъговете (в GATE-REPORT.md)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#30" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Защита на дизайна (30 мин)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#g2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Какво покрива скритият набор (G2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#g2_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Задължителни критерии за G2
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#g2_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Рубрика за оценяване на G2
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-g3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Гейт G3 — Експлоатация, атака, миграция, редизайн
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Гейт G3 — Експлоатация, атака, миграция, редизайн">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#6_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Формат и времева рамка (6 ч, един ден, четири блока)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-90" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Блок A — Инцидент в продукция (90 мин)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-red-team-75" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Блок B — Red team (75 мин)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-75" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Блок C — Миграция на модел (75 мин)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#d-60" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Блок D — Преглед на дизайна (60 мин)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#g3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Рубрика за оценяване на G3 (по блокове, плюс една обща)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-evals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Как се гарантира справедливостта на скритите набори от evals
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Правила за повторно явяване и обжалване
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="_1">Оценяване и гейтове<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><strong>Версия:</strong> 2026.11 · <strong>Продължителност:</strong> 6 ч работа на курсиста за всеки гейт (вкл. устния изпит) · <strong>Формат:</strong> индивидуален, практически, очаква се използване на AI · <strong>Оценява се спрямо:</strong> <a href="../competency-matrix/">Матрицата на компетентностите</a> (G1 и G2: Компетентен в съответните области; G3: Напреднал в поне 3 от 4 блока, без нито един под Компетентен, като всичките 12 области са доказани чрез блоковете и пакета с доказателства за G3, вж. §5)</p>
+</blockquote>
+<p>Тази глава описва какво оценява всеки гейт (gate, практически изпит), как протича, как се оценява и какво става, ако не го преминете. Тя съзнателно не описва вариантите на гейтовете, тестовите случаи или умишлено заложените дефекти: гейтовете измерват как се справяте с работа, която не сте виждали.</p>
+<h2 id="1">1. Защо гейтове и какво измерват<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<p>Гейтовете превръщат курса в система за обучение до пълно усвояване (mastery learning). Преминавате към следващия клас задачи едва след като покажете, че можете да вършите работата на изискваното ниво върху случаи, които не сте виждали. Според обобщението на Bloom обучението до усвояване с обратна връзка и корекция само по себе си дава предимство от около 1 стандартно отклонение (SD) пред традиционното обучение. Обратната връзка и корекцията се случват именно в гейтовете, затова те докладват конкретни категории грешки и предвиждат възможност за повторно явяване.</p>
+<p>Тъй като помощта от AI се <strong>очаква</strong>, гейтът не проверява дали можете да произведете код. Код произвеждат агентите. Гейтът измерва три неща, които агентите не могат да осигурят вместо вас:</p>
+<ol>
+<li><strong>Преценка.</strong> Какво да изградите, коя грешка има значение, какво да оставите настрана и кой компромис да приемете.</li>
+<li><strong>Проверка.</strong> Дали вашите evals (автоматизирани оценки на качеството), тестове и traces наистина улавят проблемите. Скритите набори проверяват системата ви, а проверката на чувствителността на гейта тества собствените ви гейтове.</li>
+<li><strong>Обяснение.</strong> Дали можете да обясните, да предвидите поведението и безопасно да промените това, което сте предали. Това се проверява на устния изпит и в писменото обяснение.</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>Гейт</th>
+<th>След</th>
+<th>Клас задачи</th>
+<th>Основен фокус</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>G1</strong></td>
+<td>C0–C5</td>
+<td>Функционалност с промпт + първи инструмент + evals</td>
+<td>Изграждане на функционалност <em>чрез Фабриката</em> (Factory, вашият агентен SDLC) и доказването ѝ с evals, водени от грешките</td>
+</tr>
+<tr>
+<td><strong>G2</strong></td>
+<td>C6–C11</td>
+<td>RAG (генериране, допълнено с извличане) + инструменти + единичен агент + SQL + автоматизация на тестовете</td>
+<td><em>Дебъгване и разширяване</em> на система, която не сте писали, след това защита на дизайнерско решение</td>
+</tr>
+<tr>
+<td><strong>G3</strong></td>
+<td>C12–C19</td>
+<td>Многоагентна система в продукция в Azure</td>
+<td><em>Експлоатация, атака, миграция и редизайн</em> на работеща система под времеви натиск</td>
+</tr>
+</tbody>
+</table>
+<p>Преди G1, в C0 има кратък тест за готовност за гейтовете с автоматична проверка (праг 5/6, може да се повтаря) върху правилата от тази глава. Използвайте го, за да се уверите, че разбирате компонентите на оценяването, частта без AI помощ, правилото за собственост и проверката на чувствителността на гейта, преди да ви потрябват.</p>
+<hr />
+<h2 id="2">2. Общи правила за всички гейтове<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
+<h3 id="_2">Среда и какво се предоставя<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Частно хранилище за гейта за всеки кандидат.</strong> То се създава за вас от началното състояние на гейта. Получавате права за запис само в собственото си хранилище за гейта.</li>
+<li><strong>Донесете своята Фабрика.</strong> През първите 15 минути можете да копирате в хранилището за гейта активите на собствената си Фабрика: AGENTS.md / CLAUDE.md, <code>.github/copilot-instructions.md</code>, <code>.github/agents/*.agent.md</code>, skills (пакети с процедурни знания за агента), hooks (команди, изпълнявани при събития от жизнения цикъл на агента), потребителски команди, шаблони за CI и помощни средства за evals. Продуктов код от собственото ви хранилище <strong>не</strong> може да се копира. Така се проверява дали Фабриката ви е преносима и дали наистина ви помага.</li>
+<li><strong>Достъпът до моделите</strong> минава през AI gateway (единна точка за политики върху трафика към моделите) на курса с индивидуален ключ за всеки кандидат. Той предоставя ролите <code>chat-fast</code>, <code>chat-reasoning</code> и <code>embedding</code> (плюс <code>chat-local</code> чрез Foundry Local на вашата машина) и налага индивидуална <strong>квота за токени</strong>, обявена в заданието и равна на около 3× потреблението на референтното решение. Превишаването ѝ спира достъпа до моделите, но не и гейта. Дисциплината по отношение на разходите е част от оценяването.</li>
+<li><strong>Кодиращи агенти (coding agents):</strong> позволен е всеки агент (Copilot, Claude Code, Codex или други). <strong>Достъпът до интернет</strong> е позволен за документация и регистри на пакети.</li>
+<li><strong>Видими срещу скрити evals.</strong> Всеки гейт идва с малък видим набор от smoke тестове. Скритият набор се изпълнява в pipeline на оценяващата система след предаването и никога не се показва. Резултатите се връщат по страти и по категории грешки, никога по отделни случаи.</li>
+<li><strong>Предаването</strong> става с таг <code>submit</code> в хранилището ви за гейта преди изтичането на определеното време. Pipeline на оценяващата система изтегля този таг, затова commits след крайния срок се игнорират.</li>
+</ul>
+<h3 id="_3">Задължителни артефакти за предаване (всички гейтове)<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Кодът и промените във Фабриката на тага <code>submit</code>, като CI минава успешно за този commit.</li>
+<li><code>GATE-REPORT.md</code> по шаблона за съответния гейт.</li>
+<li><strong>Доказателства от сесиите с агенти:</strong> експортирани транскрипти или логове от сесиите с кодиращия агент. Използвайте експорта на инструмента или hook за логване във Фабриката си; точният механизъм зависи от инструмента, затова проверете в актуалната документация какви са възможностите за експорт. Логовете от сесиите не се оценяват за стил. Те се използват на устния изпит и при въпроси, свързани с почтеността.</li>
+<li>Ред за разходите: изразходваните токени по роли, взети от метриките на gateway за вашия ключ.</li>
+</ol>
+<h3 id="_4">Модел на оценяване<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>Всеки гейт съчетава три елемента:</p>
+<ul>
+<li><strong>Задължителни критерии</strong> (hard gates; бинарни, задължителни за преминаване). Неизпълнението на който и да е от тях означава неуспех на гейта, колкото и добри да са останалите резултати. Те защитават неподлежащото на компромис: безопасност, сигурност, честност, работещ build.</li>
+<li><strong>Прагове за скритите evals</strong>, изразени <strong>спрямо референтното решение</strong>, изпълнено в същия ден със същите фиксирани модели, плюс <strong>абсолютна долна граница</strong>. Пример: „≥ 90% от точността по полета на референтното решение и ≥ 0,85 абсолютно“. Относителните прагове поемат отклонението (drift) на моделите. Долните граници не позволяват летвата да падне, когато референтното решение има лош ден. Посочените по-долу граници са начални стойности и могат да бъдат прекалибрирани за всяка версия на курса.</li>
+<li><strong>Рубрика за оценяване</strong> (Начинаещ / Компетентен / Напреднал / Експерт) по 5 критерия за всеки гейт, която двама изпитващи попълват въз основа на артефактите и устния изпит.</li>
+</ul>
+<p><strong>Справяне с недетерминизма.</strong> Скритият набор се изпълнява <strong>3 пъти</strong>. Метриките за качество използват средната стойност от 3-те изпълнения. Елементите за безопасност в задължителните критерии използват <strong>pass^3</strong>: трябва да минат и в трите изпълнения, защото свойство за безопасност, което е изпълнено два пъти от три, не е изпълнено.</p>
+<p><strong>Проверка на чувствителността на гейта.</strong> След предаването оценяващата система внася в системата ви известни мутации, напр. влошава промпта, премахва стъпка за валидация или изключва филтър. След това пуска отново <strong>вашия собствен eval гейт в CI</strong>. Гейт, който остава зелен при мутация, която чупи скрития набор, говори за кухи evals, и това се отразява в реда „Evals и проверка“ на рубриката. Това е мутационно тестване, приложено към evals.</p>
+<h3 id="_5">Протокол на устната защита (всички гейтове)<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<ul>
+<li>За G1 устният изпит е 20 минути, а за G2 и G3 — 30 минути. Устните изпити се провеждат до 3 работни дни след предаването, с двама изпитващи, и се записват за модерация (записите се пазят 90 дни; изисква се съгласие).</li>
+<li><strong>Обяснете:</strong> изпитващите избират на случаен принцип 3 части от diff (hunks) от предаденото от вас (избира ги скрипт, така че изборът не е тенденциозен). За всяка обяснявате какво прави, защо е там и какво се чупи, ако бъде премахната.</li>
+<li><strong>Предвидете:</strong> изпитващият предлага промяна, напр. „задайте максимален брой итерации 1“, „премахнете този филтър“ или „сменете с модел без извикване на инструменти (tool calling)“. Предвиждате ефекта върху поведението, evals и разходите, <em>преди</em> да пуснете каквото и да е.</li>
+<li><strong>Променете:</strong> правите на живо една малка, предварително зададена промяна, със или без агента си, като описвате на глас как я проверявате.</li>
+<li><strong>Предизвикателство:</strong> един-два въпроса по доклада ви (G1, G2) или по дизайна (защитата при G2, блок D на G3).</li>
+<li><strong>Правило за собственост:</strong> ако не можете да обясните код, който сте предали, критерият „Насочване и проверка на агенти“ получава оценка Начинаещ, независимо от резултата от скритите evals. <strong>Отговаряте за всичко, което слеете.</strong></li>
+</ul>
+<h3 id="_6">Позиция относно почтеността<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p>Използването на AI се очаква и не е нужно да се декларира отделно извън доказателствата от сесиите. <strong>Какво не е позволено:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Не е позволено</th>
+<th>Как се открива или предотвратява</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Помощ от друг човек по време на изпита (включително да помолите някого да пише промптове вместо вас)</td>
+<td>Лек надзор (proctoring) на частта без AI помощ, проверки за последователност на устния изпит и сравнение на логовете от сесиите с историята на commits</td>
+</tr>
+<tr>
+<td>Споделяне на съдържание от гейта или на резултати от скритите evals с други курсисти</td>
+<td>Вариантите се ротират, скритите случаи се генерират наново за всеки випуск, а изтекло съдържание може да се открие в по-късни предавания и в публични хранилища</td>
+</tr>
+<tr>
+<td><strong>Манипулиране на evals (eval gaming):</strong> специална обработка на скрити или видими случаи или разпознаване на оценяващата система</td>
+<td>Скритите случаи са нови перифрази на видимите разпределения; проверка на оценяващата система търси разклонения за конкретни случаи и буквални низове от случаите; манипулирането означава автоматичен неуспех и проверка за почтеност</td>
+</tr>
+<tr>
+<td>Копиране на продуктов код от собствени или чужди по-ранни хранилища</td>
+<td>Проверка на произхода на кода спрямо хранилищата на курса (сканиране за сходство); активите на Фабриката са изключение</td>
+</tr>
+<tr>
+<td>Представяне на разбиране, което нямате</td>
+<td>Устната защита</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Какво не се контролира:</strong> кой агент използвате, как му пишете промптове, дали четете документация и дали използвате агент в стъпката „Променете“ на устния изпит, стига да описвате на глас как проверявате.</p>
+<p><strong>Надзорът е съзнателно лек.</strong> Под надзор са само кратките <strong>части без AI помощ</strong> (чрез споделяне на екрана или в залата). Останалото разчита на дизайна на оценяването: скритите набори, проверката на чувствителността на гейта, логовете от сесиите и устния изпит. Записите се обработват като лични данни съгласно уведомлението за поверителност на випуска.</p>
+<h3 id="_7">Специални условия<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p>Курсисти с документирани специални потребности получават до +25% време за практическите блокове (точният размер се определя от политиката на институцията). Те могат да изберат и алтернативен формат на устния изпит: писмени въпроси, на които отговарят на живо в чат, с допълнителни въпроси, или повече време за размисъл. Оценяваните компетентности не се променят. Заявете нуждата от специални условия пред екипа на курса доста преди седмицата на гейта си.</p>
+<hr />
+<h2 id="3-g1-evals">3. Гейт G1 — Изграждане на функционалност чрез Фабриката и доказване с evals<a class="headerlink" href="#3-g1-evals" title="Permanent link">&para;</a></h2>
+<p><strong>Предварителни изисквания:</strong> завършени C0–C5 и успешно преминати проверки за приемане на модулите. <strong>Оценява:</strong> K1, K2, K7 и K8 на ниво Компетентен, а K3 и K4 — в по-малка степен.</p>
+<h3 id="6">Формат и времева рамка (общо 6 ч)<a class="headerlink" href="#6" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Време</th>
+<th>Блок</th>
+<th>Режим</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0:00–0:15</td>
+<td>Инструктаж, създаване на хранилището, копиране на вашата Фабрика</td>
+<td>—</td>
+</tr>
+<tr>
+<td>0:15–0:45</td>
+<td><strong>Част без AI помощ.</strong> Прочетете набор от предоставени traces и промпта на изходната версия; отговорете на кратки въпроси: предвидете поведението и назовете видовете грешки (failure modes)</td>
+<td><strong>Без AI</strong>, под надзор</td>
+</tr>
+<tr>
+<td>0:45–4:15</td>
+<td>Изграждане: спецификация → тестове → имплементация от агента → анализ на грешките → evals → гейт в CI</td>
+<td>Очаква се AI</td>
+</tr>
+<tr>
+<td>4:15–4:50</td>
+<td>Напишете <code>GATE-REPORT.md</code> (доклад от evals + обяснение)</td>
+<td>AI е позволен; отговаряте за всяко твърдение</td>
+</tr>
+<tr>
+<td>4:50–5:00</td>
+<td>Поставете таг <code>submit</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td>до 3 дни след това</td>
+<td>Устен изпит, 20 мин (+ ~20 мин подготовка)</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_8">Какво се предоставя<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Стандартен</strong> Fleet Ops Copilot на ниво C5 (API със стрийминг, pipeline с <code>IChatClient</code>, един инструмент, еталонен набор (golden set) v1, проект за evals, CI). Това не е вашият собствен продукт, така че всички започват от една и съща изходна версия и трябва да работите в код, който не сте писали.</li>
+<li><code>BRIEF.md</code>: задание за функционалността на една страница, написано като бизнес заявка, с критерии за приемане и нефункционални изисквания (латентност, цена на заявка, BG/EN).</li>
+<li><code>pilot-traces/</code>: неетикетирани traces от синтетичен „пилот“ в OTel JSON и в четим Markdown.</li>
+<li><code>evals/visible/</code>: малък набор от примерни случаи за функционалността.</li>
+<li>Ключ за gateway с квота за токени; наличен е Foundry Local.</li>
+</ul>
+<p>Всеки кандидат получава една функционалност от ротиращ се набор от варианти. Всички варианти са в домейна на Fleet Ops и упражняват едни и същи умения: типизирано извличане на данни или отговаряне, обосновано в източниците, извиквания на инструменти, въздържане от отговор или уточняващ въпрос, вход на български и английски и устойчивост на инструкции, вградени в недоверен вход.</p>
+<h3 id="_9">Задачи<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Първо спецификация, после изграждане.</strong> Обновете <code>SPEC.md</code> за функционалността. Напишете <strong>приемателни тестове, написани от човек</strong> (xUnit), преди имплементацията: валидност на схемата, очаквани извиквания на инструменти и поведение при въздържане от отговор. Без проверки за точно съвпадение на низове в изхода на модела.</li>
+<li><strong>Изграждайте чрез Фабриката.</strong> Водете кодиращия агент през цикъла план → имплементация → проверка. Историята на commits трябва да показва тази форма, напр. commit или файл с плана, последван от commits с имплементацията, които правят тестовете зелени. Обновете AGENTS.md, ако научите нещо, което ще е нужно на следващата сесия на агента.</li>
+<li><strong>Анализ на грешките.</strong> Пуснете функционалността върху входовете от пилотните traces. Приложете отворено кодиране (open coding), като отбележите първата грешка във всеки неуспешен trace. Чрез аксиално кодиране (axial coding) обединете бележките в таксономия от ≥ 3 вида грешки с броя им в <code>evals/error-analysis.md</code>.</li>
+<li><strong>Evals, водени от грешките.</strong> За всеки вид грешка напишете поне един оценител (evaluator), по възможност базиран на код. Използвайте LLM съдия (LLM-as-judge) само ако проверка с код е невъзможна, и обяснете как бихте го валидирали. Разширете еталонния набор до ≥ 25 тестови случая, включително ≥ 5 на български и ≥ 3 случая за въздържане от отговор или уточняване. Включете evals в CI с кеширане на отговорите и праг, при който build не минава.</li>
+<li><strong>Обяснете.</strong> <code>GATE-REPORT.md</code> (≤ 2 страници) описва таксономията, резултатите от evals, какво сте поправили, <strong>какво сте решили да не поправяте и защо</strong>, измерената цена на заявка и един риск, който виждате за продукция.</li>
+</ol>
+<h3 id="g1">Какво покрива скритият набор (G1)<a class="headerlink" href="#g1" title="Permanent link">&para;</a></h3>
+<p>Скритият набор е стратифициран, така че функционалност, настроена само за видимите случаи, да не минава. Стратите включват типичен вход на английски и български, български на латиница, липсващи или двусмислени полета, непознати обекти, злонамерени вградени инструкции, заявки извън обхвата, откази на инструменти и дълги входове.</p>
+<p>Метрики: валидност на схемата; точност по полета или коректност на цитатите (според варианта); коректност на въздържането от отговор; коректност на извикванията на инструменти; проверки за изтичане на данни там, където се генерира текст за клиенти; p95 латентност и цена на заявка при <code>chat-fast</code>.</p>
+<h3 id="g1_1">Задължителни критерии за G1<a class="headerlink" href="#g1_1" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Задължителен критерий</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>H1</td>
+<td>Build за <code>submit</code> минава, всички ваши тестове минават в CI, няма секрети (gitleaks), а eval гейтът в CI е наличен и задължителен</td>
+</tr>
+<tr>
+<td>H2</td>
+<td><strong>Валидност на схемата ≥ 98%</strong> в скрития набор (средно от 3 изпълнения)</td>
+</tr>
+<tr>
+<td>H3</td>
+<td><strong>Елемент за безопасност, pass^3:</strong> свойството за безопасност, посочено за вашия вариант, е изпълнено и в трите изпълнения (напр. висок recall (пълнота) за критичните за безопасността елементи, никакви необосновани отговори на опасни заявки или нула изтичания на вътрешни данни или данни за шофьори към клиенти)</td>
+</tr>
+<tr>
+<td>H4</td>
+<td>В тестовете няма проверки за точно съвпадение на низове в изхода на модела и няма разклонения за конкретни случаи (статична проверка)</td>
+</tr>
+<tr>
+<td>H5</td>
+<td>Устният изпит е проведен и правилото за собственост не е задействано</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Прагове за скритите evals (начални долни граници, могат да се прекалибрират за всяка версия):</strong> основната метрика за точност е ≥ 90% от референтната и ≥ 0,80 абсолютно. Коректност на въздържането от отговор ≥ 0,80. Цена на заявка ≤ 1,5× от референтната.</p>
+<h3 id="g1_2">Рубрика за оценяване на G1<a class="headerlink" href="#g1_2" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Критерий</th>
+<th>Начинаещ</th>
+<th>Компетентен (ниво за преминаване)</th>
+<th>Напреднал</th>
+<th>Експерт</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Формулиране на проблема и спецификация</strong></td>
+<td>Изгражда директно по заданието, без спецификация; критериите за приемане са неявни</td>
+<td>Спецификацията и тестовете, написани от човек, предхождат имплементацията и покриват критериите от заданието</td>
+<td>Спецификацията прави явни неочевидните решения (политика за въздържане от отговор, граници на enum стойностите, обработка на български); тестовете покриват граничните страти</td>
+<td>Спецификацията предвижда видове грешки, потвърдени по-късно от скрития набор, и съзнателно определя обхвата им</td>
+</tr>
+<tr>
+<td><strong>Насочване и проверка на агенти</strong></td>
+<td>Приема изхода на агента; не може да обясни части от diff</td>
+<td>Видим е цикълът план → имплементация → проверка; тестовете и evals се пускат преди „готово“; diff е напълно обяснен на устния изпит</td>
+<td>Ограничава агента ефективно (обновяване на файловете с памет, hooks, малки порции работа); улавя и поправя поне една грешка на агента, с доказателства в логовете</td>
+<td>Активите на Фабриката измеримо са ускорили работата или са намалили риска, напр. skill или проверка за многократна употреба, които колега би могъл да възприеме</td>
+</tr>
+<tr>
+<td><strong>Анализ на грешките и evals</strong></td>
+<td>Общи метрики; evals са написани, преди да се разгледат traces</td>
+<td>Таксономия от traces; по един оценител за всеки вид грешка; гейтът в CI работи</td>
+<td>Предпочитани и обосновани проверки с код; еталонният набор е стратифициран; проверката на чувствителността на гейта улавя ≥ 2 от 3 мутации на оценяващата система</td>
+<td>Проверката на чувствителността на гейта улавя всички мутации; докладът дава количествена оценка на остатъчния риск за всеки вид грешка</td>
+</tr>
+<tr>
+<td><strong>Инженерно качество, сигурност и разходи</strong></td>
+<td>Работи само при основния успешен сценарий (happy path)</td>
+<td>Обработва грешки на инструментите и непознати обекти; автентикация без ключове; цената на заявка е измерена</td>
+<td>Промптът е структуриран за кеширане; бюджетите или лимитите се спазват; prompt injection (вмъкване на инструкции) във входа е предотвратен чрез дизайна (а не с „моля, игнорирай“)</td>
+<td>Измерима оптимизация на разходите и латентността при същото качество, с документиран компромис</td>
+</tr>
+<tr>
+<td><strong>Обяснение (писмено + устно)</strong></td>
+<td>Описва какво е направено, но не и защо</td>
+<td>Обяснява правилно решенията и ограниченията; прогнозите са предимно верни</td>
+<td>Прогнозите са верни, включително ефектите върху разходите; посочва какво съзнателно не е поправено и защо</td>
+<td>Обучава: ясни причинно-следствени обяснения, по които колега може да действа; сам открива слабост в собствения си дизайн, без подсказване</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Преминаване:</strong> всички задължителни критерии са изпълнени, всеки критерий е ≥ Компетентен, праговете на скрития набор са достигнати.</p>
+<hr />
+<h2 id="4-g2-rag">4. Гейт G2 — Дебъгване и разширяване на система с RAG и агент, която не сте писали<a class="headerlink" href="#4-g2-rag" title="Permanent link">&para;</a></h2>
+<p><strong>Предварителни изисквания:</strong> преминат G1; успешно преминати проверки за приемане на C6–C11. <strong>Оценява:</strong> K2, K3, K4, K5, K7, K8, K10 и K12 на ниво Компетентен.</p>
+<h3 id="6_1">Формат и времева рамка (общо 6 ч)<a class="headerlink" href="#6_1" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Време</th>
+<th>Блок</th>
+<th>Режим</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0:00–0:20</td>
+<td>Инструктаж; прочитане на <code>ARCHITECTURE.md</code>, оплакванията на потребителите и шаблона за доклад за бъг</td>
+<td>—</td>
+</tr>
+<tr>
+<td>0:20–0:40</td>
+<td><strong>Част без AI помощ.</strong> По предоставените traces напишете хипотези за оплакванията. Без поправки.</td>
+<td><strong>Без AI</strong>, под надзор</td>
+</tr>
+<tr>
+<td>0:40–3:20</td>
+<td><strong>Дебъгване:</strong> намерете вкараните дефекти, установете първопричината им и ги поправете, всеки с регресионен тест или eval</td>
+<td>Очаква се AI</td>
+</tr>
+<tr>
+<td>3:20–4:50</td>
+<td><strong>Разширяване:</strong> имплементирайте новата възможност с evals</td>
+<td>Очаква се AI</td>
+</tr>
+<tr>
+<td>4:50–5:20</td>
+<td><code>GATE-REPORT.md</code>: таблица с бъговете + един ADR (запис на архитектурно решение)</td>
+<td>—</td>
+</tr>
+<tr>
+<td>до 3 дни след това</td>
+<td><strong>Защита на дизайна</strong>, 30 мин (+ ~10 мин подготовка)</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_10">Какво се предоставя<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Fleet Ops Copilot на ниво C11. Включва RAG върху фирмените политики на BG/EN (хибридно търсене + повторно класиране + <code>allowed_groups</code>), MCP сървър на Trakia, агента Fleet Assistant (MAF, одобрение за действия), агента за text-to-SQL Fleet Analyst, тестовата пирамида, мутационен гейт и тестове с Playwright.</li>
+<li><strong>Споделен индекс в AI Search само за четене</strong>, както и локален SQL Server 2025 (малкият профил на <code>TrakiaOps</code>).</li>
+<li><code>complaints/</code>: оплаквания на потребители, написани като тикети към поддръжката.</li>
+<li><code>traces/</code>: traces, подобни на продукционните, някои от които показват вкараните дефекти.</li>
+<li>Видимият набор от evals. <strong>Предупреждение в заданието:</strong> „самият набор от evals може да не е надежден“.</li>
+</ul>
+<h3 id="_11">Задача за дебъгване<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<p>Системата съдържа няколко вкарани дефекта; в заданието пише, че са „поне пет“. Те засягат извличането (retrieval), сигурността, поведението на агента и инструментите, както и проверката (включително собствените гейтове на Фабриката). Установете първопричината на всеки въз основа на доказателства, поправете го и защитете поправката с регресионен тест или eval. Поправянето на всички дефекти от категория „сигурност“ е задължителен критерий.</p>
+<h3 id="_12">Задача за разширяване<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<p>Имплементирате и една нова възможност в същата система, с evals за нейните видове грешки. Възможността е описана в заданието ви и зависи от варианта. Очаквайте тя да включва действия с последици, изискващи одобрение, извличане между езици или анализи в няколко хода, и да изисква съществуващите гаранции (права на достъп, достъп само за четене, одобрения, идемпотентност) да продължат да важат.</p>
+<h3 id="gate-reportmd">Таблица с бъговете (в <code>GATE-REPORT.md</code>)<a class="headerlink" href="#gate-reportmd" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Симптом</th>
+<th>Доказателство (trace id, заявка, метрика)</th>
+<th>Първопричина</th>
+<th>Поправка (commit)</th>
+<th>Регресионен тест / eval</th>
+<th>Как бих го предотвратил(а)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="30">Защита на дизайна (30 мин)<a class="headerlink" href="#30" title="Permanent link">&para;</a></h3>
+<p>Представяте един ADR от гейта, избран измежду: подхода за поправка на извличането, дизайна на инструментите или одобренията, или поправката на доверието в evals. Комисията го изследва с променени ограничения, напр. много по-голям корпус, допълнителен език, модел без извикване на инструменти, ново законово ограничение за това какво може да се индексира или наполовина по-малък бюджет за разходи. Трябва да адаптирате решението или да обясните защо то остава в сила.</p>
+<h3 id="g2">Какво покрива скритият набор (G2)<a class="headerlink" href="#g2" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Извличане:</strong> заявки на BG/EN; recall@10 и nDCG@5 (нормализирана дисконтирана кумулативна печалба).</li>
+<li><strong>Обоснованост (groundedness) и коректност на цитатите:</strong> LLM съдия на курса, фиксиран и валидиран спрямо етикети, поставени от човек (TPR/TNR (дял на верните положителни / верните отрицателни резултати) ≥ 0,85 върху етикетирания набор на курса).</li>
+<li><strong>Матрица на правата:</strong> всяка роля × документи с ограничен достъп, през <em>всеки</em> endpoint.</li>
+<li><strong>Безопасност на SQL:</strong> опити за запис, пакети с няколко заявки, достъп извън обхвата при RLS (сигурност на ниво ред), SQL, вмъкнат чрез prompt injection.</li>
+<li><strong>Точност на извикванията на инструменти</strong> върху набор от задачи.</li>
+<li><strong>Спазване на одобренията:</strong> опити за промяна на състоянието без одобрение.</li>
+<li><strong>Поведение спрямо бюджета</strong>, когато даден инструмент постоянно отказва.</li>
+<li><strong>Регресионни проверки за всеки дефект:</strong> скрити тестове, които се провалят, ако дефектът все още е налице.</li>
+<li><strong>Набор за разширението</strong> за новата възможност.</li>
+</ul>
+<h3 id="g2_1">Задължителни критерии за G2<a class="headerlink" href="#g2_1" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Задължителен критерий</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>H1</td>
+<td>Build и CI минават; няма секрети; eval гейтът и мутационният гейт са задължителни (прагове &gt; 0)</td>
+</tr>
+<tr>
+<td>H2</td>
+<td><strong>Матрица на правата: 0 изтичания, pass^3</strong>, през всички endpoints</td>
+</tr>
+<tr>
+<td>H3</td>
+<td><strong>Безопасност на SQL: 0 изпълнени заявки за запис или извън обхвата, pass^3</strong></td>
+</tr>
+<tr>
+<td>H4</td>
+<td><strong>Одобрение: 0 неодобрени извиквания на инструменти, които променят състоянието, pass^3</strong></td>
+</tr>
+<tr>
+<td>H5</td>
+<td>За всички дефекти от <strong>категория „сигурност“</strong> е установена първопричината и са поправени, всеки с регресионен тест</td>
+</tr>
+<tr>
+<td>H6</td>
+<td>Защитата на дизайна е проведена; правилото за собственост не е задействано</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Прагове (начални долни граници):</strong>
+- ≥ 5 дефекта с правилно установена първопричина и поправени, включително всички свързани със сигурността.
+- При извличането recall@10 и обосноваността ≥ 90% от референтното решение.
+- Набор за разширението ≥ 85% от референтното решение.
+- Агентът приключва в рамките на бюджета в 100% от проверките за бюджет.</p>
+<h3 id="g2_2">Рубрика за оценяване на G2<a class="headerlink" href="#g2_2" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Критерий</th>
+<th>Начинаещ</th>
+<th>Компетентен (ниво за преминаване)</th>
+<th>Напреднал</th>
+<th>Експерт</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Диагностика въз основа на доказателства</strong></td>
+<td>Променя кода, докато симптомите изчезнат</td>
+<td>Всяка поправка е свързана с доказателство от trace или метрика и с посочена първопричина</td>
+<td>Систематично използва traces, разбивката на evals и матрицата на правата; различава симптоми с обща причина</td>
+<td>Намира всички дефекти, включително дефекта в доверието към evals, и обяснява как всеки е убегнал от съществуващите гейтове</td>
+</tr>
+<tr>
+<td><strong>Качество на поправките и защита от регресии</strong></td>
+<td>Поправките чупят други неща; няма тестове</td>
+<td>Всяка поправка има регресионен тест или eval; няма нови регресии в скрития набор</td>
+<td>Поправките адресират класа проблеми, а не отделния случай (напр. филтърът се прилага централно за всички endpoints)</td>
+<td>Добавя функция за пригодност (fitness function) или гейт, който би уловил класа по-рано (архитектурен тест, проверка на политика)</td>
+</tr>
+<tr>
+<td><strong>Дизайн на разширението</strong></td>
+<td>Функционалността работи при основния успешен сценарий</td>
+<td>Покрива набора за разширението; одобрението и идемпотентността са коректни</td>
+<td>Дизайнът на инструментите следва насоките на курса (консолидирани инструменти, пагинация, грешки с указания за поправка — actionable errors); evals покриват новите видове грешки</td>
+<td>Дизайнът на разширението може да се преизползва като шаблон с документирани компромиси</td>
+</tr>
+<tr>
+<td><strong>Проверка и използване на Фабриката</strong></td>
+<td>Вярва на видимия набор</td>
+<td>Забелязва, че наборът може да лъже, и го проверява независимо</td>
+<td>Поправя тестовата рамка (harness) за evals и гейтовете в CI; проверката на чувствителността на гейта минава</td>
+<td>Използва ефективно агенти паралелно (напр. по един агент за всяка хипотеза в отделни worktrees), с доказателства за дисциплина при проверката</td>
+</tr>
+<tr>
+<td><strong>Защита на дизайна</strong></td>
+<td>Преразказва какво е изградено</td>
+<td>Обосновава ADR-а с алтернативи и последствия</td>
+<td>Адаптира се правилно към 2 или повече променени ограничения с количествена аргументация (цена, recall, риск)</td>
+<td>Посочва ограничението, което би обърнало решението, преди да бъде попитан</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Преминаване:</strong> всички задължителни критерии са изпълнени, всички критерии са ≥ Компетентен, ≥ 2 критерия са на ниво Напреднал, праговете са достигнати.</p>
+<hr />
+<h2 id="5-g3">5. Гейт G3 — Експлоатация, атака, миграция, редизайн<a class="headerlink" href="#5-g3" title="Permanent link">&para;</a></h2>
+<p><strong>Предварителни изисквания:</strong> преминат G2; успешно преминати проверки за приемане на C12–C19; <strong>пакет с доказателства за G3</strong>, предаден 48 часа преди гейта. Пакетът съдържа връзки към ADR-0012 (топология), ADR-0013 (избор на подход за извличане), ADR-0014 (дизайн на паметта), ADR-0015, ADR-0017, ADR-0018 и ADR-0019; контекстния бюджет от C13 (<code>docs/context-budget.md</code>) с резултатите за деградация на контекста (context rot) и уплътняване на контекста (compaction); доклада от evals и картите на съдиите от C14; регистъра на заплахите и доклада за ASR (процент успешни атаки) от C16; досието за риска (risk file), промените в оценката на въздействието върху защитата на данните (DPIA), доклада за справедливост и резултата от <code>FairnessGateTests</code> от C18; както и картата с показатели (scorecard) на Фабриката и политиката за агентите от C19. Пакетът не се оценява самостоятелно; комисията го използва за въпросите в блок D, а правилото „Донесете своята Фабрика“ (§2) важи за блокове A–C.</p>
+<p><strong>Оценява:</strong> решението за преминаване следва рубриката за блоковете и правилото за преминаване по-долу (≥ Напреднал в 3 от 4 блока). 12-те области на компетентност се доказват чрез блоковете и пакета, както е показано в следващата таблица. Област, която не е показана на ниво Напреднал, не води до неуспех за кандидат, който изпълнява правилото за преминаване, но се вписва в записа на компетентностите ви като задача за наваксване преди влизането в специализацията. Това е последният общ гейт преди разделянето на специализациите.</p>
+<p><strong>Как G3 доказва 12-те области</strong></p>
+<table>
+<thead>
+<tr>
+<th>Област</th>
+<th>Основни доказателства в G3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>K1 Основи на AI</td>
+<td>Блок C (разлики в токените и в цената на задача); блок A, когато сценарият засяга разходите</td>
+</tr>
+<tr>
+<td>K2 Промптинг и структуриран вход/изход</td>
+<td>Блок C (поведение на кандидат-модела при структуриран изход и извикване на инструменти)</td>
+</tr>
+<tr>
+<td>K3 Извличане и знания</td>
+<td>Блок A, когато сценарият засяга извличането; иначе ADR-0013, срезовете за извличане в доклада от evals от C14 плюс въпроса за тенантите в блок D относно изолацията на индексите</td>
+</tr>
+<tr>
+<td>K4 Инструменти и MCP</td>
+<td>Блок B (обхват на инструментите, описания в MCP)</td>
+</tr>
+<tr>
+<td>K5 Агенти и оркестрация</td>
+<td>Блок A (поведение на workflow (работен поток с предварително зададени стъпки)); ADR-0012</td>
+</tr>
+<tr>
+<td>K6 Контекст и памет</td>
+<td>Пакетът (ADR-0014, контекстен бюджет, резултати за context rot/уплътняване) + <strong>задължителен въпрос от комисията в блок D</strong>; блок B, когато паметта е в обхвата</td>
+</tr>
+<tr>
+<td>K7 Оценяване</td>
+<td>Блок C (сравнение по двойки за всеки вид грешка); eval като действие от постмортема в блок A</td>
+</tr>
+<tr>
+<td>K8 Тестване и автоматизация на SDLC</td>
+<td>Използване на Фабриката в блокове A–C; картата с показатели от C19</td>
+</tr>
+<tr>
+<td>K9 Експлоатация, наблюдаемост и разходи</td>
+<td>Блок A</td>
+</tr>
+<tr>
+<td>K10 Сигурност</td>
+<td>Блок B</td>
+</tr>
+<tr>
+<td>K11 Отговорен AI и управление</td>
+<td>Блок D (класификация по Акта за изкуствения интелект (AI Act)); пакетът (досие за риска, промени в DPIA, доклад за справедливост) + <strong>задължителен въпрос от комисията в блок D за справедливостта</strong></td>
+</tr>
+<tr>
+<td>K12 Архитектура и бизнес</td>
+<td>Блок D</td>
+</tr>
+</tbody>
+</table>
+<h3 id="6_2">Формат и времева рамка (6 ч, един ден, четири блока)<a class="headerlink" href="#6_2" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Време</th>
+<th>Блок</th>
+<th>Режим</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0:00–0:15</td>
+<td>Инструктаж; достъп до вашата <strong>предварително подготвена среда в Azure</strong></td>
+<td>—</td>
+</tr>
+<tr>
+<td>0:15–1:45</td>
+<td><strong>Блок A — Инцидент в продукция</strong> (90 мин)</td>
+<td>Очаква се AI; позволен е Azure SRE Agent (режим Reader)</td>
+</tr>
+<tr>
+<td>1:45–2:00</td>
+<td>Почивка</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2:00–3:15</td>
+<td><strong>Блок B — Red team</strong> (75 мин)</td>
+<td>Очаква се AI; [Python] PyRIT / AI Red Teaming Agent</td>
+</tr>
+<tr>
+<td>3:15–4:30</td>
+<td><strong>Блок C — Миграция на модел</strong> (75 мин)</td>
+<td>Очаква се AI</td>
+</tr>
+<tr>
+<td>4:30–4:45</td>
+<td>Почивка</td>
+<td>—</td>
+</tr>
+<tr>
+<td>4:45–5:45</td>
+<td><strong>Блок D — Преглед на дизайна</strong> (20 мин подготовка <strong>без AI помощ</strong>, 40 мин пред комисията)</td>
+<td>Подготовката е под надзор, без AI</td>
+</tr>
+<tr>
+<td>след това</td>
+<td>Премахване на средата (автоматично)</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>Средата съдържа Fleet Ops Copilot на ниво C19:</p>
+<ul>
+<li>многоагентният workflow за инциденти</li>
+<li>Container Apps и хостван агент (hosted agent) във Foundry</li>
+<li>AI gateway в APIM (приоритетен пул в стил PTU, симулиран с два бекенда, плюс прекъсвач (circuit breaker))</li>
+<li>AI Search</li>
+<li>App Insights с табла и KQL workbooks</li>
+<li>guardrails (защитни механизми)</li>
+<li>CI/CD pipeline</li>
+<li>генератор на синтетичен трафик, който работи през цялото време</li>
+</ul>
+<h3 id="a-90">Блок A — Инцидент в продукция (90 мин)<a class="headerlink" href="#a-90" title="Permanent link">&para;</a></h3>
+<p>В момента T0 се задейства известие (alert). Всеки кандидат получава един сценарий за инцидент от набор, който покрива проблеми с разходите, латентността и ограничаването на заявките (throttling), качеството на отговорите, сигурността и жизнения цикъл на моделите. Причината е умишлено заложена; вашата задача е да овладеете инцидента и да докажете причината.</p>
+<p><strong>Задачи:</strong>
+1. Обявете сериозността и въздействието до 15 минути, като статус бележка във файла на канала за инцидента.
+2. <strong>Първо смекчете последиците</strong>: feature flag, rollback (връщане към предишна версия), квота, блокиране или превключване към резерва (failover). Запишете времето до смекчаване.
+3. Намерете първопричината чрез traces и KQL. Хипотезите на SRE Agent трябва да бъдат проверени, а не просто копирани.
+4. Напишете <strong>постмортем без търсене на виновни</strong> (<code>postmortems/G3.md</code>) с хронология, въздействие, първопричина, допринасящи фактори и действия за изпълнение. Действията трябва да включват <strong>нов eval или известие, които биха уловили проблема по-рано</strong>, и промяна във Фабриката, ако е уместно.</p>
+<p><strong>Задължителен критерий:</strong> смекчаването ограничава въздействието в рамките на блока и не се предприемат разрушителни действия извън обхвата (без изтриване на данни, без изключване на защитни контроли като „поправка“).</p>
+<h3 id="b-red-team-75">Блок B — Red team (75 мин)<a class="headerlink" href="#b-red-team-75" title="Permanent link">&para;</a></h3>
+<p><strong>Обект на атаката:</strong> red team вариант на средата (за атакуващо тестване) с умишлено заложени слабости, за които не ви казват.</p>
+<p><strong>Задачи:</strong>
+1. Пуснете автоматизирано сканиране с AI Red Teaming Agent или PyRIT [Python]. Имайте предвид ограниченията по региони и функционалности: категориите рискове, специфични за агенти, са налични само в облака и само в пет региона, а някои типове агенти не се поддържат като цели, затова пропуските се запълват с ръчни атаки.
+2. Напишете <strong>ръчни атаки на BG и EN</strong>. Класификаторите на Content Safety не са валидирани за български, затова атаките, специфични за езика, имат значение.
+3. Изгответе карта с показатели с <strong>ASR по категории</strong>, най-важните находки със стъпки за възпроизвеждане, всяка съпоставена с идентификатори от OWASP LLM / ASI, и мерки за смекчаване, подредени с приоритет на архитектурните.
+4. Имплементирайте <strong>една архитектурна мярка за смекчаване</strong>, напр. премахване на един елемент от смъртоносната тройка (lethal trifecta), ограничаване на пространството от действия или изолиране на споделен компонент, и измерете ASR отново.</p>
+<p><strong>Задължителен критерий:</strong> поне една валидна, възпроизводима находка, плюс измерен ASR преди и след мярката за смекчаване.</p>
+<h3 id="c-75">Блок C — Миграция на модел (75 мин)<a class="headerlink" href="#c-75" title="Permanent link">&para;</a></h3>
+<p><strong>Известие:</strong> „Моделът зад <code>chat-reasoning</code> се извежда от употреба след 60 дни. Кандидат за замяна: <code>&lt;model-X&gt;</code>.“ Кандидат-моделът е избран така, че да се различава от текущия по начин, който има значение; част от задачата е да откриете как.</p>
+<p><strong>Задачи:</strong>
+1. Сменете модела само чрез конфигурация. Всяка промяна в кода трябва да е обоснована.
+2. Пуснете продукционния набор от evals <strong>по двойки</strong>. Докладвайте дела на успешните случаи за всеки вид грешка, разликите в цената на задача и в p95 латентността, както и промените в поведението на кеширането.
+3. Открийте разликата в поведението и решете дали да адаптирате промпта или слоя с инструменти, да изберете друг кандидат, или да маршрутизирате според задачата.
+4. Напишете <strong>бележка с решение „да/не“ (go/no-go)</strong>: решение, доказателства, план за canary release (пускане към малък дял от трафика) — претеглени бекенди в APIM: етапи, метрики, условия за rollback, съображения за PTU (deployments с резервиран капацитет не се надграждат автоматично) и одобрения от отговорниците.</p>
+<p><strong>Задължителен критерий:</strong> решението е подкрепено с данни по видове грешки. Решение „да“, основано само на обобщени резултати или без критерии за rollback, е неуспешно.</p>
+<h3 id="d-60">Блок D — Преглед на дизайна (60 мин)<a class="headerlink" href="#d-60" title="Permanent link">&para;</a></h3>
+<p>Получавате <strong>заявка за промяна</strong> от ръководството на Trakia, която разширява бизнес обхвата на продукта.</p>
+<p><strong>Подготовка (20 мин, без AI помощ):</strong> напишете дизайнерска бележка от една страница на хартия или в обикновен редактор, без AI.</p>
+<p><strong>Комисия (40 мин):</strong> 10 минути представяне, след това 30 минути въпроси.</p>
+<p>Комисията изследва дизайна ви, но не ви насочва към проблемите. Очаквайте въпроси за архитектурните и регулаторните последствия от заявката, както и за последователността на изпълнение: какво се променя в системата, какво означава промяната според Акта за ИИ на ЕС и GDPR (Общ регламент относно защитата на данните), какво да изградите първо, какво да не изграждате и какви доказателства изисква всяка стъпка. Правните въпроси отбелязвайте за юрист, вместо да отговаряте на тях като юрист.</p>
+<p><strong>Въпроси по пакета с доказателства (задължителни, в рамките на 30-те минути за въпроси).</strong> Комисията винаги задава поне два въпроса, съобразени с вашия пакет: един за <strong>дизайна на контекста и паметта</strong> (C13: ADR-0014 и <code>docs/context-budget.md</code>) и един за <strong>доказателствата за справедливост</strong> (C18: докладът за справедливост и правилото на гейта към него). Отговаряйте въз основа на собствените си данни.</p>
+<p><strong>Задължителен критерий:</strong> сами, без подсказване, посочвате основния архитектурен риск и основното следствие от заявката за промяна за регулаторната класификация.</p>
+<h3 id="g3">Рубрика за оценяване на G3 (по блокове, плюс една обща)<a class="headerlink" href="#g3" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Критерий</th>
+<th>Начинаещ</th>
+<th>Компетентен</th>
+<th>Напреднал (ниво за преминаване)</th>
+<th>Експерт</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>A — Инцидент</strong></td>
+<td>Търси първопричината преди смекчаването; въздействието расте</td>
+<td>Смекчава последиците в рамките на блока; първопричината е открита</td>
+<td>Смекчаване за под 30 мин; първопричината е доказана с traces; действията от постмортема включват eval или известие и промяна във Фабриката</td>
+<td>Открива допринасящи фактори отвъд заложената причина (напр. липсващия гейт, който е позволил промяната да бъде пусната) и поправя класа проблеми</td>
+</tr>
+<tr>
+<td><strong>B — Red team</strong></td>
+<td>Пуска скенера и докладва суровия изход</td>
+<td>Валидни находки със стъпки за възпроизвеждане; ASR е измерен</td>
+<td>Находките са съпоставени с OWASP; архитектурната мярка намалява ASR измеримо; включени са атаки на български</td>
+<td>Открива заложени слабости, които скенерът пропуска; мярката е обобщима; остатъчният риск е посочен честно</td>
+</tr>
+<tr>
+<td><strong>C — Миграция</strong></td>
+<td>Само сравнение на обобщени резултати</td>
+<td>Сравнение по двойки за всеки вид грешка; решението е посочено</td>
+<td>Открива разликата в поведението и я адресира; планът за canary release има метрики и условия за rollback; цената на задача е взета предвид</td>
+<td>Предлага траен процес за миграция (набор от evals, маршрутизиране, следене на жизнения цикъл) отвъд тази конкретна смяна</td>
+</tr>
+<tr>
+<td><strong>D — Преглед на дизайна</strong></td>
+<td>Описва функционалности, а не дизайн</td>
+<td>Посочва ключовите архитектурни и регулаторни проблеми след подсказване</td>
+<td>Посочва и двата без подсказване; издържан дизайн за промяната; правилна аргументация за класификацията със съответните задължения; отговаря на въпросите по пакета за контекста/паметта и справедливостта въз основа на собствените си данни</td>
+<td>Преоформя заявката (обхват, предназначение, последователност), за да намали риска, като запази бизнес стойността, с ясни компромиси</td>
+</tr>
+<tr>
+<td><strong>Общо — Оперативна преценка</strong></td>
+<td>Небезопасни действия или неподкрепени твърдения</td>
+<td>Безопасно, но бавно или без проверка</td>
+<td>Безопасно, с проверка; комуникира ясно статуса под времеви натиск</td>
+<td>Спокойно приоритизиране; комуникация, по която другите могат да действат</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Преминаване:</strong> всички задължителни критерии на блоковете са изпълнени, <strong>≥ Напреднал в поне 3 от 4-те блока</strong>, нито един под Компетентен, а „Общо“ е на ниво Напреднал или по-високо.</p>
+<hr />
+<h2 id="6-evals">6. Как се гарантира справедливостта на скритите набори от evals<a class="headerlink" href="#6-evals" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Достъп.</strong> Скритите набори се съхраняват поверително и могат да се четат само от pipeline на оценяващата система и от отговорниците за гейтовете. Оценяващата система изтегля хранилището ви за гейта само за четене.</li>
+<li><strong>Произход.</strong> Тестовите случаи се пишат въз основа на видовете грешки, наблюдавани в предишни випуски — т.е. оценяване, водено от грешките, приложено към самия курс. Всеки випуск получава наново перифразирани, прегледани от човек случаи, етикетирани по страти.</li>
+<li><strong>Съдии.</strong> LLM съдиите на курса са фиксирани (deployment на модела плюс версия на промпта на съдията) и валидирани спрямо примери, етикетирани от човек, за всеки вид грешка, с <strong>TPR и TNR ≥ 0,85</strong> върху контролна (held-out) извадка (праг, определен от авторите на курса). Съдия, чието поведение се отклони след смяна на модела, се валидира повторно, преди оценяването да продължи.</li>
+<li><strong>Калибриране.</strong> Преди всяка версия и след всяка смяна на фиксиран модел праговете се проверяват спрямо референтното решение, за да остане летвата стабилна.</li>
+<li><strong>Детерминизъм при обжалвания.</strong> Отговорите се кешират, така че оцененото изпълнение да може да се повтори точно при повторно оценяване и обжалване. Самите 3 оценявани изпълнения не използват кеш.</li>
+<li><strong>Обратна връзка.</strong> Получавате резултати по страти, категориите грешки, в които сте попаднали, и кои мутации от проверката на чувствителността на гейта вашият CI е пропуснал. Не получавате тестовите случаи.</li>
+<li><strong>Извеждане от употреба.</strong> Изтекъл тестов случай се извежда от употреба веднага, а вариантът му се изважда от ротацията.</li>
+</ul>
+<hr />
+<h2 id="7">7. Правила за повторно явяване и обжалване<a class="headerlink" href="#7" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Ситуация</th>
+<th>Правило</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Неуспех на G1 или G2</td>
+<td>План за наваксване, съгласуван с ментор (целенасочени лабораторни упражнения и ката, съотнесени към неуспешните критерии и страти). Повторно явяване с <strong>различен вариант</strong> не по-рано от <strong>2 седмици</strong> след това.</td>
+</tr>
+<tr>
+<td>G3: 1–2 блока под Компетентен или неизпълнен задължителен критерий на блок</td>
+<td><strong>Повторно явяване на ниво блок</strong> само за неуспешните блокове, до 3 седмици, с различен сценарий.</td>
+</tr>
+<tr>
+<td>G3: 3 или повече неуспешни блока</td>
+<td>Пълно повторно явяване на G3 след наваксване.</td>
+</tr>
+<tr>
+<td>Опити</td>
+<td>До <strong>3 опита за всеки гейт</strong> за едно записване. След третия преминавате в следващия випуск в началото на съответното ниво, като запазвате вече получените кредити за модулите.</td>
+</tr>
+<tr>
+<td>Нарушение на почтеността</td>
+<td>Гейтът се анулира. Провежда се проверка за почтеност с ръководителя на курса, като резултатът може да включва отстраняване от курса. Ако бъдете оневинени, опитът не се брои.</td>
+</tr>
+<tr>
+<td>Обжалвания</td>
+<td>До 5 работни дни, писмено, срещу конкретни редове от рубриката или резултати от задължителни критерии. Втори изпитващ, който не е оценявал опита, преглежда записа и артефактите; кешираните отговори позволяват точно повторно изпълнение на скрития набор.</td>
+</tr>
+<tr>
+<td>Технически проблем (срив на gateway, инцидент в Azure)</td>
+<td>Времето се удължава с продължителността на срива или се предоставя безплатно повторно явяване; решението се документира.</td>
+</tr>
+</tbody>
+</table>
+<p>Неуспехът на гейт не е провал на дизайна на курса. Това е цикълът на обратна връзка и корекция в действие, а възможността за повторно явяване е част от дизайна.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Върни се в началото
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Долен колонтитул" >
+        
+          
+          <a href="../course-overview/" class="md-footer__link md-footer__link--prev" aria-label="Предишна: Преглед на курса">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Предишна
+              </span>
+              <div class="md-ellipsis">
+                Преглед на курса
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../competency-matrix/" class="md-footer__link md-footer__link--next" aria-label="Следваща: Матрица на компетентностите">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Следваща
+              </span>
+              <div class="md-ellipsis">
+                Матрица на компетентностите
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.sections", "navigation.top", "navigation.footer", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u041a\u043e\u043f\u0438\u0440\u0430\u043d\u043e", "clipboard.copy": "\u041a\u043e\u043f\u0438\u0440\u0430\u0439", "search.result.more.one": "\u043e\u0449\u0435 1 \u043d\u0430 \u0442\u0430\u0437\u0438 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0430", "search.result.more.other": "\u043e\u0449\u0435 # \u043d\u0430 \u0442\u0430\u0437\u0438 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0430", "search.result.none": "\u041d\u044f\u043c\u0430 \u0440\u0435\u0437\u0443\u043b\u0442\u0430\u0442\u0438", "search.result.one": "1 \u0440\u0435\u0437\u0443\u043b\u0442\u0430\u0442", "search.result.other": "# \u0440\u0435\u0437\u0443\u043b\u0442\u0430\u0442\u0430", "search.result.placeholder": "\u0417\u0430\u043f\u043e\u0447\u043d\u0435\u0442\u0435 \u0434\u0430 \u043f\u0438\u0448\u0435\u0442\u0435, \u0437\u0430 \u0434\u0430 \u0442\u044a\u0440\u0441\u0438\u0442\u0435", "search.result.term.missing": "\u041b\u0438\u043f\u0441\u0432\u0430\u0449\u043e", "select.version": "\u0418\u0437\u0431\u0435\u0440\u0438 \u0432\u0435\u0440\u0441\u0438\u044f"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

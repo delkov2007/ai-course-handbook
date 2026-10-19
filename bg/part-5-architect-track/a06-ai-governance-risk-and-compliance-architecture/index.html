@@ -1,0 +1,3353 @@
+
+<!doctype html>
+<html lang="bg" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Learning-by-doing course, release 2026.11 (content as of October 2026)">
+      
+      
+      
+      
+        <link rel="prev" href="../a05-reliability-scale-model-lifecycle-and-finops/">
+      
+      
+        <link rel="next" href="../a07-the-architect-s-craft-in-ai-programmes/">
+      
+      
+        
+          <link rel="alternate" href="../../../part-5-architect-track/a06-ai-governance-risk-and-compliance-architecture/" hreflang="en">
+        
+          <link rel="alternate" href="./" hreflang="bg">
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>A6 — Архитектура за управление на AI, риска и съответствието - AI Solution Developer & Architect — Наръчник за курсиста</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#a6-ai-governance-risk-compliance-architecture" class="md-skip">
+          Към съдържанието
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Горен колонтитул">
+    <a href="../../" title="AI Solution Developer &amp; Architect — Наръчник за курсиста" class="md-header__button md-logo" aria-label="AI Solution Developer & Architect — Наръчник за курсиста" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            AI Solution Developer & Architect — Наръчник за курсиста
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              A6 — Архитектура за управление на AI, риска и съответствието
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="Избери език">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href="../../../part-5-architect-track/a06-ai-governance-risk-and-compliance-architecture/" hreflang="en" class="md-select__link">
+              English
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="./" hreflang="bg" class="md-select__link">
+              Български
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Търси" placeholder="Търси" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Търси">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Изчисти" aria-label="Изчисти" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Инициализирано търсене
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Навигация" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../" title="AI Solution Developer &amp; Architect — Наръчник за курсиста" class="md-nav__button md-logo" aria-label="AI Solution Developer & Architect — Наръчник за курсиста" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    AI Solution Developer & Architect — Наръчник за курсиста
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Добре дошли
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Започнете оттук
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Започнете оттук
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/how-to-use/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Как да използвате наръчника
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/course-overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Преглед на курса
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/assessment-gates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Оценяване и гейтове
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/competency-matrix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Матрица на компетентностите
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Част 1 — Основи (ниво 1)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Част 1 — Основи (ниво 1)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c00-orientation-setup-and-toolchain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C0 — Ориентация, настройка и инструменти
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c01-how-generative-ai-works-an-engineer-s-mental-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C1 — Как работи генеративният AI: мисловен модел за инженери
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c02-your-first-ai-feature-in-net/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C2 — Първата ви AI функционалност в .NET
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c03-prompting-structured-outputs-and-tool-calling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C3 — Промптинг, структуриран изход и извикване на инструменти
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c04-working-with-coding-agents-the-factory-day-one/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C4 — Работа с кодиращи агенти: Фабриката, първи ден
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c05-evals-from-day-one/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C5 — Evals от първия ден
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Част 2 — Градивни елементи (ниво 2)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Част 2 — Градивни елементи (ниво 2)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c06-embeddings-and-vector-search/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C6 — Embeddings и векторно търсене
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c07-rag-from-documents-to-cited-permission-aware-answers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C7 — RAG: от документи до отговори с цитати, съобразени с правата на достъп
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c08-tools-and-the-model-context-protocol/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C8 — Инструменти и Model Context Protocol
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c09-agents-with-microsoft-agent-framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C9 — Агенти с Microsoft Agent Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c10-agents-over-structured-data-text-to-sql-on-sql-server/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C10 — Агенти върху структурирани данни: text-to-SQL върху SQL Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c11-agentic-testing-ai-driven-tdd-mutation-and-e2e-test-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C11 — Агентно тестване: TDD с AI, мутационно тестване и агенти за E2E тестове
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Част 3 — Продукционни системи (ниво 3)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Част 3 — Продукционни системи (ниво 3)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c12-workflows-and-multi-agent-orchestration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C12 — Workflows и многоагентна оркестрация
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c13-context-engineering-advanced-retrieval-and-memory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C13 — Инженеринг на контекста, напреднало извличане и памет
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c14-failure-driven-evals-llm-judges-and-red-teaming/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C14 — Evals, водени от грешките, LLM съдии и red teaming
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c15-observability-genaiops-and-cost/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C15 — Наблюдаемост, GenAIOps и разходи
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c16-security-for-llm-and-agentic-systems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C16 — Сигурност на LLM и агентни системи
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c17-shipping-to-azure-hosting-ai-gateway-iac-and-interop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C17 — Пускане в Azure: хостинг, AI gateway, IaC и оперативна съвместимост
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c18-responsible-ai-and-the-eu-ai-act-in-practice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C18 — Отговорен AI и Актът за изкуствения интелект на ЕС на практика
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c19-the-automated-sdlc-agents-from-issue-to-production/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C19 — Автоматизираният SDLC: агенти от issue до продукция
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Част 4 — Експертна специализация: AI Solution Developer
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Част 4 — Експертна специализация: AI Solution Developer
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d01-model-customization-and-small-local-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D1 — Адаптиране на модели и малки/локални модели
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d02-long-running-durable-and-autonomous-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D2 — Дълго работещи, устойчиви и автономни агенти
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d03-multimodal-and-realtime-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D3 — Мултимодални агенти и агенти в реално време
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d04-agent-ux-and-front-ends/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D4 — UX и фронтенди за агенти
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d05-performance-and-cost-engineering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D5 — Инженеринг на производителността и разходите
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d06-building-your-own-agent-tooling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D6 — Изграждане на собствени инструменти за агенти
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d07-agent-reliability-engineering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D7 — Инженеринг на надеждността на агенти
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Част 5 — Експертна специализация: AI Solution Architect
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Част 5 — Експертна специализация: AI Solution Architect
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../a01-ai-strategy-use-case-discovery-and-business-case/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A1 — AI стратегия, откриване на сценарии на употреба и бизнес обосновка
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../a02-azure-ai-reference-architectures-and-well-architected-for-ai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A2 — Референтни AI архитектури в Azure и Well-Architected за AI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../a03-enterprise-knowledge-and-data-architecture-for-ai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A3 — Корпоративна архитектура на знанията и данните за AI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../a04-agent-platform-and-integration-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A4 — Платформа за агенти и интеграционна архитектура
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../a05-reliability-scale-model-lifecycle-and-finops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A5 — Надеждност, мащаб, жизнен цикъл на моделите и FinOps
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A6 — Архитектура за управление на AI, риска и съответствието
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A6 — Архитектура за управление на AI, риска и съответствието
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Съдържание">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Съдържание
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-this-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why this matters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learning outcomes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concepts
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Concepts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-the-eu-ai-act-timeline-after-the-digital-omnibus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. The EU AI Act timeline after the Digital Omnibus
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-classifying-trakias-portfolio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Classifying Trakia's portfolio
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-provider-vs-deployer-when-selling-saas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Provider vs deployer when selling SaaS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-gdpr-and-the-dpia-for-ai-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. GDPR and the DPIA for AI features
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-management-systems-and-frameworks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Management systems and frameworks
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-inventory-model-cards-and-system-cards" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Inventory, model cards and system cards
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-governance-boards-and-approval-workflows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Governance boards and approval workflows
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-policy-as-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Policy-as-code
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-audit-logging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Audit logging
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tools-versions-as-of-oct-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tools &amp; versions (as of Oct 2026)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#labs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Labs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Labs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lab-1-ai-inventory-and-classification-as-code-3h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 1 — AI inventory and classification as code (≈3h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-2-dpia-and-impact-assessment-for-driver-coaching-35h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 2 — DPIA and impact assessment for driver coaching (≈3.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-3-policy-as-code-across-platform-and-pipeline-3h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 3 — Policy-as-code across platform and pipeline (≈3h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-4-audit-trail-and-evidence-pack-generation-35h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 4 — Audit trail and evidence pack generation (≈3.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-5-governance-board-simulation-and-customer-due-diligence-3h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 5 — Governance board simulation and customer due diligence (≈3h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kata
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#product-increment-fleet-ops-copilot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Product increment — Fleet Ops Copilot
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#factory-increment-your-agentic-sdlc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Factory increment — your agentic SDLC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assessment
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common pitfalls
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../a07-the-architect-s-craft-in-ai-programmes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A7 — Занаятът на архитекта в AI програми
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Част 6 — Съвместен финален проект
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Част 6 — Съвместен финален проект
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capstone/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Финален проект
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Приложение
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Приложение
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Речник на термините
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/references/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Допълнителна литература
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Съдържание">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Съдържание
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-this-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why this matters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learning outcomes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concepts
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Concepts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-the-eu-ai-act-timeline-after-the-digital-omnibus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. The EU AI Act timeline after the Digital Omnibus
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-classifying-trakias-portfolio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Classifying Trakia's portfolio
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-provider-vs-deployer-when-selling-saas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Provider vs deployer when selling SaaS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-gdpr-and-the-dpia-for-ai-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. GDPR and the DPIA for AI features
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-management-systems-and-frameworks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Management systems and frameworks
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-inventory-model-cards-and-system-cards" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Inventory, model cards and system cards
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-governance-boards-and-approval-workflows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Governance boards and approval workflows
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-policy-as-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Policy-as-code
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-audit-logging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Audit logging
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tools-versions-as-of-oct-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tools &amp; versions (as of Oct 2026)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#labs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Labs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Labs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lab-1-ai-inventory-and-classification-as-code-3h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 1 — AI inventory and classification as code (≈3h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-2-dpia-and-impact-assessment-for-driver-coaching-35h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 2 — DPIA and impact assessment for driver coaching (≈3.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-3-policy-as-code-across-platform-and-pipeline-3h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 3 — Policy-as-code across platform and pipeline (≈3h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-4-audit-trail-and-evidence-pack-generation-35h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 4 — Audit trail and evidence pack generation (≈3.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-5-governance-board-simulation-and-customer-due-diligence-3h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 5 — Governance board simulation and customer due diligence (≈3h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kata
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#product-increment-fleet-ops-copilot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Product increment — Fleet Ops Copilot
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#factory-increment-your-agentic-sdlc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Factory increment — your agentic SDLC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assessment
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common pitfalls
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="a6-ai-governance-risk-compliance-architecture">A6 — AI governance, risk &amp; compliance architecture<a class="headerlink" href="#a6-ai-governance-risk-compliance-architecture" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><strong>Level:</strong> Expert — AI Solution Architect track · <strong>Duration:</strong> 16h (theory 35% / labs 65%) · <strong>Prerequisites:</strong> A1–A5; C16 (threat model), C18 (AI Act classification, transparency, human oversight) · <strong>Volatility:</strong> High (EU AI Act guidance and national implementation, Digital Omnibus follow-ups, Azure Policy definitions, Agent 365/Purview features)</p>
+<p><strong>Not legal advice.</strong> This module teaches architects to build the <em>technical and organisational system</em> that makes compliance demonstrable. Classification decisions, legal bases and contractual positions must be confirmed by qualified counsel and the data protection officer. Article references are given for orientation; verify them against the consolidated text of Regulation (EU) 2024/1689 as amended by Regulation (EU) 2026/1744.</p>
+</blockquote>
+<h2 id="why-this-matters">Why this matters<a class="headerlink" href="#why-this-matters" title="Permanent link">&para;</a></h2>
+<p><strong>What separates an expert architect from a proficient one here:</strong> a proficient architect can classify one AI system and write a transparency notice (C18). An expert designs the <em>governance system</em> for the whole portfolio. That system has five parts:</p>
+<ul>
+<li>an inventory that is always current;</li>
+<li>risk-tiered approval workflows;</li>
+<li>controls enforced as code;</li>
+<li>evidence generated by the delivery pipeline as a by-product;</li>
+<li>an audit trail that reconstructs who, which agent version, which model, which data and which approval produced any action.</li>
+</ul>
+<p>The expert also knows how the obligations <em>shift</em> when the company moves from using AI internally to selling it to other companies.</p>
+<p>Trakia's two decisions make governance a design problem:</p>
+<ul>
+<li><strong>Internal rollout.</strong> It reaches drivers, which is employment territory. The deferred "driver-behaviour scoring" feature from A1 evaluates the performance and behaviour of workers, which places it squarely in <strong>Annex III</strong> high-risk territory.</li>
+<li><strong>SaaS.</strong> It changes Trakia's role. Trakia becomes the <strong>provider</strong> of an AI system placed on the market, and each customer fleet becomes a <strong>deployer</strong> with obligations of its own that Trakia must <em>enable</em>: instructions for use, logging, human-oversight design.</li>
+</ul>
+<p>The regulatory calendar also moved. The <strong>Digital Omnibus on AI, Regulation (EU) 2026/1744</strong>, entered into force on 27 July 2026 and pushed Annex III obligations to <strong>2 December 2027</strong>. That is a design window, not a reprieve. Customers' procurement teams are already asking for evidence.</p>
+<p>Teams without this skill fall into one of three patterns:</p>
+<ul>
+<li><strong>Paper governance:</strong> policies in a wiki that nobody's pipeline checks.</li>
+<li><strong>Freeze:</strong> "legal hasn't approved AI".</li>
+<li><strong>Surprise:</strong> a works council injunction or a customer audit finding.</li>
+</ul>
+<p>Experts map regulation to controls, controls to automated checks, and checks to evidence. They make the compliant path the easiest path through the factory.</p>
+<h2 id="learning-outcomes">Learning outcomes<a class="headerlink" href="#learning-outcomes" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Build</strong> an AI system inventory/registry that records risk class, provider/deployer role per relationship, models, data, tools, owners and evidence links, with machine-checkable completeness.</li>
+<li><strong>Classify</strong> Trakia's systems under the EU AI Act as amended (prohibited, Annex III high-risk, Art. 50 transparency, minimal), applying the current dates. <strong>Defend</strong> the reasoning, including the Art. 6(3) derogation and profiling (verify article references).</li>
+<li><strong>Analyse</strong> how obligations change between internal use and SaaS: provider vs deployer, Art. 25 role shifts, and the deployer-support pack Trakia must ship.</li>
+<li><strong>Conduct</strong> a GDPR DPIA for an AI feature that monitors employees, including retention and erasure across traces, memory, indexes and eval sets.</li>
+<li><strong>Design</strong> an AI management system aligned with ISO/IEC 42001 and map it to the NIST AI RMF (Govern/Map/Measure/Manage) and the Generative AI Profile.</li>
+<li><strong>Implement</strong> policy-as-code: Azure Policy for platform controls and CI checks for agent manifests, risk tier gates and evidence completeness.</li>
+<li><strong>Design</strong> tamper-evident audit logging that reconstructs agent actions and supports AI Act record-keeping and GDPR rights.</li>
+<li><strong>Operate</strong> a risk-tiered governance board with approval workflows, model and system cards, and evidence packs generated by the pipeline.</li>
+</ol>
+<h2 id="concepts">Concepts<a class="headerlink" href="#concepts" title="Permanent link">&para;</a></h2>
+<h3 id="1-the-eu-ai-act-timeline-after-the-digital-omnibus">1. The EU AI Act timeline after the Digital Omnibus<a class="headerlink" href="#1-the-eu-ai-act-timeline-after-the-digital-omnibus" title="Permanent link">&para;</a></h3>
+<p>Regulation (EU) 2026/1744 was published 24 July 2026 and entered into force 27 July 2026. Dates an architect plans against:</p>
+<table>
+<thead>
+<tr>
+<th>Obligation</th>
+<th>Applies from</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Prohibited practices (Art. 5); AI literacy (Art. 4)</td>
+<td>2 Feb 2025. Literacy is now softened to a duty to <em>support</em> literacy measures</td>
+</tr>
+<tr>
+<td>GPAI model obligations; governance and penalties framework</td>
+<td>2 Aug 2025 (legacy GPAI models until 2 Aug 2027)</td>
+</tr>
+<tr>
+<td><strong>Art. 50 transparency</strong> (AI interaction disclosure, synthetic content marking, deepfake labelling)</td>
+<td><strong>2 Aug 2026</strong>. Generative systems already on the market before then have until <strong>2 Dec 2026</strong> for Art. 50(2) machine-readable marking</td>
+</tr>
+<tr>
+<td>New prohibition: AI generating non-consensual intimate imagery / CSAM (or lacking reasonable safeguards against it)</td>
+<td>2 Dec 2026</td>
+</tr>
+<tr>
+<td><strong>Annex III high-risk</strong> (incl. employment and workers management)</td>
+<td><strong>2 Dec 2027</strong> (was 2 Aug 2026)</td>
+</tr>
+<tr>
+<td><strong>Annex I</strong> product-embedded high-risk</td>
+<td><strong>2 Aug 2028</strong></td>
+</tr>
+<tr>
+<td>National regulatory sandbox (at least one per Member State)</td>
+<td>by 2 Aug 2027</td>
+</tr>
+</tbody>
+</table>
+<p>Other omnibus changes relevant to Trakia:</p>
+<ul>
+<li><strong>Small mid-caps</strong> (new Art. 3(14b)) get SME-style privileges: simplified technical documentation, proportionate QMS, lower fine caps. Check whether Trakia qualifies.</li>
+<li><strong>High-risk EU database registration is reinstated</strong> in streamlined form.</li>
+<li><strong>New Art. 4a</strong> permits strictly necessary processing of special-category data for bias detection and correction under safeguards, now extending beyond high-risk systems.</li>
+<li><strong>The AI Office</strong> gets exclusive supervision of AI systems built on GPAI models by the same provider or group.</li>
+<li><strong>The broader "Digital Omnibus"</strong> (GDPR, NIS2, Data Act changes) was still in the legislative process as of July 2026. Track it.</li>
+</ul>
+<p><strong>Bulgaria.</strong> National competent-authority designation is thinly documented. One law-firm tracker names the <strong>Commission for Personal Data Protection (КЗЛД / CPDP)</strong> as the primary authority, with the Executive Agency for Accreditation for notified bodies. <strong>This is unverified.</strong> Point learners to the State Gazette (Държавен вестник) and CPDP for authoritative updates. Do not build governance processes that hard-code an authority until it is confirmed.</p>
+<h3 id="2-classifying-trakias-portfolio">2. Classifying Trakia's portfolio<a class="headerlink" href="#2-classifying-trakias-portfolio" title="Permanent link">&para;</a></h3>
+<p>Apply a decision sequence for each system:</p>
+<ol>
+<li>Is it an AI system?</li>
+<li>Prohibited practice (Art. 5)?</li>
+<li>Annex I product safety component?</li>
+<li>Annex III use case?</li>
+<li>If Annex III, does the Art. 6(3) derogation apply? It is unavailable when the system performs <strong>profiling of natural persons</strong> (verify).</li>
+<li>Art. 50 transparency duties?</li>
+<li>GDPR overlay.</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>System</th>
+<th>Indicative classification (to be confirmed by counsel)</th>
+<th>Key reasoning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Fleet Assistant (policy/manual Q&amp;A, maintenance booking with approval)</td>
+<td>Not high-risk; <strong>Art. 50</strong> disclosure of AI interaction</td>
+<td>Assists staff; no decisions about persons</td>
+</tr>
+<tr>
+<td>Fleet Analyst (telematics NL queries)</td>
+<td>Not high-risk <em>as designed</em>; becomes sensitive if used to rank individual drivers</td>
+<td>Purpose and use constraints must be written into instructions for use and enforced (no per-driver ranking views)</td>
+</tr>
+<tr>
+<td>Incident workflow (triage → booking → customer notification)</td>
+<td>Not high-risk; Art. 50 for AI-generated customer messages where applicable</td>
+<td>Human approval on bookings; customer comms disclosure</td>
+</tr>
+<tr>
+<td><strong>Driver-behaviour scoring / coaching</strong></td>
+<td><strong>Annex III point 4 (employment, workers management), likely high-risk</strong>: monitoring and evaluating performance and behaviour of workers; profiling makes the Art. 6(3) derogation unavailable (verify)</td>
+<td>Annex III obligations from 2 Dec 2027; DPIA now; works council</td>
+</tr>
+<tr>
+<td>Driver fatigue detection from cabin camera (D3 idea)</td>
+<td>Check <strong>Art. 5</strong> workplace emotion-recognition prohibition and its medical/safety exception (verify); biometric GDPR special category</td>
+<td>Design as a safety system with minimal data; legal review mandatory</td>
+</tr>
+<tr>
+<td>HR policy Q&amp;A via M365 Copilot (A1 buy decision)</td>
+<td>Trakia is <strong>deployer</strong> of Microsoft's system; minimal risk</td>
+<td>Literacy support, transparency, data protection configuration</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Misconception to unlearn: "we only use OpenAI/Anthropic models, so the AI Act is their problem".</strong> GPAI model providers carry GPAI obligations. Trakia, which builds an AI <em>system</em> on those models and puts it into service or places it on the market under its own name, is the <strong>provider of that system</strong>.</p>
+<h3 id="3-provider-vs-deployer-when-selling-saas">3. Provider vs deployer when selling SaaS<a class="headerlink" href="#3-provider-vs-deployer-when-selling-saas" title="Permanent link">&para;</a></h3>
+<p><strong>Internal use.</strong> Trakia is provider <em>and</em> deployer of its own system (it puts it into service for its own use).</p>
+<p><strong>SaaS to fleets.</strong> Trakia is the <strong>provider</strong>. Each customer fleet is a <strong>deployer</strong>.</p>
+<p>For high-risk systems, providers carry:
+- risk management (Art. 9);
+- data governance (Art. 10);
+- technical documentation (Art. 11);
+- record-keeping and automatic logging (Art. 12);
+- transparency and instructions for use (Art. 13);
+- human-oversight design (Art. 14);
+- accuracy, robustness and cybersecurity (Art. 15);
+- a QMS (Art. 17);
+- conformity assessment, registration and post-market monitoring.</p>
+<p>Deployers carry:
+- use according to instructions;
+- human oversight by competent people;
+- input-data relevance;
+- log retention (at least six months is the commonly cited minimum; verify Art. 26);
+- <strong>informing workers' representatives and affected workers before putting a high-risk system into service at the workplace</strong> (verify Art. 26(7));
+- an FRIA for public bodies and certain private deployers (Art. 27).</p>
+<p><strong>Art. 25 role shifts.</strong> A deployer becomes a provider on <strong>substantial modification</strong> or <strong>rebranding</strong> under its own name. That is relevant if a large customer white-labels Fleet Ops Copilot, or if Trakia lets tenants upload custom agents that change the intended purpose. Contracts and product configuration limits are architecture.</p>
+<p><strong>Architectural consequence: the deployer-support pack.</strong> For every SaaS feature Trakia ships:
+- instructions for use;
+- the system card;
+- a logging and export API (so deployers can meet their log retention);
+- oversight configuration (approval steps a tenant can't switch off for high-risk features);
+- transparency notice templates in Bulgarian and English;
+- a works-council information template;
+- data-processing terms.</p>
+<p><strong>Customers will ask for this in procurement.</strong> Build it once, generate it per release.</p>
+<h3 id="4-gdpr-and-the-dpia-for-ai-features">4. GDPR and the DPIA for AI features<a class="headerlink" href="#4-gdpr-and-the-dpia-for-ai-features" title="Permanent link">&para;</a></h3>
+<p><strong>A DPIA is required for systematic monitoring of employees</strong> and for large-scale or innovative processing. The driver-behaviour feature needs one regardless of AI Act timing. Architectural content of a good AI DPIA:</p>
+<ul>
+<li><strong>Data flow map.</strong> Reuse the A3 "where does this byte live" register: prompts, retrieved chunks, tool outputs, traces, memory, eval sets, red-team corpora, gateway logs, semantic cache.</li>
+<li><strong>Lawful basis and purpose limitation per flow.</strong> Telematics collected for fleet operations is not automatically lawful to reuse for individual performance scoring.</li>
+<li><strong>Minimisation:</strong></li>
+<li>pseudonymised driver IDs (already in <code>TrakiaOps</code>);</li>
+<li>aggregation thresholds (no per-driver views below N events);</li>
+<li>OTel content capture off in production, redaction in the Collector.</li>
+<li><strong>Retention:</strong></li>
+<li>per store, with deletion jobs;</li>
+<li>prompts and traces with the shortest feasible retention;</li>
+<li>eval datasets classified as production data.</li>
+<li><strong>Data-subject rights.</strong> Access and erasure across <em>all</em> stores, including memory ("forget"), indexes, traces and eval samples. Design an erasure orchestrator, not a manual checklist.</li>
+<li><strong>Processors and sub-processors.</strong></li>
+<li>Microsoft (Foundry, Azure);</li>
+<li>model providers offered through Foundry (verify the data-processing terms per model family);</li>
+<li>Trakia as processor for SaaS customers, who are controllers of their drivers' data.</li>
+<li><strong>Residency and transfers.</strong> Data Zone EU deployments, EU regions and failover pairs (A3, A5).</li>
+<li><strong>Risks and mitigations,</strong> including model-specific ones: inference of special categories (MEAI's UngroundedAttributes evaluator is useful), hallucinated statements about people, memory poisoning.</li>
+</ul>
+<h3 id="5-management-systems-and-frameworks">5. Management systems and frameworks<a class="headerlink" href="#5-management-systems-and-frameworks" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>ISO/IEC 42001</strong> is the certifiable <strong>AI management system (AIMS)</strong> standard. Plan-do-check-act structure, AI policy, roles and responsibilities, AI risk assessment and treatment, <strong>AI system impact assessment</strong>, Annex A reference controls, statement of applicability, internal audit, management review, continual improvement. Companions: <strong>ISO/IEC 23894</strong> (AI risk management) and <strong>ISO/IEC 42005</strong> (AI impact assessment). A Trakia AIMS scopes "design, development, operation and provision of Fleet Ops Copilot (internal and SaaS)". Certification is a commercial lever for SaaS sales.</li>
+<li><strong>NIST AI RMF 1.0</strong> (Jan 2023) remains current; <strong>there is no "2.0"</strong>. Functions: <strong>Govern, Map, Measure, Manage</strong>. The <strong>Generative AI Profile (NIST AI 600-1, July 2024)</strong> lists GenAI-specific risks and actions. CSA published a <strong>draft Agentic NIST AI RMF Profile</strong> (Mar 2026). NIST runs an AI Agent Standards Initiative via CAISI.</li>
+<li><strong>Mapping is the architect's job.</strong> One control, many frameworks. Example: the "eval gate on release" control satisfies:</li>
+<li>AI Act Art. 9/15 (risk management, accuracy, robustness);</li>
+<li>ISO 42001 operational controls (verify the Annex A control IDs);</li>
+<li>NIST <em>Measure</em>.</li>
+</ul>
+<p>Build a <strong>control catalogue</strong> with one row per control, linked to frameworks, implementation and evidence.</p>
+<h3 id="6-inventory-model-cards-and-system-cards">6. Inventory, model cards and system cards<a class="headerlink" href="#6-inventory-model-cards-and-system-cards" title="Permanent link">&para;</a></h3>
+<p><strong>AI inventory record</strong> (extends the A4 agent registry; one record per AI <em>system</em>, linking to its agents):</p>
+<ul>
+<li>system ID, name, purpose, intended users;</li>
+<li>provider/deployer role per relationship (internal, each SaaS tenant);</li>
+<li>risk class and rationale, with reviewer and date;</li>
+<li>Art. 50 duties;</li>
+<li>DPIA reference;</li>
+<li>models (role, version, retirement date from A5);</li>
+<li>data sources and classification;</li>
+<li>tools and side-effect classes;</li>
+<li>human-oversight points;</li>
+<li>eval suite and last results;</li>
+<li>red-team ASR;</li>
+<li>incidents;</li>
+<li>owner/sponsor;</li>
+<li>status;</li>
+<li>next review.</li>
+</ul>
+<p><strong>Model card</strong> (per model role as used by Trakia, not the vendor's card):
+- intended use;
+- evaluation results on Trakia's suites, including Bulgarian strata;
+- known failure modes from error analysis;
+- limitations (e.g., groundedness detection English-only → custom judge);
+- version and lifecycle.</p>
+<p><strong>System card</strong> (per AI system):
+- architecture summary (C4 extract);
+- capabilities and limitations;
+- oversight design;
+- safety evaluations;
+- data handling;
+- residency;
+- intended and prohibited uses;
+- contact.</p>
+<p>The system card is the backbone of the Art. 13 instructions for use and the customer due-diligence response.</p>
+<h3 id="7-governance-boards-and-approval-workflows">7. Governance boards and approval workflows<a class="headerlink" href="#7-governance-boards-and-approval-workflows" title="Permanent link">&para;</a></h3>
+<p><strong>Tier the process by risk.</strong> A single heavyweight board for everything creates the "freeze" pattern.</p>
+<table>
+<thead>
+<tr>
+<th>Tier</th>
+<th>Examples</th>
+<th>Approval</th>
+<th>Evidence required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>T0</td>
+<td>Internal productivity with bought SaaS (M365 Copilot)</td>
+<td>Product owner + IT security checklist</td>
+<td>Inventory entry, data config</td>
+</tr>
+<tr>
+<td>T1</td>
+<td>Internal custom assistants, read-only tools</td>
+<td>Platform architect + security</td>
+<td>Eval report, threat model delta, DPIA screening</td>
+</tr>
+<tr>
+<td>T2</td>
+<td>Agents with write actions, customer-facing, SaaS features</td>
+<td>Governance board (architecture, security, DPO, product)</td>
+<td>Full evidence pack, red-team scorecard, oversight design</td>
+</tr>
+<tr>
+<td>T3</td>
+<td>Annex III / high-risk, employee monitoring</td>
+<td>Board + legal + management sign-off + works-council process</td>
+<td>T2 + DPIA, FRIA-style impact assessment, conformity plan</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Workflow mechanics:</strong>
+- the request is a PR adding or changing an inventory record;
+- CI computes the tier from the manifest (a classification decision table) and requires the corresponding evidence and approvers (CODEOWNERS / environment protection rules);
+- the decision is recorded as an ADR;
+- re-approval triggers: model migration (A5), new tools, new data sources, new tenant category, incidents.</p>
+<h3 id="8-policy-as-code">8. Policy-as-code<a class="headerlink" href="#8-policy-as-code" title="Permanent link">&para;</a></h3>
+<p><strong>Platform controls (Azure Policy).</strong> Assign an initiative at the AI landing-zone scope:
+- deny public network access on AI services, Search, Cosmos and Storage;
+- require private endpoints;
+- disable local (key) auth;
+- require diagnostic settings to central Log Analytics;
+- allowed locations limited to EU regions;
+- required tags: <code>ai-system-id</code>, <code>risk-tier</code>, <code>data-classification</code>, <code>tenant</code>/<code>stamp</code>.</p>
+<p>Built-in definitions exist for several of these. Verify names and effects, and whether model-deployment-level policies, such as allowed models or deployment types, are available for Foundry.</p>
+<p><strong>Delivery controls (CI).</strong>
+- An agent manifest schema (<code>agent.yaml</code>) must reference an inventory ID. CI fails if:
+  - risk tier evidence is missing;
+  - an <code>irreversible</code> tool lacks a HITL point;
+  - a model role has a retirement date inside the release window without a migration ticket;
+  - the content-capture flag is on for production;
+  - the deployment region is outside the EU.
+- Evals, red-team ASR and isolation suites are gates (C14, A3).</p>
+<p><strong>Runtime controls.</strong> Guardrails (input / tool call / tool response / output, with tool controls preview), the gateway content-safety policy, Conditional Access for agents and lifecycle suspension (A4).</p>
+<h3 id="9-audit-logging">9. Audit logging<a class="headerlink" href="#9-audit-logging" title="Permanent link">&para;</a></h3>
+<p><strong>What to log for every agent action:</strong>
+- timestamp;
+- tenant;
+- user (pseudonymous ID);
+- agent ID and version;
+- model deployment and <code>gen_ai.response.model</code>;
+- prompt and instructions version;
+- retrieved document IDs (not content);
+- tool calls with arguments (redacted per classification);
+- guardrail decisions;
+- approval events: approver, what they saw (the raw action, per OWASP guidance), decision;
+- outcome.</p>
+<p>Use trace correlation (<code>gen_ai.conversation.id</code>, trace IDs).</p>
+<p><strong>Properties:</strong>
+- <strong>Tamper-evident.</strong> Use immutable storage (WORM/immutability policies on Blob) or hash-chained records.
+- <strong>Separated</strong> from operational telemetry that engineers can purge.
+- <strong>Retention per policy:</strong> AI Act record-keeping for high-risk systems (Art. 12, plus deployer retention under Art. 26; verify periods) balanced against GDPR minimisation.
+- <strong>Access-controlled:</strong> the auditor role (A2 personas).
+- <strong>Exportable per tenant</strong> for SaaS deployers.</p>
+<p><strong>Reconstruction test.</strong> Given a booking made 3 weeks ago for Danube Logistics, reconstruct who and what caused it in under 15 minutes. If you can't, your audit design has failed.</p>
+<h2 id="tools-versions-as-of-oct-2026">Tools &amp; versions (as of Oct 2026)<a class="headerlink" href="#tools-versions-as-of-oct-2026" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Tool / resource</th>
+<th>Purpose</th>
+<th>Status</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Regulation (EU) 2024/1689 as amended by (EU) 2026/1744</td>
+<td>Legal basis</td>
+<td>In force (omnibus 27 Jul 2026)</td>
+<td>Use the consolidated text; FPF timeline PDF for dates</td>
+</tr>
+<tr>
+<td>ISO/IEC 42001:2023; ISO/IEC 23894; ISO/IEC 42005</td>
+<td>AIMS, risk, impact assessment</td>
+<td>Published standards</td>
+<td>Purchase from ISO; verify any 2026 amendments</td>
+</tr>
+<tr>
+<td>NIST AI RMF 1.0; NIST AI 600-1 (GenAI Profile)</td>
+<td>Risk framework</td>
+<td>Current (no 2.0)</td>
+<td>CSA Agentic profile is a <strong>draft</strong></td>
+</tr>
+<tr>
+<td>Azure Policy (built-in + custom), initiatives</td>
+<td>Platform controls</td>
+<td>GA</td>
+<td>Verify AI-specific built-ins</td>
+</tr>
+<tr>
+<td>PSRule for Azure / custom CI validators</td>
+<td>Pre-deployment checks</td>
+<td>OSS / course assets</td>
+<td></td>
+</tr>
+<tr>
+<td>Microsoft Purview (sensitivity labels, data map)</td>
+<td>Classification, label-aware retrieval</td>
+<td>GA; Search label integration <strong>preview</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>Entra Agent ID, Agent 365</td>
+<td>Identity, registry convergence</td>
+<td>GA (parts preview)</td>
+<td>Inventory source of truth TBD per tenant: verify</td>
+</tr>
+<tr>
+<td>Foundry guardrails</td>
+<td>Runtime controls</td>
+<td>GA; tool-call/response controls, PII, groundedness <strong>preview</strong></td>
+<td>Agent guardrail overrides model guardrail</td>
+</tr>
+<tr>
+<td>AI Red Teaming Agent <strong>[Python]</strong></td>
+<td>ASR evidence</td>
+<td>Status not stated on Learn</td>
+<td>Agent risks cloud-only in 5 regions</td>
+</tr>
+<tr>
+<td><code>Microsoft.Extensions.AI.Evaluation.Safety</code></td>
+<td>Safety evals incl. UngroundedAttributes</td>
+<td>GA (verify versions)</td>
+<td>Uses Foundry Evaluation service</td>
+</tr>
+<tr>
+<td>Azure Blob immutability / Log Analytics</td>
+<td>Tamper-evident audit</td>
+<td>GA</td>
+<td></td>
+</tr>
+<tr>
+<td>ASSERT, Agent Control Specification (open source, Build 2026)</td>
+<td>Policy → adversarial tests / runtime guardrails</td>
+<td>OSS (verify maturity)</td>
+<td>Assess for radar (A7)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="labs">Labs<a class="headerlink" href="#labs" title="Permanent link">&para;</a></h2>
+<h3 id="lab-1-ai-inventory-and-classification-as-code-3h">Lab 1 — AI inventory and classification as code (≈3h)<a class="headerlink" href="#lab-1-ai-inventory-and-classification-as-code-3h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> Every Trakia AI system is inventoried, classified with recorded reasoning, and tiered automatically.</li>
+<li><strong>Start state:</strong> branch <code>a6/start</code>. Contains the A4 agent registry and <code>governance/inventory/schema.json</code>.</li>
+<li><strong>Steps:</strong></li>
+<li>Create inventory records for all systems in Concepts §2, plus the SRE agent and the coding agents of the factory. Are coding agents in scope of your AI policy? Decide, and record why.</li>
+<li>Encode the classification decision sequence as a reviewed decision table (<code>classification.yaml</code>) and a small .NET evaluator. Example:
+     <div class="highlight"><pre><span></span><code><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">annex3-employment</span>
+<span class="w">  </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> affects_workers</span><span class="p">:</span><span class="w"> </span><span class="nv">true</span><span class="p p-Indicator">,</span><span class="nt"> evaluates_performance_or_behaviour</span><span class="p">:</span><span class="w"> </span><span class="nv">true</span><span class="w"> </span><span class="p p-Indicator">}</span>
+<span class="w">  </span><span class="nt">result</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> class</span><span class="p">:</span><span class="w"> </span><span class="nv">high-risk-annex-iii</span><span class="p p-Indicator">,</span><span class="nt"> derogation_6_3</span><span class="p">:</span><span class="w"> </span><span class="nv">unavailable_if_profiling</span><span class="p p-Indicator">,</span><span class="nt"> applies_from</span><span class="p">:</span><span class="w"> </span><span class="nv">2027-12-02</span><span class="w"> </span><span class="p p-Indicator">}</span>
+<span class="w">  </span><span class="nt">citation</span><span class="p">:</span><span class="w"> </span><span class="s">"Annex</span><span class="nv"> </span><span class="s">III</span><span class="nv"> </span><span class="s">pt</span><span class="nv"> </span><span class="s">4;</span><span class="nv"> </span><span class="s">Art.</span><span class="nv"> </span><span class="s">6(2)-(3)</span><span class="nv"> </span><span class="s">—</span><span class="nv"> </span><span class="s">verify</span><span class="nv"> </span><span class="s">against</span><span class="nv"> </span><span class="s">consolidated</span><span class="nv"> </span><span class="s">text"</span>
+</code></pre></div></li>
+<li>Record the provider/deployer role per relationship: internal, and each SaaS tenant category.</li>
+<li>Generate the tier (T0–T3) and the required-evidence list per system. CI fails on missing evidence for the current status (e.g., "pilot" T2 requires an eval report and threat model).</li>
+<li><strong>Break it:</strong> A product manager adds "monthly driver ranking leaderboard" to the Fleet Analyst's purpose field. Re-classification must flip the system to T3 / Annex III, block its promotion, and open a governance-board issue.</li>
+<li><strong>Acceptance criteria:</strong></li>
+<li>The inventory schema validates and the classification evaluator's tests (≥ 12 cases incl. edge cases) pass.</li>
+<li>Every record has a reviewer and date.</li>
+<li>The leaderboard change is caught by CI.</li>
+<li>Classification rationales cite articles marked "verify".</li>
+<li><strong>Stretch:</strong> Generate a portfolio dashboard showing systems by tier, open evidence gaps and upcoming dates (2 Dec 2026 Art. 50(2) marking; 2 Dec 2027 Annex III).</li>
+</ul>
+<h3 id="lab-2-dpia-and-impact-assessment-for-driver-coaching-35h">Lab 2 — DPIA and impact assessment for driver coaching (≈3.5h)<a class="headerlink" href="#lab-2-dpia-and-impact-assessment-for-driver-coaching-35h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> Decide how (and whether) Trakia offers driver-behaviour features, with a DPIA and design alternatives.</li>
+<li><strong>Start state:</strong> <code>a6/lab2-start</code>. Contains the A3 data-location register, telematics schema and persona notes from the A1 works-council representative.</li>
+<li><strong>Steps:</strong></li>
+<li>Describe three design alternatives:<ul>
+<li>(a) individual driver scores visible to managers;</li>
+<li>(b) <strong>private coaching</strong>: each driver sees only their own feedback, managers see only depot-level aggregates above a minimum group size, no ranking, no HR use;</li>
+<li>(c) fleet-level safety analytics only (no individual processing beyond what operations already needs).</li>
+</ul>
+</li>
+<li>For each, run the DPIA: data flows, lawful basis, necessity and proportionality, risks to drivers (incl. inference errors, chilling effects), mitigations, residual risk. Also run an impact assessment in the spirit of ISO/IEC 42005 (fairness across routes and vehicle types: are drivers on mountain routes scored unfairly?).</li>
+<li>Re-run the AI Act classification per alternative. Note which remain Annex III (evaluating behaviour of workers may persist even in coaching designs; counsel must decide).</li>
+<li>Specify the technical controls for the chosen design:<ul>
+<li>aggregation thresholds enforced in SQL views (A3 semantic layer);</li>
+<li>no per-driver API for manager roles (authorization tests);</li>
+<li>retention;</li>
+<li>an erasure orchestrator covering index, memory, traces and eval samples;</li>
+<li>a fairness evaluation in CI (score distributions by route type with tolerance).</li>
+</ul>
+</li>
+<li>Draft the worker information notice (BG/EN) and the works-council briefing outline (used in A7).</li>
+<li><strong>Break it:</strong> A developer adds a "top 10 safest drivers" endpoint for a depot-motivation campaign. Authorization and aggregation tests must fail. Explain in the DPIA addendum why "positive" rankings still evaluate behaviour.</li>
+<li><strong>Acceptance criteria:</strong></li>
+<li>The DPIA template is complete (linter).</li>
+<li>The chosen design's controls are implemented as tests and pass.</li>
+<li>The erasure orchestrator removes a test driver's data from all registered stores, with a report.</li>
+<li>The fairness check is in CI with a documented threshold.</li>
+<li><strong>Stretch:</strong> Write the deployer-facing instructions-for-use section for SaaS customers who enable the coaching feature, including their own works-council duties (verify Art. 26).</li>
+</ul>
+<h3 id="lab-3-policy-as-code-across-platform-and-pipeline-3h">Lab 3 — Policy-as-code across platform and pipeline (≈3h)<a class="headerlink" href="#lab-3-policy-as-code-across-platform-and-pipeline-3h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> Make the compliant path the only deployable path.</li>
+<li><strong>Start state:</strong> <code>a6/lab3-start</code>. Contains A2 policy definitions and agent manifests from A4.</li>
+<li><strong>Steps:</strong></li>
+<li>
+<p>Extend the Azure Policy initiative:</p>
+<ul>
+<li>allowed EU locations;</li>
+<li>deny public network access;</li>
+<li>disable local auth;</li>
+<li>require diagnostic settings;</li>
+<li>required tags <code>ai-system-id</code>, <code>risk-tier</code>, <code>data-classification</code>.</li>
+</ul>
+<p>Assign it at the AI landing-zone management group/subscription. Run a compliance scan.
+  2. Write <code>agent-manifest</code> CI validation:
+ - inventory ID exists;
+ - tier evidence present;
+ - <code>irreversible</code> tools have HITL;
+ - content capture off for prod;
+ - model roles have no retirement inside the release window without a migration ticket (reads the A5 register);
+ - deployment type is Data Zone EU or regional EU for personal data.
+  3. Gate releases with environment protection: T2/T3 releases require board approvers; the evidence pack (Lab 4) must exist.
+  4. Document each policy in the <strong>control catalogue</strong> with its AI Act / ISO 42001 / NIST mapping.
+- <strong>Break it:</strong> Run three violations one at a time:
+  - (a) deploy a Global Standard model deployment for the Fleet Analyst (personal data);
+  - (b) a new Search service in a non-EU region;
+  - (c) an agent manifest enabling content capture in prod.</p>
+</li>
+</ul>
+<p>Each must be blocked at the right layer (policy deny / CI fail) with a clear message.
+- <strong>Acceptance criteria:</strong>
+  - The policy compliance report shows 100% on AI resources.
+  - All three violations are blocked with evidence (deny event, CI log).
+  - Every control in the catalogue maps to ≥ 1 framework and links an automated check or a named manual review.
+- <strong>Stretch:</strong> Assess ASSERT / the Agent Control Specification (open-sourced at Build 2026): generate adversarial tests from Trakia's AI policy text and compare them with your C14 red-team set. Report the overlap and new findings.</p>
+<h3 id="lab-4-audit-trail-and-evidence-pack-generation-35h">Lab 4 — Audit trail and evidence pack generation (≈3.5h)<a class="headerlink" href="#lab-4-audit-trail-and-evidence-pack-generation-35h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> Any action is reconstructable, and every release produces the evidence a regulator, auditor or customer will ask for.</li>
+<li><strong>Start state:</strong> <code>a6/lab4-start</code>.</li>
+<li><strong>Steps:</strong></li>
+<li>Implement an <strong>audit event</strong> emitter in the agent middleware and tool hosts, following the Concepts §9 schema. Write to an append-only store with immutability, plus hash chaining per tenant per day. Keep it separate from operational telemetry.</li>
+<li>Build the <strong>reconstruction query</strong>: given a booking ID, return the full causal chain (event → triage agent version → model → retrieved doc IDs → tool calls → approval by whom, seeing what → outcome).</li>
+<li>
+<p>Build the <strong>evidence pack generator</strong> in the release pipeline. It produces:</p>
+<ul>
+<li>system card;</li>
+<li>model cards per role;</li>
+<li>eval report (<code>dotnet aieval</code>);</li>
+<li>red-team scorecard (ASR);</li>
+<li>threat model delta (C16);</li>
+<li>isolation and permission test results (A3);</li>
+<li>DPIA reference;</li>
+<li>control-catalogue status;</li>
+<li>SBOM plus an AI bill of materials (models, MCP servers with hashes, datasets).</li>
+</ul>
+<p>All are signed, versioned and attached to the release.
+  4. Produce a <strong>traceability matrix</strong>: AI Act Arts. 9–15 (and deployer support items) → controls → evidence artefacts for the driver-coaching feature (T3), even though obligations apply from 2 Dec 2027.
+- <strong>Break it:</strong> The instructor edits an audit record in storage. Hash-chain verification must detect it. Then reconstruct a 3-week-old Danube Logistics booking within 15 minutes.
+- <strong>Acceptance criteria:</strong>
+  - Tamper detection test passes.
+  - Reconstruction completes in ≤ 15 min with all chain links.
+  - The evidence pack is generated automatically for the release and is complete per tier (checker).
+  - The traceability matrix has no unmapped article for the T3 feature.
+- <strong>Stretch:</strong> Expose a per-tenant audit export API for SaaS deployers, with tenant isolation tests (A3 canaries).</p>
+</li>
+</ul>
+<h3 id="lab-5-governance-board-simulation-and-customer-due-diligence-3h">Lab 5 — Governance board simulation and customer due diligence (≈3h)<a class="headerlink" href="#lab-5-governance-board-simulation-and-customer-due-diligence-3h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> Run the tiered approval process end to end and answer a customer's AI due-diligence questionnaire from generated evidence.</li>
+<li><strong>Start state:</strong> Outputs of Labs 1–4. The instructor provides a 40-question SaaS customer questionnaire (residency, sub-processors, model lifecycle, evals, red-teaming, human oversight, logging, incident response, AI Act role).</li>
+<li><strong>Steps:</strong></li>
+<li>Submit two requests via PR: (a) promote the Fleet Analyst to SaaS GA (T2); (b) pilot driver coaching internally (T3).</li>
+<li>Run the board: architecture, security, DPO and product (rotated roles; the instructor plays legal). Decide approve / approve with conditions / reject. Record ADRs with conditions and re-approval triggers.</li>
+<li>Draft the ISO/IEC 42001 AIMS skeleton:<ul>
+<li>scope;</li>
+<li>AI policy (1 page);</li>
+<li>roles;</li>
+<li>risk assessment method (reuse A1 scoring);</li>
+<li>statement of applicability outline;</li>
+<li>internal audit plan;</li>
+<li>management review cadence;</li>
+<li>the NIST AI RMF function mapping.</li>
+</ul>
+</li>
+<li>Answer the customer questionnaire. ≥ 80% of answers must link to generated evidence (system card, evidence pack, policy compliance, DR test report from A5), not prose.</li>
+<li><strong>Break it:</strong> Mid-board, a severity-2 incident is reported: the incident agent drafted a customer email containing another customer's shipment reference (an isolation failure in a template cache). Apply your incident process: containment, notification assessment (GDPR breach evaluation), inventory update, re-approval trigger, corrective action.</li>
+<li><strong>Acceptance criteria:</strong></li>
+<li>Board decisions are recorded with conditions and triggers.</li>
+<li>The AIMS skeleton covers all mandatory clauses listed in the course template.</li>
+<li>The questionnaire is ≥ 80% evidence-linked.</li>
+<li>The incident record is complete, with a root cause and a new automated check.</li>
+<li><strong>Stretch:</strong> Estimate the effort and cost of ISO/IEC 42001 certification for Trakia (A1 model, people family) and its expected impact on SaaS sales cycles. Treat the result as a business-case line, not a compliance cost.</li>
+</ul>
+<h2 id="kata">Kata<a class="headerlink" href="#kata" title="Permanent link">&para;</a></h2>
+<p><strong>"Classify in 20 minutes"</strong> (repeat with variations).</p>
+<p>Given a one-paragraph feature description, produce:
+- the AI Act class with articles (marked verify);
+- provider/deployer roles internal vs SaaS;
+- Art. 50 duties;
+- whether a DPIA is needed;
+- the governance tier;
+- the three controls you would automate first.</p>
+<p>Variations:
+- AI-drafted customer delay notifications;
+- a voice assistant for drivers;
+- a tenant-uploaded custom agent;
+- a white-labelled reseller deal (Art. 25);
+- synthetic training images of damaged trucks (Art. 50(2) marking);
+- route optimisation that assigns shifts based on driver history (Annex III task allocation; verify).</p>
+<p>The score is agreement with the reference classification plus the quality of the control choices.</p>
+<h2 id="product-increment-fleet-ops-copilot">Product increment — Fleet Ops Copilot<a class="headerlink" href="#product-increment-fleet-ops-copilot" title="Permanent link">&para;</a></h2>
+<p>Fleet Ops Copilot now has an <strong>ISO/IEC 42001-style governance system</strong>:</p>
+<ul>
+<li>a complete AI inventory with classification-as-code and risk tiers;</li>
+<li>a DPIA-backed decision on driver coaching with enforced aggregation, authorization and fairness checks;</li>
+<li>Azure Policy and CI policy-as-code;</li>
+<li>a tamper-evident audit trail with a 15-minute reconstruction;</li>
+<li>evidence packs and system/model cards generated per release;</li>
+<li>a deployer-support pack for SaaS customers;</li>
+<li>a running governance board with recorded decisions.</li>
+</ul>
+<h2 id="factory-increment-your-agentic-sdlc">Factory increment — your agentic SDLC<a class="headerlink" href="#factory-increment-your-agentic-sdlc" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Agent-manifest and inventory validators</strong> in CI. Tier-based required approvers via CODEOWNERS and environment protection.</li>
+<li><strong>Evidence pack generator</strong> as a release stage. The release fails if evidence is incomplete for the tier.</li>
+<li><strong>Governance skill for coding agents:</strong> when an agent's change touches tools, data sources, models or purpose fields, the skill updates the manifest, flags re-classification and drafts the DPIA screening delta for a human.</li>
+<li><strong>Coding agents themselves are inventoried</strong> (T1). The factory's own permissions, sandbox and data policies (A7) are referenced from the AI policy.</li>
+</ul>
+<h2 id="assessment">Assessment<a class="headerlink" href="#assessment" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th>Novice</th>
+<th>Competent</th>
+<th>Proficient</th>
+<th>Expert</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Regulatory analysis</td>
+<td>Generic "AI Act applies"</td>
+<td>Correct classes for obvious systems</td>
+<td>Correct post-omnibus dates; Annex III and Art. 5 edge cases; provider/deployer per relationship; Art. 25 risks</td>
+<td>Plus design alternatives that change classification, deployer-support pack, uncertainty flagged for counsel</td>
+</tr>
+<tr>
+<td>Data protection</td>
+<td>Privacy notice only</td>
+<td>DPIA for one flow</td>
+<td>DPIA covering all data surfaces, erasure orchestrator, residency, retention per store</td>
+<td>Plus fairness evaluation, worker-information materials, special-category inference controls</td>
+</tr>
+<tr>
+<td>Controls as code</td>
+<td>Policies in a wiki</td>
+<td>Some Azure Policy</td>
+<td>Policy initiative + CI manifest validation + release gates, all mapped in a control catalogue</td>
+<td>Plus re-approval triggers automated from model/tool/data changes; negative tests for each control</td>
+</tr>
+<tr>
+<td>Audit &amp; evidence</td>
+<td>App logs</td>
+<td>Structured logs</td>
+<td>Tamper-evident audit with reconstruction ≤ 15 min; evidence pack per release; traceability matrix</td>
+<td>Plus per-tenant export, AIBOM, questionnaire ≥ 80% evidence-linked</td>
+</tr>
+<tr>
+<td>Governance operation</td>
+<td>Single approver</td>
+<td>Board exists</td>
+<td>Risk-tiered workflow, recorded decisions, AIMS skeleton, NIST/ISO mapping</td>
+<td>Plus incident-to-governance loop and certification business case</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Auto-checked:</strong>
+- inventory and classification tests;
+- leaderboard re-classification;
+- DPIA linter;
+- authorization, aggregation and fairness tests;
+- erasure report;
+- policy compliance and deny events;
+- manifest validation;
+- audit tamper detection;
+- reconstruction timing;
+- evidence pack completeness;
+- traceability matrix coverage.</p>
+<h2 id="common-pitfalls">Common pitfalls<a class="headerlink" href="#common-pitfalls" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Using pre-omnibus dates (Annex III from 2 Aug 2026), or treating the 2027 deadline as a reason to wait.</li>
+<li>"The model vendor is responsible", which ignores Trakia's provider role for its own system and SaaS.</li>
+<li>Positive rankings ("safest drivers") treated as harmless. They still evaluate worker behaviour.</li>
+<li>A DPIA that covers the database but not traces, caches, memory and eval sets.</li>
+<li>Governance as one heavyweight board for everything (freeze), or as wiki policies nobody checks (theatre).</li>
+<li>Audit logs in the same mutable store engineers purge for cost.</li>
+<li>Hard-coding a Bulgarian authority that isn't confirmed.</li>
+<li>Shipping SaaS without instructions for use and log export for deployers.</li>
+<li>Treating this module as legal advice. Escalate classification calls to counsel.</li>
+</ul>
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Digital Omnibus on AI published (Cuatrecasas): https://www.cuatrecasas.com/en/spain/intellectual-property/art/digital-omnibus-ai-has-been-published</li>
+<li>AI omnibus formally adopted (Addleshaw Goddard): https://www.addleshawgoddard.com/en/insights/insights-briefings/2026/technology/eu-ai-act-ai-omnibus-formally-adopted/</li>
+<li>Netlaw (BG), Digital Omnibus explainer: https://www.netlaw.bg/en/a/the-eus-ai-act-is-already-changing-understanding-the-digital-omnibus-on-ai</li>
+<li>FPF EU AI Act Timeline 2026 R2: https://fpf.org/wp-content/uploads/2026/07/FPF-EU-AI-Act-Timeline-2026-R2.pdf</li>
+<li>Regulation (EU) 2024/1689 (EUR-Lex): https://eur-lex.europa.eu/eli/reg/2024/1689/oj ; navigator: https://artificialintelligenceact.eu</li>
+<li>Bulgaria tracker (single source, unverified): https://vlolawfirm.com/trackers/ai-regulation-bulgaria</li>
+<li>ISO/IEC 42001: https://www.iso.org/standard/81230.html</li>
+<li>NIST AI RMF and GenAI Profile: https://www.nist.gov/itl/ai-risk-management-framework ; status note: https://www.ispartnersllc.com/blog/nist-ai-rmf-2025-2026-updates-what-you-need-to-know-about-the-latest-framework-changes/</li>
+<li>CSA Agentic NIST AI RMF Profile (draft): https://labs.cloudsecurityalliance.org/agentic/agentic-nist-ai-rmf-profile-v1/</li>
+<li>Foundry guardrails: https://learn.microsoft.com/en-us/azure/foundry/guardrails/guardrails-overview</li>
+<li>AI Red Teaming Agent: https://learn.microsoft.com/azure/ai-foundry/concepts/ai-red-teaming-agent</li>
+<li>MEAI Evaluation (Safety evaluators incl. UngroundedAttributes): https://learn.microsoft.com/en-us/dotnet/ai/evaluation/libraries</li>
+<li>What's new in Foundry — Build 2026 (ASSERT, Agent Control Specification): https://devblogs.microsoft.com/foundry/whats-new-in-microsoft-foundry-build-2026/</li>
+<li>OWASP Top 10 for Agentic Applications (summary): https://cycode.com/blog/owasp-top-10-agentic-applications/</li>
+<li>Baseline Foundry chat RA (Azure Policy guidance): https://learn.microsoft.com/en-us/azure/architecture/ai-ml/architecture/baseline-microsoft-foundry-chat</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Върни се в началото
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Долен колонтитул" >
+        
+          
+          <a href="../a05-reliability-scale-model-lifecycle-and-finops/" class="md-footer__link md-footer__link--prev" aria-label="Предишна: A5 — Надеждност, мащаб, жизнен цикъл на моделите и FinOps">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Предишна
+              </span>
+              <div class="md-ellipsis">
+                A5 — Надеждност, мащаб, жизнен цикъл на моделите и FinOps
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../a07-the-architect-s-craft-in-ai-programmes/" class="md-footer__link md-footer__link--next" aria-label="Следваща: A7 — Занаятът на архитекта в AI програми">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Следваща
+              </span>
+              <div class="md-ellipsis">
+                A7 — Занаятът на архитекта в AI програми
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.sections", "navigation.top", "navigation.footer", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u041a\u043e\u043f\u0438\u0440\u0430\u043d\u043e", "clipboard.copy": "\u041a\u043e\u043f\u0438\u0440\u0430\u0439", "search.result.more.one": "\u043e\u0449\u0435 1 \u043d\u0430 \u0442\u0430\u0437\u0438 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0430", "search.result.more.other": "\u043e\u0449\u0435 # \u043d\u0430 \u0442\u0430\u0437\u0438 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0430", "search.result.none": "\u041d\u044f\u043c\u0430 \u0440\u0435\u0437\u0443\u043b\u0442\u0430\u0442\u0438", "search.result.one": "1 \u0440\u0435\u0437\u0443\u043b\u0442\u0430\u0442", "search.result.other": "# \u0440\u0435\u0437\u0443\u043b\u0442\u0430\u0442\u0430", "search.result.placeholder": "\u0417\u0430\u043f\u043e\u0447\u043d\u0435\u0442\u0435 \u0434\u0430 \u043f\u0438\u0448\u0435\u0442\u0435, \u0437\u0430 \u0434\u0430 \u0442\u044a\u0440\u0441\u0438\u0442\u0435", "search.result.term.missing": "\u041b\u0438\u043f\u0441\u0432\u0430\u0449\u043e", "select.version": "\u0418\u0437\u0431\u0435\u0440\u0438 \u0432\u0435\u0440\u0441\u0438\u044f"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

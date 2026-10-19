@@ -1,0 +1,3240 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Learning-by-doing course, release 2026.11 (content as of October 2026)">
+      
+      
+      
+      
+        <link rel="prev" href="../../part-4-developer-track/d07-agent-reliability-engineering/">
+      
+      
+        <link rel="next" href="../a02-azure-ai-reference-architectures-and-well-architected-for-ai/">
+      
+      
+        
+          <link rel="alternate" href="./" hreflang="en">
+        
+          <link rel="alternate" href="../../bg/part-5-architect-track/a01-ai-strategy-use-case-discovery-and-business-case/" hreflang="bg">
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>A1 — AI strategy, use-case discovery & business case - AI Solution Developer & Architect — Learner Handbook</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#a1-ai-strategy-use-case-discovery-business-case" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="AI Solution Developer &amp; Architect — Learner Handbook" class="md-header__button md-logo" aria-label="AI Solution Developer & Architect — Learner Handbook" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            AI Solution Developer & Architect — Learner Handbook
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              A1 — AI strategy, use-case discovery & business case
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="Select language">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href="./" hreflang="en" class="md-select__link">
+              English
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="../../bg/part-5-architect-track/a01-ai-strategy-use-case-discovery-and-business-case/" hreflang="bg" class="md-select__link">
+              Български
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="AI Solution Developer &amp; Architect — Learner Handbook" class="md-nav__button md-logo" aria-label="AI Solution Developer & Architect — Learner Handbook" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    AI Solution Developer & Architect — Learner Handbook
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Welcome
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Start here
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Start here
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/how-to-use/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How to use this handbook
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/course-overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Course overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/assessment-gates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Assessment and gates
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/competency-matrix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Competency matrix
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 1 — Foundations (Level 1)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part 1 — Foundations (Level 1)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c00-orientation-setup-and-toolchain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C0 — Orientation, setup & toolchain
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c01-how-generative-ai-works-an-engineer-s-mental-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C1 — How generative AI works: an engineer's mental model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c02-your-first-ai-feature-in-net/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C2 — Your first AI feature in .NET
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c03-prompting-structured-outputs-and-tool-calling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C3 — Prompting, structured outputs & tool calling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c04-working-with-coding-agents-the-factory-day-one/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C4 — Working with coding agents: the Factory, day one
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c05-evals-from-day-one/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C5 — Evals from day one
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 2 — Building blocks (Level 2)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part 2 — Building blocks (Level 2)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c06-embeddings-and-vector-search/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C6 — Embeddings & vector search
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c07-rag-from-documents-to-cited-permission-aware-answers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C7 — RAG: from documents to cited, permission-aware answers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c08-tools-and-the-model-context-protocol/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C8 — Tools & the Model Context Protocol
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c09-agents-with-microsoft-agent-framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C9 — Agents with Microsoft Agent Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c10-agents-over-structured-data-text-to-sql-on-sql-server/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C10 — Agents over structured data: text-to-SQL on SQL Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c11-agentic-testing-ai-driven-tdd-mutation-and-e2e-test-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C11 — Agentic testing: AI-driven TDD, mutation & E2E test agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 3 — Production systems (Level 3)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part 3 — Production systems (Level 3)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c12-workflows-and-multi-agent-orchestration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C12 — Workflows & multi-agent orchestration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c13-context-engineering-advanced-retrieval-and-memory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C13 — Context engineering, advanced retrieval & memory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c14-failure-driven-evals-llm-judges-and-red-teaming/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C14 — Failure-driven evals, LLM judges & red teaming
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c15-observability-genaiops-and-cost/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C15 — Observability, GenAIOps & cost
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c16-security-for-llm-and-agentic-systems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C16 — Security for LLM & agentic systems
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c17-shipping-to-azure-hosting-ai-gateway-iac-and-interop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C17 — Shipping to Azure: hosting, AI gateway, IaC & interop
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c18-responsible-ai-and-the-eu-ai-act-in-practice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C18 — Responsible AI & the EU AI Act in practice
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c19-the-automated-sdlc-agents-from-issue-to-production/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C19 — The automated SDLC: agents from issue to production
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 4 — Expert track: AI Solution Developer
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part 4 — Expert track: AI Solution Developer
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d01-model-customization-and-small-local-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D1 — Model customization & small/local models
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d02-long-running-durable-and-autonomous-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D2 — Long-running, durable & autonomous agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d03-multimodal-and-realtime-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D3 — Multimodal & realtime agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d04-agent-ux-and-front-ends/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D4 — Agent UX & front-ends
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d05-performance-and-cost-engineering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D5 — Performance & cost engineering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d06-building-your-own-agent-tooling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D6 — Building your own agent tooling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d07-agent-reliability-engineering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D7 — Agent reliability engineering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 5 — Expert track: AI Solution Architect
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part 5 — Expert track: AI Solution Architect
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A1 — AI strategy, use-case discovery & business case
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A1 — AI strategy, use-case discovery & business case
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-this-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why this matters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learning outcomes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concepts
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Concepts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-strategy-is-a-portfolio-not-a-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Strategy is a portfolio, not a project
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-use-case-discovery-how-experts-run-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Use-case discovery: how experts run it
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-scoring-value-feasibility-risk" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Scoring: value × feasibility × risk
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-ai-readiness-assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. AI readiness assessment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-roi-and-tco-the-five-cost-families" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. ROI and TCO: the five cost families
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-build-vs-buy-vs-extend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Build vs buy vs extend
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-pilot-to-production-criteria-and-success-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Pilot-to-production criteria and success metrics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-ab-100-alignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. AB-100 alignment
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tools-versions-as-of-oct-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tools &amp; versions (as of Oct 2026)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#labs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Labs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Labs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lab-1-discovery-workshop-with-simulated-stakeholders-3h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 1 — Discovery workshop with simulated stakeholders (≈3h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-2-ai-readiness-and-data-readiness-spike-25h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 2 — AI readiness and data-readiness spike (≈2.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-3-roitco-model-as-code-calibrated-from-traces-4h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 3 — ROI/TCO model as code, calibrated from traces (≈4h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-4-build-vs-buy-vs-extend-spike-4h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 4 — Build vs buy vs extend spike (≈4h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-5-business-case-pilot-charter-and-arb-defence-25h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 5 — Business case, pilot charter and ARB defence (≈2.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kata
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#product-increment-fleet-ops-copilot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Product increment — Fleet Ops Copilot
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#factory-increment-your-agentic-sdlc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Factory increment — your agentic SDLC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assessment
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common pitfalls
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../a02-azure-ai-reference-architectures-and-well-architected-for-ai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A2 — Azure AI reference architectures & Well-Architected for AI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../a03-enterprise-knowledge-and-data-architecture-for-ai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A3 — Enterprise knowledge & data architecture for AI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../a04-agent-platform-and-integration-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A4 — Agent platform & integration architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../a05-reliability-scale-model-lifecycle-and-finops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A5 — Reliability, scale, model lifecycle & FinOps
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../a06-ai-governance-risk-and-compliance-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A6 — AI governance, risk & compliance architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../a07-the-architect-s-craft-in-ai-programmes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A7 — The architect's craft in AI programmes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 6 — Joint capstone
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part 6 — Joint capstone
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capstone/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Capstone
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Appendix
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Appendix
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/references/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Further reading
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-this-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why this matters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learning outcomes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concepts
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Concepts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-strategy-is-a-portfolio-not-a-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Strategy is a portfolio, not a project
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-use-case-discovery-how-experts-run-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Use-case discovery: how experts run it
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-scoring-value-feasibility-risk" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Scoring: value × feasibility × risk
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-ai-readiness-assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. AI readiness assessment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-roi-and-tco-the-five-cost-families" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. ROI and TCO: the five cost families
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-build-vs-buy-vs-extend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Build vs buy vs extend
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-pilot-to-production-criteria-and-success-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Pilot-to-production criteria and success metrics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-ab-100-alignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. AB-100 alignment
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tools-versions-as-of-oct-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tools &amp; versions (as of Oct 2026)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#labs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Labs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Labs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lab-1-discovery-workshop-with-simulated-stakeholders-3h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 1 — Discovery workshop with simulated stakeholders (≈3h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-2-ai-readiness-and-data-readiness-spike-25h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 2 — AI readiness and data-readiness spike (≈2.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-3-roitco-model-as-code-calibrated-from-traces-4h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 3 — ROI/TCO model as code, calibrated from traces (≈4h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-4-build-vs-buy-vs-extend-spike-4h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 4 — Build vs buy vs extend spike (≈4h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-5-business-case-pilot-charter-and-arb-defence-25h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 5 — Business case, pilot charter and ARB defence (≈2.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kata
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#product-increment-fleet-ops-copilot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Product increment — Fleet Ops Copilot
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#factory-increment-your-agentic-sdlc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Factory increment — your agentic SDLC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assessment
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common pitfalls
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="a1-ai-strategy-use-case-discovery-business-case">A1 — AI strategy, use-case discovery &amp; business case<a class="headerlink" href="#a1-ai-strategy-use-case-discovery-business-case" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><strong>Level:</strong> Expert — AI Solution Architect track · <strong>Duration:</strong> 16h (theory 30% / labs 70%) · <strong>Prerequisites:</strong> Core C0–C19 and Gate G3 passed (you have a working, traced, evaluated Fleet Ops Copilot) · <strong>Volatility:</strong> Med (methods are stable; prices, SKUs, licensing and certification blueprints change quarterly)</p>
+</blockquote>
+<h2 id="why-this-matters">Why this matters<a class="headerlink" href="#why-this-matters" title="Permanent link">&para;</a></h2>
+<p><strong>What separates an expert architect from a proficient one here:</strong> a proficient architect can estimate what an AI feature costs to run. An expert can show, with numbers they can defend, <em>which</em> problems deserve AI at all, which should be bought instead of built, and what evidence must exist before a pilot is allowed to become a product. The expert treats the business case as a falsifiable hypothesis that evals and telemetry will confirm or kill. The proficient architect treats it as a slide that unlocks budget.</p>
+<p>Trakia Freight's board has decided, after a good demo, to (a) roll Fleet Ops Copilot out to all 600 drivers, ~45 dispatchers, ~35 mechanics and the office functions across Plovdiv, Sofia and Varna, and (b) sell it as multi-tenant SaaS to other fleets. The usual failure pattern follows:</p>
+<ul>
+<li>Every department submits "AI ideas" and the team builds the loudest one.</li>
+<li>Time savings are counted as cash.</li>
+<li>Token costs are estimated from one happy-path prompt, although a multi-agent workflow burns roughly 15× the tokens of a chat turn.</li>
+<li>Nobody budgets for eval labelling, red-teaming or the model migrations that 12–18-month lifecycles force.</li>
+<li>The HR policy bot is custom-built when an M365 Copilot licence would have done.</li>
+<li>Driver-behaviour scoring, an EU AI Act Annex III employment use case, slips in as "just analytics".</li>
+</ul>
+<p>Experts run discovery as a structured, evidence-producing process:</p>
+<ul>
+<li>They score use cases on value, feasibility <em>and</em> risk, and kill most of them early and cheaply.</li>
+<li>They model TCO across five cost families: tokens, infrastructure, people, evals and ops.</li>
+<li>They apply the Cloud Adoption Framework (CAF) rule of "least operational responsibility".</li>
+<li>They write pilot-to-production criteria <em>before</em> the pilot starts.</li>
+</ul>
+<h2 id="learning-outcomes">Learning outcomes<a class="headerlink" href="#learning-outcomes" title="Permanent link">&para;</a></h2>
+<p>By the end of this module you can:</p>
+<ol>
+<li><strong>Facilitate</strong> a use-case discovery workshop, using persona interviews, a process walk and a pain/value inventory, and produce a backlog of at least 8 use-case canvases with explicit value hypotheses.</li>
+<li><strong>Score and rank</strong> use cases on value, feasibility and risk with a weighted, documented rubric. <strong>Defend</strong> at least two "kill" decisions and one "not an LLM problem" decision.</li>
+<li><strong>Assess</strong> AI readiness across six dimensions (data, platform, skills, governance, process, culture) and <strong>quantify</strong> data readiness with queries against the real estate (<code>TrakiaOps</code>, document corpus).</li>
+<li><strong>Build</strong> a ROI/TCO model as code plus a spreadsheet view, covering tokens, infrastructure, people, evals and ops. <strong>Calibrate</strong> cost per task from production traces, not prompt guesses.</li>
+<li><strong>Run</strong> sensitivity and Monte Carlo analysis, and <strong>identify</strong> the three assumptions that drive the business case.</li>
+<li><strong>Choose and justify</strong> build vs buy vs extend per use case (M365 Copilot, Copilot Studio, Foundry agents, custom MAF), applying the CAF "least operational responsibility" rule, and record the choice as an ADR.</li>
+<li><strong>Define</strong> measurable pilot-to-production gates covering eval thresholds, adoption, cost per task, SLOs, security and compliance, plus success metrics with leading, lagging and guardrail indicators.</li>
+<li><strong>Map</strong> your deliverables to the AB-100 "Plan AI-powered business solutions" skill area.</li>
+</ol>
+<h2 id="concepts">Concepts<a class="headerlink" href="#concepts" title="Permanent link">&para;</a></h2>
+<h3 id="1-strategy-is-a-portfolio-not-a-project">1. Strategy is a portfolio, not a project<a class="headerlink" href="#1-strategy-is-a-portfolio-not-a-project" title="Permanent link">&para;</a></h3>
+<p>An AI strategy for a mid-size company is a <em>portfolio</em> of bets with different risk/return profiles, governed by one platform and one set of controls. For Trakia it has three horizons:</p>
+<ul>
+<li><strong>H1 — productivity inside existing workflows</strong> (low risk, mostly buy/extend): HR and policy Q&amp;A, email drafting for customer service, meeting summaries.</li>
+<li><strong>H2 — process redesign with agents</strong> (medium risk, build on the platform): incident triage → diagnostics → maintenance booking (C12), the Fleet Analyst over telematics (C10).</li>
+<li><strong>H3 — new revenue</strong> (high risk, build): Fleet Ops Copilot as SaaS for other fleets.</li>
+</ul>
+<p>H1 funds credibility, H2 funds the platform, and H3 needs the platform to exist. A common mistake is to start H3 (SaaS) before H2 has proven unit economics and operational maturity internally. Trakia's internal rollout is the cheapest place to learn what a tenant costs.</p>
+<p>The CAF AI adoption scenario structures the journey as <strong>AI planning → AI ready → govern, secure, manage</strong>. Its build-vs-buy heuristic is explicit: prefer the option "with the least operational responsibility". That means SaaS such as M365 Copilot and Copilot Studio first, then PaaS (Foundry, Fabric, Azure ML, Container Apps). IaaS "shouldn't be the default". CAF folds skilling into workforce enablement and has no separate agent-adoption guidance, so you supply that yourself (A7).</p>
+<h3 id="2-use-case-discovery-how-experts-run-it">2. Use-case discovery: how experts run it<a class="headerlink" href="#2-use-case-discovery-how-experts-run-it" title="Permanent link">&para;</a></h3>
+<p>Discovery fails when it starts from "where can we use AI?". It succeeds when it starts from <em>work</em>: who does what, how often, how long it takes, what it costs when it goes wrong, and what data exists at that moment. The expert sequence:</p>
+<ol>
+<li><strong>Frame</strong>: the business goals for the year (Trakia: cut unplanned downtime, cut SLA penalties, grow revenue without growing headcount 1:1) and the constraints (GDPR, EU AI Act, Bulgarian-language users, works council).</li>
+<li><strong>Persona interviews</strong> (30 min each, 6–8 personas): use "tell me about the last time…" questions, never "would AI help you?".</li>
+<li><strong>Process walk</strong>: map the incident flow from fault code to repaired truck. Mark waiting time, handoffs, rework and lookups.</li>
+<li><strong>Pain/value inventory</strong>: one sticky per pain with frequency × time × cost-of-error.</li>
+<li><strong>Use-case canvas</strong> per candidate, with these fields:</li>
+<li>actor and trigger;</li>
+<li>task;</li>
+<li>current KPI baseline;</li>
+<li>value hypothesis ("We believe X will reduce Y from A to B, measured by M");</li>
+<li>data needed and where it lives;</li>
+<li>action level (inform / recommend / act with approval / act autonomously);</li>
+<li>failure cost;</li>
+<li>regulatory flags;</li>
+<li>"is an LLM the right tool?" check.</li>
+<li><strong>Score, then cut</strong>: most candidates should die at this step.</li>
+</ol>
+<p><strong>"Is it an LLM problem?" check.</strong> Apply it ruthlessly, because many of Trakia's ideas are not LLM problems:</p>
+<ul>
+<li><strong>Predicting component failure from telematics</strong> is tabular prediction → ML.NET/AutoML.</li>
+<li><strong>Reading scanned delivery notes</strong> is fixed-layout extraction with per-field confidence → Content Understanding or Document Intelligence.</li>
+<li><strong>Classifying 50k engine fault codes per day</strong> is high-volume deterministic classification → a fine-tuned small model (D1) or a typed decision model.</li>
+<li><strong>Answering "which clause of the customer SLA applies to this late delivery?"</strong> needs language understanding over documents → an LLM with RAG.</li>
+</ul>
+<p>The architect's value is often in redirecting a use case to the cheaper, more explainable technique.</p>
+<h3 id="3-scoring-value-feasibility-risk">3. Scoring: value × feasibility × risk<a class="headerlink" href="#3-scoring-value-feasibility-risk" title="Permanent link">&para;</a></h3>
+<p>Use a weighted rubric with anchored levels (1–5). Anchors make scores comparable between assessors.</p>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>Sub-criteria (weight)</th>
+<th>Anchor examples</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Value</strong> (40%)</td>
+<td>Hard € impact (50%), strategic fit (20%), frequency × reach (20%), time-to-value (10%)</td>
+<td>5 = &gt; €200k/yr hard benefit or enables revenue; 1 = &lt; €10k/yr, soft only</td>
+</tr>
+<tr>
+<td><strong>Feasibility</strong> (35%)</td>
+<td>Data readiness (35%), eval-ability (25%; can we define pass/fail?), integration effort (20%), skills (20%)</td>
+<td>5 = data clean and accessible, golden set exists; 1 = data on paper, no ground truth</td>
+</tr>
+<tr>
+<td><strong>Risk</strong> (25%, scored inverted)</td>
+<td>Regulatory class (35%), failure cost and reversibility (30%), security exposure / lethal trifecta (20%), change/people impact (15%)</td>
+<td>5 = minimal-risk, read-only, reversible; 1 = Annex III high-risk, autonomous actions on people</td>
+</tr>
+</tbody>
+</table>
+<p>Two decision rules sit on top of the weighted score:</p>
+<ul>
+<li><strong>Hard gates override the score.</strong> A prohibited practice (Art. 5) is killed regardless of value. An Annex III use case cannot enter a pilot without a governance-board decision (A6). A use case with eval-ability 1 cannot enter a pilot until someone can say what "correct" means.</li>
+<li><strong>Plot, don't just rank.</strong> A value-vs-feasibility bubble chart, with bubble size = risk, shows the "quick wins", the "strategic bets" that need a spike first, and the "money pits".</li>
+</ul>
+<p><strong>Misconception to unlearn: "high value + high feasibility = do it now".</strong> For an agent that <em>acts</em> (books maintenance, emails a customer), feasibility must include whether you can build the HITL step and the evals for that action. "We can call the API" is not enough.</p>
+<h3 id="4-ai-readiness-assessment">4. AI readiness assessment<a class="headerlink" href="#4-ai-readiness-assessment" title="Permanent link">&para;</a></h3>
+<p>Microsoft and others publish AI readiness instruments (verify the current Microsoft instrument before teaching). This course uses a six-dimension, evidence-based assessment. The rule is that every score must cite an artefact or a query result, never an opinion.</p>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>Evidence you collect at Trakia</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Data</td>
+<td>% of incident reports with a valid vehicle ID; document freshness (share of policies reviewed &lt; 12 months ago); ACL coverage (share of documents with role metadata); BG/EN split; corpus size in tokens</td>
+</tr>
+<tr>
+<td>Platform</td>
+<td>Landing zone exists? Private networking? APIM? Observability (C15)? IaC coverage?</td>
+</tr>
+<tr>
+<td>Skills</td>
+<td>Who can run error analysis, write evals, operate agents? Named people, not roles</td>
+</tr>
+<tr>
+<td>Governance</td>
+<td>AI policy, inventory, DPIA practice, risk classification process (A6)</td>
+</tr>
+<tr>
+<td>Process</td>
+<td>Can the target process absorb a recommendation? Who acts on it, and in which system?</td>
+</tr>
+<tr>
+<td>Culture / change</td>
+<td>Works council stance, driver trust, manager sponsorship</td>
+</tr>
+</tbody>
+</table>
+<p>Corpus size is a design input, not trivia. Anthropic's rule of thumb is that knowledge bases under ~200k tokens can skip RAG and go into a cached prompt. A department-specific use case (e.g., the 40-page depot safety handbook) may need no retrieval pipeline at all.</p>
+<h3 id="5-roi-and-tco-the-five-cost-families">5. ROI and TCO: the five cost families<a class="headerlink" href="#5-roi-and-tco-the-five-cost-families" title="Permanent link">&para;</a></h3>
+<p>The TCO of an AI product has five families. Most business cases model only the first.</p>
+<ol>
+<li><strong>Tokens.</strong></li>
+<li><em>Formula:</em> cost per task = Σ over model calls of (uncached input × p_in + cached input × p_cached + (output + reasoning tokens) × p_out). Reasoning tokens are billed and share the context budget.</li>
+<li><em>Per-token price ≠ per-task cost.</em> A model with a cheaper per-token price can cost more per task because it uses more tokens.</li>
+<li><em>Multi-agent multiplier:</em> multi-agent systems use ~15× the tokens of chat (Anthropic's research system). Calibrate from your C15 traces, never from a single prompt.</li>
+<li><strong>Infrastructure.</strong></li>
+<li><em>Fixed baseline:</em> AI Search tier, Cosmos DB, App Gateway + WAF, Azure Firewall, DDoS Protection, APIM tier, private endpoints, Log Analytics ingestion. The baseline Foundry chat reference architecture names Cosmos DB, AI Search and DDoS Protection as the largest cost lines.</li>
+<li><em>Variable:</em> compute for hosted agents and Container Apps, Redis for the semantic cache, storage, egress.</li>
+<li><strong>People.</strong></li>
+<li>Platform team, product team share, an SME "benevolent dictator" for quality labels, a governance role, on-call.</li>
+<li>People usually dominate internal-product TCO in Bulgaria-scale salary markets.</li>
+<li><strong>Evals and assurance.</strong></li>
+<li>Error-analysis time: practitioners report spending 60–80% of development time on error analysis and evaluation.</li>
+<li>Human labelling: 100–200 labelled examples per failure mode to validate a judge.</li>
+<li>Judge tokens on CI and on sampled production traffic, red-team runs, re-labelling after every model change.</li>
+<li><strong>Ops and change.</strong></li>
+<li><em>Model migrations.</em> GA models get a minimum of 18 months (12 for Anthropic, DeepSeek, Fireworks and Mistral; some Grok models 6), with ≥60 days' retirement notice. Budget at least one migration per primary model per year, including eval re-runs and prompt re-tuning (A5).</li>
+<li><em>Other run costs:</em> index rebuilds, incident handling, user support, training and adoption.</li>
+</ol>
+<p><strong>Worked example (illustrative prices — verify current Azure prices before use).</strong> A Fleet Assistant policy Q&amp;A turn on a "Sol-class" model priced at $2 / $10 per million input/output tokens:</p>
+<ul>
+<li>2,500 static tokens (system prompt and tool schemas, cacheable), 4,000 retrieved tokens, 500 history tokens, 500 output tokens and 800 reasoning tokens.</li>
+<li>Uncached cost: 7,000 × $2/M + 1,300 × $10/M ≈ $0.027.</li>
+<li>Caching the static prefix trims this further. The exact saving depends on the provider's cached-read discount: Anthropic lists cached reads at $0.20 vs $4 base input for Opus 5.5, while the Azure OpenAI discount must be verified.</li>
+<li>At 3,000 such turns per working day, that is ~$80/day, roughly €19k/year.</li>
+</ul>
+<p>Now compare that with one platform engineer's loaded cost, or with a DDoS Protection plan. The lesson is that <strong>for the internal rollout, tokens are rarely the dominant TCO line. For the SaaS product at 40 tenants with heavy Fleet Analyst usage, they can become one.</strong> You only know which case you are in after modelling both.</p>
+<p><strong>Benefits: hard vs soft.</strong></p>
+<ul>
+<li>Time saved is a <em>soft</em> benefit unless the capacity is redeployed or avoids a hire. Example: 35 mechanics × 20 min/day × 220 days × €18/h ≈ €46k/year of <em>capacity</em>, not cash.</li>
+<li><em>Hard</em> benefits for Trakia are fewer unplanned downtime days, which carry lost revenue per truck-day, lower SLA penalties, and SaaS subscription revenue.</li>
+<li>An expert presents hard and soft benefits separately and never lets the soft line carry the case.</li>
+</ul>
+<p><strong>Model the uncertainty.</strong> Every input gets a range (P10/P50/P90), not a point. Run:</p>
+<ul>
+<li>a one-at-a-time sensitivity analysis, shown as a tornado chart;</li>
+<li>a Monte Carlo simulation (10k draws) to report P(NPV &gt; 0) and payback-period percentiles.</li>
+</ul>
+<p>The three assumptions at the top of the tornado chart become the <strong>pilot's learning objectives</strong>. If adoption rate drives the case, the pilot must measure adoption.</p>
+<h3 id="6-build-vs-buy-vs-extend">6. Build vs buy vs extend<a class="headerlink" href="#6-build-vs-buy-vs-extend" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>What it is</th>
+<th>Choose when</th>
+<th>Trakia example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Buy: M365 Copilot</strong> (and its agents)</td>
+<td>SaaS assistant over Microsoft Graph content</td>
+<td>Knowledge work inside M365, users already licensed, content in SharePoint/Teams/Outlook</td>
+<td>HR policy Q&amp;A and email drafting for office staff</td>
+</tr>
+<tr>
+<td><strong>Extend: Copilot Studio</strong></td>
+<td>Low-code agents with connectors and topics, publishable to Teams/M365; A2A integrated</td>
+<td>Departmental workflows, citizen-dev maintainability, moderate integration</td>
+<td>Customer-service "where is my shipment" agent calling the C8 MCP server</td>
+</tr>
+<tr>
+<td><strong>Build on PaaS: Foundry Agent Service</strong> (prompt agents, hosted agents, Foundry IQ)</td>
+<td>Managed agent runtime, knowledge bases, guardrails, evaluations, tracing</td>
+<td>Pro-code needs but you want the platform to own hosting, state and safety plumbing</td>
+<td>Incident triage agents; policy RAG via Foundry IQ</td>
+</tr>
+<tr>
+<td><strong>Build custom: MAF on Container Apps / Functions</strong></td>
+<td>Full control of orchestration, hosting, networking, multi-tenancy</td>
+<td>Multi-tenant SaaS, unusual isolation or residency constraints, deep workflow control, portability</td>
+<td>The SaaS product's tenant-aware agent runtime</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Decision rules:</strong></p>
+<ol>
+<li>Apply the CAF rule first: the least operational responsibility that <em>meets the requirements</em>.</li>
+<li>Then test the knock-out requirements:</li>
+<li><strong>Multi-tenancy for external customers:</strong> M365 Copilot cannot serve another company's drivers. The SaaS product is a build.</li>
+<li><strong>Data residency and processing location:</strong> see A3.</li>
+<li><strong>Eval-ability:</strong> can you run your golden set and judges against the option? If you cannot evaluate it, you cannot govern it.</li>
+<li><strong>Exit cost:</strong> where do prompts, knowledge and conversation state live, and can you export them?</li>
+<li><strong>Seam availability:</strong> MCP and A2A let low-code and pro-code agents share tools and call each other, so "extend" no longer means "dead end".</li>
+</ol>
+<p><strong>Misconception to unlearn: "buying is always cheaper".</strong> Per-seat licences × 600 drivers can exceed a consumption-priced custom agent, and drivers do not live in M365. Compare cost at your <em>actual</em> adoption curve, and verify licence prices on the day you decide.</p>
+<h3 id="7-pilot-to-production-criteria-and-success-metrics">7. Pilot-to-production criteria and success metrics<a class="headerlink" href="#7-pilot-to-production-criteria-and-success-metrics" title="Permanent link">&para;</a></h3>
+<p>Write the gate before the pilot starts. A Trakia pilot charter defines:</p>
+<ul>
+<li><strong>Scope:</strong> one depot (Plovdiv), 12 dispatchers, 10 mechanics, 8 weeks, named sponsor and product owner.</li>
+<li><strong>Learning objectives:</strong> the top three tornado assumptions.</li>
+<li><strong>Exit to production requires <em>all</em> of:</strong></li>
+<li>eval pass-all rate ≥ target on the hidden suite (C14), with no failure mode below its floor;</li>
+<li>Bulgarian-calibrated groundedness judge ≥ 90% on sampled traffic;</li>
+<li>red-team ASR ≤ agreed threshold;</li>
+<li>cost per task P50 within ±25% of model;</li>
+<li>p95 latency SLO met for 4 consecutive weeks;</li>
+<li>weekly active use ≥ 60% of pilot users in weeks 6–8;</li>
+<li>DPIA approved and AI inventory entry complete (A6);</li>
+<li>security review closed (C16 threat model);</li>
+<li>runbooks and rollback tested.</li>
+<li><strong>Kill criteria:</strong> for example, cost per task &gt; 2× model after optimisation, or adoption &lt; 30% by week 6 with no fixable cause found in interviews.</li>
+</ul>
+<p><strong>Success metrics come in three kinds:</strong></p>
+<ul>
+<li><strong>Leading</strong> (adoption, task completion, deflection to human, thumbs-down rate).</li>
+<li><strong>Lagging</strong> (downtime days per truck, SLA penalties, incident handling time).</li>
+<li><strong>Guardrail</strong> (escalations, wrong-action incidents, complaints, cost per task, ASR).</li>
+</ul>
+<p>A metric without a baseline is not a metric. Capture baselines in week 0.</p>
+<h3 id="8-ab-100-alignment">8. AB-100 alignment<a class="headerlink" href="#8-ab-100-alignment" title="Permanent link">&para;</a></h3>
+<p>AB-100's "Plan AI-powered business solutions" area (25–30%) maps onto this module:</p>
+<ul>
+<li>requirements and grounding-data readiness → Labs 1–2;</li>
+<li>CAF adoption and an AI CoE → §1 and Lab 5;</li>
+<li>ROI including TCO → Lab 3;</li>
+<li>build/buy/extend and multi-agent design across M365 Copilot, Copilot Studio and Foundry → Lab 4;</li>
+<li>model router → Lab 3 stretch.</li>
+</ul>
+<p>Its deploy domain (ALM, governance, residency, audit trails) is covered in A4–A6.</p>
+<h2 id="tools-versions-as-of-oct-2026">Tools &amp; versions (as of Oct 2026)<a class="headerlink" href="#tools-versions-as-of-oct-2026" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Tool / package</th>
+<th>Purpose</th>
+<th>Status</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Lab repo <code>architecture/business/</code></td>
+<td>Baselines (<code>baseline.xlsx</code>), persona cards, use-case canvas template</td>
+<td>Course asset</td>
+<td>Synthetic Trakia data</td>
+</tr>
+<tr>
+<td><code>Trakia.CostModel</code> (.NET 10 console + xUnit)</td>
+<td>Cost/ROI model as code: <code>assumptions.yaml</code> → per-task, per-tenant, annual TCO, Monte Carlo</td>
+<td>Course asset</td>
+<td>Uses <code>YamlDotNet</code>; pin version</td>
+</tr>
+<tr>
+<td>Azure Retail Prices API</td>
+<td>Pull current list prices for infra SKUs</td>
+<td>GA</td>
+<td>Public REST endpoint; prices are list, not your EA rate</td>
+</tr>
+<tr>
+<td>Azure Pricing Calculator / Foundry pricing pages</td>
+<td>Token, PTU, AI Search, APIM prices</td>
+<td>—</td>
+<td>Verify before every business case; model prices change monthly</td>
+</tr>
+<tr>
+<td>Application Insights + KQL (from C15)</td>
+<td>Measured tokens per task from <code>gen_ai.usage.*</code> attributes</td>
+<td>GA (semconv "Development")</td>
+<td>Pin semconv version as in C15</td>
+</tr>
+<tr>
+<td>Microsoft Foundry (prompt agent + Foundry IQ knowledge base)</td>
+<td>"Build on PaaS" spike</td>
+<td>Foundry IQ KBs GA; Serverless preview</td>
+<td></td>
+</tr>
+<tr>
+<td>Copilot Studio</td>
+<td>"Extend" spike</td>
+<td>GA</td>
+<td>Licensing model: verify against current documentation</td>
+</tr>
+<tr>
+<td>M365 Copilot declarative agent</td>
+<td>"Buy/extend" spike</td>
+<td>GA</td>
+<td>Requires tenant licences; instructor tenant provided</td>
+</tr>
+<tr>
+<td>MAF 1.0 (<code>Microsoft.Agents.AI</code>)</td>
+<td>Existing custom build</td>
+<td>GA</td>
+<td>From C9/C12</td>
+</tr>
+<tr>
+<td><code>Microsoft.Extensions.AI.Evaluation</code> + <code>dotnet aieval</code></td>
+<td>Same golden set across options</td>
+<td>GA (verify package versions on NuGet)</td>
+<td></td>
+</tr>
+<tr>
+<td>Model router (<code>2025-11-18</code>)</td>
+<td>Cost lever in the stretch lab</td>
+<td>Latest auto-updating version</td>
+<td>Effective context = smallest model in pool</td>
+</tr>
+</tbody>
+</table>
+<h2 id="labs">Labs<a class="headerlink" href="#labs" title="Permanent link">&para;</a></h2>
+<h3 id="lab-1-discovery-workshop-with-simulated-stakeholders-3h">Lab 1 — Discovery workshop with simulated stakeholders (≈3h)<a class="headerlink" href="#lab-1-discovery-workshop-with-simulated-stakeholders-3h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> Produce a defensible use-case backlog from structured interviews, not from an ideas list.</li>
+<li><strong>Start state:</strong> branch <code>a1/start</code>. Contains <code>architecture/business/personas/*.md</code>: dispatcher (Sofia), mechanic (Varna), fleet manager, HR lead, customer-service lead, CFO, works-council representative, and the commercial director pushing SaaS. Also contains <code>baseline.xlsx</code> and <code>canvas-template.md</code>.</li>
+<li><strong>Steps:</strong></li>
+<li>Spin up the <strong>stakeholder simulator</strong>: a MAF agent per persona card (instructions = persona, goals, hidden pains, data they know). The cards contain <em>hidden facts</em> that only good "tell me about the last time…" questions reveal.
+     <div class="highlight"><pre><span></span><code><span class="c1">// One agent per persona; instructions loaded from the card. Verify exact API against current docs.</span>
+<span class="n">AIAgent</span><span class="w"> </span><span class="n">dispatcher</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">chatClient</span><span class="p">.</span><span class="n">AsAIAgent</span><span class="p">(</span>
+<span class="w">    </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="s">"persona-dispatcher-sofia"</span><span class="p">,</span>
+<span class="w">    </span><span class="n">instructions</span><span class="p">:</span><span class="w"> </span><span class="n">File</span><span class="p">.</span><span class="n">ReadAllText</span><span class="p">(</span><span class="s">"personas/dispatcher-sofia.md"</span><span class="p">));</span>
+<span class="n">AgentSession</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">dispatcher</span><span class="p">.</span><span class="n">CreateSessionAsync</span><span class="p">();</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">reply</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">dispatcher</span><span class="p">.</span><span class="n">RunAsync</span><span class="p">(</span><span class="s">"Tell me about the last breakdown you handled."</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Run 30-minute interviews with at least 6 personas. Log every interview transcript to <code>discovery/interviews/</code> (the factory will analyse them).</li>
+<li>Walk the incident process (fault code → triage → workshop slot → parts → customer notice). Annotate waits, handoffs and lookups in a swimlane diagram (<code>discovery/process-incident.md</code>, Mermaid).</li>
+<li>Fill ≥ 8 use-case canvases. At least one must be redirected to non-LLM technology, and at least one must carry an AI Act flag (driver-behaviour scoring).</li>
+<li>Score all canvases with the rubric (<code>scoring.yaml</code>). Two team members score independently, then reconcile the scores and record the disagreements.</li>
+<li><strong>Break it:</strong> The instructor injects a "CEO pet project": "AI that predicts which drivers will quit". Score it honestly: value is unclear, it is Annex III employment, it involves profiling, and works-council exposure is high. Write the one-paragraph kill or defer memo.</li>
+<li><strong>Acceptance criteria:</strong></li>
+<li><code>dotnet test architecture/business/tests</code>: the canvas schema validator passes (all mandatory fields filled; the value hypothesis matches the pattern "We believe … from … to … measured by …").</li>
+<li>≥ 6 interview transcripts exist.</li>
+<li>Inter-rater score difference ≤ 1 point on ≥ 80% of sub-criteria after reconciliation (computed by script).</li>
+<li>The hidden-fact coverage report shows ≥ 5 of 9 hidden pains discovered.</li>
+<li><strong>Stretch:</strong> Use the factory to run axial coding over interview transcripts (as you did with traces in C14) and compare the agent's pain taxonomy with yours.</li>
+</ul>
+<h3 id="lab-2-ai-readiness-and-data-readiness-spike-25h">Lab 2 — AI readiness and data-readiness spike (≈2.5h)<a class="headerlink" href="#lab-2-ai-readiness-and-data-readiness-spike-25h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> Replace readiness opinions with measured evidence and find the data blockers before they find you.</li>
+<li><strong>Start state:</strong> <code>a1/lab2-start</code>, plus <code>TrakiaOps</code> and the document corpus from <code>/data</code>.</li>
+<li><strong>Steps:</strong></li>
+<li>Write <code>readiness/queries.sql</code> against <code>TrakiaOps</code>:<ul>
+<li>% of incidents with a valid <code>VehicleId</code> and <code>FaultCode</code>;</li>
+<li>median lag between telematics fault event and incident record;</li>
+<li>% of work orders with parts lines;</li>
+<li>null rates on driver pseudonym joins.</li>
+</ul>
+</li>
+<li>Write a small .NET tool that profiles the corpus:<ul>
+<li>token counts per document and per collection, BG vs EN, using <code>Microsoft.ML.Tokenizers</code> with the encoding matching your pinned model;</li>
+<li>% of documents with an owner, a review date and role ACL metadata;</li>
+<li>duplicate and near-duplicate ratio (content hash plus embedding similarity &gt; 0.95).</li>
+</ul>
+</li>
+<li>Compute per-use-case corpus size. Flag every use case whose relevant corpus is &lt; 200k tokens as a "cached-prompt candidate, no RAG".</li>
+<li>Score the six readiness dimensions. Each score cites a query result or artefact path.</li>
+<li>Produce <code>readiness/report.md</code> with a "blockers &amp; remediation" table: owner, effort and the date the use case unblocks.</li>
+<li><strong>Break it:</strong> The instructor swaps in a corpus snapshot where 30% of HR documents lack ACL metadata. Re-run the analysis. Your report must now block the HR use case (custom-build path) until security trimming can be guaranteed, or redirect it to M365 Copilot, which inherits SharePoint permissions.</li>
+<li><strong>Acceptance criteria:</strong></li>
+<li>Profiler unit tests pass.</li>
+<li>The report includes a token count per collection (±2% of the reference).</li>
+<li>Every readiness score has an evidence link (checked by script).</li>
+<li>At least one use case changes its score because of measured data.</li>
+<li><strong>Stretch:</strong> Estimate golden-set effort per use case (questions × minutes per label × SME rate). This number feeds the evals family in Lab 3.</li>
+</ul>
+<h3 id="lab-3-roitco-model-as-code-calibrated-from-traces-4h">Lab 3 — ROI/TCO model as code, calibrated from traces (≈4h)<a class="headerlink" href="#lab-3-roitco-model-as-code-calibrated-from-traces-4h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> A business case where every number traces to a measurement, a price source or an explicit, ranged assumption.</li>
+<li><strong>Start state:</strong> <code>a1/lab3-start</code> with <code>Trakia.CostModel</code> skeleton, <code>assumptions.yaml</code> (empty ranges) and <code>prices.2026-10.yaml</code>. The price file carries illustrative list prices from vendor and aggregator sources (e.g., GPT-6 Sol $2/$10, Luna $0.10/$0.50, Claude Opus 5.5 $4/$20, Haiku 5.5 $0.10/$0.50 per MTok, Haiku price: verify against current documentation). It is labelled <strong>verify on Azure pricing before use</strong>.</li>
+<li><strong>Steps:</strong></li>
+<li><strong>Measure</strong> per-task tokens from your C15 telemetry. Run the KQL below for three task types (policy Q&amp;A, Fleet Analyst query, multi-agent incident workflow).
+     <div class="highlight"><pre><span></span><code><span class="n">dependencies</span>
+<span class="p">|</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">customDimensions</span><span class="p">[</span><span class="s">"gen_ai.operation.name"</span><span class="p">]</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="s">"chat"</span>
+<span class="p">|</span><span class="w"> </span><span class="k">extend</span><span class="w"> </span><span class="n">task</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">tostring</span><span class="p">(</span><span class="n">customDimensions</span><span class="p">[</span><span class="s">"trakia.task.type"</span><span class="p">]),</span>
+<span class="w">         </span><span class="n">inTok</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">toint</span><span class="p">(</span><span class="n">customDimensions</span><span class="p">[</span><span class="s">"gen_ai.usage.input_tokens"</span><span class="p">]),</span>
+<span class="w">         </span><span class="n">outTok</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">toint</span><span class="p">(</span><span class="n">customDimensions</span><span class="p">[</span><span class="s">"gen_ai.usage.output_tokens"</span><span class="p">]),</span>
+<span class="w">         </span><span class="n">cached</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">toint</span><span class="p">(</span><span class="n">customDimensions</span><span class="p">[</span><span class="s">"gen_ai.usage.cache_read.input_tokens"</span><span class="p">])</span>
+<span class="p">|</span><span class="w"> </span><span class="k">summarize</span><span class="w"> </span><span class="n">calls</span><span class="p">=</span><span class="k">count</span><span class="p">(),</span><span class="w"> </span><span class="n">p50In</span><span class="p">=</span><span class="n">percentile</span><span class="p">(</span><span class="n">inTok</span><span class="p">,</span><span class="mi">50</span><span class="p">),</span><span class="w"> </span><span class="n">p90In</span><span class="p">=</span><span class="n">percentile</span><span class="p">(</span><span class="n">inTok</span><span class="p">,</span><span class="mi">90</span><span class="p">),</span>
+<span class="w">            </span><span class="n">p50Out</span><span class="p">=</span><span class="n">percentile</span><span class="p">(</span><span class="n">outTok</span><span class="p">,</span><span class="mi">50</span><span class="p">),</span><span class="w"> </span><span class="n">p90Out</span><span class="p">=</span><span class="n">percentile</span><span class="p">(</span><span class="n">outTok</span><span class="p">,</span><span class="mi">90</span><span class="p">),</span><span class="w"> </span><span class="n">cachedShare</span><span class="p">=</span><span class="n">avg</span><span class="p">(</span><span class="n">todouble</span><span class="p">(</span><span class="n">cached</span><span class="p">)/</span><span class="n">inTok</span><span class="p">)</span>
+<span class="w">  </span><span class="k">by</span><span class="w"> </span><span class="n">task</span>
+</code></pre></div>
+     Join on <code>operation_Id</code> to get calls per task. Expect the incident workflow to be an order of magnitude above Q&amp;A.</li>
+<li><strong>Infra:</strong> pull prices via the Azure Retail Prices API for the C17 bill of materials (AI Search, Cosmos DB, APIM, App Gateway WAF, Firewall, DDoS Protection, Log Analytics, Container Apps). Store the raw response with its retrieval date.</li>
+<li><strong>People, evals, ops:</strong> FTE ranges, labelling hours (Lab 2 stretch), model migrations (primary models × 1/year × engineer-days), red-team runs per release.</li>
+<li><strong>Benefits:</strong> hard (downtime days avoided × € per truck-day, SLA penalties avoided) and soft (hours) on separate lines. SaaS scenario: tenants × trucks × €/truck/month (fictional) × churn.</li>
+<li>Implement <code>MonteCarlo.Run(10_000)</code> with triangular distributions. Output NPV P10/P50/P90, P(NPV &gt; 0), payback percentiles and a tornado chart.</li>
+<li>Generate the executive spreadsheet from the model (<code>dotnet run -- export xlsx</code>). The spreadsheet is a <em>view</em>, never edited by hand.</li>
+<li><strong>Break it:</strong> Three shocks, applied one at a time, each with its effect on P(NPV &gt; 0) recorded:</li>
+<li>(a) the provider's newer model uses 1.6× more tokens per task at the same price;</li>
+<li>(b) the incident workflow gains a reflection loop, doubling calls;</li>
+<li>(c) adoption reaches only 35%.</li>
+<li><strong>Acceptance criteria:</strong></li>
+<li><code>dotnet test</code>: unit tests validate the per-task formula against three hand-computed cases (±0.5%).</li>
+<li>Every assumption has <code>{p10,p50,p90,source}</code>, with no empty <code>source</code> (schema test).</li>
+<li>Infra prices carry a retrieval timestamp &lt; 30 days old.</li>
+<li>The tornado chart's top 3 assumptions are listed in <code>business-case.md</code>.</li>
+<li>A reviewer can regenerate the spreadsheet bit-for-bit from the repo.</li>
+<li><strong>Stretch:</strong> Add the model router (Balanced / Quality / Cost modes) as a scenario. Measure the per-task cost delta on 100 replayed Q&amp;A traces. Note that the effective context window equals the smallest model in the pool.</li>
+</ul>
+<h3 id="lab-4-build-vs-buy-vs-extend-spike-4h">Lab 4 — Build vs buy vs extend spike (≈4h)<a class="headerlink" href="#lab-4-build-vs-buy-vs-extend-spike-4h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> Decide, with evidence, how Trakia should deliver <em>HR &amp; policy Q&amp;A for office staff</em>, and how that differs from the <em>driver-facing</em> and <em>SaaS</em> use cases.</li>
+<li><strong>Start state:</strong> <code>a1/lab4-start</code>. Instructor M365 tenant with SharePoint HR library (same documents as <code>/data/hr</code>). Your C7 RAG and C14 golden set (HR subset, 60 questions, including 10 permission-restricted and 8 "not in corpus").</li>
+<li><strong>Steps:</strong></li>
+<li><strong>Extend/buy:</strong> build an M365 Copilot declarative agent or a Copilot Studio agent over the SharePoint library (time-box 60 min, and log effort).</li>
+<li><strong>PaaS:</strong> create a Foundry prompt agent with a Foundry IQ knowledge base over the same documents (time-box 60 min).</li>
+<li><strong>Custom:</strong> use your existing MAF RAG agent from C7/C9.</li>
+<li>Run the same 60 questions through all three. For the SaaS options, use your eval harness. For M365/Copilot Studio, capture answers via the available test or export path, or manually if needed; record how you did it, because eval-ability is itself a criterion. Score them with the C14 judges, the Bulgarian-calibrated groundedness judge, and permission-leak checks.</li>
+<li>Fill the decision matrix: quality, permission correctness, BG quality, effort to build, ops responsibility (who patches, monitors, migrates models), per-user-month cost at your adoption curve, exit cost, eval-ability.</li>
+<li>Write <strong>ADR-A1-001 "HR &amp; policy Q&amp;A delivery option"</strong> and ADR-A1-002 "SaaS product delivery option". These are different answers for different use cases.</li>
+<li><strong>Break it:</strong> Remove one HR document's permissions in SharePoint mid-test. Which options reflect the change, and how fast? Record the propagation latency for each option. This previews A3.</li>
+<li><strong>Acceptance criteria:</strong></li>
+<li>The eval report for all three options is committed (<code>dotnet aieval report</code> for the harness-driven options).</li>
+<li>Zero permission leaks is a hard requirement for any option you recommend.</li>
+<li>Both ADRs pass the ADR linter: context, ≥ 3 options considered (incl. "do nothing / status quo" where meaningful), decision, consequences, evidence links and a review date.</li>
+<li>The matrix records real measured effort hours.</li>
+<li><strong>Stretch:</strong> Make the Copilot Studio agent call the C8 MCP server for live shipment status, and the incident agent via A2A. Document what the "extend" option becomes once protocol seams exist.</li>
+</ul>
+<h3 id="lab-5-business-case-pilot-charter-and-arb-defence-25h">Lab 5 — Business case, pilot charter and ARB defence (≈2.5h)<a class="headerlink" href="#lab-5-business-case-pilot-charter-and-arb-defence-25h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> Package everything into the artefacts an executive committee and an architecture review board (ARB) will act on.</li>
+<li><strong>Start state:</strong> Outputs of Labs 1–4.</li>
+<li><strong>Steps:</strong></li>
+<li>Write a 2-page <strong>executive memo</strong>: decision asked for, portfolio (H1/H2/H3), P50 NPV with P10–P90 range, top 3 risks, what the pilot will prove, cost of <em>not</em> doing it.</li>
+<li>Write the <strong>pilot charter</strong> with gate criteria (Concepts §7) and kill criteria. Every metric needs a baseline and a measurement method (KQL query, survey or system report).</li>
+<li>Write the <strong>success-metric tree</strong>: lagging business outcome → leading indicators → guardrails.</li>
+<li>Write a half-page <strong>AI CoE/platform charter</strong> sketch: who owns the platform, the eval practice and the governance gate (expanded in A4/A7).</li>
+<li>Defend the case to the ARB (instructor + 2 peers) in 15 minutes plus 10 minutes of questions. At least one ARB member plays the CFO and one plays the works council.</li>
+<li><strong>Break it:</strong> The ARB "CFO" demands a single number with no ranges. Respond without losing the uncertainty, e.g., P50 plus the probability of loss plus the assumption the pilot retires.</li>
+<li><strong>Acceptance criteria:</strong> All artefacts are in <code>architecture/business/</code>. The pilot charter linter passes (every gate has a threshold, a source query and an owner). The ARB rubric score is ≥ Proficient on all criteria.</li>
+<li><strong>Stretch:</strong> Draft a 1-page SaaS go-to-market assumption sheet (tenant segments, pricing hypothesis, cost to serve per tenant) that A4/A5 will validate.</li>
+</ul>
+<h2 id="kata">Kata<a class="headerlink" href="#kata" title="Permanent link">&para;</a></h2>
+<p><strong>"Twenty-five-minute use-case triage"</strong> (repeat 4–6 times, each with a new card).</p>
+<p>The instructor deals one use-case card (half a page: actor, pain, data, desired action). In 25 minutes you produce:</p>
+<ol>
+<li>Is it an LLM problem? Name the alternative technique if not.</li>
+<li>Value/feasibility/risk scores with one-line justifications.</li>
+<li>Hard regulatory flags (Art. 5 / Annex III / Art. 50 / GDPR special categories).</li>
+<li>Build/buy/extend recommendation.</li>
+<li>The single riskiest assumption and the cheapest spike that tests it.</li>
+</ol>
+<p>Variations:
+- Customer-contract clause lookup.
+- Fault-code classification at 50k/day.
+- Driver fatigue detection from cabin camera. Check the Art. 5 workplace emotion-recognition prohibition and its safety exception (verify against current documentation; not legal advice).
+- Tachograph infringement explainer for drivers in Bulgarian.
+- Supplier invoice matching.
+- Customer churn prediction for the SaaS business.</p>
+<p>Compare with the instructor's reference triage. The score is the number of dimensions within ±1 point plus a correct regulatory flag.</p>
+<h2 id="product-increment-fleet-ops-copilot">Product increment — Fleet Ops Copilot<a class="headerlink" href="#product-increment-fleet-ops-copilot" title="Permanent link">&para;</a></h2>
+<p>Fleet Ops Copilot now has a <strong>business owner's view</strong>:</p>
+<ul>
+<li>a scored use-case portfolio (H1/H2/H3);</li>
+<li>a calibrated ROI/TCO model that regenerates from code and telemetry;</li>
+<li>two delivery ADRs: HR Q&amp;A bought or extended, SaaS built;</li>
+<li>a pilot charter for the Plovdiv depot with measurable gates;</li>
+<li>a readiness report whose blockers (ACL metadata, incident data quality) become backlog items for the platform.</li>
+</ul>
+<p>The driver-behaviour scoring idea is formally <em>deferred</em> to the A6 governance board, with its Annex III flag recorded.</p>
+<h2 id="factory-increment-your-agentic-sdlc">Factory increment — your agentic SDLC<a class="headerlink" href="#factory-increment-your-agentic-sdlc" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong><code>/usecase-triage</code> skill:</strong> reads a canvas, runs the scoring rubric, checks regulatory flags against a keyword and decision table, and writes a draft score file <em>for human review</em>. It never commits a final score.</li>
+<li><strong><code>cost-per-task</code> CI job:</strong> nightly KQL export → <code>Trakia.CostModel</code> → fails the build if measured P50 cost per task drifts &gt; 25% from the business-case assumption. A cost regression gate now sits next to your eval gates.</li>
+<li><strong>ADR linter and pilot-charter linter</strong> in CI, so architecture artefacts get the same treatment as code.</li>
+<li><strong>Interview and trace analysis agent:</strong> the C14 open/axial coding workflow reused on discovery transcripts.</li>
+</ul>
+<h2 id="assessment">Assessment<a class="headerlink" href="#assessment" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th>Novice</th>
+<th>Competent</th>
+<th>Proficient</th>
+<th>Expert</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Discovery quality</td>
+<td>Ideas list; no baselines</td>
+<td>Canvases with some baselines</td>
+<td>≥ 8 canvases with baselines and falsifiable hypotheses; ≥ 5 hidden pains found</td>
+<td>Plus redirected non-LLM cases and a reasoned kill memo; interview evidence cited per canvas</td>
+</tr>
+<tr>
+<td>Scoring &amp; prioritisation</td>
+<td>Unweighted ranking</td>
+<td>Weighted rubric</td>
+<td>Anchored rubric, inter-rater reconciliation, hard gates applied</td>
+<td>Plus sensitivity of the ranking to weights shown; portfolio balanced across horizons with explicit sequencing logic</td>
+</tr>
+<tr>
+<td>ROI/TCO model</td>
+<td>Token cost only</td>
+<td>Tokens + infra</td>
+<td>Five cost families, ranges, trace-calibrated tokens, hard vs soft benefits</td>
+<td>Plus Monte Carlo, tornado-driven pilot objectives, reproducible from code, model-migration and eval costs explicit</td>
+</tr>
+<tr>
+<td>Build/buy/extend</td>
+<td>Preference stated</td>
+<td>Matrix without evidence</td>
+<td>Measured spike across 3 options, ADRs per use case</td>
+<td>Plus exit cost, eval-ability and protocol seams (MCP/A2A) analysed; different answers per use case justified with CAF</td>
+</tr>
+<tr>
+<td>Pilot gates &amp; communication</td>
+<td>"Pilot for 3 months"</td>
+<td>Some metrics</td>
+<td>Gates with thresholds, sources, owners, kill criteria</td>
+<td>Plus metric tree with guardrails, executive memo that survives CFO and works-council challenge</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Auto-checked:</strong>
+- canvas schema;
+- inter-rater script;
+- readiness evidence links;
+- cost-model unit tests and assumption schema;
+- price freshness;
+- spreadsheet regeneration diff;
+- <code>dotnet aieval</code> reports for the spike;
+- permission-leak test results;
+- ADR and charter linters.</p>
+<h2 id="common-pitfalls">Common pitfalls<a class="headerlink" href="#common-pitfalls" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Counting hours saved as cash, or letting soft benefits carry the NPV.</li>
+<li>Estimating tokens from one prompt, forgetting reasoning tokens, retries, judges and the multi-agent multiplier.</li>
+<li>Ignoring the cost of evals, labelling and model migrations.</li>
+<li>One build/buy answer for the whole programme.</li>
+<li>Risk scored as an afterthought, so Annex III or Art. 5 issues surface after the pilot.</li>
+<li>Pilot criteria written after the pilot, or metrics without baselines.</li>
+<li>RAG for a corpus that fits in a cached prompt.</li>
+<li>Prices without a source and a date.</li>
+</ul>
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<ul>
+<li>CAF AI adoption scenario (plan, ready, govern, secure, manage; "least operational responsibility"): https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/scenarios/ai/</li>
+<li>AB-100 study guide (ROI/TCO, build/buy/extend, CoE, model router): https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/ab-100</li>
+<li>Baseline Microsoft Foundry chat reference architecture (cost drivers: Cosmos DB, AI Search, DDoS; PAYG vs PTU): https://learn.microsoft.com/en-us/azure/architecture/ai-ml/architecture/baseline-microsoft-foundry-chat</li>
+<li>Foundry model retirements (lifecycle durations, 60-day notice): https://learn.microsoft.com/en-us/azure/foundry/openai/concepts/model-retirements</li>
+<li>Model router concepts (modes, custom subset, smallest-context rule): https://learn.microsoft.com/en-us/azure/ai-foundry/openai/concepts/model-router</li>
+<li>Anthropic, multi-agent research system (~15× tokens vs chat): https://www.anthropic.com/engineering/multi-agent-research-system</li>
+<li>Anthropic, contextual retrieval (skip RAG below ~200k tokens): https://www.anthropic.com/news/contextual-retrieval</li>
+<li>Claude Opus 5.5 pricing and caching (illustrative price source): https://platform.claude.com/docs/en/models/opus-5-5/overview</li>
+<li>Hamel Husain &amp; Shreya Shankar, evals FAQ (labelling effort, 60–80% time on evals): https://hamel.dev/blog/posts/evals-faq/</li>
+<li>Per-task vs per-token cost (aggregator, treat as indicative): https://www.digitalapplied.com/blog/ai-model-releases-september-2026-tracker</li>
+<li>Azure Retail Prices API: https://learn.microsoft.com/en-us/rest/api/cost-management/retail-prices/azure-retail-prices (verify URL before teaching)</li>
+<li>Foundry IQ / What's new in Microsoft Foundry, Build 2026 (Foundry IQ GA; Serverless preview): https://devblogs.microsoft.com/foundry/whats-new-in-microsoft-foundry-build-2026/</li>
+<li>Linux Foundation A2A press release (Copilot Studio and Foundry integration): https://linuxfoundation.org/press/a2a-protocol-surpasses-150-organizations-lands-in-major-cloud-platforms-and-sees-enterprise-production-use-in-first-year</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../../part-4-developer-track/d07-agent-reliability-engineering/" class="md-footer__link md-footer__link--prev" aria-label="Previous: D7 — Agent reliability engineering">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                D7 — Agent reliability engineering
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../a02-azure-ai-reference-architectures-and-well-architected-for-ai/" class="md-footer__link md-footer__link--next" aria-label="Next: A2 — Azure AI reference architectures &amp; Well-Architected for AI">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                A2 — Azure AI reference architectures & Well-Architected for AI
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.top", "navigation.footer", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

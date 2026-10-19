@@ -1,0 +1,3076 @@
+
+<!doctype html>
+<html lang="bg" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Learning-by-doing course, release 2026.11 (content as of October 2026)">
+      
+      
+      
+      
+        <link rel="prev" href="../../part-1-foundations/c05-evals-from-day-one/">
+      
+      
+        <link rel="next" href="../c07-rag-from-documents-to-cited-permission-aware-answers/">
+      
+      
+        
+          <link rel="alternate" href="../../../part-2-building-blocks/c06-embeddings-and-vector-search/" hreflang="en">
+        
+          <link rel="alternate" href="./" hreflang="bg">
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>C6 — Embeddings и векторно търсене - AI Solution Developer & Architect — Наръчник за курсиста</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#c6-embeddings-vector-search" class="md-skip">
+          Към съдържанието
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Горен колонтитул">
+    <a href="../../" title="AI Solution Developer &amp; Architect — Наръчник за курсиста" class="md-header__button md-logo" aria-label="AI Solution Developer & Architect — Наръчник за курсиста" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            AI Solution Developer & Architect — Наръчник за курсиста
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              C6 — Embeddings и векторно търсене
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="Избери език">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href="../../../part-2-building-blocks/c06-embeddings-and-vector-search/" hreflang="en" class="md-select__link">
+              English
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="./" hreflang="bg" class="md-select__link">
+              Български
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Търси" placeholder="Търси" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Търси">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Изчисти" aria-label="Изчисти" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Инициализирано търсене
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Навигация" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../" title="AI Solution Developer &amp; Architect — Наръчник за курсиста" class="md-nav__button md-logo" aria-label="AI Solution Developer & Architect — Наръчник за курсиста" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    AI Solution Developer & Architect — Наръчник за курсиста
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Добре дошли
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Започнете оттук
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Започнете оттук
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/how-to-use/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Как да използвате наръчника
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/course-overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Преглед на курса
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/assessment-gates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Оценяване и гейтове
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/competency-matrix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Матрица на компетентностите
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Част 1 — Основи (ниво 1)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Част 1 — Основи (ниво 1)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c00-orientation-setup-and-toolchain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C0 — Ориентация, настройка и инструменти
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c01-how-generative-ai-works-an-engineer-s-mental-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C1 — Как работи генеративният AI: мисловен модел за инженери
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c02-your-first-ai-feature-in-net/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C2 — Първата ви AI функционалност в .NET
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c03-prompting-structured-outputs-and-tool-calling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C3 — Промптинг, структуриран изход и извикване на инструменти
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c04-working-with-coding-agents-the-factory-day-one/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C4 — Работа с кодиращи агенти: Фабриката, първи ден
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c05-evals-from-day-one/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C5 — Evals от първия ден
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Част 2 — Градивни елементи (ниво 2)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Част 2 — Градивни елементи (ниво 2)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C6 — Embeddings и векторно търсене
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C6 — Embeddings и векторно търсене
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Съдържание">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Съдържание
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-this-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why this matters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learning outcomes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concepts
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Concepts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#embeddings-as-a-measurement-instrument" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Embeddings as a measurement instrument
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#current-models-you-will-meet-oct-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Current models you will meet (Oct 2026)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#similarity-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Similarity metrics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exact-vs-approximate-nearest-neighbour" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exact vs approximate nearest neighbour
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compression-quantization-and-matryoshka" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Compression: quantization and Matryoshka
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#where-vectors-live-on-azure-oct-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where vectors live on Azure (Oct 2026)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#microsoftextensionsvectordata-mevd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Microsoft.Extensions.VectorData (MEVD)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#measuring-retrieval" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Measuring retrieval
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#misconceptions-to-unlearn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Misconceptions to unlearn
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tools-versions-as-of-oct-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tools &amp; versions (as of Oct 2026)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#labs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Labs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Labs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lab-1-embeddings-on-bilingual-trakia-text-15h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 1 — Embeddings on bilingual Trakia text (≈1.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-2-a-retrieval-eval-harness-with-qrels-15h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 2 — A retrieval eval harness with qrels (≈1.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-3-sql-server-2025-exact-search-diskann-and-filters-25h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 3 — SQL Server 2025: exact search, DiskANN and filters (≈2.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-4-azure-ai-search-hnsw-quantization-and-matryoshka-175h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 4 — Azure AI Search: HNSW, quantization and Matryoshka (≈1.75h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-5-the-embedding-model-changes-bluegreen-re-embed-and-the-adr-125h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 5 — The embedding model changes: blue/green re-embed and the ADR (≈1.25h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kata
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#product-increment-fleet-ops-copilot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Product increment — Fleet Ops Copilot
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#factory-increment-your-agentic-sdlc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Factory increment — your agentic SDLC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assessment
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common pitfalls
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../c07-rag-from-documents-to-cited-permission-aware-answers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C7 — RAG: от документи до отговори с цитати, съобразени с правата на достъп
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../c08-tools-and-the-model-context-protocol/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C8 — Инструменти и Model Context Protocol
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../c09-agents-with-microsoft-agent-framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C9 — Агенти с Microsoft Agent Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../c10-agents-over-structured-data-text-to-sql-on-sql-server/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C10 — Агенти върху структурирани данни: text-to-SQL върху SQL Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../c11-agentic-testing-ai-driven-tdd-mutation-and-e2e-test-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C11 — Агентно тестване: TDD с AI, мутационно тестване и агенти за E2E тестове
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Част 3 — Продукционни системи (ниво 3)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Част 3 — Продукционни системи (ниво 3)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c12-workflows-and-multi-agent-orchestration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C12 — Workflows и многоагентна оркестрация
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c13-context-engineering-advanced-retrieval-and-memory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C13 — Инженеринг на контекста, напреднало извличане и памет
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c14-failure-driven-evals-llm-judges-and-red-teaming/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C14 — Evals, водени от грешките, LLM съдии и red teaming
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c15-observability-genaiops-and-cost/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C15 — Наблюдаемост, GenAIOps и разходи
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c16-security-for-llm-and-agentic-systems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C16 — Сигурност на LLM и агентни системи
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c17-shipping-to-azure-hosting-ai-gateway-iac-and-interop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C17 — Пускане в Azure: хостинг, AI gateway, IaC и оперативна съвместимост
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c18-responsible-ai-and-the-eu-ai-act-in-practice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C18 — Отговорен AI и Актът за изкуствения интелект на ЕС на практика
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c19-the-automated-sdlc-agents-from-issue-to-production/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C19 — Автоматизираният SDLC: агенти от issue до продукция
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Част 4 — Експертна специализация: AI Solution Developer
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Част 4 — Експертна специализация: AI Solution Developer
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d01-model-customization-and-small-local-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D1 — Адаптиране на модели и малки/локални модели
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d02-long-running-durable-and-autonomous-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D2 — Дълго работещи, устойчиви и автономни агенти
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d03-multimodal-and-realtime-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D3 — Мултимодални агенти и агенти в реално време
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d04-agent-ux-and-front-ends/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D4 — UX и фронтенди за агенти
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d05-performance-and-cost-engineering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D5 — Инженеринг на производителността и разходите
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d06-building-your-own-agent-tooling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D6 — Изграждане на собствени инструменти за агенти
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d07-agent-reliability-engineering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D7 — Инженеринг на надеждността на агенти
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Част 5 — Експертна специализация: AI Solution Architect
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Част 5 — Експертна специализация: AI Solution Architect
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a01-ai-strategy-use-case-discovery-and-business-case/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A1 — AI стратегия, откриване на сценарии на употреба и бизнес обосновка
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a02-azure-ai-reference-architectures-and-well-architected-for-ai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A2 — Референтни AI архитектури в Azure и Well-Architected за AI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a03-enterprise-knowledge-and-data-architecture-for-ai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A3 — Корпоративна архитектура на знанията и данните за AI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a04-agent-platform-and-integration-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A4 — Платформа за агенти и интеграционна архитектура
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a05-reliability-scale-model-lifecycle-and-finops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A5 — Надеждност, мащаб, жизнен цикъл на моделите и FinOps
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a06-ai-governance-risk-and-compliance-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A6 — Архитектура за управление на AI, риска и съответствието
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a07-the-architect-s-craft-in-ai-programmes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A7 — Занаятът на архитекта в AI програми
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Част 6 — Съвместен финален проект
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Част 6 — Съвместен финален проект
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capstone/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Финален проект
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Приложение
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Приложение
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Речник на термините
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/references/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Допълнителна литература
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Съдържание">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Съдържание
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-this-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why this matters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learning outcomes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concepts
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Concepts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#embeddings-as-a-measurement-instrument" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Embeddings as a measurement instrument
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#current-models-you-will-meet-oct-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Current models you will meet (Oct 2026)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#similarity-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Similarity metrics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exact-vs-approximate-nearest-neighbour" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exact vs approximate nearest neighbour
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compression-quantization-and-matryoshka" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Compression: quantization and Matryoshka
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#where-vectors-live-on-azure-oct-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where vectors live on Azure (Oct 2026)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#microsoftextensionsvectordata-mevd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Microsoft.Extensions.VectorData (MEVD)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#measuring-retrieval" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Measuring retrieval
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#misconceptions-to-unlearn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Misconceptions to unlearn
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tools-versions-as-of-oct-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tools &amp; versions (as of Oct 2026)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#labs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Labs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Labs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lab-1-embeddings-on-bilingual-trakia-text-15h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 1 — Embeddings on bilingual Trakia text (≈1.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-2-a-retrieval-eval-harness-with-qrels-15h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 2 — A retrieval eval harness with qrels (≈1.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-3-sql-server-2025-exact-search-diskann-and-filters-25h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 3 — SQL Server 2025: exact search, DiskANN and filters (≈2.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-4-azure-ai-search-hnsw-quantization-and-matryoshka-175h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 4 — Azure AI Search: HNSW, quantization and Matryoshka (≈1.75h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-5-the-embedding-model-changes-bluegreen-re-embed-and-the-adr-125h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 5 — The embedding model changes: blue/green re-embed and the ADR (≈1.25h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kata
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#product-increment-fleet-ops-copilot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Product increment — Fleet Ops Copilot
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#factory-increment-your-agentic-sdlc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Factory increment — your agentic SDLC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assessment
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common pitfalls
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="c6-embeddings-vector-search">C6 — Embeddings &amp; vector search<a class="headerlink" href="#c6-embeddings-vector-search" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><strong>Level:</strong> 2 — Building blocks (Intermediate) · <strong>Duration:</strong> 12h (theory 30% / labs 70%) · <strong>Prerequisites:</strong> C2 (<code>IChatClient</code>, provider swap via config), C5 (golden dataset v1, eval tests in CI), working SQL Server 2025 container from C0 · <strong>Volatility:</strong> Med</p>
+</blockquote>
+<h2 id="why-this-matters">Why this matters<a class="headerlink" href="#why-this-matters" title="Permanent link">&para;</a></h2>
+<p>Trakia Freight's dispatchers ask questions like "може ли шофьор да кара 10 часа два пъти в седмицата?" ("can a driver drive 10 hours twice a week?") while the authoritative answer sits in an English EU driving-time summary, a Bulgarian internal policy annex, and a 2024 memo that superseded part of both. A keyword search on "10 часа" finds the memo but not the regulation; a naive vector search finds the regulation but ranks a near-duplicate <em>draft</em> policy above the approved one. Neither failure shows up in a demo. Both show up on day three of production, when a dispatcher acts on the wrong document.</p>
+<p>Embeddings and vector search are the first stage of almost every knowledge feature in this course (RAG in C7, few-shot retrieval for text-to-SQL in C10, memory in C13). Teams that skip the fundamentals make expensive, hard-to-reverse mistakes: they pick an embedding model by leaderboard rank without testing Bulgarian, put a DiskANN index on a table where exact search would be faster and exact, or discover after six months that "upgrading the embedding model" means re-embedding the whole corpus — with no way to roll back.</p>
+<p>Experts do three things differently. First, they <strong>measure retrieval separately from generation</strong>, with a labelled query set and recall@k / MRR / nDCG, before any LLM sees a chunk. Second, they treat the vector store as an <strong>architecture decision</strong> (where the source of truth lives, filter semantics, hybrid support, cost model) recorded in an ADR, not a default. Third, they <strong>design for model churn</strong>: the embedding model is versioned data, re-embedding is a planned blue/green operation with a cost estimate, and the code talks to an abstraction (<code>IEmbeddingGenerator</code>, <code>Microsoft.Extensions.VectorData</code>) so a store or model swap is a configuration change followed by an eval run.</p>
+<h2 id="learning-outcomes">Learning outcomes<a class="headerlink" href="#learning-outcomes" title="Permanent link">&para;</a></h2>
+<p>By the end of this module you can:</p>
+<ol>
+<li><strong>Explain</strong> how a bi-encoder embedding model maps text to vectors and <strong>predict</strong> when cosine, dot product and Euclidean distance give identical rankings.</li>
+<li><strong>Choose and justify</strong> an embedding model (dimensions, max input, languages, modality, price, lifecycle) for a bilingual BG/EN corpus using measured recall, not leaderboard rank.</li>
+<li><strong>Implement</strong> a retrieval evaluation harness in C# that computes recall@k, MRR@k and nDCG@k over a labelled query set and runs in CI.</li>
+<li><strong>Implement</strong> vector storage and search on SQL Server 2025 (<code>VECTOR</code> type, <code>VECTOR_DISTANCE</code>, DiskANN index) and on Azure AI Search (HNSW / exhaustive KNN, filters), and <strong>decide</strong> between exact and approximate search from corpus size and filter selectivity.</li>
+<li><strong>Apply</strong> compression (int8 scalar, binary quantization, Matryoshka truncation) with oversampling and rescoring, and <strong>quantify</strong> the storage-vs-recall trade-off on Trakia data.</li>
+<li><strong>Write</strong> store-agnostic retrieval code with <code>Microsoft.Extensions.VectorData</code> and swap stores without changing business logic.</li>
+<li><strong>Estimate</strong> the cost and plan the rollout of an embedding-model change (re-embedding tokens, index rebuild, alias cut-over, rollback).</li>
+<li><strong>Produce</strong> an ADR comparing SQL Server 2025 vectors and Azure AI Search for the Trakia policy corpus, backed by eval numbers.</li>
+</ol>
+<h2 id="concepts">Concepts<a class="headerlink" href="#concepts" title="Permanent link">&para;</a></h2>
+<h3 id="embeddings-as-a-measurement-instrument">Embeddings as a measurement instrument<a class="headerlink" href="#embeddings-as-a-measurement-instrument" title="Permanent link">&para;</a></h3>
+<p>An embedding model is an encoder that maps an input (text, and for multimodal models images) to a fixed-length vector so that semantically similar inputs are close. Retrieval models are <strong>bi-encoders</strong>: query and document are encoded independently, which is what makes them indexable — you embed the corpus once and only the query at search time. The price of independence is precision: a bi-encoder never sees query and document together, so it is weak at negation, exact identifiers and fine-grained constraints. That is why C7 adds lexical search (BM25) and a cross-encoder reranker on top. Treat embeddings as a <em>recall</em> instrument: their job is to get the right chunk into the top 50, not to put it at rank 1.</p>
+<p>What the vector encodes is decided by the model's training data and objective, not by you. Consequences:</p>
+<ul>
+<li><strong>Vectors from different models are incomparable.</strong> Even two models with 1,536 dimensions live in unrelated spaces. Microsoft's catalogue states plainly that you cannot upgrade between embedding models; switching means re-embedding the corpus.</li>
+<li><strong>Max input length truncates silently.</strong> Azure OpenAI <code>text-embedding-3-*</code> accept up to 8,192 tokens per input and up to 2,048 inputs per call. The research notes record Cohere <code>embed-v-4-0</code> on Azure as accepting text "up to 512 tokens" — that is a hard design constraint on chunk size if accurate (verify against current documentation; it may reflect a catalogue-specific limit).</li>
+<li><strong>Languages matter.</strong> Bulgarian Cyrillic text is token-heavier than English (no published measurement was found; Lab 1 produces Trakia's own number), and multilingual quality varies per model. Cross-lingual retrieval (Bulgarian query, English document) works only if the model was trained for it. You must test it.</li>
+</ul>
+<h3 id="current-models-you-will-meet-oct-2026">Current models you will meet (Oct 2026)<a class="headerlink" href="#current-models-you-will-meet-oct-2026" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Model (Foundry)</th>
+<th>Dims</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>text-embedding-3-large</code></td>
+<td>3,072 (reducible via <code>dimensions</code>)</td>
+<td>8,192-token input; Matryoshka-style truncation supported</td>
+</tr>
+<tr>
+<td><code>text-embedding-3-small</code></td>
+<td>1,536 (reducible)</td>
+<td>Cheap default; reduced-dimension output still slightly beats <code>ada-002</code> on MTEB per Microsoft</td>
+</tr>
+<tr>
+<td><code>text-embedding-ada-002</code></td>
+<td>1,536</td>
+<td>Legacy; do not start new corpora on it</td>
+</tr>
+<tr>
+<td>Cohere <code>embed-v-4-0</code></td>
+<td>256 / 512 / 1,024 / 1,536</td>
+<td>Multimodal (text + images); relevant for scanned delivery notes</td>
+</tr>
+<tr>
+<td>Others in the wider market</td>
+<td>—</td>
+<td><code>gemini-embedding-2-preview</code> (not sold by Azure), Voyage 4, Qwen3-Embedding-8B (open weights)</td>
+</tr>
+</tbody>
+</table>
+<p>Labs refer to the <em>role</em> "embedding model" and pin the deployment name in <code>appsettings.json</code> (blueprint rule). Never quote MTEB ranks in an ADR — no 2026 snapshot was verified, and your corpus is not MTEB.</p>
+<h3 id="similarity-metrics">Similarity metrics<a class="headerlink" href="#similarity-metrics" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Cosine similarity</strong>: cos θ = (a·b)/(‖a‖‖b‖). Measures angle; ignores magnitude.</li>
+<li><strong>Dot product</strong>: a·b. Equal to cosine when both vectors are unit-normalized.</li>
+<li><strong>Euclidean (L2) distance</strong>: ‖a−b‖. For unit vectors, ‖a−b‖² = 2 − 2·cos θ, so the <em>ranking</em> is identical to cosine.</li>
+</ul>
+<p>Decision rule: use the metric the model was trained for; if the model outputs normalized vectors (OpenAI and most modern models do — verify per model), cosine, dot and L2 rank identically and dot is cheapest. If you truncate a Matryoshka vector, <strong>re-normalize</strong> before using dot product — truncation breaks unit length. Note that SQL Server's <code>VECTOR_DISTANCE('cosine', …)</code> returns a <em>distance</em> (lower is better), while many SDKs return a <em>similarity score</em> (higher is better); mixing them up produces perfectly inverted rankings that pass a smoke test with one query.</p>
+<p>In .NET, <code>System.Numerics.Tensors.TensorPrimitives.CosineSimilarity(ReadOnlySpan&lt;float&gt;, ReadOnlySpan&lt;float&gt;)</code> and <code>TensorPrimitives.Dot</code> are SIMD-accelerated and are what you use for in-memory experiments and for the in-memory MEVD connector.</p>
+<h3 id="exact-vs-approximate-nearest-neighbour">Exact vs approximate nearest neighbour<a class="headerlink" href="#exact-vs-approximate-nearest-neighbour" title="Permanent link">&para;</a></h3>
+<p><strong>Exact kNN</strong> compares the query with every candidate vector: O(n·d). For 15,000 chunks × 1,536 dims that is ~23M multiply-adds — single-digit milliseconds on a modern CPU. Microsoft's SQL guidance recommends exact search (<code>VECTOR_DISTANCE</code>) when there are fewer than about <strong>50,000 vectors after predicates are applied</strong>. That last clause is the important one: a filter <code>WHERE DepotId = 'VAR' AND Lang = 'bg'</code> can turn a 2M-row table into 8,000 candidates, where exact search is both faster and 100% accurate.</p>
+<p><strong>Approximate (ANN)</strong> indexes trade a little recall for sub-linear search:</p>
+<ul>
+<li><strong>HNSW</strong> (Malkov &amp; Yashunin): a hierarchical proximity graph. Knobs: <code>M</code> (edges per node; memory and recall up), <code>efConstruction</code> (build-time beam; build cost and graph quality up), <code>efSearch</code> (query-time beam; latency and recall up). Azure AI Search's default vector algorithm.</li>
+<li><strong>DiskANN</strong>: a graph index (Vamana) designed to keep most of the graph on SSD with a compressed in-memory representation, so very large indexes do not need all vectors in RAM. It is the index behind <code>CREATE VECTOR INDEX</code> in SQL Server 2025 / Azure SQL.</li>
+<li><strong>IVF / product quantization</strong> families exist in other stores; you will not configure them in this course.</li>
+</ul>
+<p><strong>Filtering is where ANN bites.</strong> With <em>post-filtering</em>, the index returns top-k neighbours and then the filter removes most of them — you ask for 10, get 2. With <em>pre-filtering</em>, the filter restricts the candidate set first; on a graph index this can disconnect the graph and hurt recall or latency. Azure AI Search offers <code>vectorFilterMode</code> (<code>preFilter</code> default, <code>postFilter</code>, and <code>strictPostFilter</code> in preview since Aug 2025). In SQL, check the plan: does the optimizer apply your predicate before or after the approximate search? Measure recall per filter bucket, not only globally.</p>
+<h3 id="compression-quantization-and-matryoshka">Compression: quantization and Matryoshka<a class="headerlink" href="#compression-quantization-and-matryoshka" title="Permanent link">&para;</a></h3>
+<p>Vector storage dominates cost in search services sized by storage and memory. Three levers, all GA in Azure AI Search since Sep 2025:</p>
+<ul>
+<li><strong>Scalar quantization (int8)</strong>: each float32 → 1 byte. ~<strong>4×</strong> smaller index, small recall loss.</li>
+<li><strong>Binary quantization</strong>: each dimension → 1 bit. "Up to <strong>28×</strong>" smaller (up to 96% reduction). Works best for embeddings with <strong>&gt;1,024 dimensions</strong> that are roughly zero-centred.</li>
+<li><strong>Matryoshka truncation</strong>: models trained with Matryoshka Representation Learning (Kusupati et al.) put the most information in the leading dimensions, so the first N dimensions form a usable lower-dimensional embedding. Azure AI Search exposes this as <code>truncationDimension</code> for <code>text-embedding-3</code> models; the Azure OpenAI API exposes the <code>dimensions</code> parameter at embedding time.</li>
+</ul>
+<p>Compression loses ranking precision, which you recover with <strong>oversampling + rescoring</strong>: retrieve k × oversampling candidates using compressed vectors (default oversampling 4), then rescore them with full-precision vectors and return the top k. In Azure AI Search, rescoring requires HNSW (not exhaustive KNN) and the original vectors must be kept (<code>enableRescoring: true</code>, and don't set <code>discardOriginals</code> if you want full-precision rescoring — verify the exact interaction in current docs). The decision is economic: binary + rescoring can cut a tier; on a 15k-chunk corpus it changes nothing material and adds a failure mode.</p>
+<h3 id="where-vectors-live-on-azure-oct-2026">Where vectors live on Azure (Oct 2026)<a class="headerlink" href="#where-vectors-live-on-azure-oct-2026" title="Permanent link">&para;</a></h3>
+<p><strong>SQL Server 2025 / Azure SQL / Fabric SQL</strong> — the <code>VECTOR(n)</code> type (float32 elements) and <code>VECTOR_DISTANCE</code> are GA everywhere. <code>CREATE VECTOR INDEX</code> (DiskANN) is <strong>GA in Azure SQL Database, Fabric SQL and SQL MI (Always-up-to-date policy) but preview in boxed SQL Server 2025</strong> (and in MI with the SQL Server 2025 policy). Approximate search uses the newer <code>SELECT TOP (N) WITH APPROXIMATE … ORDER BY VECTOR_DISTANCE(…)</code> form; the older <code>VECTOR_SEARCH(… TOP_N …)</code> parameter is deprecated. <code>AI_GENERATE_EMBEDDINGS(text USE MODEL &lt;model&gt;)</code> generates embeddings in T-SQL; how the model object is created (<code>CREATE EXTERNAL MODEL</code>) was not confirmed on the fetched page — verify against current documentation. Historically early previews made a table read-only once it had a vector index; verify current behaviour before you put a DiskANN index on a table that receives writes. Strengths: vectors sit next to the rows (no sync pipeline), transactional consistency, row-level security reuse, no new service. Hybrid search must be assembled yourself (full-text + vector, fused in T-SQL or C#; not verified as a native feature).</p>
+<p><strong>Azure AI Search</strong> — vector fields up to 4,096 dims, HNSW or exhaustive KNN, quantization with rescoring, Matryoshka truncation, integrated vectorization and skills, hybrid BM25 + vector with RRF, semantic ranker, subscores, index <strong>aliases (GA Apr 2026)</strong> for blue/green re-indexing, and knowledge bases (C7, C13). Cost is a fixed search-unit tier; semantic ranker and agentic retrieval need separate billing consent since API 2026-04-01.</p>
+<p><strong>Cosmos DB for NoSQL</strong> (vector + BM25 + hybrid RRF, GA May 2025) and <strong>PostgreSQL/pgvector</strong> (portable; 2026 Azure status not re-verified) complete the picture.</p>
+<h3 id="microsoftextensionsvectordata-mevd">Microsoft.Extensions.VectorData (MEVD)<a class="headerlink" href="#microsoftextensionsvectordata-mevd" title="Permanent link">&para;</a></h3>
+<p>MEVD (GA May 2025) is to stores what <code>IChatClient</code> is to models. Core types: <code>VectorStore</code>, <code>VectorStoreCollection&lt;TKey, TRecord&gt;</code>, attributes <code>[VectorStoreKey]</code>, <code>[VectorStoreData]</code>, <code>[VectorStoreVector(dimensions: N)]</code>, operations <code>EnsureCollectionExistsAsync</code>, <code>UpsertAsync</code>, <code>SearchAsync</code>. If an <code>IEmbeddingGenerator</code> is attached to the store, you can search by text and the store embeds the query. Microsoft Learn (Jul 2026) shows connectors as <code>CommunityToolkit.VectorData.InMemory</code> and <code>CommunityToolkit.VectorData.AzureAISearch</code>; older <code>Microsoft.SemanticKernel.Connectors.*</code> packages also exist (including SQL Server and PgVector). The connector naming is in flux — <strong>pin exact packages in the lab repo and verify against current documentation</strong>. MEVD gives you portability for the 80% case (upsert, top-k, simple filters); store-specific features (quantization config, <code>WITH APPROXIMATE</code>, semantic ranker) still need the native SDK or T-SQL.</p>
+<h3 id="measuring-retrieval">Measuring retrieval<a class="headerlink" href="#measuring-retrieval" title="Permanent link">&para;</a></h3>
+<p>You need <strong>qrels</strong>: for each query, the set of relevant chunk/document IDs (optionally graded 0–3). Then:</p>
+<ul>
+<li><strong>recall@k</strong> = |relevant ∩ top-k| / |relevant|. "Did it get into the window the generator will see?" For RAG this is the primary metric.</li>
+<li><strong>MRR@k</strong> = mean over queries of 1/rank of the first relevant hit (0 if none in top k). Sensitive to rank 1; good for single-answer lookups.</li>
+<li><strong>nDCG@k</strong> = DCG@k / IDCG@k with DCG = Σ (2^rel_i − 1)/log₂(i+1). Handles graded relevance and position. Foundry's Document Retrieval evaluator reports nDCG@3, XDCG@3, Fidelity and "holes" (retrieved docs with no label — your qrels are incomplete, not necessarily your retriever bad).</li>
+</ul>
+<p>Rules: label at the <strong>document or section level</strong> if chunking is still changing, otherwise every chunking change invalidates qrels; stratify queries (BG, EN, cross-lingual, identifiers such as fault code <code>P0420</code>, multi-document, "not in corpus"); report per stratum; and track <strong>holes</strong> — an unlabelled hit is a labelling task, not a metric.</p>
+<h3 id="misconceptions-to-unlearn">Misconceptions to unlearn<a class="headerlink" href="#misconceptions-to-unlearn" title="Permanent link">&para;</a></h3>
+<ul>
+<li>"Switching embedding models is a config change." It is a full re-embed and re-index (Lab 5).</li>
+<li>"Higher dimensions are always better." On a small domain corpus, truncated 256-dim vectors may match 3,072 within noise; measure.</li>
+<li>"ANN is always faster." Below ~50k candidates exact search is fast and exact.</li>
+<li>"Cosine 0.83 means 83% relevant." Scores are uncalibrated across queries and models; never threshold raw similarity without calibration.</li>
+<li>"Vector search finds IDs and codes." Bi-encoders blur <code>P0420</code> and <code>P0430</code> (C7 adds hybrid).</li>
+<li>"Multilingual means good at Bulgarian." Test it on Trakia queries.</li>
+</ul>
+<h2 id="tools-versions-as-of-oct-2026">Tools &amp; versions (as of Oct 2026)<a class="headerlink" href="#tools-versions-as-of-oct-2026" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Tool / package</th>
+<th>Purpose</th>
+<th>Status</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Microsoft.Extensions.AI</code> / <code>.Abstractions</code> 10.5.x</td>
+<td><code>IEmbeddingGenerator&lt;string, Embedding&lt;float&gt;&gt;</code>, <code>EmbeddingGenerationOptions.Dimensions</code></td>
+<td>GA</td>
+<td>Same abstraction for Foundry, Foundry Local, Ollama</td>
+</tr>
+<tr>
+<td><code>Microsoft.Extensions.AI.OpenAI</code> + <code>OpenAI</code> (against <code>/openai/v1/</code>) or <code>Azure.AI.Extensions.OpenAI</code> 2.0</td>
+<td>Embedding client for Foundry deployments</td>
+<td>GA</td>
+<td>Don't mix with preview <code>Azure.AI.Projects.OpenAI</code></td>
+</tr>
+<tr>
+<td><code>Microsoft.Extensions.VectorData.Abstractions</code></td>
+<td><code>VectorStore</code>, <code>VectorStoreCollection</code></td>
+<td>GA (May 2025)</td>
+<td>Pin version</td>
+</tr>
+<tr>
+<td><code>CommunityToolkit.VectorData.InMemory</code>, <code>.AzureAISearch</code>; SQL Server connector</td>
+<td>MEVD connectors</td>
+<td>Package names in flux</td>
+<td>Verify exact names/versions before teaching</td>
+</tr>
+<tr>
+<td>SQL Server 2025 / Azure SQL</td>
+<td><code>VECTOR</code>, <code>VECTOR_DISTANCE</code>, <code>AI_GENERATE_EMBEDDINGS</code>, <code>CREATE VECTOR INDEX</code></td>
+<td>Type GA; DiskANN <strong>preview</strong> in SQL Server 2025, GA in Azure SQL DB / MI (Always-up-to-date) / Fabric</td>
+<td>Exact search &lt; ~50k vectors after predicates</td>
+</tr>
+<tr>
+<td><code>Microsoft.Data.SqlClient</code></td>
+<td>Parameterizing vectors</td>
+<td>GA</td>
+<td>Native vector parameter type in recent versions — verify; fallback: JSON string + <code>CAST(@q AS VECTOR(n))</code></td>
+</tr>
+<tr>
+<td><code>Azure.Search.Documents</code></td>
+<td>Index definition, vector/hybrid queries</td>
+<td>GA (API 2026-04-01)</td>
+<td>Quantization, <code>truncationDimension</code>, aliases</td>
+</tr>
+<tr>
+<td><code>System.Numerics.Tensors</code></td>
+<td><code>TensorPrimitives.CosineSimilarity</code>, <code>Dot</code></td>
+<td>GA</td>
+<td>In-memory experiments</td>
+</tr>
+<tr>
+<td><code>Microsoft.ML.Tokenizers</code></td>
+<td>Token counting BG vs EN</td>
+<td>GA</td>
+<td>Cost estimation</td>
+</tr>
+<tr>
+<td>Foundry embedding deployments</td>
+<td><code>text-embedding-3-small/large</code>, Cohere <code>embed-v-4-0</code></td>
+<td>GA</td>
+<td>Lifecycle: GA models retire ≥18 months (partner models 12)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="labs">Labs<a class="headerlink" href="#labs" title="Permanent link">&para;</a></h2>
+<h3 id="lab-1-embeddings-on-bilingual-trakia-text-15h">Lab 1 — Embeddings on bilingual Trakia text (≈1.5h)<a class="headerlink" href="#lab-1-embeddings-on-bilingual-trakia-text-15h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> Build intuition for embedding geometry, metric equivalence, cross-lingual behaviour and token cost on Trakia's own text.</li>
+<li><strong>Start state:</strong> <code>c6/lab1-start</code> — solution <code>FleetOps.sln</code> with <code>FleetOps.Retrieval</code> project, <code>data/policies/</code> (fleet policy handbook, driver code of conduct, EU driving-time summary; BG and EN versions of 40 sections), <code>appsettings.json</code> with <code>Embeddings:Primary</code> and <code>Embeddings:Secondary</code> deployment names.</li>
+<li><strong>Steps:</strong></li>
+<li>Register two generators by key, driven by config:
+     <div class="highlight"><pre><span></span><code><span class="n">builder</span><span class="p">.</span><span class="n">Services</span><span class="p">.</span><span class="n">AddKeyedSingleton</span><span class="o">&lt;</span><span class="n">IEmbeddingGenerator</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="n">Embedding</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;&gt;&gt;</span><span class="p">(</span><span class="s">"primary"</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">sp</span><span class="p">,</span><span class="w"> </span><span class="n">_</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">OpenAIClient</span><span class="p">(</span><span class="n">credentialPolicy</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OpenAIClientOptions</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Endpoint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="p">(</span><span class="n">cfg</span><span class="p">[</span><span class="s">"Foundry:OpenAIEndpoint"</span><span class="p">]</span><span class="o">!</span><span class="p">)</span><span class="w"> </span><span class="p">})</span>
+<span class="w">        </span><span class="p">.</span><span class="n">GetEmbeddingClient</span><span class="p">(</span><span class="n">cfg</span><span class="p">[</span><span class="s">"Embeddings:Primary"</span><span class="p">]</span><span class="o">!</span><span class="p">)</span><span class="w">      </span><span class="c1">// e.g. text-embedding-3-large</span>
+<span class="w">        </span><span class="p">.</span><span class="n">AsIEmbeddingGenerator</span><span class="p">());</span><span class="w">                           </span><span class="c1">// verify exact API against current docs</span>
+</code></pre></div></li>
+<li>Embed the 40 parallel BG/EN section pairs with both models. For each pair compute cosine with <code>TensorPrimitives.CosineSimilarity</code>. Compute the same for 40 <em>non-matching</em> pairs. Plot both distributions (CSV → any chart tool). The gap between distributions is your model's cross-lingual separability.</li>
+<li>Verify unit norm (<code>TensorPrimitives.Norm</code>) of returned vectors. Rank 20 chunks for 5 queries by cosine, dot and L2; assert rankings are identical. Now request <code>Dimensions = 256</code> via <code>EmbeddingGenerationOptions</code> and repeat — rankings by dot product diverge unless you re-normalize. Fix it.</li>
+<li>Count tokens for all 40 BG and EN sections with <code>Microsoft.ML.Tokenizers</code> (tokenizer for the embedding model family — verify which encoding applies). Record the BG/EN token ratio; project the monthly embedding cost for the full 1,500-doc corpus at current price (price from config, not hard-coded).</li>
+<li><strong>Break it:</strong> Embed the corpus with the primary model and the queries with the secondary model (same dimension count via <code>Dimensions</code>). Observe that the code runs, returns results, and is garbage. Add a guard: every stored vector carries <code>EmbeddingModelId</code>; the search path throws if the query generator's model ID differs.</li>
+<li><strong>Acceptance criteria:</strong> <code>dotnet test --filter Category=C6.Lab1</code> passes: (a) metric-equivalence test for normalized vectors; (b) model-mismatch guard throws; (c) <code>reports/c6-lab1.md</code> contains the BG/EN token ratio and the matched vs non-matched cosine means for both models.</li>
+<li><strong>Stretch:</strong> Embed 20 scanned delivery-note images with Cohere <code>embed-v-4-0</code> and search them with text ("доставка Варна палети") — no OCR.</li>
+</ul>
+<h3 id="lab-2-a-retrieval-eval-harness-with-qrels-15h">Lab 2 — A retrieval eval harness with qrels (≈1.5h)<a class="headerlink" href="#lab-2-a-retrieval-eval-harness-with-qrels-15h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> Build the instrument every later retrieval decision depends on.</li>
+<li><strong>Start state:</strong> <code>c6/lab2-start</code> — <code>evals/retrieval-golden.v1.jsonl</code> with 60 instructor-labelled queries; you add 20 (incl. ≥ 5 cross-lingual and ≥ 3 identifier queries) to reach 80.</li>
+<li><strong>Steps:</strong></li>
+<li>Extend the golden set to 80 queries, stratified: 25 BG, 25 EN, 15 cross-lingual (BG query → EN source), 10 identifier queries (fault codes, policy numbers like <code>FP-7.3</code>), 5 "not in corpus". Each line: <code>{ "id", "query", "lang", "stratum", "relevant": [{ "docId", "section", "grade": 0-3 }] }</code>. Label at <strong>section</strong> level so Lab 3–5 chunking changes don't invalidate labels.</li>
+<li>Implement the metrics:
+     <div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">RetrievalMetrics</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="nf">RecallAt</span><span class="p">(</span><span class="n">IReadOnlyList</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ranked</span><span class="p">,</span><span class="w"> </span><span class="n">ISet</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">relevant</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span>
+<span class="w">        </span><span class="n">relevant</span><span class="p">.</span><span class="n">Count</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="kt">double</span><span class="p">.</span><span class="n">NaN</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ranked</span><span class="p">.</span><span class="n">Take</span><span class="p">(</span><span class="n">k</span><span class="p">).</span><span class="n">Count</span><span class="p">(</span><span class="n">relevant</span><span class="p">.</span><span class="n">Contains</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">relevant</span><span class="p">.</span><span class="n">Count</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="nf">ReciprocalRank</span><span class="p">(</span><span class="n">IReadOnlyList</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ranked</span><span class="p">,</span><span class="w"> </span><span class="n">ISet</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">relevant</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">Math</span><span class="p">.</span><span class="n">Min</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="n">ranked</span><span class="p">.</span><span class="n">Count</span><span class="p">);</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">relevant</span><span class="p">.</span><span class="n">Contains</span><span class="p">(</span><span class="n">ranked</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mf">1.0</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="nf">NdcgAt</span><span class="p">(</span><span class="n">IReadOnlyList</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ranked</span><span class="p">,</span><span class="w"> </span><span class="n">IReadOnlyDictionary</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">grades</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">double</span><span class="w"> </span><span class="nf">Dcg</span><span class="p">(</span><span class="n">IEnumerable</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">g</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">g</span><span class="p">.</span><span class="n">Select</span><span class="p">((</span><span class="n">rel</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">(</span><span class="n">Math</span><span class="p">.</span><span class="n">Pow</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">rel</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">Math</span><span class="p">.</span><span class="n">Log2</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="p">)).</span><span class="n">Sum</span><span class="p">();</span>
+<span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">dcg</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">Dcg</span><span class="p">(</span><span class="n">ranked</span><span class="p">.</span><span class="n">Take</span><span class="p">(</span><span class="n">k</span><span class="p">).</span><span class="n">Select</span><span class="p">(</span><span class="n">id</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">grades</span><span class="p">.</span><span class="n">GetValueOrDefault</span><span class="p">(</span><span class="n">id</span><span class="p">)));</span>
+<span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">idcg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Dcg</span><span class="p">(</span><span class="n">grades</span><span class="p">.</span><span class="n">Values</span><span class="p">.</span><span class="n">OrderByDescending</span><span class="p">(</span><span class="n">v</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">v</span><span class="p">).</span><span class="n">Take</span><span class="p">(</span><span class="n">k</span><span class="p">));</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">idcg</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">dcg</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">idcg</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></li>
+<li>Define <code>IRetriever { Task&lt;IReadOnlyList&lt;Hit&gt;&gt; SearchAsync(string query, RetrievalFilter filter, int k, CancellationToken ct); }</code> and map chunk hits back to <code>docId#section</code> before scoring (dedupe: first occurrence wins).</li>
+<li>Write an xUnit test that runs the harness against the in-memory MEVD baseline and writes <code>artifacts/retrieval-report.json</code> (per-stratum recall@5/@10, MRR@10, nDCG@10, holes count). Mark it <code>[Trait("Category","Eval")]</code> so CI runs it in the eval job created in C5.</li>
+<li><strong>Break it:</strong> Swap two labels in the golden set (simulate a labelling error) and observe how much a single wrong label moves MRR on the "identifier" stratum (n=10). Write two sentences in the report about confidence intervals on small strata.</li>
+<li><strong>Acceptance criteria:</strong> Metric unit tests (hand-computed fixtures) pass; harness produces the JSON report; CI eval job publishes it as an artifact; "not in corpus" queries are excluded from recall and reported separately as "top-1 score distribution".</li>
+<li><strong>Stretch:</strong> Add bootstrap 95% confidence intervals per stratum (1,000 resamples).</li>
+</ul>
+<h3 id="lab-3-sql-server-2025-exact-search-diskann-and-filters-25h">Lab 3 — SQL Server 2025: exact search, DiskANN and filters (≈2.5h)<a class="headerlink" href="#lab-3-sql-server-2025-exact-search-diskann-and-filters-25h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> Run vector search where Trakia's operational data already lives and learn when the index helps.</li>
+<li><strong>Start state:</strong> <code>c6/lab3-start</code> — <code>TrakiaOps</code> database with <code>dbo.PolicyChunk</code> (≈15k chunks, 512-token fixed chunks for now), and a synthetic <code>dbo.IncidentNoteEmbedding</code> table (≈600k rows) for scale experiments. Note: DiskANN is <strong>preview</strong> in boxed SQL Server 2025; the lab includes an Azure SQL Database variant (<code>infra/c6-azuresql.bicep</code>) where it is GA.</li>
+<li><strong>Steps:</strong></li>
+<li>Schema:
+     <div class="highlight"><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">dbo</span><span class="p">.</span><span class="n">PolicyChunk</span><span class="w"> </span><span class="k">ADD</span>
+<span class="w">    </span><span class="n">Embedding</span><span class="w"> </span><span class="n">VECTOR</span><span class="p">(</span><span class="mi">1536</span><span class="p">)</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">EmbeddingModelId</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">64</span><span class="p">)</span><span class="w"> </span><span class="k">NULL</span><span class="p">;</span>
+</code></pre></div>
+     Populate from C# in batches of ≤2,048 inputs per embedding call (the API limit), using a <code>SqlBulkCopy</code> staging table or batched <code>UPDATE</code>. Pass vectors either via the native SqlClient vector type (verify) or as a JSON array string with <code>CAST(@v AS VECTOR(1536))</code>.</li>
+<li>Exact search with a filter:
+     <div class="highlight"><pre><span></span><code><span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">q</span><span class="w"> </span><span class="n">VECTOR</span><span class="p">(</span><span class="mi">1536</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">CAST</span><span class="p">(</span><span class="o">@</span><span class="n">qjson</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">VECTOR</span><span class="p">(</span><span class="mi">1536</span><span class="p">));</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">TOP</span><span class="w"> </span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="w"> </span><span class="n">ChunkId</span><span class="p">,</span><span class="w"> </span><span class="n">DocId</span><span class="p">,</span><span class="w"> </span><span class="n">Section</span><span class="p">,</span>
+<span class="w">       </span><span class="n">VECTOR_DISTANCE</span><span class="p">(</span><span class="s1">'cosine'</span><span class="p">,</span><span class="w"> </span><span class="n">Embedding</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">q</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">Distance</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">dbo</span><span class="p">.</span><span class="n">PolicyChunk</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">Lang</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="p">(</span><span class="s1">'bg'</span><span class="p">,</span><span class="s1">'en'</span><span class="p">)</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">Status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Approved'</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">Distance</span><span class="p">;</span><span class="w">            </span><span class="c1">-- distance: lower is better</span>
+</code></pre></div>
+     Wire it as <code>SqlExactRetriever : IRetriever</code> and run the Lab 2 harness.</li>
+<li>Build an index on the large table and compare:
+     <div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="n">VECTOR</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">vix_IncidentNote</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">dbo</span><span class="p">.</span><span class="n">IncidentNoteEmbedding</span><span class="p">(</span><span class="n">Embedding</span><span class="p">)</span>
+<span class="w">    </span><span class="k">WITH</span><span class="w"> </span><span class="p">(</span><span class="n">METRIC</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'cosine'</span><span class="p">,</span><span class="w"> </span><span class="k">TYPE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'diskann'</span><span class="p">);</span><span class="w">   </span><span class="c1">-- preview on SQL Server 2025; verify options</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">TOP</span><span class="w"> </span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="n">APPROXIMATE</span><span class="w"> </span><span class="n">NoteId</span><span class="p">,</span>
+<span class="w">       </span><span class="n">VECTOR_DISTANCE</span><span class="p">(</span><span class="s1">'cosine'</span><span class="p">,</span><span class="w"> </span><span class="n">Embedding</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">q</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">Distance</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">dbo</span><span class="p">.</span><span class="n">IncidentNoteEmbedding</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">Distance</span><span class="p">;</span><span class="w">                                 </span><span class="c1">-- verify exact syntax against current docs</span>
+</code></pre></div>
+     For 50 random queries, compute ANN recall@10 against exact results (exact = ground truth) and p50/p95 latency for both.</li>
+<li>Filter selectivity experiment: add <code>WHERE DepotId = @depot</code> with depots of very different sizes (Varna ≈ 8% of rows). Measure ANN recall@10 per depot and inspect execution plans: is the predicate applied before or after the approximate search? Record result-count shortfalls (asked 10, got fewer).</li>
+<li><strong>Break it:</strong> Run the exact query on the 600k-row table without a filter while the embedding backfill job is writing; observe latency and blocking. Then attempt an <code>UPDATE</code> on a row of the indexed table and record the behaviour (read-only restriction or not — this is the "verify against current documentation" fact; your lab report is evidence).</li>
+<li><strong>Acceptance criteria:</strong> <code>SqlExactRetriever</code> reaches the same metrics as the in-memory baseline (±0.01 recall@10) on the golden set; report contains exact-vs-ANN recall@10 (target ≥0.95 unfiltered) and latency table; a decision rule written in your own words with the measured crossover point.</li>
+<li><strong>Stretch:</strong> Generate query embeddings in-database with <code>AI_GENERATE_EMBEDDINGS</code> and compare end-to-end latency and operational trade-offs (credentials, network path, model governance) with app-side embedding.</li>
+</ul>
+<h3 id="lab-4-azure-ai-search-hnsw-quantization-and-matryoshka-175h">Lab 4 — Azure AI Search: HNSW, quantization and Matryoshka (≈1.75h)<a class="headerlink" href="#lab-4-azure-ai-search-hnsw-quantization-and-matryoshka-175h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> Quantify compression trade-offs and compare with SQL on identical data and labels.</li>
+<li><strong>Start state:</strong> <code>c6/lab4-start</code> — <code>infra/c6-search.bicep</code> (Basic tier), <code>FleetOps.Retrieval.AzureSearch</code> project.</li>
+<li><strong>Steps:</strong></li>
+<li>Create four indexes over the same chunks (3,072-dim <code>text-embedding-3-large</code> vectors): <code>pol-full</code> (HNSW, no compression), <code>pol-int8</code> (scalar quantization + rescoring), <code>pol-bin</code> (binary quantization + rescoring, oversampling 4 then 10), <code>pol-trunc256</code> (<code>truncationDimension = 256</code> + int8). Shape:
+     <div class="highlight"><pre><span></span><code><span class="kt">var</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SearchIndex</span><span class="p">(</span><span class="s">"pol-int8"</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">Fields</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="nf">SimpleField</span><span class="p">(</span><span class="s">"id"</span><span class="p">,</span><span class="w"> </span><span class="n">SearchFieldDataType</span><span class="p">.</span><span class="n">String</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">IsKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">true</span><span class="w"> </span><span class="p">},</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="nf">SearchableField</span><span class="p">(</span><span class="s">"content"</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">AnalyzerName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LexicalAnalyzerName</span><span class="p">.</span><span class="n">BgMicrosoft</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="c1">// verify analyzer name</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="nf">SimpleField</span><span class="p">(</span><span class="s">"lang"</span><span class="p">,</span><span class="w"> </span><span class="n">SearchFieldDataType</span><span class="p">.</span><span class="n">String</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">IsFilterable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">true</span><span class="w"> </span><span class="p">},</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="nf">VectorSearchField</span><span class="p">(</span><span class="s">"embedding"</span><span class="p">,</span><span class="w"> </span><span class="mi">3072</span><span class="p">,</span><span class="w"> </span><span class="s">"vp-int8"</span><span class="p">)</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="n">VectorSearch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Algorithms</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HnswAlgorithmConfiguration</span><span class="p">(</span><span class="s">"hnsw"</span><span class="p">)</span><span class="w"> </span><span class="p">},</span>
+<span class="w">        </span><span class="n">Compressions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ScalarQuantizationCompression</span><span class="p">(</span><span class="s">"sq"</span><span class="p">)</span>
+<span class="w">                         </span><span class="p">{</span><span class="w"> </span><span class="cm">/* RescoringOptions: enable rescoring, oversampling 4 — verify property names */</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">},</span>
+<span class="w">        </span><span class="n">Profiles</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">VectorSearchProfile</span><span class="p">(</span><span class="s">"vp-int8"</span><span class="p">,</span><span class="w"> </span><span class="s">"hnsw"</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">CompressionName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"sq"</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></li>
+<li>Query each index with <code>VectorizedQuery</code> (k=50) and also with <code>Exhaustive = true</code> on <code>pol-full</code> as ground truth; run the Lab 2 harness on all variants.</li>
+<li>Read index statistics (vector index size, storage) via <code>SearchIndexClient.GetIndexStatisticsAsync</code>. Produce a table: variant · vector storage · recall@10 · nDCG@10 · p95 latency.</li>
+<li>Implement <code>AzureSearchRetriever : IRetriever</code> once with MEVD (<code>CommunityToolkit.VectorData.AzureAISearch</code>) and once with the native SDK; confirm identical metrics and note which settings MEVD cannot express.</li>
+<li><strong>Break it:</strong> Disable rescoring on <code>pol-bin</code> and re-run. Then set <code>vectorFilterMode = postFilter</code> with a selective <code>lang eq 'bg'</code> filter and k=10; count queries that return fewer than 10 results.</li>
+<li><strong>Acceptance criteria:</strong> Report table complete for 4 variants; binary+rescoring within 0.03 recall@10 of <code>pol-full</code> or an explanation why not (dimensionality, centring); a chosen production configuration for a corpus 20× larger with one-paragraph justification.</li>
+<li><strong>Stretch:</strong> Repeat with Cohere <code>embed-v-4-0</code> at 1,024 dims; compare BG and cross-lingual strata.</li>
+</ul>
+<h3 id="lab-5-the-embedding-model-changes-bluegreen-re-embed-and-the-adr-125h">Lab 5 — The embedding model changes: blue/green re-embed and the ADR (≈1.25h)<a class="headerlink" href="#lab-5-the-embedding-model-changes-bluegreen-re-embed-and-the-adr-125h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> Rehearse a model migration with cost estimate, alias cut-over and rollback; write the store ADR.</li>
+<li><strong>Start state:</strong> <code>c6/lab5-start</code> — <code>pol-v1</code> index populated with <code>text-embedding-3-small</code>; alias <code>policies</code> → <code>pol-v1</code>.</li>
+<li><strong>Steps:</strong></li>
+<li>Cost model: total corpus tokens (from Lab 1 counting, BG-adjusted) × price per 1M tokens for the new model + search indexing time + engineer time; plus SQL storage delta for the SQL path (1,536 → 3,072 float32 = +6 KB per chunk). Put it in <code>docs/cost/c6-reembed.md</code>.</li>
+<li>Build <code>pol-v2</code> with <code>text-embedding-3-large</code> from the same chunks (store <code>EmbeddingModelId</code> and <code>ChunkerVersion</code> on each record). Run the harness on both. Write a promotion rule: v2 is promoted only if recall@10 is ≥ v1 on every stratum and overall nDCG@10 improves by ≥0.02.</li>
+<li>Cut over by repointing the alias (Index aliases GA Apr 2026); queries use the alias, never index names. Prove rollback by repointing back. Ensure the <em>query</em> embedding generator is switched in the same release as the alias (Lab 1 guard catches mistakes).</li>
+<li>Write <code>docs/adr/0006-policy-vector-store.md</code>: SQL Server 2025 vectors vs Azure AI Search for policies — source of truth, filters/ACL (forward reference to C7), hybrid availability, compression, cost model, operational burden, portability via MEVD, measured metrics from Labs 3–4.</li>
+<li><strong>Break it:</strong> Repoint the alias to v2 but leave the app's query generator on v1 (simulated partial deploy). Observe the guard; then disable it and observe recall collapse — measured, not imagined.</li>
+<li><strong>Acceptance criteria:</strong> Migration script idempotent; harness results for v1 and v2 committed; promotion rule implemented as a test that fails when the rule is not met; ADR reviewed by a peer using the ADR checklist in <code>docs/adr/README.md</code>.</li>
+<li><strong>Stretch:</strong> Dual-write during the migration window (new chunks embedded with both models) and measure the extra cost.</li>
+</ul>
+<h2 id="kata">Kata<a class="headerlink" href="#kata" title="Permanent link">&para;</a></h2>
+<p><strong>Retrieval triage (25 min, repeat 4×).</strong> You get a failing query from the golden set plus the top-20 hits with scores from one retriever variant. In 25 minutes: (1) classify the root cause — vocabulary/identifier mismatch, cross-lingual gap, chunk boundary, filter shortfall, ANN recall loss, compression loss, model mismatch, or wrong label; (2) state the cheapest experiment that would confirm it; (3) run it; (4) write a two-line finding. Variations: rotate the store (SQL exact, SQL DiskANN, AI Search int8, AI Search binary); one round uses a query in Bulgarian with transliterated Latin script ("shofior pochivka"); one round the "failure" is a label error (holes).</p>
+<h2 id="product-increment-fleet-ops-copilot">Product increment — Fleet Ops Copilot<a class="headerlink" href="#product-increment-fleet-ops-copilot" title="Permanent link">&para;</a></h2>
+<p>"Ask Fleet Ops" gains <strong>semantic policy search</strong>: <code>GET /api/policies/search?q=&amp;lang=&amp;k=</code> returns ranked policy sections with document ID, section, language and score, behind <code>IRetriever</code>. Two implementations ship behind configuration — <code>SqlExactRetriever</code> (default for dev, SQL Server 2025 container) and <code>AzureSearchRetriever</code> (Azure) — with the decision and numbers in ADR-0006. Every vector carries <code>EmbeddingModelId</code> and <code>ChunkerVersion</code>. The golden set grows a retrieval slice (80 queries with qrels) used by C7 onward.</p>
+<h2 id="factory-increment-your-agentic-sdlc">Factory increment — your agentic SDLC<a class="headerlink" href="#factory-increment-your-agentic-sdlc" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Add a <strong><code>retrieval-eval</code> skill</strong> (Claude Code <code>.claude/skills/retrieval-eval/SKILL.md</code> and an equivalent Copilot prompt file) that tells the agent how to run the harness, where the report lands and what the promotion rule is. Agents must attach the before/after retrieval report to any PR touching <code>FleetOps.Retrieval/**</code>.</li>
+<li>Extend AGENTS.md with two non-guessable rules: "never compare vectors from different <code>EmbeddingModelId</code>s" and "SQL <code>VECTOR_DISTANCE</code> returns distance (lower is better)".</li>
+<li>Ask your coding agent to generate the Lab 4 index variants from a spec table; review its diff specifically for silent defaults (oversampling, filter mode, analyzer). Record what it got wrong in <code>docs/factory/agent-log.md</code> — this log feeds C11 and C19.</li>
+</ul>
+<h2 id="assessment">Assessment<a class="headerlink" href="#assessment" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th>Novice</th>
+<th>Competent</th>
+<th>Proficient</th>
+<th>Expert</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Retrieval measurement</td>
+<td>Eyeballs results</td>
+<td>Computes recall@k on a small set</td>
+<td>Stratified qrels, recall/MRR/nDCG, holes tracked, CI artifact</td>
+<td>Adds confidence intervals, label-quality checks, and uses the harness to reject a plausible change</td>
+</tr>
+<tr>
+<td>Store &amp; index choice</td>
+<td>Uses defaults</td>
+<td>Picks exact vs ANN with a reason</td>
+<td>Measured crossover, filter-aware recall, plan inspection</td>
+<td>ADR anticipates scale, ACLs (C7) and migration; numbers reproducible from repo</td>
+</tr>
+<tr>
+<td>Compression &amp; cost</td>
+<td>Not considered</td>
+<td>Enables quantization</td>
+<td>Storage-vs-recall table with rescoring, tier implication</td>
+<td>Cost model across tiers/stores incl. re-embedding and BG token ratio</td>
+</tr>
+<tr>
+<td>Model lifecycle</td>
+<td>Model hard-coded</td>
+<td>Model in config</td>
+<td>Model ID stored per vector, guard, alias cut-over</td>
+<td>Rehearsed rollback, promotion rule as test, retirement-date watch</td>
+</tr>
+<tr>
+<td>Explanation</td>
+<td>Cannot explain results</td>
+<td>Explains metric meanings</td>
+<td>Explains each regression with evidence</td>
+<td>Teaches a peer the triage method using own data</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Auto-checked:</strong> metric unit tests; retrieval harness runs in CI and produces report; <code>SqlExactRetriever</code> and <code>AzureSearchRetriever</code> meet recall@10 ≥ 0.85 overall and ≥ 0.75 on the cross-lingual stratum on the hidden 40-query set; model-mismatch guard test; promotion-rule test. <strong>Human-reviewed:</strong> ADR-0006 and Lab 5 cost model.</p>
+<h2 id="common-pitfalls">Common pitfalls<a class="headerlink" href="#common-pitfalls" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Sorting <code>VECTOR_DISTANCE</code> results descending; dot product on truncated, un-normalized vectors.</li>
+<li>Labelling qrels at chunk level, then "losing" recall on every chunking change.</li>
+<li>DiskANN for 15k rows; exact search on 2M rows without a selective predicate.</li>
+<li>Post-filtering with small k and returning 2 results.</li>
+<li>Oversized embedding batches failing a whole backfill; mixed models during a partial deploy.</li>
+<li>Comparing stores with different chunking, crediting the store for a chunking difference.</li>
+</ul>
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Microsoft Learn — Vectors in SQL Server / Azure SQL (status table, exact &lt; ~50k, <code>WITH APPROXIMATE</code>): https://learn.microsoft.com/en-us/sql/sql-server/ai/vectors</li>
+<li>Microsoft Learn — Vector quantization in Azure AI Search (int8 4×, binary up to 28×, rescoring, <code>truncationDimension</code>): https://learn.microsoft.com/en-us/azure/search/vector-search-how-to-quantization</li>
+<li>Azure AI Search — What's new (aliases GA Apr 2026, <code>strictPostFilter</code> preview, 4,096 dims): https://learn.microsoft.com/en-au/Azure/search/whats-new</li>
+<li>Microsoft Learn — Models sold directly by Azure (embedding models, dims, limits; Cohere embed v4 / rerank v4): https://learn.microsoft.com/en-us/azure/foundry/foundry-models/concepts/models-sold-directly-by-azure</li>
+<li>Microsoft Learn — .NET vector stores overview (MEVD): https://learn.microsoft.com/en-us/dotnet/ai/vector-stores/overview</li>
+<li>Microsoft Learn — .NET AI ecosystem: https://learn.microsoft.com/en-us/dotnet/ai/dotnet-ai-ecosystem</li>
+<li>Foundry RAG evaluators (Document Retrieval: nDCG@3, Fidelity, holes): https://learn.microsoft.com/en-my/Azure/foundry/concepts/evaluation-evaluators/rag-evaluators</li>
+<li>Kusupati et al., Matryoshka Representation Learning: https://arxiv.org/abs/2205.13147</li>
+<li>Malkov &amp; Yashunin, HNSW: https://arxiv.org/abs/1603.09320</li>
+<li>Reimers &amp; Gurevych, Sentence-BERT (bi-encoders): https://arxiv.org/abs/1908.10084</li>
+<li>Cosmos DB hybrid search GA (AZ467425): https://mc.merill.net/message/AZ467425</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Върни се в началото
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Долен колонтитул" >
+        
+          
+          <a href="../../part-1-foundations/c05-evals-from-day-one/" class="md-footer__link md-footer__link--prev" aria-label="Предишна: C5 — Evals от първия ден">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Предишна
+              </span>
+              <div class="md-ellipsis">
+                C5 — Evals от първия ден
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../c07-rag-from-documents-to-cited-permission-aware-answers/" class="md-footer__link md-footer__link--next" aria-label="Следваща: C7 — RAG: от документи до отговори с цитати, съобразени с правата на достъп">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Следваща
+              </span>
+              <div class="md-ellipsis">
+                C7 — RAG: от документи до отговори с цитати, съобразени с правата на достъп
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.sections", "navigation.top", "navigation.footer", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u041a\u043e\u043f\u0438\u0440\u0430\u043d\u043e", "clipboard.copy": "\u041a\u043e\u043f\u0438\u0440\u0430\u0439", "search.result.more.one": "\u043e\u0449\u0435 1 \u043d\u0430 \u0442\u0430\u0437\u0438 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0430", "search.result.more.other": "\u043e\u0449\u0435 # \u043d\u0430 \u0442\u0430\u0437\u0438 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0430", "search.result.none": "\u041d\u044f\u043c\u0430 \u0440\u0435\u0437\u0443\u043b\u0442\u0430\u0442\u0438", "search.result.one": "1 \u0440\u0435\u0437\u0443\u043b\u0442\u0430\u0442", "search.result.other": "# \u0440\u0435\u0437\u0443\u043b\u0442\u0430\u0442\u0430", "search.result.placeholder": "\u0417\u0430\u043f\u043e\u0447\u043d\u0435\u0442\u0435 \u0434\u0430 \u043f\u0438\u0448\u0435\u0442\u0435, \u0437\u0430 \u0434\u0430 \u0442\u044a\u0440\u0441\u0438\u0442\u0435", "search.result.term.missing": "\u041b\u0438\u043f\u0441\u0432\u0430\u0449\u043e", "select.version": "\u0418\u0437\u0431\u0435\u0440\u0438 \u0432\u0435\u0440\u0441\u0438\u044f"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

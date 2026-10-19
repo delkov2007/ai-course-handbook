@@ -1,0 +1,3004 @@
+
+<!doctype html>
+<html lang="bg" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Learning-by-doing course, release 2026.11 (content as of October 2026)">
+      
+      
+      
+      
+        <link rel="prev" href="../../start-here/competency-matrix/">
+      
+      
+        <link rel="next" href="../c01-how-generative-ai-works-an-engineer-s-mental-model/">
+      
+      
+        
+          <link rel="alternate" href="../../../part-1-foundations/c00-orientation-setup-and-toolchain/" hreflang="en">
+        
+          <link rel="alternate" href="./" hreflang="bg">
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>C0 — Ориентация, настройка и инструменти - AI Solution Developer & Architect — Наръчник за курсиста</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#c0-orientation-setup-toolchain" class="md-skip">
+          Към съдържанието
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Горен колонтитул">
+    <a href="../../" title="AI Solution Developer &amp; Architect — Наръчник за курсиста" class="md-header__button md-logo" aria-label="AI Solution Developer & Architect — Наръчник за курсиста" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            AI Solution Developer & Architect — Наръчник за курсиста
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              C0 — Ориентация, настройка и инструменти
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="Избери език">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href="../../../part-1-foundations/c00-orientation-setup-and-toolchain/" hreflang="en" class="md-select__link">
+              English
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="./" hreflang="bg" class="md-select__link">
+              Български
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Търси" placeholder="Търси" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Търси">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Изчисти" aria-label="Изчисти" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Инициализирано търсене
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Навигация" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../" title="AI Solution Developer &amp; Architect — Наръчник за курсиста" class="md-nav__button md-logo" aria-label="AI Solution Developer & Architect — Наръчник за курсиста" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    AI Solution Developer & Architect — Наръчник за курсиста
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Добре дошли
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Започнете оттук
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Започнете оттук
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/how-to-use/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Как да използвате наръчника
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/course-overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Преглед на курса
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/assessment-gates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Оценяване и гейтове
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/competency-matrix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Матрица на компетентностите
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Част 1 — Основи (ниво 1)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Част 1 — Основи (ниво 1)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C0 — Ориентация, настройка и инструменти
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C0 — Ориентация, настройка и инструменти
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Съдържание">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Съдържание
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-this-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why this matters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learning outcomes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concepts
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Concepts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-course-workflow-product-factory-gated-by-evals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The course workflow: Product + Factory, gated by evals
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#environment-as-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Environment as code
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#microsoft-foundry-as-of-october-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Microsoft Foundry, as of October 2026
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#keyless-authentication-from-the-start" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Keyless authentication from the start
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cost-guardrails-three-layers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cost guardrails: three layers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#foundry-local" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Foundry Local
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-python-and-nodejs-in-a-net-course" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why Python and Node.js in a .NET course
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#misconceptions-to-unlearn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Misconceptions to unlearn
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tools-versions-as-of-oct-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tools &amp; versions (as of Oct 2026)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#labs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Labs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Labs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lab-1-environment-as-code-125h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 1 — Environment as code (≈1.25h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-2-foundry-resource-project-two-deployments-keyless-call-125h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 2 — Foundry resource, project, two deployments, keyless call (≈1.25h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-3-cost-guardrails-by-script-05h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 3 — Cost guardrails by script (≈0.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-4-foundry-local-and-the-language-primers-125h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 4 — Foundry Local and the language primers (≈1.25h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kata
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#product-increment-fleet-ops-copilot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Product increment — Fleet Ops Copilot
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#factory-increment-your-agentic-sdlc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Factory increment — your agentic SDLC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assessment
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common pitfalls
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../c01-how-generative-ai-works-an-engineer-s-mental-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C1 — Как работи генеративният AI: мисловен модел за инженери
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../c02-your-first-ai-feature-in-net/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C2 — Първата ви AI функционалност в .NET
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../c03-prompting-structured-outputs-and-tool-calling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C3 — Промптинг, структуриран изход и извикване на инструменти
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../c04-working-with-coding-agents-the-factory-day-one/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C4 — Работа с кодиращи агенти: Фабриката, първи ден
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../c05-evals-from-day-one/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C5 — Evals от първия ден
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Част 2 — Градивни елементи (ниво 2)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Част 2 — Градивни елементи (ниво 2)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c06-embeddings-and-vector-search/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C6 — Embeddings и векторно търсене
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c07-rag-from-documents-to-cited-permission-aware-answers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C7 — RAG: от документи до отговори с цитати, съобразени с правата на достъп
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c08-tools-and-the-model-context-protocol/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C8 — Инструменти и Model Context Protocol
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c09-agents-with-microsoft-agent-framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C9 — Агенти с Microsoft Agent Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c10-agents-over-structured-data-text-to-sql-on-sql-server/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C10 — Агенти върху структурирани данни: text-to-SQL върху SQL Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c11-agentic-testing-ai-driven-tdd-mutation-and-e2e-test-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C11 — Агентно тестване: TDD с AI, мутационно тестване и агенти за E2E тестове
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Част 3 — Продукционни системи (ниво 3)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Част 3 — Продукционни системи (ниво 3)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c12-workflows-and-multi-agent-orchestration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C12 — Workflows и многоагентна оркестрация
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c13-context-engineering-advanced-retrieval-and-memory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C13 — Инженеринг на контекста, напреднало извличане и памет
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c14-failure-driven-evals-llm-judges-and-red-teaming/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C14 — Evals, водени от грешките, LLM съдии и red teaming
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c15-observability-genaiops-and-cost/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C15 — Наблюдаемост, GenAIOps и разходи
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c16-security-for-llm-and-agentic-systems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C16 — Сигурност на LLM и агентни системи
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c17-shipping-to-azure-hosting-ai-gateway-iac-and-interop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C17 — Пускане в Azure: хостинг, AI gateway, IaC и оперативна съвместимост
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c18-responsible-ai-and-the-eu-ai-act-in-practice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C18 — Отговорен AI и Актът за изкуствения интелект на ЕС на практика
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c19-the-automated-sdlc-agents-from-issue-to-production/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C19 — Автоматизираният SDLC: агенти от issue до продукция
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Част 4 — Експертна специализация: AI Solution Developer
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Част 4 — Експертна специализация: AI Solution Developer
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d01-model-customization-and-small-local-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D1 — Адаптиране на модели и малки/локални модели
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d02-long-running-durable-and-autonomous-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D2 — Дълго работещи, устойчиви и автономни агенти
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d03-multimodal-and-realtime-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D3 — Мултимодални агенти и агенти в реално време
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d04-agent-ux-and-front-ends/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D4 — UX и фронтенди за агенти
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d05-performance-and-cost-engineering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D5 — Инженеринг на производителността и разходите
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d06-building-your-own-agent-tooling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D6 — Изграждане на собствени инструменти за агенти
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d07-agent-reliability-engineering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D7 — Инженеринг на надеждността на агенти
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Част 5 — Експертна специализация: AI Solution Architect
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Част 5 — Експертна специализация: AI Solution Architect
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a01-ai-strategy-use-case-discovery-and-business-case/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A1 — AI стратегия, откриване на сценарии на употреба и бизнес обосновка
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a02-azure-ai-reference-architectures-and-well-architected-for-ai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A2 — Референтни AI архитектури в Azure и Well-Architected за AI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a03-enterprise-knowledge-and-data-architecture-for-ai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A3 — Корпоративна архитектура на знанията и данните за AI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a04-agent-platform-and-integration-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A4 — Платформа за агенти и интеграционна архитектура
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a05-reliability-scale-model-lifecycle-and-finops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A5 — Надеждност, мащаб, жизнен цикъл на моделите и FinOps
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a06-ai-governance-risk-and-compliance-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A6 — Архитектура за управление на AI, риска и съответствието
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a07-the-architect-s-craft-in-ai-programmes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A7 — Занаятът на архитекта в AI програми
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Част 6 — Съвместен финален проект
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Част 6 — Съвместен финален проект
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capstone/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Финален проект
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Приложение
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Приложение
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Речник на термините
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/references/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Допълнителна литература
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Съдържание">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Съдържание
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-this-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why this matters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learning outcomes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concepts
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Concepts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-course-workflow-product-factory-gated-by-evals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The course workflow: Product + Factory, gated by evals
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#environment-as-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Environment as code
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#microsoft-foundry-as-of-october-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Microsoft Foundry, as of October 2026
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#keyless-authentication-from-the-start" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Keyless authentication from the start
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cost-guardrails-three-layers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cost guardrails: three layers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#foundry-local" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Foundry Local
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-python-and-nodejs-in-a-net-course" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why Python and Node.js in a .NET course
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#misconceptions-to-unlearn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Misconceptions to unlearn
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tools-versions-as-of-oct-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tools &amp; versions (as of Oct 2026)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#labs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Labs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Labs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lab-1-environment-as-code-125h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 1 — Environment as code (≈1.25h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-2-foundry-resource-project-two-deployments-keyless-call-125h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 2 — Foundry resource, project, two deployments, keyless call (≈1.25h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-3-cost-guardrails-by-script-05h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 3 — Cost guardrails by script (≈0.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-4-foundry-local-and-the-language-primers-125h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 4 — Foundry Local and the language primers (≈1.25h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kata
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#product-increment-fleet-ops-copilot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Product increment — Fleet Ops Copilot
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#factory-increment-your-agentic-sdlc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Factory increment — your agentic SDLC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assessment
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common pitfalls
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="c0-orientation-setup-toolchain">C0 — Orientation, setup &amp; toolchain<a class="headerlink" href="#c0-orientation-setup-toolchain" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><strong>Level:</strong> Part 0 — Orientation · <strong>Duration:</strong> 6h (theory 30% / labs 70%) · <strong>Prerequisites:</strong> Git, HTTP/REST, SQL, one unit-test framework in any language; an Azure subscription where you can create resource groups; a GitHub account · <strong>Volatility:</strong> High (tool versions, portal UX, SDK names)</p>
+</blockquote>
+<h2 id="why-this-matters">Why this matters<a class="headerlink" href="#why-this-matters" title="Permanent link">&para;</a></h2>
+<p>Trakia Freight's IT lead gives you a laptop, a GitHub org and an Azure subscription on Monday and expects a working "Ask Fleet Ops" prototype by Friday. Teams that skip setup discipline lose that week in predictable ways: one developer is on .NET 9 and another on .NET 10; someone pastes an API key into <code>appsettings.json</code> and pushes it; a forgotten test deployment of a frontier reasoning model runs a load test over the weekend and burns the quarter's budget; a sample copied from a 2025 blog targets the retired Assistants API and a hub-based project that only exists in "Foundry (classic)". None of these are AI problems, but in AI projects they cost more because every call is metered and the platform renamed half of itself in 2025–2026.</p>
+<p>This course is long (~475h) and the platform moves monthly. You will rebuild your environment several times (new laptop, Codespaces, a colleague joining your capstone team, a CI runner, a coding agent's sandbox). The only sustainable answer is <strong>environment as code</strong>: a devcontainer, pinned SDKs and packages, configuration-only model selection, keyless authentication, and budget alerts created by script, not by memory. That same environment is what your coding agents (C4) will run in, so its reproducibility directly limits how much you can safely delegate.</p>
+<p>Experts also set up <em>feedback</em> on day one: a cost alert that fires before damage is done, an Aspire dashboard that shows every model call, and a CI job that builds and tests the empty solution. In this course you are graded on how you direct and verify agents (from C4 on); the factory you start here is the foundation of that grade.</p>
+<h2 id="learning-outcomes">Learning outcomes<a class="headerlink" href="#learning-outcomes" title="Permanent link">&para;</a></h2>
+<p>By the end of C0 you can:</p>
+<ol>
+<li><strong>Provision</strong> a reproducible dev environment (devcontainer or local) with .NET 10, Aspire 13.x, Node.js LTS and Python, and prove it with a scripted <code>doctor</code> check.</li>
+<li><strong>Create</strong> a Microsoft Foundry resource and project (new resource/project model, not hub-based), deploy two model roles ("fast small model", "frontier reasoning model") and call them with keyless (Entra ID) authentication.</li>
+<li><strong>Configure</strong> Azure cost guardrails: a resource-group budget with actual and forecast alerts, and per-deployment rate limits as a hard ceiling.</li>
+<li><strong>Run</strong> a model locally with Foundry Local and explain when local inference is the right lab default.</li>
+<li><strong>Explain</strong> the lab repo structure, tagging scheme and version-pinning policy (<code>global.json</code>, central package management, <code>models.json</code>), and find the start state of any lab.</li>
+<li><strong>Read</strong> the C#, Python and Node.js you will meet in this course well enough to modify samples (non-.NET developers: C# crash-course checkpoints passed).</li>
+<li><strong>Describe</strong> how mastery gates (G1–G3) work: hidden eval suites, code review, design defense.</li>
+</ol>
+<h2 id="concepts">Concepts<a class="headerlink" href="#concepts" title="Permanent link">&para;</a></h2>
+<h3 id="the-course-workflow-product-factory-gated-by-evals">The course workflow: Product + Factory, gated by evals<a class="headerlink" href="#the-course-workflow-product-factory-gated-by-evals" title="Permanent link">&para;</a></h3>
+<p>You grow one product, <strong>Fleet Ops Copilot</strong> for the fictional Plovdiv logistics company <strong>Trakia Freight</strong> (~400 trucks, ~600 drivers, depots in Plovdiv, Sofia and Varna), and in parallel your <strong>Factory</strong> — your own agentic SDLC (memory files, custom agents, hooks, eval gates, CI agents). Every module ends with a product increment and a factory increment. From C4 onward, product work is done <em>through</em> the factory: you specify, constrain and verify; agents type.</p>
+<p><strong>Vehicle identifiers (course-wide convention).</strong> Two vehicle identifiers recur in every module and must not be confused: the <strong>fleet/vehicle ID</strong> (<code>VehicleId</code>, e.g. <code>TRK-0471</code>), assigned by TrakiaOps and stable for the vehicle's life — the key that tools, traces and logs use; and the <strong>registration plate</strong> (<code>VehicleReg</code>, canonical form Cyrillic with spaces, e.g. <code>РВ 4471 АК</code>), which drivers type in Cyrillic or Latin look-alikes, is normalised to Cyrillic in code (C1, C3), can change over a vehicle's life and is resolved to the fleet ID by lookup. Tools return and accept both, but joins, logs and approvals use the fleet ID.</p>
+<p>Each lab follows <strong>Learn → Do → Break → Fix → Explain</strong>: a working baseline, an induced failure, a fix, and a short written explanation (ADR, postmortem or eval report). The explanation is graded.</p>
+<p><strong>Gates.</strong> After Level 1 you sit <strong>Gate G1</strong> (specified separately). Gates use (a) hidden eval suites run against your product branch, (b) a code review against a rubric (correctness, security, observability, cost, eval coverage), and from G2 (c) a design defense. Passing means your evals clear thresholds on cases you have <em>not</em> seen, so overfitting prompts to your own golden set does not help. You can resit; feedback is specific.</p>
+<h3 id="environment-as-code">Environment as code<a class="headerlink" href="#environment-as-code" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Devcontainer</strong> (<code>.devcontainer/devcontainer.json</code>): the same image runs in VS Code Dev Containers, GitHub Codespaces and the CI runner. Coding agents (Copilot cloud agent, Claude Code in Actions) get an equivalent environment, which is why their test runs mean something.</li>
+<li><strong>Pinned SDK</strong> (<code>global.json</code>) with <code>rollForward: latestFeature</code> within .NET 10 — allows patch/feature-band updates, blocks an accidental major jump.</li>
+<li><strong>Central Package Management</strong> (<code>Directory.Packages.props</code>, <code>ManagePackageVersionsCentrally=true</code>): one place where every NuGet version is pinned. Nightly CI (run by the course team, and later by you in C19) bumps versions on a branch and runs all lab solutions; that is how the course keeps up with preview churn without breaking you mid-module.</li>
+<li><strong>Model config, not model code</strong>: labs reference model <em>roles</em>. <code>models.json</code> / <code>appsettings.json</code> maps roles (<code>chat-fast</code>, <code>chat-reasoning</code>, <code>embedding</code>) to deployment names. Model names change monthly (GPT-6 Sol/Luna/Astra and Claude Opus 5.5 all shipped in September 2026); your code must survive that as a config change. Foundry GA models are deprecated at 12 months and retired at 18 (partner models typically 12), with ≥60 days notice, and retired models return <code>410 Gone</code> — so hard-coded names are a production defect, not a style issue.</li>
+</ul>
+<h3 id="microsoft-foundry-as-of-october-2026">Microsoft Foundry, as of October 2026<a class="headerlink" href="#microsoft-foundry-as-of-october-2026" title="Permanent link">&para;</a></h3>
+<ul>
+<li>"Azure AI Foundry" is now <strong>Microsoft Foundry</strong>; "Azure AI Services" is now <strong>Foundry Tools</strong>.</li>
+<li>One <strong>Foundry resource</strong> contains <strong>projects</strong>. Hub-based projects survive only in the "Foundry (classic)" portal. Do not follow tutorials that create a hub.</li>
+<li>Endpoints you will use:</li>
+<li>Project endpoint: <code>https://&lt;resource&gt;.services.ai.azure.com/api/projects/&lt;project&gt;</code> (Responses API, agents, evaluations) via <code>Azure.AI.Projects</code> 2.0 GA family.</li>
+<li>OpenAI v1 endpoint: <code>https://&lt;resource&gt;.openai.azure.com/openai/v1/</code> via the plain <code>OpenAI</code> .NET package — no dated <code>api-version</code> query strings.</li>
+<li>The <strong>Assistants API retired on 26 Aug 2026</strong>; use the Responses API.</li>
+<li><strong>Do not install</strong> the preview <code>Azure.AI.Projects.OpenAI</code> alongside <code>Azure.AI.Extensions.OpenAI</code> — Microsoft warns of ambiguous types.</li>
+</ul>
+<h3 id="keyless-authentication-from-the-start">Keyless authentication from the start<a class="headerlink" href="#keyless-authentication-from-the-start" title="Permanent link">&para;</a></h3>
+<p>Use <strong>Microsoft Entra ID</strong> (<code>DefaultAzureCredential</code> locally via <code>az login</code>; managed identity in Azure; OIDC federated credentials in GitHub Actions). Assign yourself the minimal data-plane role on the Foundry resource (the role name for calling models in the new Foundry RBAC model — verify against current documentation; Foundry evaluations require Entra ID and do not accept API keys). API keys are allowed only for Foundry Local / local OpenAI-compatible endpoints. Rule: <em>no secret ever lands in a tracked file</em>; <code>dotnet user-secrets</code> for anything unavoidable, GitHub secret scanning on.</p>
+<h3 id="cost-guardrails-three-layers">Cost guardrails: three layers<a class="headerlink" href="#cost-guardrails-three-layers" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Budgets with alerts</strong> (Cost Management) on the course resource group: e.g. €40/month, alerts at 50% actual, 80% actual, 100% forecast. Budgets <em>alert</em>; they do not stop spend.</li>
+<li><strong>Deployment rate limits</strong> (tokens-per-minute quota per deployment): the only hard ceiling you control at the model layer. Set the frontier model deployment low (a few thousand TPM is plenty for labs).</li>
+<li><strong>Habits</strong>: default to the fast small model or Foundry Local; use the frontier role only when a lab says so; delete load-test deployments; MEAI.Evaluation response caching (C5) for repeated eval runs.</li>
+</ol>
+<p>Rough numbers to calibrate intuition (list prices from research notes; verify against the Azure pricing page before quoting to learners): a "fast small" class model at ~$0.10/$0.50 per million input/output tokens vs a frontier class at ~$10/$50 is a <strong>100× spread</strong>. A 50-case eval suite × 3 runs × ~2k tokens per case ≈ 300k tokens: cents on the small model, a few dollars on the frontier model, much more with high reasoning effort. Per-token price is not per-task cost (C1).</p>
+<h3 id="foundry-local">Foundry Local<a class="headerlink" href="#foundry-local" title="Permanent link">&para;</a></h3>
+<p><strong>Foundry Local went GA on 9 Apr 2026</strong>: on-device inference on Windows, macOS (Apple silicon) and Linux x64; ONNX Runtime with automatic GPU/NPU/CPU selection; OpenAI-compatible API including the Responses format; C# SDK <code>Microsoft.AI.Foundry.Local</code>; curated models (Phi, Qwen, gpt-oss, Mistral, DeepSeek, Whisper). Use it for offline work, cheap iteration and as the "swap" target that proves your code is provider-agnostic (C2). Caveat: small local models are weaker at tool calling and structured output — that is a lesson, not a bug.</p>
+<h3 id="why-python-and-nodejs-in-a-net-course">Why Python and Node.js in a .NET course<a class="headerlink" href="#why-python-and-nodejs-in-a-net-course" title="Permanent link">&para;</a></h3>
+<p>Everything is C# except a bounded, declared set marked <strong>[Python]</strong>: PyRIT / AI Red Teaming Agent local scans (C14, C16), Foundry cloud-evaluation authoring samples (<code>azure-ai-evaluation</code>), fine-tuning data prep and the interactive-training preview (D1), Agent Framework "Labs" packages, RAGAS. <strong>Node.js</strong> is needed for Playwright test agents (<code>npx playwright init-agents</code>, C11), AG-UI/React front-ends (D4), and many MCP servers and CLIs. The certification market also matters: AI-103 (the AI-102 successor) assumes Python, so <em>reading</em> fluency is a career asset.</p>
+<h3 id="misconceptions-to-unlearn">Misconceptions to unlearn<a class="headerlink" href="#misconceptions-to-unlearn" title="Permanent link">&para;</a></h3>
+<ul>
+<li>"Budgets cap my spend." They alert. Quotas/rate limits and deleting deployments cap spend.</li>
+<li>"A key in user-secrets is safe enough for CI." CI uses OIDC federation; no long-lived secrets.</li>
+<li>"The latest preview package is better." Labs pin versions; you upgrade deliberately, behind a green eval suite.</li>
+<li>"Any Foundry tutorial works." Hub-based, Assistants-API and <code>api-version</code>-dated samples are legacy as of 2026.</li>
+</ul>
+<h2 id="tools-versions-as-of-oct-2026">Tools &amp; versions (as of Oct 2026)<a class="headerlink" href="#tools-versions-as-of-oct-2026" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Tool / package</th>
+<th>Purpose</th>
+<th>Status</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>.NET 10 SDK, C#</td>
+<td>Primary runtime/language</td>
+<td>GA (LTS)</td>
+<td>Pin in <code>global.json</code></td>
+</tr>
+<tr>
+<td>Aspire 13.6</td>
+<td>Local orchestration, OTel dashboard</td>
+<td>GA</td>
+<td>Renamed from ".NET Aspire"; dashboard marks LLM calls when MEAI <code>UseOpenTelemetry</code> is on</td>
+</tr>
+<tr>
+<td>Visual Studio 2026 (v18.x) / VS Code</td>
+<td>IDE</td>
+<td>GA</td>
+<td>VS 2026 has Copilot <code>@Test</code> agent (GA v18.3) and "Agent (Preview)" built on the Copilot CLI SDK</td>
+</tr>
+<tr>
+<td>Dev Containers / GitHub Codespaces</td>
+<td>Reproducible env</td>
+<td>GA</td>
+<td>Same image locally, in Codespaces and CI</td>
+</tr>
+<tr>
+<td>GitHub + GitHub Actions</td>
+<td>Source, CI, agents</td>
+<td>GA</td>
+<td>Azure DevOps interop covered in C19</td>
+</tr>
+<tr>
+<td>Azure CLI, <code>azd</code></td>
+<td>Provisioning</td>
+<td>GA</td>
+<td>Bicep for IaC from C17</td>
+</tr>
+<tr>
+<td>Microsoft Foundry (resource + project)</td>
+<td>Models, agents, evals, tracing</td>
+<td>GA</td>
+<td>Hub projects = "Foundry (classic)" only</td>
+</tr>
+<tr>
+<td><code>Azure.AI.Projects</code> / <code>.Agents</code> / <code>Azure.AI.Extensions.OpenAI</code> 2.0.0</td>
+<td>Foundry .NET SDK</td>
+<td>GA</td>
+<td>Don't mix with preview <code>Azure.AI.Projects.OpenAI</code></td>
+</tr>
+<tr>
+<td><code>OpenAI</code> .NET package</td>
+<td><code>/openai/v1/</code> endpoint</td>
+<td>GA</td>
+<td>Some APIs need <code>#pragma warning disable OPENAI001</code></td>
+</tr>
+<tr>
+<td><code>Azure.Identity</code></td>
+<td>Entra auth</td>
+<td>GA</td>
+<td><code>DefaultAzureCredential</code></td>
+</tr>
+<tr>
+<td>Foundry Local (<code>Microsoft.AI.Foundry.Local</code>)</td>
+<td>Local inference</td>
+<td>GA (9 Apr 2026)</td>
+<td>Learn page carries no GA label — verify against current documentation</td>
+</tr>
+<tr>
+<td>Foundry Toolkit for VS Code</td>
+<td>Model playground, local models</td>
+<td>GA</td>
+<td>Appears to supersede "AI Toolkit" (rename unconfirmed)</td>
+</tr>
+<tr>
+<td>Node.js LTS</td>
+<td>Playwright agents, MCP servers, front-ends</td>
+<td>GA</td>
+<td>Pin via <code>.nvmrc</code> / devcontainer feature (course choice: current LTS line — verify)</td>
+</tr>
+<tr>
+<td>Python 3.12+ with <code>uv</code></td>
+<td>[Python] red-teaming, cloud evals, fine-tuning prep</td>
+<td>GA</td>
+<td>Course choice; pinned in <code>scripts/python/pyproject.toml</code></td>
+</tr>
+<tr>
+<td>GitHub Copilot (agent mode), Claude Code, Codex</td>
+<td>Coding agents (C4)</td>
+<td>GA</td>
+<td>Paid plan needed for some features</td>
+</tr>
+</tbody>
+</table>
+<h2 id="labs">Labs<a class="headerlink" href="#labs" title="Permanent link">&para;</a></h2>
+<h3 id="lab-1-environment-as-code-125h">Lab 1 — Environment as code (≈1.25h)<a class="headerlink" href="#lab-1-environment-as-code-125h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> A devcontainer-based environment that builds and tests the empty Fleet Ops solution, identical on your machine, in Codespaces and in CI.</li>
+<li><strong>Start state:</strong> lab repo <code>trakia-fleetops</code>, tag <code>c0/lab1-start</code> (solution skeleton, no devcontainer).</li>
+<li><strong>Steps:</strong></li>
+<li>Clone and inspect the repo layout:
+     <div class="highlight"><pre><span></span><code>trakia-fleetops/
+  .devcontainer/           # you create in this lab
+  .github/workflows/       # ci.yml (build+test), nightly.yml (course team)
+  data/                    # TrakiaOps SQL scripts, docs corpus (BG+EN), mock API OpenAPI specs
+  docs/adr/                # ADRs; template + checklist in README.md (you write from C1)
+  evals/                   # golden datasets, error-analysis notes (C5)
+  prompts/                 # versioned prompt templates (C3)
+  scripts/doctor.sh        # environment check
+  scripts/python/          # the only Python in the repo [Python]
+  src/FleetOps.AppHost/    # Aspire AppHost
+  src/FleetOps.ServiceDefaults/
+  src/FleetOps.Core/       # domain + AI services
+  src/FleetOps.Api/        # minimal API
+  src/FleetOps.Cli/        # console client
+  tests/FleetOps.Tests/    # xUnit unit tests
+  tests/FleetOps.Evals/    # eval tests (C5)
+  global.json  Directory.Packages.props  models.json  AGENTS.md (C4)
+</code></pre></div></li>
+<li>Create <code>.devcontainer/devcontainer.json</code>:
+     <div class="highlight"><pre><span></span><code>{
+  "name": "trakia-fleetops",
+  "image": "mcr.microsoft.com/devcontainers/dotnet:10.0", // verify current tag
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": { "version": "lts" },
+    "ghcr.io/devcontainers/features/python:1": { "version": "3.12" },
+    "ghcr.io/devcontainers/features/azure-cli:1": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}   // Aspire containers, SQL Server
+  },
+  "postCreateCommand": "dotnet restore &amp;&amp; dotnet tool restore &amp;&amp; ./scripts/doctor.sh",
+  "forwardPorts": [17000, 5080],
+  "customizations": { "vscode": { "extensions": ["ms-dotnettools.csdevkit", "GitHub.copilot-chat"] } }
+}
+</code></pre></div></li>
+<li>Pin the SDK and packages:
+     <div class="highlight"><pre><span></span><code><span class="c1">// global.json</span>
+<span class="p">{</span><span class="w"> </span><span class="nt">"sdk"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10.0.100"</span><span class="p">,</span><span class="w"> </span><span class="nt">"rollForward"</span><span class="p">:</span><span class="w"> </span><span class="s2">"latestFeature"</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span><span class="w">  </span><span class="c1">// set to the course release's SDK</span>
+</code></pre></div>
+     <div class="highlight"><pre><span></span><code><span class="cm">&lt;!-- Directory.Packages.props (excerpt) --&gt;</span>
+<span class="nt">&lt;Project&gt;</span>
+<span class="w">  </span><span class="nt">&lt;PropertyGroup&gt;&lt;ManagePackageVersionsCentrally&gt;</span>true<span class="nt">&lt;/ManagePackageVersionsCentrally&gt;&lt;/PropertyGroup&gt;</span>
+<span class="w">  </span><span class="nt">&lt;ItemGroup&gt;</span>
+<span class="w">    </span><span class="nt">&lt;PackageVersion</span><span class="w"> </span><span class="na">Include=</span><span class="s">"Microsoft.Extensions.AI"</span><span class="w"> </span><span class="na">Version=</span><span class="s">"10.5.0"</span><span class="w"> </span><span class="nt">/&gt;</span><span class="w">  </span><span class="cm">&lt;!-- course release pin; verify --&gt;</span>
+<span class="w">    </span><span class="nt">&lt;PackageVersion</span><span class="w"> </span><span class="na">Include=</span><span class="s">"Azure.Identity"</span><span class="w"> </span><span class="na">Version=</span><span class="s">"..."</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;PackageVersion</span><span class="w"> </span><span class="na">Include=</span><span class="s">"OpenAI"</span><span class="w"> </span><span class="na">Version=</span><span class="s">"..."</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/ItemGroup&gt;</span>
+<span class="nt">&lt;/Project&gt;</span>
+</code></pre></div></li>
+<li>Write <code>scripts/doctor.sh</code> that prints and asserts: <code>dotnet --version</code> major = 10, <code>node --version</code> ≥ pinned LTS major, <code>python --version</code> ≥ 3.12, <code>az account show</code> succeeds, <code>aspire --version</code> or the Aspire templates are installed (verify the current Aspire CLI install path), <code>docker info</code> succeeds. Exit non-zero on any failure.</li>
+<li>Run <code>dotnet new</code> is <em>not</em> needed — the skeleton exists. Run <code>dotnet build</code> and <code>dotnet test</code> inside the container.</li>
+<li>Add <code>.github/workflows/ci.yml</code> that uses the same devcontainer (e.g. <code>devcontainers/ci</code> action) to run <code>./scripts/doctor.sh --ci &amp;&amp; dotnet test</code>.</li>
+<li><strong>Break it:</strong> Change <code>global.json</code> to <code>9.0.100</code> with <code>rollForward: disable</code> and rebuild. Then add a package with a floating version (<code>Version="10.*"</code>) to a project file directly. Observe the CPM error (<code>NU1008</code>-style) and the SDK resolution failure.</li>
+<li><strong>Acceptance criteria:</strong> <code>./scripts/doctor.sh</code> exits 0 in the container; <code>ci.yml</code> green on your fork; <code>Directory.Packages.props</code> is the only place versions appear (CI step <code>grep -R "Version=" src tests --include=*.csproj</code> returns nothing).</li>
+<li><strong>Stretch:</strong> Open the repo in a Codespace and time from "Create" to green <code>dotnet test</code>. Add a prebuild configuration to cut it.</li>
+</ul>
+<h3 id="lab-2-foundry-resource-project-two-deployments-keyless-call-125h">Lab 2 — Foundry resource, project, two deployments, keyless call (≈1.25h)<a class="headerlink" href="#lab-2-foundry-resource-project-two-deployments-keyless-call-125h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> A Foundry resource + project in an EU region with a "fast small" and a "frontier reasoning" deployment, called from C# with Entra ID.</li>
+<li><strong>Start state:</strong> <code>c0/lab2-start</code>.</li>
+<li><strong>Steps:</strong></li>
+<li>Create a resource group <code>rg-trakia-&lt;you&gt;</code> in an EU region that offers your chosen models (check model/region availability; Sweden Central and France Central frequently appear in Microsoft regional lists — verify for the current models).</li>
+<li>Create the <strong>Foundry resource</strong> and a <strong>project</strong> in the new portal (ai.azure.com), <em>not</em> a hub. Optional IaC path: Bicep <code>Microsoft.CognitiveServices/accounts</code> (kind <code>AIServices</code>) with project management enabled and a child <code>projects</code> resource — verify exact properties against current docs before teaching.</li>
+<li>Deploy two models, recording only <em>roles</em> in config:
+     <div class="highlight"><pre><span></span><code><span class="c1">// models.json</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">"roles"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"chat-fast"</span><span class="p">:</span><span class="w">      </span><span class="p">{</span><span class="w"> </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"foundry"</span><span class="p">,</span><span class="w"> </span><span class="nt">"deployment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fleet-fast"</span><span class="p">,</span><span class="w">      </span><span class="nt">"notes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cheap/fast class"</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">"chat-reasoning"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"foundry"</span><span class="p">,</span><span class="w"> </span><span class="nt">"deployment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fleet-reasoning"</span><span class="p">,</span><span class="w"> </span><span class="nt">"notes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"frontier reasoning class"</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">"chat-local"</span><span class="p">:</span><span class="w">     </span><span class="p">{</span><span class="w"> </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"foundry-local"</span><span class="p">,</span><span class="w"> </span><span class="nt">"model"</span><span class="p">:</span><span class="w"> </span><span class="s2">"phi-family-alias"</span><span class="w"> </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+     Use Global/Data Zone Standard deployments; set the reasoning deployment's TPM limit low.</li>
+<li>Assign your user the data-plane role required to call models (verify role name), then <code>az login</code>.</li>
+<li>Call the OpenAI v1 endpoint with a bearer token:
+     <div class="highlight"><pre><span></span><code><span class="cp">#pragma warning disable OPENAI001</span>
+<span class="k">using</span><span class="w"> </span><span class="nn">Azure.Identity</span><span class="p">;</span>
+<span class="k">using</span><span class="w"> </span><span class="nn">OpenAI</span><span class="p">;</span>
+<span class="k">using</span><span class="w"> </span><span class="nn">System.ClientModel.Primitives</span><span class="p">;</span>
+
+<span class="kt">var</span><span class="w"> </span><span class="n">credential</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DefaultAzureCredential</span><span class="p">();</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">client</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OpenAIClient</span><span class="p">(</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">BearerTokenPolicy</span><span class="p">(</span><span class="n">credential</span><span class="p">,</span><span class="w"> </span><span class="s">"https://ai.azure.com/.default"</span><span class="p">),</span><span class="w"> </span><span class="c1">// token scope: verify against the SDK overview</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">OpenAIClientOptions</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Endpoint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Uri</span><span class="p">(</span><span class="s">$"https://{resource}.openai.azure.com/openai/v1/"</span><span class="p">)</span><span class="w"> </span><span class="p">});</span>
+
+<span class="kt">var</span><span class="w"> </span><span class="n">chat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">client</span><span class="p">.</span><span class="n">GetChatClient</span><span class="p">(</span><span class="s">"fleet-fast"</span><span class="p">);</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">chat</span><span class="p">.</span><span class="n">CompleteChatAsync</span><span class="p">(</span><span class="s">"Reply with exactly: Trakia Freight online."</span><span class="p">);</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="n">Value</span><span class="p">.</span><span class="n">Content</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">Text</span><span class="p">);</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$"in={result.Value.Usage.InputTokenCount} out={result.Value.Usage.OutputTokenCount}"</span><span class="p">);</span>
+</code></pre></div>
+     (C2 wraps this in <code>IChatClient</code>; here you only prove connectivity and auth.)</li>
+<li><strong>Break it:</strong> (a) Remove your role assignment and re-run — read the 401/403 body. (b) Call a deployment name that does not exist — 404. (c) Put a fake key in <code>appsettings.json</code>, commit to a branch and push to your fork; observe GitHub secret scanning / push protection (if enabled on your plan) and then <em>rotate</em> — the lesson is the rotation, not the detection.</li>
+<li><strong>Acceptance criteria:</strong> <code>dotnet run --project src/FleetOps.Cli -- ping --role chat-fast</code> and <code>--role chat-reasoning</code> both print a reply and token usage; <code>git grep -nE "(api[-_]?key|Ocp-Apim)" -- ':!*.md'</code> finds nothing; no key-based auth configured on the Foundry resource client path.</li>
+<li><strong>Stretch:</strong> Disable local (key) auth on the Foundry resource and confirm everything still works.</li>
+</ul>
+<h3 id="lab-3-cost-guardrails-by-script-05h">Lab 3 — Cost guardrails by script (≈0.5h)<a class="headerlink" href="#lab-3-cost-guardrails-by-script-05h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> Budget alerts and rate limits created reproducibly.</li>
+<li><strong>Start state:</strong> <code>c0/lab3-start</code> (contains <code>scripts/budget.sh</code> skeleton).</li>
+<li><strong>Steps:</strong></li>
+<li>Create a monthly resource-group budget with notifications at 50% and 80% <em>actual</em> and 100% <em>forecasted</em> to your email, via <code>az consumption budget create</code> or Bicep (<code>Microsoft.Consumption/budgets</code>) — verify current CLI command group; portal fallback documented in the script header.</li>
+<li>Tag every resource with <code>course=trakia</code>, <code>owner=&lt;you&gt;</code>, <code>module=c0</code> so Cost Management can group spend by module.</li>
+<li>Record deployment TPM limits in <code>docs/cost-guardrails.md</code>: what each role costs per 1M tokens (list price, date-stamped), current TPM limit, who may raise it.</li>
+<li>Write <code>scripts/teardown.sh</code> that deletes load-test deployments and lists anything tagged <code>ephemeral=true</code>.</li>
+<li><strong>Break it:</strong> Compute (on paper, then with a 30-line C# script) what a runaway loop calling the reasoning deployment at its TPM limit would cost in 48 hours at list price. Compare with your budget. This is why the rate limit, not the budget, is the real control.</li>
+<li><strong>Acceptance criteria:</strong> <code>az consumption budget list -g rg-trakia-&lt;you&gt;</code> (or equivalent) shows the budget with three notifications; all resources carry the three tags (checked by <code>scripts/doctor.sh --azure</code>); <code>docs/cost-guardrails.md</code> exists with a date stamp.</li>
+<li><strong>Stretch:</strong> Add an Azure Policy assignment that denies resources without the <code>owner</code> tag in the course resource group.</li>
+</ul>
+<h3 id="lab-4-foundry-local-and-the-language-primers-125h">Lab 4 — Foundry Local and the language primers (≈1.25h)<a class="headerlink" href="#lab-4-foundry-local-and-the-language-primers-125h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> Run a small model locally behind an OpenAI-compatible endpoint; pass the C#, Python and Node reading checkpoints.</li>
+<li><strong>Start state:</strong> <code>c0/lab4-start</code>.</li>
+<li><strong>Steps:</strong></li>
+<li>Install Foundry Local (Windows/macOS/Linux x64) and run a small Phi-family or Qwen model from the curated catalog (CLI command names: verify against current Foundry Local docs). Note which execution provider (CPU/GPU/NPU) it picked.</li>
+<li>Point the same <code>OpenAIClient</code> code from Lab 2 at the local endpoint (local endpoints accept a dummy key). Compare latency and answer quality for the prompt "Summarize in one sentence: Truck РВ 4521 КН reported a coolant leak near Stara Zagora." in English and Bulgarian.</li>
+<li><strong>C# crash-course checkpoints</strong> (for non-.NET developers; ~30 min with the pointers below): records and <code>init</code>; nullable reference types; <code>async</code>/<code>await</code>, <code>IAsyncEnumerable&lt;T&gt;</code> and <code>await foreach</code>; LINQ; generics; <code>System.Text.Json</code> with source generation; dependency injection (<code>IServiceCollection</code>, lifetimes); minimal APIs (<code>app.MapPost</code>); options pattern (<code>IOptions&lt;T&gt;</code>); xUnit <code>[Fact]</code>/<code>[Theory]</code>. Exercise: make the provided <code>TripSummaryTests</code> pass by implementing a record and an async method.</li>
+<li><strong>Python primer [Python]</strong> (~15 min): create the env with <code>uv sync</code> in <code>scripts/python/</code>, run <code>hello_eval.py</code> (reads a JSONL file, prints pass rate). Learn to read: virtual envs, <code>pyproject.toml</code>, <code>async def</code>, type hints, Pydantic models, pytest.</li>
+<li><strong>Node primer</strong> (~10 min): <code>npm ci</code> in <code>tools/node/</code>, run <code>npx playwright --version</code>; understand <code>package.json</code>, <code>package-lock.json</code>, <code>npx</code>.</li>
+<li><strong>Break it:</strong> Ask the local model for a JSON object with three fields for 10 different incident sentences. Count invalid JSON outputs. Keep the number — you will reduce it in C3.</li>
+<li><strong>Acceptance criteria:</strong> <code>dotnet run --project src/FleetOps.Cli -- ping --role chat-local</code> succeeds offline (network disabled); <code>dotnet test --filter Category=C0Primer</code> green; <code>scripts/python/hello_eval.py</code> prints a pass rate.</li>
+<li><strong>Stretch:</strong> Measure tokens/s locally vs cloud for a 300-token answer; record in <code>docs/local-vs-cloud.md</code>.</li>
+</ul>
+<h2 id="kata">Kata<a class="headerlink" href="#kata" title="Permanent link">&para;</a></h2>
+<p><strong>"Fresh machine in 20 minutes"</strong> (20–30 min, repeat 3×). Start from a clean Codespace (or a teammate's laptop) and reach: devcontainer up, <code>doctor.sh</code> green, <code>ping</code> succeeding against <code>chat-fast</code> and <code>chat-local</code>, Aspire dashboard reachable. Variations: (1) a different Azure subscription (forces you to parameterize resource names); (2) no Azure access at all — local-only path; (3) a CI runner — make <code>ci.yml</code> do it unattended with OIDC. Track your time; target &lt; 15 min on the third run.</p>
+<h2 id="product-increment-fleet-ops-copilot">Product increment — Fleet Ops Copilot<a class="headerlink" href="#product-increment-fleet-ops-copilot" title="Permanent link">&para;</a></h2>
+<p>Nothing user-facing yet: the solution skeleton builds, <code>FleetOps.Cli ping</code> reaches every model role, and <code>models.json</code> defines the roles that every later module uses. The TrakiaOps SQL Server 2025 database and the BG/EN document corpus are restored locally (Aspire runs SQL Server in a container) and verified by <code>doctor.sh --data</code>.</p>
+<h2 id="factory-increment-your-agentic-sdlc">Factory increment — your agentic SDLC<a class="headerlink" href="#factory-increment-your-agentic-sdlc" title="Permanent link">&para;</a></h2>
+<p>Dev environment as code (devcontainer, pinned SDK and packages), CI building and testing inside the same container, keyless auth for humans and CI, cost alerts and rate limits, a teardown script. This is the sandbox your coding agents inherit in C4 — a coding agent can only verify its work if <code>dotnet test</code> behaves identically for it.</p>
+<h2 id="assessment">Assessment<a class="headerlink" href="#assessment" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th>Novice</th>
+<th>Competent</th>
+<th>Proficient</th>
+<th>Expert</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Reproducibility</td>
+<td>Works only on own machine</td>
+<td>Devcontainer builds; manual steps remain</td>
+<td>Devcontainer + CI green; versions centrally pinned</td>
+<td>Codespace-to-green &lt; 15 min, prebuilds, doctor checks data + Azure</td>
+</tr>
+<tr>
+<td>Security of credentials</td>
+<td>Keys in config</td>
+<td>Keys in user-secrets</td>
+<td>Entra ID everywhere except local endpoints</td>
+<td>Local auth disabled on resource; OIDC in CI; push protection verified</td>
+</tr>
+<tr>
+<td>Cost control</td>
+<td>No alerts</td>
+<td>Budget exists</td>
+<td>Budget + TPM limits + tags</td>
+<td>Budget + limits + tags + policy + teardown script, with a written runaway-cost estimate</td>
+</tr>
+<tr>
+<td>Platform currency</td>
+<td>Uses hub/Assistants samples</td>
+<td>New resource/project model</td>
+<td>Correct endpoints and SDK families</td>
+<td>Can explain why each legacy pattern is legacy and how to detect it in a sample</td>
+</tr>
+<tr>
+<td>Gate readiness (outcome 7)</td>
+<td>Thinks gates re-run the visible tests</td>
+<td>Names the three gate components (hidden suite, code review, design defense from G2)</td>
+<td>Explains hidden suites, 3-run nondeterminism handling (mean for quality, pass^3 for safety), the unaided segment and the ownership rule</td>
+<td>Explains the gate-sensitivity check and why thresholds are relative to the reference plus an absolute floor</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Auto-checked:</strong> <code>doctor.sh</code> (env, Azure, data), CI status on the <code>c0</code> branch, absence of secrets (<code>gitleaks</code> step), tag compliance, presence of <code>docs/cost-guardrails.md</code>.</p>
+<p><strong>Gate-readiness check (10 min, auto-marked quiz, pass 5/6, retake allowed):</strong> six short questions answered from <a href="../../start-here/assessment-gates/">gates.md</a>: (1) what the three G1–G3 assessment components are; (2) why overfitting prompts to your own golden set does not help; (3) how the hidden suite handles nondeterminism (mean of 3 runs vs pass^3 for safety items); (4) what is allowed in the unaided segment; (5) what the ownership rule means for code your agent wrote; (6) what the gate-sensitivity check does to <em>your</em> CI eval gate. Misconceptions are revisited in the C5 debrief before G1.</p>
+<h2 id="common-pitfalls">Common pitfalls<a class="headerlink" href="#common-pitfalls" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Creating a <strong>hub-based project</strong> from an old tutorial; it lands in "Foundry (classic)" and later labs' endpoints won't match.</li>
+<li>Choosing a region where your models aren't offered, then scattering deployments across regions.</li>
+<li>Leaving <code>rollForward</code> unset and silently picking up a different SDK on the CI runner.</li>
+<li>Assuming the budget will stop spend; it won't.</li>
+<li>Mixing <code>Azure.AI.Projects.OpenAI</code> (preview) with <code>Azure.AI.Extensions.OpenAI</code> (GA) — ambiguous type compile errors.</li>
+<li>Running Docker-dependent Aspire resources without Docker-in-Docker in the devcontainer.</li>
+<li>On Apple silicon or ARM Windows, assuming an x64-only container image works; check image architectures.</li>
+</ul>
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<ul>
+<li>What is Microsoft Foundry (resource/project model, renames): https://learn.microsoft.com/en-us/azure/ai-foundry/what-is-azure-ai-foundry</li>
+<li>Foundry SDK overview (.NET packages, endpoints, OPENAI001, ambiguous-type warning): https://learn.microsoft.com/en-us/azure/foundry/how-to/develop/sdk-overview</li>
+<li>Assistants API retirement notice: https://learn.microsoft.com/en-us/answers/questions/5790094/will-azure-openai-assistants-api-specifically-be-d</li>
+<li>Foundry model retirements policy: https://learn.microsoft.com/en-us/azure/foundry/openai/concepts/model-retirements</li>
+<li>Foundry Local GA: https://devblogs.microsoft.com/foundry/foundry-local-ga/ ; What is Foundry Local: https://learn.microsoft.com/en-us/azure/foundry-local/what-is-foundry-local</li>
+<li>.NET AI ecosystem decision guide: https://learn.microsoft.com/en-us/dotnet/ai/dotnet-ai-ecosystem</li>
+<li>Aspire blog (13.x): https://devblogs.microsoft.com/aspire/</li>
+<li>Models sold directly by Azure (regions, context windows): https://learn.microsoft.com/en-us/azure/foundry/foundry-models/concepts/models-sold-directly-by-azure</li>
+<li>AI-103 credential (Python assumption): https://learn.microsoft.com/en-us/credentials/certifications/azure-ai-apps-and-agents-developer-associate/</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Върни се в началото
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Долен колонтитул" >
+        
+          
+          <a href="../../start-here/competency-matrix/" class="md-footer__link md-footer__link--prev" aria-label="Предишна: Матрица на компетентностите">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Предишна
+              </span>
+              <div class="md-ellipsis">
+                Матрица на компетентностите
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../c01-how-generative-ai-works-an-engineer-s-mental-model/" class="md-footer__link md-footer__link--next" aria-label="Следваща: C1 — Как работи генеративният AI: мисловен модел за инженери">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Следваща
+              </span>
+              <div class="md-ellipsis">
+                C1 — Как работи генеративният AI: мисловен модел за инженери
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.sections", "navigation.top", "navigation.footer", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u041a\u043e\u043f\u0438\u0440\u0430\u043d\u043e", "clipboard.copy": "\u041a\u043e\u043f\u0438\u0440\u0430\u0439", "search.result.more.one": "\u043e\u0449\u0435 1 \u043d\u0430 \u0442\u0430\u0437\u0438 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0430", "search.result.more.other": "\u043e\u0449\u0435 # \u043d\u0430 \u0442\u0430\u0437\u0438 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0430", "search.result.none": "\u041d\u044f\u043c\u0430 \u0440\u0435\u0437\u0443\u043b\u0442\u0430\u0442\u0438", "search.result.one": "1 \u0440\u0435\u0437\u0443\u043b\u0442\u0430\u0442", "search.result.other": "# \u0440\u0435\u0437\u0443\u043b\u0442\u0430\u0442\u0430", "search.result.placeholder": "\u0417\u0430\u043f\u043e\u0447\u043d\u0435\u0442\u0435 \u0434\u0430 \u043f\u0438\u0448\u0435\u0442\u0435, \u0437\u0430 \u0434\u0430 \u0442\u044a\u0440\u0441\u0438\u0442\u0435", "search.result.term.missing": "\u041b\u0438\u043f\u0441\u0432\u0430\u0449\u043e", "select.version": "\u0418\u0437\u0431\u0435\u0440\u0438 \u0432\u0435\u0440\u0441\u0438\u044f"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,3371 @@
+
+<!doctype html>
+<html lang="bg" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Learning-by-doing course, release 2026.11 (content as of October 2026)">
+      
+      
+      
+      
+        <link rel="prev" href="../../part-3-production/c19-the-automated-sdlc-agents-from-issue-to-production/">
+      
+      
+        <link rel="next" href="../d02-long-running-durable-and-autonomous-agents/">
+      
+      
+        
+          <link rel="alternate" href="../../../part-4-developer-track/d01-model-customization-and-small-local-models/" hreflang="en">
+        
+          <link rel="alternate" href="./" hreflang="bg">
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>D1 — Адаптиране на модели и малки/локални модели - AI Solution Developer & Architect — Наръчник за курсиста</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#d1-model-customization-smalllocal-models" class="md-skip">
+          Към съдържанието
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Горен колонтитул">
+    <a href="../../" title="AI Solution Developer &amp; Architect — Наръчник за курсиста" class="md-header__button md-logo" aria-label="AI Solution Developer & Architect — Наръчник за курсиста" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            AI Solution Developer & Architect — Наръчник за курсиста
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              D1 — Адаптиране на модели и малки/локални модели
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="Избери език">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href="../../../part-4-developer-track/d01-model-customization-and-small-local-models/" hreflang="en" class="md-select__link">
+              English
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="./" hreflang="bg" class="md-select__link">
+              Български
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Търси" placeholder="Търси" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Търси">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Изчисти" aria-label="Изчисти" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Инициализирано търсене
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Навигация" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../" title="AI Solution Developer &amp; Architect — Наръчник за курсиста" class="md-nav__button md-logo" aria-label="AI Solution Developer & Architect — Наръчник за курсиста" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    AI Solution Developer & Architect — Наръчник за курсиста
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Добре дошли
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Започнете оттук
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Започнете оттук
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/how-to-use/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Как да използвате наръчника
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/course-overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Преглед на курса
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/assessment-gates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Оценяване и гейтове
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/competency-matrix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Матрица на компетентностите
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Част 1 — Основи (ниво 1)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Част 1 — Основи (ниво 1)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c00-orientation-setup-and-toolchain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C0 — Ориентация, настройка и инструменти
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c01-how-generative-ai-works-an-engineer-s-mental-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C1 — Как работи генеративният AI: мисловен модел за инженери
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c02-your-first-ai-feature-in-net/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C2 — Първата ви AI функционалност в .NET
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c03-prompting-structured-outputs-and-tool-calling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C3 — Промптинг, структуриран изход и извикване на инструменти
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c04-working-with-coding-agents-the-factory-day-one/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C4 — Работа с кодиращи агенти: Фабриката, първи ден
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c05-evals-from-day-one/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C5 — Evals от първия ден
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Част 2 — Градивни елементи (ниво 2)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Част 2 — Градивни елементи (ниво 2)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c06-embeddings-and-vector-search/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C6 — Embeddings и векторно търсене
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c07-rag-from-documents-to-cited-permission-aware-answers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C7 — RAG: от документи до отговори с цитати, съобразени с правата на достъп
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c08-tools-and-the-model-context-protocol/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C8 — Инструменти и Model Context Protocol
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c09-agents-with-microsoft-agent-framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C9 — Агенти с Microsoft Agent Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c10-agents-over-structured-data-text-to-sql-on-sql-server/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C10 — Агенти върху структурирани данни: text-to-SQL върху SQL Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c11-agentic-testing-ai-driven-tdd-mutation-and-e2e-test-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C11 — Агентно тестване: TDD с AI, мутационно тестване и агенти за E2E тестове
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Част 3 — Продукционни системи (ниво 3)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Част 3 — Продукционни системи (ниво 3)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c12-workflows-and-multi-agent-orchestration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C12 — Workflows и многоагентна оркестрация
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c13-context-engineering-advanced-retrieval-and-memory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C13 — Инженеринг на контекста, напреднало извличане и памет
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c14-failure-driven-evals-llm-judges-and-red-teaming/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C14 — Evals, водени от грешките, LLM съдии и red teaming
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c15-observability-genaiops-and-cost/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C15 — Наблюдаемост, GenAIOps и разходи
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c16-security-for-llm-and-agentic-systems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C16 — Сигурност на LLM и агентни системи
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c17-shipping-to-azure-hosting-ai-gateway-iac-and-interop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C17 — Пускане в Azure: хостинг, AI gateway, IaC и оперативна съвместимост
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c18-responsible-ai-and-the-eu-ai-act-in-practice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C18 — Отговорен AI и Актът за изкуствения интелект на ЕС на практика
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c19-the-automated-sdlc-agents-from-issue-to-production/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C19 — Автоматизираният SDLC: агенти от issue до продукция
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Част 4 — Експертна специализация: AI Solution Developer
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Част 4 — Експертна специализация: AI Solution Developer
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D1 — Адаптиране на модели и малки/локални модели
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D1 — Адаптиране на модели и малки/локални модели
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Съдържание">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Съдържание
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-this-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why this matters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learning outcomes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concepts
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Concepts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-the-customization-ladder-as-decision-rules-not-a-staircase" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. The customization ladder as decision rules, not a staircase
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-managed-fine-tuning-on-microsoft-foundry-as-of-oct-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Managed fine-tuning on Microsoft Foundry (as of Oct 2026)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-peft-lora-and-qlora-enough-math-to-make-decisions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. PEFT, LoRA and QLoRA — enough math to make decisions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-data-preparation-where-most-fine-tunes-actually-fail" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Data preparation: where most fine-tunes actually fail
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-evaluation-before-and-after-the-experiment-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Evaluation before and after — the experiment design
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-overfitting-and-catastrophic-forgetting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Overfitting and catastrophic forgetting
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-distillation-done-properly" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Distillation done properly
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-small-models-memory-and-quantization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Small models, memory and quantization
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-local-runtimes-behind-one-abstraction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Local runtimes behind one abstraction
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tools-versions-as-of-oct-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tools &amp; versions (as of Oct 2026)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#labs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Labs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Labs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lab-1-baseline-matrix-and-a-leakage-proof-eval-harness-25h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 1 — Baseline matrix and a leakage-proof eval harness (≈2.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-2-distil-a-cloud-student-with-foundry-sft-then-overfit-it-on-purpose-35h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 2 — Distil a cloud student with Foundry SFT, then overfit it on purpose (≈3.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-3-loraqlora-an-open-weight-edge-model-and-measure-quantization-loss-4h-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 3 — LoRA/QLoRA an open-weight edge model and measure quantization loss (≈4h) [Python]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-4-deploy-to-the-depot-edge-with-foundry-local-and-an-offline-first-fallback-chain-35h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 4 — Deploy to the depot edge with Foundry Local and an offline-first fallback chain (≈3.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-5-decision-report-and-adr-15h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 5 — Decision report and ADR (≈1.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kata
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#product-increment-fleet-ops-copilot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Product increment — Fleet Ops Copilot
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#factory-increment-your-agentic-sdlc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Factory increment — your agentic SDLC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assessment
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common pitfalls
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../d02-long-running-durable-and-autonomous-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D2 — Дълго работещи, устойчиви и автономни агенти
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../d03-multimodal-and-realtime-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D3 — Мултимодални агенти и агенти в реално време
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../d04-agent-ux-and-front-ends/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D4 — UX и фронтенди за агенти
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../d05-performance-and-cost-engineering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D5 — Инженеринг на производителността и разходите
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../d06-building-your-own-agent-tooling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D6 — Изграждане на собствени инструменти за агенти
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../d07-agent-reliability-engineering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D7 — Инженеринг на надеждността на агенти
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Част 5 — Експертна специализация: AI Solution Architect
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Част 5 — Експертна специализация: AI Solution Architect
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a01-ai-strategy-use-case-discovery-and-business-case/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A1 — AI стратегия, откриване на сценарии на употреба и бизнес обосновка
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a02-azure-ai-reference-architectures-and-well-architected-for-ai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A2 — Референтни AI архитектури в Azure и Well-Architected за AI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a03-enterprise-knowledge-and-data-architecture-for-ai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A3 — Корпоративна архитектура на знанията и данните за AI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a04-agent-platform-and-integration-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A4 — Платформа за агенти и интеграционна архитектура
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a05-reliability-scale-model-lifecycle-and-finops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A5 — Надеждност, мащаб, жизнен цикъл на моделите и FinOps
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a06-ai-governance-risk-and-compliance-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A6 — Архитектура за управление на AI, риска и съответствието
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a07-the-architect-s-craft-in-ai-programmes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A7 — Занаятът на архитекта в AI програми
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Част 6 — Съвместен финален проект
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Част 6 — Съвместен финален проект
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capstone/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Финален проект
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Приложение
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Приложение
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Речник на термините
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/references/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Допълнителна литература
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Съдържание">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Съдържание
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-this-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why this matters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learning outcomes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concepts
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Concepts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-the-customization-ladder-as-decision-rules-not-a-staircase" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. The customization ladder as decision rules, not a staircase
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-managed-fine-tuning-on-microsoft-foundry-as-of-oct-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Managed fine-tuning on Microsoft Foundry (as of Oct 2026)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-peft-lora-and-qlora-enough-math-to-make-decisions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. PEFT, LoRA and QLoRA — enough math to make decisions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-data-preparation-where-most-fine-tunes-actually-fail" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Data preparation: where most fine-tunes actually fail
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-evaluation-before-and-after-the-experiment-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Evaluation before and after — the experiment design
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-overfitting-and-catastrophic-forgetting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Overfitting and catastrophic forgetting
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-distillation-done-properly" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Distillation done properly
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-small-models-memory-and-quantization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Small models, memory and quantization
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-local-runtimes-behind-one-abstraction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Local runtimes behind one abstraction
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tools-versions-as-of-oct-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tools &amp; versions (as of Oct 2026)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#labs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Labs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Labs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lab-1-baseline-matrix-and-a-leakage-proof-eval-harness-25h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 1 — Baseline matrix and a leakage-proof eval harness (≈2.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-2-distil-a-cloud-student-with-foundry-sft-then-overfit-it-on-purpose-35h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 2 — Distil a cloud student with Foundry SFT, then overfit it on purpose (≈3.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-3-loraqlora-an-open-weight-edge-model-and-measure-quantization-loss-4h-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 3 — LoRA/QLoRA an open-weight edge model and measure quantization loss (≈4h) [Python]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-4-deploy-to-the-depot-edge-with-foundry-local-and-an-offline-first-fallback-chain-35h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 4 — Deploy to the depot edge with Foundry Local and an offline-first fallback chain (≈3.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-5-decision-report-and-adr-15h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 5 — Decision report and ADR (≈1.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kata
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#product-increment-fleet-ops-copilot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Product increment — Fleet Ops Copilot
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#factory-increment-your-agentic-sdlc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Factory increment — your agentic SDLC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assessment
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common pitfalls
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="d1-model-customization-smalllocal-models">D1 — Model customization &amp; small/local models<a class="headerlink" href="#d1-model-customization-smalllocal-models" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><strong>Level:</strong> Expert (AI Solution Developer track) · <strong>Duration:</strong> 20h (theory 25% / labs 75%) · <strong>Prerequisites:</strong> Core C0–C19 and Gate G3; especially C1 (mechanics), C5/C14 (evals, judges), C15 (cost per task), C18 (data protection) · <strong>Volatility:</strong> High (fine-tunable model list, preview deployment options, local runtime APIs)</p>
+</blockquote>
+<h2 id="why-this-matters">Why this matters<a class="headerlink" href="#why-this-matters" title="Permanent link">&para;</a></h2>
+<p>A proficient practitioner can run a fine-tuning job and serve a local model. An expert decides, with numbers, whether either should happen at all. The expert quantifies the gap a rung of the customization ladder must close, predicts its cost, and builds the before/after eval before touching training data. They know which failure each technique fixes (knowledge, behaviour, format, cost, latency, sovereignty). They catch leakage, forgetting and quantization loss before users do. They also treat a fine-tuned model as a versioned artifact with a retirement date, not as a one-off experiment.</p>
+<p>Trakia Freight's depots in Plovdiv, Sofia and Varna triage engine fault codes (DTCs) for ~400 trucks. Today a frontier model answers mechanics' questions in Fleet Ops Copilot. Three things hurt: Varna's connectivity is unreliable, thousands of near-identical classification calls are billed at frontier prices, and a safety-relevant decision ("stop the truck now") depends on a cloud round trip.</p>
+<p>"Fine-tune a small model and run it locally" fails in four predictable ways:
+- training data leaks across splits, so offline scores are great and production scores are not;
+- the student learns the teacher's mistakes;
+- INT4 quantization quietly erases the rare-but-critical class;
+- the fine-tuned base is retired 12–18 months later with no migration plan.</p>
+<p>Experts therefore run customization as an experiment with a pre-registered success criterion. For Trakia: macro-F1 within 2 points of the frontier baseline, <code>StopNow</code> recall ≥ 0.97, p95 &lt; 400 ms on depot hardware, and cost per 1,000 triages &lt; 5% of baseline. If the experiment misses the bar, they stop and write down why.</p>
+<h2 id="learning-outcomes">Learning outcomes<a class="headerlink" href="#learning-outcomes" title="Permanent link">&para;</a></h2>
+<p>By the end of this module you can:</p>
+<ol>
+<li><strong>Choose and justify</strong> a rung on the customization ladder (prompting, few-shot, RAG, SFT, DPO, RFT, distillation, classical ML) for a given failure mode, using an explicit decision record with expected cost and eval delta.</li>
+<li><strong>Construct</strong> a leakage-free fine-tuning dataset (grouped splits, dedup, label audit, PII handling) and <strong>diagnose</strong> leakage when offline and online scores diverge.</li>
+<li><strong>Design and run</strong> a before/after evaluation matrix that measures target-task quality, safety-critical class recall, format adherence, general-capability regression and cost/latency.</li>
+<li><strong>Execute</strong> SFT and teacher-to-student distillation on Microsoft Foundry, and <strong>explain</strong> when DPO or RFT would be the better training signal and what the grader or preference data must look like.</li>
+<li><strong>Detect</strong> overfitting and catastrophic forgetting from loss curves and regression suites, and <strong>apply</strong> mitigations (epochs, rank, data mixing, early stopping).</li>
+<li><strong>Explain</strong> LoRA/QLoRA/PEFT mechanics well enough to size trainable parameters, pick rank, and decide between merged and hot-swapped adapters.</li>
+<li><strong>Size</strong> memory for a local or self-hosted model (weights + KV cache, dense vs MoE) and <strong>measure</strong> the quality cost of INT8/INT4 quantization on the critical class.</li>
+<li><strong>Implement</strong> provider-swappable local inference (Foundry Local, ONNX Runtime GenAI, LLamaSharp, Ollama) behind <code>IChatClient</code>, with an offline-first fallback chain.</li>
+<li><strong>Produce</strong> a cost/latency/accuracy comparison and an ADR that a reviewer can reproduce from pinned artifacts.</li>
+</ol>
+<h2 id="concepts">Concepts<a class="headerlink" href="#concepts" title="Permanent link">&para;</a></h2>
+<h3 id="1-the-customization-ladder-as-decision-rules-not-a-staircase">1. The customization ladder as decision rules, not a staircase<a class="headerlink" href="#1-the-customization-ladder-as-decision-rules-not-a-staircase" title="Permanent link">&para;</a></h3>
+<p>The ladder is a set of tools mapped to failure types. You do not climb it in order. Heuristic: <strong>knowledge → RAG; behaviour/format → fine-tune; cost/latency at volume → distil to a smaller model; gradeable quality with many valid answers → RFT; "better vs worse is easy to judge, hard to demonstrate" → DPO; everything → evals first.</strong> Microsoft's own guidance states the benefit of fine-tuning "isn't guaranteed", that teams must "compare against a baseline with held-out evaluation", and that fine-tuning "doesn't replace retrieval for current information".</p>
+<p>Decision rules experts apply:</p>
+<table>
+<thead>
+<tr>
+<th>Observed failure (from error analysis, C14)</th>
+<th>First lever</th>
+<th>Escalate to</th>
+<th>Do <strong>not</strong> use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Missing or stale facts (new maintenance bulletin)</td>
+<td>RAG (C7)</td>
+<td>Better chunking/rerank</td>
+<td>Fine-tuning (facts go stale, and you cannot cite weights)</td>
+</tr>
+<tr>
+<td>Wrong output format or schema drift</td>
+<td>Structured outputs (C3)</td>
+<td>SFT if the schema is complex and the call volume is high</td>
+<td>DPO</td>
+</tr>
+<tr>
+<td>Inconsistent label policy on edge cases</td>
+<td>Few-shot with curated hard examples, prompt-cached</td>
+<td>SFT on adjudicated labels</td>
+<td>RAG</td>
+</tr>
+<tr>
+<td>Tone or completeness preferences</td>
+<td>Prompt + rubric</td>
+<td>DPO from preference pairs</td>
+<td>SFT on "good" examples alone (it misses the contrast)</td>
+</tr>
+<tr>
+<td>Correct answer is verifiable by code</td>
+<td>Prompt + validator + retry</td>
+<td>RFT with a code grader</td>
+<td>LLM-judge rewards that can be gamed</td>
+</tr>
+<tr>
+<td>Frontier quality is fine but cost/latency is not</td>
+<td>Smaller model + few-shot; model router (D5)</td>
+<td>Distillation into a small model</td>
+<td>Bigger prompt</td>
+</tr>
+<tr>
+<td>Closed label set, high volume, tabular-ish features</td>
+<td><strong>ML.NET classifier</strong> or a "decision model"</td>
+<td>Fine-tuned small LM</td>
+<td>Any generative model, by default</td>
+</tr>
+<tr>
+<td>Data must not leave the site, or the site is offline</td>
+<td>Local SLM (Foundry Local)</td>
+<td>LoRA-tuned local SLM</td>
+<td>Cloud-only design</td>
+</tr>
+</tbody>
+</table>
+<p>Exit criterion for every rung: a pre-registered metric target on a frozen test set. If prompting plus few-shot reaches 95% of the target, the remaining 5% rarely justifies a training pipeline you must then own for 18 months.</p>
+<p><strong>Misconceptions to unlearn:</strong>
+- "Fine-tuning teaches the model our latest data." It shifts behaviour. Use retrieval for knowledge.
+- "More epochs = better." Small datasets overfit within 2–4 epochs.
+- "The fine-tuned model is ours forever." The base model has a retirement date (C15, A5). GA Azure models typically retire at 18 months and partner models at 12. Plan for re-training.
+- "Open-weight means free to use." Licences vary (MIT, Apache-2.0, custom). Audit them.</p>
+<h3 id="2-managed-fine-tuning-on-microsoft-foundry-as-of-oct-2026">2. Managed fine-tuning on Microsoft Foundry (as of Oct 2026)<a class="headerlink" href="#2-managed-fine-tuning-on-microsoft-foundry-as-of-oct-2026" title="Permanent link">&para;</a></h3>
+<p>Foundry offers three managed training signals:
+- <strong>SFT</strong>: (prompt, ideal response) demonstrations.
+- <strong>DPO</strong>: (prompt, preferred, rejected) pairs. Use it when quality depends on preferences such as tone or completeness.
+- <strong>RFT</strong>: prompts plus a <strong>grader</strong> that scores responses. Use it when many answers are valid and quality can be scored reliably. Microsoft says graders "should be tested against correct, incorrect, and adversarial responses", because reward hacking is the default failure.</p>
+<p><strong>Distillation</strong> is SFT on teacher-generated data. <strong>Interactive training</strong> (preview, approval required, <strong>[Python]</strong>) lets you write your own training loop, controlling losses, rewards, rollouts and checkpoints.</p>
+<p>Fine-tunable models listed on Learn (page updated 2026-10-08). Treat this list as perishable:</p>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Methods</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>gpt-4.1</code>, <code>gpt-4.1-mini</code>, <code>gpt-4.1-nano</code></td>
+<td>SFT, DPO</td>
+<td>The practical cloud student family</td>
+</tr>
+<tr>
+<td><code>gpt-4o</code></td>
+<td>SFT, DPO</td>
+<td>Older</td>
+</tr>
+<tr>
+<td><code>gpt-4o-mini</code></td>
+<td>SFT</td>
+<td>Older</td>
+</tr>
+<tr>
+<td><code>o4-mini</code></td>
+<td>RFT</td>
+<td>Reasoning RFT</td>
+</tr>
+<tr>
+<td><code>gpt-5</code></td>
+<td>RFT</td>
+<td>Invitation only</td>
+</tr>
+<tr>
+<td><code>gpt-oss-20b</code></td>
+<td>SFT</td>
+<td>Open weights</td>
+</tr>
+<tr>
+<td><code>gpt-oss-120b</code></td>
+<td>SFT, RFT</td>
+<td>Preview</td>
+</tr>
+<tr>
+<td><code>Qwen3-32B</code></td>
+<td>SFT</td>
+<td></td>
+</tr>
+<tr>
+<td><code>Qwen3.6-35B-A3B</code>, <code>Qwen3.8-27B</code></td>
+<td>SFT, RFT</td>
+<td>Preview; 35B-A3B is MoE</td>
+</tr>
+<tr>
+<td><code>Muse-Glimmer-30B</code> (Meta)</td>
+<td>SFT, RFT</td>
+<td>Preview, Apache-2.0</td>
+</tr>
+<tr>
+<td><code>Llama-3.3-70B-Instruct</code></td>
+<td>SFT</td>
+<td></td>
+</tr>
+<tr>
+<td><code>Ministral-3B</code></td>
+<td>SFT</td>
+<td>Smallest listed LLM</td>
+</tr>
+<tr>
+<td><code>MAI-Code-1.1-Flash</code></td>
+<td>RFT</td>
+<td>Preview</td>
+</tr>
+</tbody>
+</table>
+<p><strong>No GPT-5.x/GPT-6 SFT is listed.</strong> You cannot fine-tune the current frontier tier. You distil from it.</p>
+<p><strong>Training tiers:</strong> Standard (in-region, keeps residency), Data zone (US only; verify against current documentation), Global (cheaper, no residency guarantee), Developer (lowest cost, preemptible, no SLA). Build 2026 also announced a developer tier "with no hosting fees" and "Frontier Tuning", whose scope is undescribed: verify against current documentation. For Trakia's GDPR-bound data, <strong>Global and Data zone are out</strong>. Use Standard in an EU region where the model is trainable (verify per model). Use Developer only on synthetic or fully pseudonymized data, and record that in the DPIA (C18).</p>
+<p><strong>Deployment:</strong> Serverless (the usual OpenAI-family path), Managed compute (preview; base model plus compatible <strong>LoRA adapters</strong>), or Fireworks on Foundry (preview; one merged adapter).</p>
+<p>Prices were not collected for this release, so take them from the pricing page on the day you teach. RFT grader types were not verified, so check the RFT how-to before Lab 2's stretch.</p>
+<h3 id="3-peft-lora-and-qlora-enough-math-to-make-decisions">3. PEFT, LoRA and QLoRA — enough math to make decisions<a class="headerlink" href="#3-peft-lora-and-qlora-enough-math-to-make-decisions" title="Permanent link">&para;</a></h3>
+<p>LoRA freezes a weight matrix W (d_out × d_in) and learns a low-rank update ΔW = B·A, where B is d_out × r and A is r × d_in, scaled by α/r. Trainable parameters per adapted matrix are r·(d_in + d_out).</p>
+<p>Worked example: d_in = d_out = 4096 and r = 16 give 131,072 trainable parameters, against 16.8M for the full matrix (0.78%). Adapt Q, K, V and O in 32 layers and the adapter is ~16.8M parameters, about 34 MB in FP16. You can ship that over a depot's slow link. A full 8B checkpoint is ~16 GB.</p>
+<p><strong>Rank choice.</strong> r = 8–16 is the usual starting band for classification or format tasks. Raise r only when the validation loss plateaus high (underfitting). Adapting MLP layers as well as attention layers adds capacity, and with it the risk of forgetting.</p>
+<p><strong>QLoRA</strong> trains LoRA adapters on top of a base frozen in 4-bit NF4, which lets you fine-tune a 7–8B model on a single GPU. The adapter is trained in higher precision. When you later <strong>merge</strong> the adapter and <strong>re-quantize</strong> for serving, you introduce a second quantization error, so you must evaluate after the final export, not after training.</p>
+<p><strong>Serving adapters.</strong></p>
+<table>
+<thead>
+<tr>
+<th>Pattern</th>
+<th>When</th>
+<th>Trade-off</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Merge into base, then quantize</td>
+<td>One task per edge device</td>
+<td>Simplest runtime. A new task means a new full model</td>
+</tr>
+<tr>
+<td>Hot-swap adapters on a shared base (multi-LoRA)</td>
+<td>Many tasks or tenants on one GPU (vLLM supports this; Foundry managed compute lists base + compatible LoRA adapters, preview)</td>
+<td>Small per-task artifacts. Batching across adapters is engine-specific</td>
+</tr>
+<tr>
+<td>One merged adapter on a hosted platform (Fireworks on Foundry, preview)</td>
+<td>Managed serving of an open model</td>
+<td>Vendor-specific limits</td>
+</tr>
+</tbody>
+</table>
+<h3 id="4-data-preparation-where-most-fine-tunes-actually-fail">4. Data preparation: where most fine-tunes actually fail<a class="headerlink" href="#4-data-preparation-where-most-fine-tunes-actually-fail" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Format.</strong> Chat-format JSONL with the <em>same</em> system prompt and schema used at inference. A prompt mismatch silently kills quality.</li>
+<li><strong>Grouped splits.</strong> Trakia's work orders repeat (same truck, same DTC, same phrasing), so a random split leaks near-duplicates into test. Split by <strong>vehicle</strong> and report random-split vs grouped-split scores. The gap is your leakage estimate.</li>
+<li><strong>Dedup.</strong> Exact hash plus near-duplicates (embedding cosine &gt; 0.95 or MinHash).</li>
+<li><strong>Label audit.</strong> Mechanic-confirmed resolutions are ground truth; teacher labels are not. Have an expert adjudicate 100 labels per class and measure the teacher–expert agreement.</li>
+<li><strong>Critical tail.</strong> <code>StopNow</code> (oil pressure, brakes) may be 4% of rows. Oversample it in training, never in test, and track its recall separately.</li>
+<li><strong>Quantity.</strong> Hundreds of examples move format and policy. Distilling a 15-class decision wants low thousands. Plot learning curves at 250/500/1,000/2,000.</li>
+<li><strong>PII.</strong> Scrub names and phone numbers from free-text notes. "Forget a driver" means re-training, not editing weights, so document it in the DPIA.</li>
+</ul>
+<h3 id="5-evaluation-before-and-after-the-experiment-design">5. Evaluation before and after — the experiment design<a class="headerlink" href="#5-evaluation-before-and-after-the-experiment-design" title="Permanent link">&para;</a></h3>
+<p>Freeze one <strong>test set</strong> (grouped split, never used for prompt tuning or checkpoint selection) and one <strong>dev set</strong> (for epoch and rank choice). Every candidate gets the same matrix:</p>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>Metric</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Target task</td>
+<td>Macro-F1 (severity), accuracy (subsystem)</td>
+<td>Overall quality</td>
+</tr>
+<tr>
+<td>Safety tail</td>
+<td>Recall and precision on <code>StopNow</code>, with a 95% Wilson interval</td>
+<td>A miss is the expensive error</td>
+</tr>
+<tr>
+<td>Cost-weighted error</td>
+<td>Σ errors × business cost matrix (missed <code>StopNow</code> = 100, false <code>StopNow</code> = 5)</td>
+<td>Turns F1 into money</td>
+</tr>
+<tr>
+<td>Format adherence</td>
+<td>% schema-valid outputs without repair</td>
+<td>Small models break schemas</td>
+</tr>
+<tr>
+<td>General regression</td>
+<td>Pass rate on a 100-item "keep" suite (BG/EN fleet Q&amp;A, refusals, the instruction-following checks from C5)</td>
+<td>Catastrophic forgetting</td>
+</tr>
+<tr>
+<td>Calibration</td>
+<td>Reliability of the confidence field or logprob threshold</td>
+<td>Needed for cascades (D5)</td>
+</tr>
+<tr>
+<td>Ops</td>
+<td>p50/p95 latency on target hardware, € per 1,000 calls, memory footprint</td>
+<td>The reason you are here</td>
+</tr>
+</tbody>
+</table>
+<p>Use <strong>paired</strong> comparisons (the same items, models A and B) and McNemar's test for "is the student really worse?". With 600 test items, a 2-point F1 difference is often noise. See D7 for the statistics.</p>
+<h3 id="6-overfitting-and-catastrophic-forgetting">6. Overfitting and catastrophic forgetting<a class="headerlink" href="#6-overfitting-and-catastrophic-forgetting" title="Permanent link">&para;</a></h3>
+<p><strong>Overfitting</strong> shows as validation loss turning up while training loss falls, verbatim reproduction of training phrasings, and dev scores far above grouped-test scores. Mitigate with fewer epochs (start at 2–3), a lower learning-rate multiplier (Foundry's hyperparameter names vary by model, so verify them), more diverse data, and early stopping or checkpoint selection on dev.</p>
+<p><strong>Catastrophic forgetting</strong> is the loss of prior skills: no more refusals, no more Bulgarian, ignored system instructions. The keep suite detects it. Mitigate with LoRA instead of full fine-tuning, a lower rank, 10–20% general instruction data mixed in, and a narrow task. Accept forgetting deliberately only for a single-purpose component behind a router, and say so in the ADR.</p>
+<h3 id="7-distillation-done-properly">7. Distillation done properly<a class="headerlink" href="#7-distillation-done-properly" title="Permanent link">&para;</a></h3>
+<p>Teacher-to-student distillation ("knowledge distillation", Hinton et al.) here means the frontier model labels a large unlabeled pool and the small model is trained on those labels.</p>
+<p><strong>Expert refinements:</strong>
+1. <strong>Filter teacher outputs.</strong> Keep items where the teacher matches confirmed outcomes or two teacher runs agree. Teacher errors become student beliefs.
+2. <strong>Labels vs rationales.</strong> A short distilled rationale can help on multi-factor cases but costs output tokens, so measure both.
+3. <strong>Distil the policy, not the prompt.</strong> The point is to remove the long few-shot prefix from every call.
+4. <strong>Verifiable labels → consider RFT.</strong> A code grader (parses, severity equals the confirmed outcome, subsystem consistent with the DTC family) rewards the true objective. Test it against adversaries: "always <code>StopNow</code>" must not score well.</p>
+<h3 id="8-small-models-memory-and-quantization">8. Small models, memory and quantization<a class="headerlink" href="#8-small-models-memory-and-quantization" title="Permanent link">&para;</a></h3>
+<p><strong>Weight memory</strong> ≈ parameters × bytes per parameter: FP16 = 2, INT8 = 1, INT4 ≈ 0.5 (plus ~5–10% for scales and zero-points).</p>
+<p><strong>KV cache</strong> per sequence ≈ 2 × layers × kv_heads × head_dim × tokens × bytes. GQA shrinks kv_heads, so read it from the model card.</p>
+<p>For <strong>MoE</strong>, memory follows <strong>total</strong> parameters and compute follows <strong>active</strong> parameters. A "35B-A3B" model needs ~17–18 GB at INT4 even though each token uses ~3B parameters.</p>
+<table>
+<thead>
+<tr>
+<th>Model class</th>
+<th>FP16</th>
+<th>INT8</th>
+<th>INT4</th>
+<th>Depot fit (16 GB RAM, iGPU/NPU)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>~3B dense</td>
+<td>6 GB</td>
+<td>3 GB</td>
+<td>~1.7 GB</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>~8B dense</td>
+<td>16 GB</td>
+<td>8 GB</td>
+<td>~4.5 GB</td>
+<td>INT4 only</td>
+</tr>
+<tr>
+<td>~27B dense</td>
+<td>54 GB</td>
+<td>27 GB</td>
+<td>~15 GB</td>
+<td>No (a ternary 27B at 5.9 GB is a vendor claim; verify)</td>
+</tr>
+<tr>
+<td>35B-A3B MoE</td>
+<td>70 GB</td>
+<td>35 GB</td>
+<td>~18 GB</td>
+<td>No</td>
+</tr>
+<tr>
+<td>120B (gpt-oss-120b)</td>
+<td>240 GB</td>
+<td>120 GB</td>
+<td>~60 GB</td>
+<td>Server GPU only</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Formats and methods:</strong>
+- <strong>GGUF</strong> is llama.cpp's container. Its quant levels (for example Q8_0, Q4_K_M) are used by LLamaSharp and Ollama.
+- <strong>GPTQ</strong> and <strong>AWQ</strong> are post-training weight quantization methods.
+- <strong>ONNX INT4</strong> models run on ONNX Runtime GenAI, which Foundry Local wraps.</p>
+<p>Quantization loss is <strong>not uniform</strong>. It concentrates on rare tokens and rare classes. Always re-run the safety-tail metric after quantization.</p>
+<h3 id="9-local-runtimes-behind-one-abstraction">9. Local runtimes behind one abstraction<a class="headerlink" href="#9-local-runtimes-behind-one-abstraction" title="Permanent link">&para;</a></h3>
+<p>All four .NET local options plug into <code>Microsoft.Extensions.AI</code> <code>IChatClient</code>, so the application code does not change:</p>
+<table>
+<thead>
+<tr>
+<th>Runtime</th>
+<th>Model format</th>
+<th>Hardware</th>
+<th>Use when</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Foundry Local</strong> (GA 9 Apr 2026; C# SDK <code>Microsoft.AI.Foundry.Local</code>)</td>
+<td>ONNX, from a curated catalogue (GPT OSS, Qwen, Whisper, DeepSeek, Mistral, Phi)</td>
+<td>Automatic GPU/NPU/CPU EP selection; Windows ML EPs on Windows, Metal on Apple silicon; Linux x64</td>
+<td>Managed path; OpenAI-compatible API incl. Responses; ~20 MB runtime; offline</td>
+</tr>
+<tr>
+<td>ONNX Runtime GenAI</td>
+<td>ONNX</td>
+<td>CUDA, OpenVINO, QNN, TensorRT EPs</td>
+<td>Maximum control; custom ONNX exports</td>
+</tr>
+<tr>
+<td>LLamaSharp</td>
+<td>GGUF</td>
+<td>CPU, CUDA, Metal, Vulkan</td>
+<td>Bring-your-own GGUF; quick quant comparisons</td>
+</tr>
+<tr>
+<td>Ollama</td>
+<td>GGUF (external runner)</td>
+<td>Varies</td>
+<td>Prototyping only</td>
+</tr>
+</tbody>
+</table>
+<p>Foundry Local also runs <strong>on Azure Local (preview)</strong> for on-prem servers. Loading <em>your own</em> fine-tuned or converted model into Foundry Local (rather than a catalogue model) was not confirmed in our sources, so verify against current documentation. The lab keeps ONNX Runtime GenAI and LLamaSharp as GA-independent fallbacks.</p>
+<p><strong>vLLM</strong> (self-hosted serving on AKS GPU nodes) introduced three ideas: PagedAttention (KV cache managed like virtual memory), continuous batching, and multi-LoRA serving. It is the reference engine when Trakia sells the product to other fleets and needs one GPU pool serving per-tenant adapters (A-track). Throughput claims depend on the hardware, so measure them with a load test (D5).</p>
+<p><strong>Edge as artifact.</strong> Version an edge model in the registry with a content hash, data snapshot ID and eval report. Roll it out per depot (Varna as canary) and log local decisions to an outbox that syncs when the link returns. Low-confidence inputs go to the cloud when it is reachable, otherwise to a conservative default. For safety triage that default is "escalate to a mechanic", never "continue driving".</p>
+<h2 id="tools-versions-as-of-oct-2026">Tools &amp; versions (as of Oct 2026)<a class="headerlink" href="#tools-versions-as-of-oct-2026" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Tool / package</th>
+<th>Purpose</th>
+<th>Status</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Microsoft Foundry fine-tuning (SFT, DPO, RFT, distillation)</td>
+<td>Managed training</td>
+<td>GA (per-model; several models preview)</td>
+<td>Learn fine-tuning overview updated 2026-10-08; model list volatile</td>
+</tr>
+<tr>
+<td>Foundry interactive training</td>
+<td>Custom training loops</td>
+<td>Preview, approval required</td>
+<td><strong>[Python]</strong></td>
+</tr>
+<tr>
+<td>Foundry managed compute with LoRA adapters</td>
+<td>Serve base + adapters</td>
+<td>Preview</td>
+<td>Verify the supported base models</td>
+</tr>
+<tr>
+<td>Fireworks on Foundry (fine-tuned deploy)</td>
+<td>One merged adapter</td>
+<td>Preview</td>
+<td>Fireworks on Foundry itself GA at Build 2026</td>
+</tr>
+<tr>
+<td><code>Azure.AI.Projects</code> 2.0.0, <code>Azure.AI.Extensions.OpenAI</code> 2.0.0</td>
+<td>Jobs, deployments, inference from .NET</td>
+<td>GA</td>
+<td>Do not mix with preview <code>Azure.AI.Projects.OpenAI</code></td>
+</tr>
+<tr>
+<td><code>OpenAI</code> .NET package against <code>/openai/v1/</code></td>
+<td>Files and fine-tuning jobs API</td>
+<td>GA</td>
+<td>Calls need <code>#pragma warning disable OPENAI001</code></td>
+</tr>
+<tr>
+<td>Foundry Local + <code>Microsoft.AI.Foundry.Local</code> C# SDK</td>
+<td>On-device inference</td>
+<td>GA (blog, 9 Apr 2026; Learn page carries no label)</td>
+<td>NuGet <code>Microsoft.AI.Foundry.Local.Runtime</code> 2.0.1 observed</td>
+</tr>
+<tr>
+<td><code>Microsoft.ML.OnnxRuntimeGenAI.Foundry</code></td>
+<td>ONNX Runtime GenAI</td>
+<td>Available (0.15.2 observed)</td>
+<td>Verify the exact package for direct ORT GenAI use</td>
+</tr>
+<tr>
+<td>LLamaSharp</td>
+<td>GGUF inference in .NET</td>
+<td>Community, active</td>
+<td>Pin version; native backends per OS</td>
+</tr>
+<tr>
+<td>Ollama</td>
+<td>Local runner</td>
+<td>Stable</td>
+<td>Prototyping</td>
+</tr>
+<tr>
+<td>Hugging Face PEFT / TRL, bitsandbytes</td>
+<td>LoRA/QLoRA training</td>
+<td>OSS</td>
+<td><strong>[Python]</strong>; run in the scripts devcontainer</td>
+</tr>
+<tr>
+<td>ML.NET</td>
+<td>Classical classifier baseline</td>
+<td>GA</td>
+<td>AutoML for the baseline</td>
+</tr>
+<tr>
+<td><code>Microsoft.Extensions.AI</code> 10.x, <code>.Evaluation</code></td>
+<td>Abstraction + eval harness</td>
+<td>GA</td>
+<td>Abstractions 10.5.0</td>
+</tr>
+<tr>
+<td>vLLM</td>
+<td>Self-hosted serving</td>
+<td>OSS</td>
+<td>Concepts and stretch lab only</td>
+</tr>
+</tbody>
+</table>
+<h2 id="labs">Labs<a class="headerlink" href="#labs" title="Permanent link">&para;</a></h2>
+<p>Lab repo: <code>trakia-fleetops</code>. All models are referenced by role in <code>appsettings.json</code>, for example <code>Models:Teacher</code>, <code>Models:CloudStudent</code>, <code>Models:EdgeSlm</code>. The fault-code dataset is generated from <code>TrakiaOps.MaintenanceWorkOrders</code> joined to <code>TelematicsEvents</code> (DTC events) with the mechanic-confirmed resolution as ground truth.</p>
+<h3 id="lab-1-baseline-matrix-and-a-leakage-proof-eval-harness-25h">Lab 1 — Baseline matrix and a leakage-proof eval harness (≈2.5h)<a class="headerlink" href="#lab-1-baseline-matrix-and-a-leakage-proof-eval-harness-25h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> Establish the bar every customized model must beat, and prove the test set does not leak.</li>
+<li><strong>Start state:</strong> tag <code>d1/lab1-start</code>. It contains <code>FaultTriage</code> contracts, a 1,400-row labeled export and an empty <code>Trakia.FaultTriage.Evals</code> xUnit project.</li>
+<li><strong>Steps:</strong></li>
+<li>Define the output contract:
+     <div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="n">Severity</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Continue</span><span class="p">,</span><span class="w"> </span><span class="n">ScheduleWithin7Days</span><span class="p">,</span><span class="w"> </span><span class="n">StopNow</span><span class="w"> </span><span class="p">}</span>
+<span class="k">public</span><span class="w"> </span><span class="k">sealed</span><span class="w"> </span><span class="k">record</span><span class="w"> </span><span class="nf">FaultTriage</span><span class="p">(</span><span class="n">Severity</span><span class="w"> </span><span class="n">Severity</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Subsystem</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">Confidence</span><span class="p">,</span><span class="w"> </span><span class="kt">string?</span><span class="w"> </span><span class="n">Rationale</span><span class="p">);</span>
+<span class="k">public</span><span class="w"> </span><span class="k">sealed</span><span class="w"> </span><span class="k">record</span><span class="w"> </span><span class="nf">FaultCase</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">CaseId</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">VehicleId</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Dtc</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">TelematicsSummary</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">MechanicNote</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Lang</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Build grouped splits by <code>VehicleId</code> (60/20/20), with dedup by normalized <code>(Dtc, MechanicNote)</code> hash plus embedding similarity &gt; 0.95. Persist <code>splits.json</code> with the dataset snapshot hash.</li>
+<li>Implement <code>ITriageModel</code> over <code>IChatClient</code>, using structured output:
+     <div class="highlight"><pre><span></span><code><span class="n">ChatResponse</span><span class="o">&lt;</span><span class="n">FaultTriage</span><span class="o">&gt;</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">chat</span><span class="p">.</span><span class="n">GetResponseAsync</span><span class="o">&lt;</span><span class="n">FaultTriage</span><span class="o">&gt;</span><span class="p">(</span>
+<span class="w">    </span><span class="na">[new(ChatRole.System, TriagePrompt.V1), new(ChatRole.User, fc.ToPromptText())]</span><span class="p">,</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">ChatOptions</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Temperature</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="n">ct</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Run four baselines on dev and test: (a) frontier model zero-shot, (b) frontier with 12 curated few-shot examples and a prompt-cache-friendly prefix, (c) the fast small cloud model with few-shot, (d) an <strong>ML.NET</strong> multiclass classifier (text featurizer over DTC + note, plus one-hot DTC family).</li>
+<li>Compute the full matrix from Concepts §5 per baseline: macro-F1, <code>StopNow</code> recall with a Wilson 95% CI, cost-weighted error, schema validity, p50/p95 latency and € per 1,000 calls (from the usage tokens × prices in config).</li>
+<li>Emit <code>baseline-report.md</code> and <code>baseline.json</code> as CI artifacts.</li>
+<li><strong>Break it:</strong> Re-run with a <em>random row</em> split. Record the inflation in macro-F1 for the ML.NET model and for few-shot. Explain in three sentences why near-duplicate work orders cause it.</li>
+<li><strong>Acceptance criteria:</strong></li>
+<li><code>dotnet test --filter Category=Baseline</code> passes.</li>
+<li>The report contains all 4 baselines × 7 metrics.</li>
+<li>A test asserts <strong>zero vehicle overlap</strong> between the train and test splits.</li>
+<li>The random-vs-grouped gap is reported.</li>
+<li><strong>Stretch:</strong> Add a "decision model"-style baseline, logprob thresholding on a single severity token, and plot its calibration.</li>
+</ul>
+<h3 id="lab-2-distil-a-cloud-student-with-foundry-sft-then-overfit-it-on-purpose-35h">Lab 2 — Distil a cloud student with Foundry SFT, then overfit it on purpose (≈3.5h)<a class="headerlink" href="#lab-2-distil-a-cloud-student-with-foundry-sft-then-overfit-it-on-purpose-35h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> Train a small cloud model that removes the few-shot prefix and the frontier price, and observe overfitting and forgetting with your own eyes.</li>
+<li><strong>Start state:</strong> tag <code>d1/lab2-start</code> (Lab 1 solution + 6,000 unlabeled historical work orders).</li>
+<li><strong>Steps:</strong></li>
+<li>Label the unlabeled pool with the teacher at temperature 0, twice. Keep items where both runs agree <strong>and</strong> (where available) the teacher matches the confirmed resolution. Report the yield and the teacher–expert agreement on a 150-item adjudicated sample.</li>
+<li>Write chat-format JSONL with the <strong>short production prompt</strong> (no few-shot). Oversample <code>StopNow</code> ×3 in train only. Mix in 10% general instruction items from the keep suite's <em>training</em> partition.</li>
+<li>Upload the data and create an SFT job on the <code>Models:CloudStudent</code> base (for example <code>gpt-4.1-nano</code> or <code>gpt-4.1-mini</code>) in a Standard EU region. Use the Developer tier only if the pool is fully pseudonymized. Use the <code>OpenAI</code> client against <code>/openai/v1/</code> or the Foundry project client:
+     <div class="highlight"><pre><span></span><code><span class="cp">#pragma warning disable OPENAI001</span>
+<span class="c1">// Shape only — verify exact fine-tuning client/method names against current OpenAI .NET + Foundry docs</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">openAi</span><span class="p">.</span><span class="n">GetOpenAIFileClient</span><span class="p">();</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">trainFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">files</span><span class="p">.</span><span class="n">UploadFileAsync</span><span class="p">(</span><span class="s">"train.jsonl"</span><span class="p">,</span><span class="w"> </span><span class="n">FileUploadPurpose</span><span class="p">.</span><span class="n">FineTune</span><span class="p">);</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">ft</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">openAi</span><span class="p">.</span><span class="n">GetFineTuningClient</span><span class="p">();</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">job</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">ft</span><span class="p">.</span><span class="n">FineTuneAsync</span><span class="p">(</span><span class="n">baseModel</span><span class="p">:</span><span class="w"> </span><span class="n">cfg</span><span class="p">[</span><span class="s">"Models:CloudStudent"</span><span class="p">],</span><span class="w"> </span><span class="n">trainingFileId</span><span class="p">:</span><span class="w"> </span><span class="n">trainFile</span><span class="p">.</span><span class="n">Value</span><span class="p">.</span><span class="n">Id</span><span class="p">,</span>
+<span class="w">    </span><span class="n">waitUntilCompleted</span><span class="p">:</span><span class="w"> </span><span class="k">false</span><span class="p">,</span><span class="w"> </span><span class="n">options</span><span class="p">:</span><span class="w"> </span><span class="k">new</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">ValidationFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">valFile</span><span class="p">.</span><span class="n">Value</span><span class="p">.</span><span class="n">Id</span><span class="w"> </span><span class="cm">/* epochs, lr multiplier: verify names */</span><span class="w"> </span><span class="p">});</span>
+</code></pre></div></li>
+<li>Deploy the resulting model (serverless) and evaluate it with the Lab 1 harness on the <strong>same</strong> test split. Add it to the matrix.</li>
+<li><strong>Overfit experiment:</strong> train a second job on only 20 examples for many epochs. Plot the training vs validation loss from the job's metrics, and run the keep suite.</li>
+<li><strong>Break it:</strong> Train a variant with the long few-shot prompt in training but the short one at inference, and measure the drop. Run the keep suite in Bulgarian and record any forgetting.</li>
+<li><strong>Acceptance criteria:</strong></li>
+<li>The student reaches macro-F1 ≥ (frontier few-shot − 2.0) <strong>and</strong> <code>StopNow</code> recall ≥ 0.97 on the grouped test, or the lab report explains why not with evidence.</li>
+<li>The keep-suite pass rate drops by ≤ 3 points.</li>
+<li><code>€/1k calls</code> ≤ 10% of the frontier few-shot cost.</li>
+<li>The overfit run's loss plot and keep-suite delta are committed under <code>reports/d1/</code>.</li>
+<li><strong>Stretch:</strong> Write a C# grader (schema valid ∧ severity equals the confirmed outcome ∧ subsystem consistent with the DTC family). Test it against an "always StopNow" adversary and a "copy the mechanic note" adversary. Then sketch an RFT job on an RFT-capable model (verify the grader types first).</li>
+</ul>
+<h3 id="lab-3-loraqlora-an-open-weight-edge-model-and-measure-quantization-loss-4h-python">Lab 3 — LoRA/QLoRA an open-weight edge model and measure quantization loss (≈4h) [Python]<a class="headerlink" href="#lab-3-loraqlora-an-open-weight-edge-model-and-measure-quantization-loss-4h-python" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> Produce a small open-weight model that can run at a depot, and measure what each compression step costs on the critical class.</li>
+<li><strong>Start state:</strong> tag <code>d1/lab3-start</code>. It contains the <code>scripts/</code> devcontainer with pinned Python, PEFT/TRL and the ONNX tooling.</li>
+<li><strong>Steps:</strong></li>
+<li>Pick <code>Models:EdgeSlm</code>, a ≤ 4B-parameter open-weight instruct model whose licence permits commercial fine-tuning. Record the licence in <code>models/LICENCES.md</code>.</li>
+<li>Run QLoRA (NF4 base, r = 16, α = 32, attention projections only, 2 epochs) on the Lab 2 distilled data. Save the adapter (~tens of MB) and log the loss curves.</li>
+<li>Merge the adapter into the base. Export (a) an <strong>ONNX INT4</strong> model for ONNX Runtime GenAI or Foundry Local (verify the current export tooling) and (b) <strong>GGUF Q8_0 and Q4_K_M</strong> for LLamaSharp.</li>
+<li>Back in C#, register three <code>IChatClient</code>s (ORT GenAI INT4, LLamaSharp Q8, LLamaSharp Q4) by keyed DI and run the Lab 1 harness on each.</li>
+<li>Record the quality ladder: base SLM few-shot → LoRA FP16 → INT8/Q8 → INT4/Q4.</li>
+<li><strong>Break it:</strong> Quantize the model <em>before</em> merging (merge an FP16 adapter into an already-INT4 base) and compare <code>StopNow</code> recall. Explain the double-quantization effect.</li>
+<li><strong>Acceptance criteria:</strong></li>
+<li>The report shows the quality ladder with <code>StopNow</code> recall CIs.</li>
+<li>The chosen export loses ≤ 1.5 macro-F1 points relative to LoRA FP16 and keeps <code>StopNow</code> recall ≥ 0.97.</li>
+<li>Artifacts are hash-pinned in <code>models/manifest.json</code>, alongside the training-data snapshot hash.</li>
+<li><strong>Stretch:</strong> Serve two adapters (triage + Bulgarian incident summary) on one base with vLLM and compare memory and latency against two merged models.</li>
+</ul>
+<h3 id="lab-4-deploy-to-the-depot-edge-with-foundry-local-and-an-offline-first-fallback-chain-35h">Lab 4 — Deploy to the depot edge with Foundry Local and an offline-first fallback chain (≈3.5h)<a class="headerlink" href="#lab-4-deploy-to-the-depot-edge-with-foundry-local-and-an-offline-first-fallback-chain-35h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> Run triage at the Varna depot with no cloud dependency, and degrade safely.</li>
+<li><strong>Start state:</strong> tag <code>d1/lab4-start</code>. It contains the <code>Trakia.Depot.Edge</code> .NET 10 Worker Service and an Aspire AppHost that simulates depot and cloud.</li>
+<li><strong>Steps:</strong></li>
+<li>Start Foundry Local from the C# SDK and wrap it as <code>IChatClient</code>:
+     <div class="highlight"><pre><span></span><code><span class="c1">// Shape only — verify exact Microsoft.AI.Foundry.Local API (manager, model load, endpoint) against current docs</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">manager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">FoundryLocalManager</span><span class="p">.</span><span class="n">StartModelAsync</span><span class="p">(</span><span class="n">aliasOrModelId</span><span class="p">:</span><span class="w"> </span><span class="n">cfg</span><span class="p">[</span><span class="s">"Models:EdgeSlmAlias"</span><span class="p">]);</span>
+<span class="n">IChatClient</span><span class="w"> </span><span class="n">edge</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OpenAIClient</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">ApiKeyCredential</span><span class="p">(</span><span class="n">manager</span><span class="p">.</span><span class="n">ApiKey</span><span class="p">),</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">OpenAIClientOptions</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Endpoint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">manager</span><span class="p">.</span><span class="n">Endpoint</span><span class="w"> </span><span class="p">})</span>
+<span class="w">    </span><span class="p">.</span><span class="n">GetChatClient</span><span class="p">(</span><span class="n">manager</span><span class="p">.</span><span class="n">ModelId</span><span class="p">).</span><span class="n">AsIChatClient</span><span class="p">();</span>
+</code></pre></div>
+     If your fine-tuned export cannot be loaded into Foundry Local, register the Lab 3 ORT GenAI client under the same key. The application code must not change.</li>
+<li>Build the pipeline with <code>ChatClientBuilder</code>: OTel → a schema-validation middleware → a <code>ConfidenceGate</code> middleware → the inner client.</li>
+<li>Implement <code>FallbackTriageModel</code>:<ul>
+<li>edge first;</li>
+<li>if the confidence is &lt; τ, the output is schema-invalid, or the DTC family was not in the training distribution, call the cloud student when connectivity is up;</li>
+<li>if the cloud is down, return <code>Severity.StopNow</code> with <code>Subsystem = "escalate-to-mechanic"</code> and raise a depot alert.
+ Tune τ on dev to keep <code>StopNow</code> recall ≥ 0.98 end to end.</li>
+</ul>
+</li>
+<li>Write every decision to a local SQLite outbox. A background service syncs the outbox to App Insights with idempotent upserts.</li>
+<li>Measure p50/p95 latency on CPU-only and (if present) GPU/NPU, using the course's reference depot spec (16 GB RAM).</li>
+<li><strong>Break it:</strong></li>
+<li>Disconnect the network mid-run (toxiproxy in the AppHost). Verify there is no lost decision and no unsafe default.</li>
+<li>Then disable the GPU/NPU execution provider and check whether the p95 budget still holds on CPU. Record the result honestly.</li>
+<li><strong>Acceptance criteria:</strong></li>
+<li>The integration test <code>EdgeOfflineTests</code> passes: 200 cases with the network down give 0 exceptions, 100% are persisted, and every low-confidence case is escalated.</li>
+<li>p95 &lt; 400 ms on the reference spec, or a documented exception.</li>
+<li>Swapping <code>Models:Provider</code> from <code>FoundryLocal</code> to <code>Ollama</code> in config passes the same tests with no code change.</li>
+<li><strong>Stretch:</strong> Canary roll-out. Ship model v2 to Varna only, compare decision distributions against Plovdiv for drift, and automate rollback on a <code>StopNow</code>-rate anomaly.</li>
+</ul>
+<h3 id="lab-5-decision-report-and-adr-15h">Lab 5 — Decision report and ADR (≈1.5h)<a class="headerlink" href="#lab-5-decision-report-and-adr-15h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> Turn the measurements into a decision another engineer can reproduce and challenge.</li>
+<li><strong>Start state:</strong> your Lab 1–4 artifacts.</li>
+<li><strong>Steps:</strong></li>
+<li>Build one table covering frontier zero-shot, frontier few-shot, ML.NET, cloud student, edge SLM base, edge LoRA INT4 and edge + cloud fallback. Columns: macro-F1, <code>StopNow</code> recall (CI), cost-weighted error, € per 1,000 calls, p95, data residency and an operational burden score.</li>
+<li>Write <code>docs/adr/ADR-0D1-fault-triage-model.md</code>. It records the chosen architecture, the rejected options with evidence, the retraining triggers (base model deprecation notice, drift on the DTC mix, new truck models) and the owner.</li>
+<li>Add the retirement date of every base model used to the model registry.</li>
+<li><strong>Break it:</strong> Ask a peer to reproduce one row from your manifest alone. Fix whatever they could not reproduce.</li>
+<li><strong>Acceptance criteria:</strong> The ADR links every number to a committed artifact, and a CI job re-runs the test-set evaluation for the chosen model nightly.</li>
+<li><strong>Stretch:</strong> Add a DPO plan. Specify how thumbs-down feedback from mechanics (C15 feedback events) becomes preference pairs, and what minimum volume would justify a run.</li>
+</ul>
+<h2 id="kata">Kata<a class="headerlink" href="#kata" title="Permanent link">&para;</a></h2>
+<p><strong>"Which rung?" (25 min, repeat 4×).</strong> The instructor hands you a failure cluster from a trace sample, with counts. Variations:
+1. Answers cite a superseded maintenance bulletin.
+2. Severity is correct but the JSON breaks on Bulgarian notes.
+3. Mechanics prefer terser rationales.
+4. Classification is correct but costs €0.004 per call at 40k calls/day.</p>
+<p>In 25 minutes, write a one-paragraph decision. Name the rung and why the lower rungs do not suffice, the metric and target, the data you need (with volume), the expected cost (training + hosting + inference/month), and the trigger that would make you revisit the decision. The instructor reveals the "expert answer", including the cases where the answer is "don't customize".</p>
+<h2 id="product-increment-fleet-ops-copilot">Product increment — Fleet Ops Copilot<a class="headerlink" href="#product-increment-fleet-ops-copilot" title="Permanent link">&para;</a></h2>
+<p>The <strong>fault-code triage capability</strong> now runs on a distilled, LoRA-tuned small model at the depots via Foundry Local (or the ORT GenAI fallback). It sits behind the same <code>IChatClient</code> contract, with a confidence-gated cloud fallback and a safe offline default. The cloud student serves the central Fleet Assistant (C9) as a cheap first tier, ready for the cascade in D5. The model registry records the dataset snapshot, eval report, licence and base-model retirement date for every model.</p>
+<h2 id="factory-increment-your-agentic-sdlc">Factory increment — your agentic SDLC<a class="headerlink" href="#factory-increment-your-agentic-sdlc" title="Permanent link">&para;</a></h2>
+<ul>
+<li>A <code>/finetune-experiment</code> <strong>skill</strong> (Claude Code and Copilot custom agent) scaffolds the dataset card, grouped splits, the eval matrix and an ADR stub from a template. It refuses to submit a training job unless <code>baseline.json</code> exists and the success criterion is filled in.</li>
+<li>A <strong>pre-commit hook</strong> blocks commits of JSONL training files that fail the PII scanner or lack a dataset snapshot hash.</li>
+<li>CI gains a nightly <code>model-eval</code> workflow for each registered model. It opens an issue when a metric drifts or a base model's retirement is under 120 days away (Models API lifecycle status).</li>
+<li>The coding agent may write data-prep code and eval harnesses. <strong>Humans own</strong> the label adjudication and the success criterion, and this is recorded in <code>AGENTS.md</code>.</li>
+</ul>
+<h2 id="assessment">Assessment<a class="headerlink" href="#assessment" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th>Novice</th>
+<th>Competent</th>
+<th>Proficient</th>
+<th>Expert</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ladder decision</td>
+<td>Fine-tunes by default</td>
+<td>Picks a plausible rung</td>
+<td>Justifies the rung with error analysis and a cost estimate</td>
+<td>Pre-registers a target; shows when <em>not</em> to customize; plans retraining against base-model retirement</td>
+</tr>
+<tr>
+<td>Data &amp; leakage</td>
+<td>Random split, no dedup</td>
+<td>Dedup only</td>
+<td>Grouped split, PII scrub, label audit</td>
+<td>Quantifies leakage (random vs grouped gap) and teacher–expert agreement; dataset card reproducible from a hash</td>
+</tr>
+<tr>
+<td>Evaluation</td>
+<td>Single accuracy number</td>
+<td>Macro-F1 on held-out data</td>
+<td>Full matrix incl. safety tail and keep suite</td>
+<td>Paired significance tests, CIs, cost-weighted error; post-export (quantized) re-eval</td>
+</tr>
+<tr>
+<td>Edge engineering</td>
+<td>Runs a local model in a demo</td>
+<td><code>IChatClient</code> swap works</td>
+<td>Fallback chain + outbox</td>
+<td>Offline-safe defaults proven by tests; per-depot canary with rollback; honest CPU-only numbers</td>
+</tr>
+<tr>
+<td>Communication</td>
+<td>Screenshots</td>
+<td>Report with numbers</td>
+<td>ADR with rejected options</td>
+<td>ADR another engineer reproduces from manifests; clear retraining triggers and owner</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Auto-checked:</strong>
+- the CI test categories <code>Baseline</code>, <code>Student</code>, <code>Edge</code>, <code>EdgeOffline</code>;
+- the zero-overlap split assertion;
+- the threshold gates (macro-F1 delta, <code>StopNow</code> recall ≥ 0.97, p95);
+- the presence and schema of <code>models/manifest.json</code>;
+- the nightly <code>model-eval</code> workflow status.</p>
+<h2 id="common-pitfalls">Common pitfalls<a class="headerlink" href="#common-pitfalls" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Training with one system prompt and serving with another.</li>
+<li>Random splits on repetitive operational data.</li>
+<li>Trusting teacher labels as ground truth.</li>
+<li>Evaluating the LoRA checkpoint instead of the shipped, quantized artifact.</li>
+<li>Oversampling the rare class in test.</li>
+<li>Ignoring the base model's lifecycle. A fine-tune on a retired base returns <code>410 Gone</code> too.</li>
+<li>Global or Data zone training tiers for EU personal data.</li>
+<li>Measuring on a laptop instead of the depot reference spec (CPU-only included).</li>
+<li>An unsafe fallback ("when in doubt, continue driving").</li>
+<li>Skipping the ML.NET baseline, which is often within a point of the LLM at a fraction of the cost.</li>
+</ul>
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Microsoft Learn — Foundry fine-tuning overview (methods, tiers, deployment, interactive training preview): https://learn.microsoft.com/en-us/azure/foundry/fine-tuning/overview</li>
+<li>Microsoft Learn — Models sold directly by Azure (fine-tunable list, context limits): https://learn.microsoft.com/en-us/azure/foundry/foundry-models/concepts/models-sold-directly-by-azure</li>
+<li>Microsoft Learn — Foundry model retirements and lifecycle: https://learn.microsoft.com/en-us/azure/foundry/openai/concepts/model-retirements</li>
+<li>Foundry blog — Foundry Local GA (9 Apr 2026): https://devblogs.microsoft.com/foundry/foundry-local-ga/</li>
+<li>Microsoft Learn — What is Foundry Local: https://learn.microsoft.com/en-us/azure/foundry-local/what-is-foundry-local</li>
+<li>Foundry blog — What's new at Build 2026 (developer training tier, Frontier Tuning): https://devblogs.microsoft.com/foundry/whats-new-in-microsoft-foundry-build-2026/</li>
+<li>Managed Code — Local LLMs in C#: LLamaSharp vs ONNX vs Foundry Local (Jun 2026, practitioner): https://www.managed-code.com/blog-post/running-local-llms-csharp-llamasharp-vs-onnx-vs-foundry-local</li>
+<li>NuGet — Microsoft.AI.Foundry.Local.Runtime: https://www.nuget.org/packages/Microsoft.AI.Foundry.Local.Runtime/ ; Microsoft.ML.OnnxRuntimeGenAI.Foundry: https://feed.nuget.org/packages/Microsoft.ML.OnnxRuntimeGenAI.Foundry/</li>
+<li>Hu et al., LoRA: https://arxiv.org/abs/2106.09685 · Dettmers et al., QLoRA: https://arxiv.org/abs/2305.14314 · Hinton et al., Distillation: https://arxiv.org/abs/1503.02531</li>
+<li>Rafailov et al., DPO: https://arxiv.org/abs/2305.18290 · DeepSeek-R1 (RL with verifiable rewards): https://arxiv.org/abs/2501.12948</li>
+<li>Frantar et al., GPTQ: https://arxiv.org/abs/2210.17323 · Lin et al., AWQ: https://arxiv.org/abs/2306.00978 · llama.cpp / GGUF: https://github.com/ggml-org/llama.cpp</li>
+<li>Kwon et al., PagedAttention / vLLM: https://arxiv.org/abs/2309.06180 · Fedus et al., Switch Transformers (MoE): https://arxiv.org/abs/2101.03961</li>
+<li>ML.NET: https://dotnet.microsoft.com/apps/ai/ml-dotnet</li>
+<li>Chip Huyen, <em>AI Engineering</em> (ch. 7 Finetuning, ch. 8 Dataset engineering): https://github.com/chiphuyen/aie-book</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Върни се в началото
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Долен колонтитул" >
+        
+          
+          <a href="../../part-3-production/c19-the-automated-sdlc-agents-from-issue-to-production/" class="md-footer__link md-footer__link--prev" aria-label="Предишна: C19 — Автоматизираният SDLC: агенти от issue до продукция">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Предишна
+              </span>
+              <div class="md-ellipsis">
+                C19 — Автоматизираният SDLC: агенти от issue до продукция
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../d02-long-running-durable-and-autonomous-agents/" class="md-footer__link md-footer__link--next" aria-label="Следваща: D2 — Дълго работещи, устойчиви и автономни агенти">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Следваща
+              </span>
+              <div class="md-ellipsis">
+                D2 — Дълго работещи, устойчиви и автономни агенти
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.sections", "navigation.top", "navigation.footer", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u041a\u043e\u043f\u0438\u0440\u0430\u043d\u043e", "clipboard.copy": "\u041a\u043e\u043f\u0438\u0440\u0430\u0439", "search.result.more.one": "\u043e\u0449\u0435 1 \u043d\u0430 \u0442\u0430\u0437\u0438 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0430", "search.result.more.other": "\u043e\u0449\u0435 # \u043d\u0430 \u0442\u0430\u0437\u0438 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0430", "search.result.none": "\u041d\u044f\u043c\u0430 \u0440\u0435\u0437\u0443\u043b\u0442\u0430\u0442\u0438", "search.result.one": "1 \u0440\u0435\u0437\u0443\u043b\u0442\u0430\u0442", "search.result.other": "# \u0440\u0435\u0437\u0443\u043b\u0442\u0430\u0442\u0430", "search.result.placeholder": "\u0417\u0430\u043f\u043e\u0447\u043d\u0435\u0442\u0435 \u0434\u0430 \u043f\u0438\u0448\u0435\u0442\u0435, \u0437\u0430 \u0434\u0430 \u0442\u044a\u0440\u0441\u0438\u0442\u0435", "search.result.term.missing": "\u041b\u0438\u043f\u0441\u0432\u0430\u0449\u043e", "select.version": "\u0418\u0437\u0431\u0435\u0440\u0438 \u0432\u0435\u0440\u0441\u0438\u044f"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

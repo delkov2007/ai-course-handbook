@@ -1,0 +1,3143 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Learning-by-doing course, release 2026.11 (content as of October 2026)">
+      
+      
+      
+      
+        <link rel="prev" href="../c00-orientation-setup-and-toolchain/">
+      
+      
+        <link rel="next" href="../c02-your-first-ai-feature-in-net/">
+      
+      
+        
+          <link rel="alternate" href="./" hreflang="en">
+        
+          <link rel="alternate" href="../../bg/part-1-foundations/c01-how-generative-ai-works-an-engineer-s-mental-model/" hreflang="bg">
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>C1 — How generative AI works: an engineer's mental model - AI Solution Developer & Architect — Learner Handbook</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#c1-how-generative-ai-works-an-engineers-mental-model" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="AI Solution Developer &amp; Architect — Learner Handbook" class="md-header__button md-logo" aria-label="AI Solution Developer & Architect — Learner Handbook" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            AI Solution Developer & Architect — Learner Handbook
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              C1 — How generative AI works: an engineer's mental model
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="Select language">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href="./" hreflang="en" class="md-select__link">
+              English
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="../../bg/part-1-foundations/c01-how-generative-ai-works-an-engineer-s-mental-model/" hreflang="bg" class="md-select__link">
+              Български
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="AI Solution Developer &amp; Architect — Learner Handbook" class="md-nav__button md-logo" aria-label="AI Solution Developer & Architect — Learner Handbook" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    AI Solution Developer & Architect — Learner Handbook
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Welcome
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Start here
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Start here
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/how-to-use/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How to use this handbook
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/course-overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Course overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/assessment-gates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Assessment and gates
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/competency-matrix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Competency matrix
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 1 — Foundations (Level 1)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part 1 — Foundations (Level 1)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../c00-orientation-setup-and-toolchain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C0 — Orientation, setup & toolchain
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C1 — How generative AI works: an engineer's mental model
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C1 — How generative AI works: an engineer's mental model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-this-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why this matters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learning outcomes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concepts
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Concepts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-minimal-ml-you-actually-need" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Minimal ML you actually need
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-tokens-and-bpe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Tokens and BPE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-embeddings-attention-layers-at-practitioner-depth" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Embeddings, attention, layers — at practitioner depth
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-context-window-and-kv-cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Context window and KV cache
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-pretraining-vs-post-training" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Pretraining vs post-training
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-reasoning-models-and-test-time-compute" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Reasoning models and test-time compute
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-mixture-of-experts-and-multimodality" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Mixture-of-Experts and multimodality
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-sampling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Sampling
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-nondeterminism-even-at-temperature-0" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Nondeterminism even at temperature 0
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-why-models-hallucinate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Why models hallucinate
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11-token-economics-price-per-token-cost-per-task" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Token economics: price per token ≠ cost per task
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-the-model-landscape-by-capability-class-oct-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. The model landscape by capability class (Oct 2026)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-when-not-to-use-an-llm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. When NOT to use an LLM
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#misconceptions-to-unlearn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Misconceptions to unlearn
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tools-versions-as-of-oct-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tools &amp; versions (as of Oct 2026)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#labs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Labs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Labs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lab-1-tokens-in-two-languages-15h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 1 — Tokens in two languages (≈1.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-2-sampling-and-nondeterminism-2h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 2 — Sampling and nondeterminism (≈2h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-3-reasoning-effort-and-context-budget-2h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 3 — Reasoning effort and context budget (≈2h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-4-cost-calculator-and-local-vs-cloud-15h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 4 — Cost calculator and local vs cloud (≈1.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kata
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#product-increment-fleet-ops-copilot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Product increment — Fleet Ops Copilot
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#factory-increment-your-agentic-sdlc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Factory increment — your agentic SDLC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assessment
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common pitfalls
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../c02-your-first-ai-feature-in-net/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C2 — Your first AI feature in .NET
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../c03-prompting-structured-outputs-and-tool-calling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C3 — Prompting, structured outputs & tool calling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../c04-working-with-coding-agents-the-factory-day-one/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C4 — Working with coding agents: the Factory, day one
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../c05-evals-from-day-one/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C5 — Evals from day one
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 2 — Building blocks (Level 2)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part 2 — Building blocks (Level 2)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c06-embeddings-and-vector-search/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C6 — Embeddings & vector search
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c07-rag-from-documents-to-cited-permission-aware-answers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C7 — RAG: from documents to cited, permission-aware answers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c08-tools-and-the-model-context-protocol/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C8 — Tools & the Model Context Protocol
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c09-agents-with-microsoft-agent-framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C9 — Agents with Microsoft Agent Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c10-agents-over-structured-data-text-to-sql-on-sql-server/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C10 — Agents over structured data: text-to-SQL on SQL Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c11-agentic-testing-ai-driven-tdd-mutation-and-e2e-test-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C11 — Agentic testing: AI-driven TDD, mutation & E2E test agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 3 — Production systems (Level 3)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part 3 — Production systems (Level 3)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c12-workflows-and-multi-agent-orchestration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C12 — Workflows & multi-agent orchestration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c13-context-engineering-advanced-retrieval-and-memory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C13 — Context engineering, advanced retrieval & memory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c14-failure-driven-evals-llm-judges-and-red-teaming/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C14 — Failure-driven evals, LLM judges & red teaming
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c15-observability-genaiops-and-cost/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C15 — Observability, GenAIOps & cost
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c16-security-for-llm-and-agentic-systems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C16 — Security for LLM & agentic systems
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c17-shipping-to-azure-hosting-ai-gateway-iac-and-interop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C17 — Shipping to Azure: hosting, AI gateway, IaC & interop
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c18-responsible-ai-and-the-eu-ai-act-in-practice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C18 — Responsible AI & the EU AI Act in practice
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c19-the-automated-sdlc-agents-from-issue-to-production/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C19 — The automated SDLC: agents from issue to production
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 4 — Expert track: AI Solution Developer
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part 4 — Expert track: AI Solution Developer
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d01-model-customization-and-small-local-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D1 — Model customization & small/local models
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d02-long-running-durable-and-autonomous-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D2 — Long-running, durable & autonomous agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d03-multimodal-and-realtime-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D3 — Multimodal & realtime agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d04-agent-ux-and-front-ends/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D4 — Agent UX & front-ends
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d05-performance-and-cost-engineering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D5 — Performance & cost engineering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d06-building-your-own-agent-tooling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D6 — Building your own agent tooling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d07-agent-reliability-engineering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D7 — Agent reliability engineering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 5 — Expert track: AI Solution Architect
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part 5 — Expert track: AI Solution Architect
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a01-ai-strategy-use-case-discovery-and-business-case/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A1 — AI strategy, use-case discovery & business case
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a02-azure-ai-reference-architectures-and-well-architected-for-ai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A2 — Azure AI reference architectures & Well-Architected for AI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a03-enterprise-knowledge-and-data-architecture-for-ai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A3 — Enterprise knowledge & data architecture for AI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a04-agent-platform-and-integration-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A4 — Agent platform & integration architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a05-reliability-scale-model-lifecycle-and-finops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A5 — Reliability, scale, model lifecycle & FinOps
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a06-ai-governance-risk-and-compliance-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A6 — AI governance, risk & compliance architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a07-the-architect-s-craft-in-ai-programmes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A7 — The architect's craft in AI programmes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 6 — Joint capstone
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part 6 — Joint capstone
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capstone/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Capstone
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Appendix
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Appendix
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/references/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Further reading
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-this-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why this matters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learning outcomes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concepts
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Concepts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-minimal-ml-you-actually-need" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Minimal ML you actually need
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-tokens-and-bpe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Tokens and BPE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-embeddings-attention-layers-at-practitioner-depth" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Embeddings, attention, layers — at practitioner depth
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-context-window-and-kv-cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Context window and KV cache
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-pretraining-vs-post-training" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Pretraining vs post-training
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-reasoning-models-and-test-time-compute" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Reasoning models and test-time compute
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-mixture-of-experts-and-multimodality" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Mixture-of-Experts and multimodality
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-sampling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Sampling
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-nondeterminism-even-at-temperature-0" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Nondeterminism even at temperature 0
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-why-models-hallucinate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Why models hallucinate
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11-token-economics-price-per-token-cost-per-task" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Token economics: price per token ≠ cost per task
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-the-model-landscape-by-capability-class-oct-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. The model landscape by capability class (Oct 2026)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-when-not-to-use-an-llm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. When NOT to use an LLM
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#misconceptions-to-unlearn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Misconceptions to unlearn
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tools-versions-as-of-oct-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tools &amp; versions (as of Oct 2026)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#labs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Labs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Labs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lab-1-tokens-in-two-languages-15h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 1 — Tokens in two languages (≈1.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-2-sampling-and-nondeterminism-2h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 2 — Sampling and nondeterminism (≈2h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-3-reasoning-effort-and-context-budget-2h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 3 — Reasoning effort and context budget (≈2h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-4-cost-calculator-and-local-vs-cloud-15h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 4 — Cost calculator and local vs cloud (≈1.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kata
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#product-increment-fleet-ops-copilot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Product increment — Fleet Ops Copilot
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#factory-increment-your-agentic-sdlc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Factory increment — your agentic SDLC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assessment
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common pitfalls
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="c1-how-generative-ai-works-an-engineers-mental-model">C1 — How generative AI works: an engineer's mental model<a class="headerlink" href="#c1-how-generative-ai-works-an-engineers-mental-model" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><strong>Level:</strong> 1 — Foundations (Beginner) · <strong>Duration:</strong> 10h (theory 30% / labs 70%) · <strong>Prerequisites:</strong> C0 (environment, <code>chat-fast</code>/<code>chat-reasoning</code>/<code>chat-local</code> roles working) · <strong>Volatility:</strong> Low for mechanics; High for the model landscape and prices</p>
+</blockquote>
+<h2 id="why-this-matters">Why this matters<a class="headerlink" href="#why-this-matters" title="Permanent link">&para;</a></h2>
+<p>Trakia Freight's CFO asks a simple question: "If 600 drivers each ask the copilot ten questions a day, what does it cost, and can we trust the answers?" An engineer without a mental model of LLMs answers with a per-token price from a vendor page and a demo. Three months later the bill is 4× the estimate (Bulgarian text is token-heavier, the reasoning model spends hidden thinking tokens, the system prompt is resent with every turn), the regression tests are flaky ("but we set temperature to 0"), and a dispatcher acted on a confidently invented regulation.</p>
+<p>Every one of those failures follows from mechanics you can learn in a day: text is billed and limited in <em>tokens</em>, not words; the model outputs a <em>probability distribution</em> and something samples from it; serving infrastructure is <em>not batch-invariant</em>, so even greedy decoding varies; <em>input, output and reasoning tokens share one context budget</em>; training and benchmarks <em>reward guessing over abstaining</em>, so hallucination is structural; and <em>price per token is not cost per task</em>. Experts don't memorize transformer math — they predict system behavior from these facts and then measure it.</p>
+<p>This module is deliberately "predict → run → explain". For every claim you will first predict the outcome, then measure it against Trakia data with your own .NET harness, then explain the gap. The harness you build becomes the seed of the eval infrastructure in C5.</p>
+<h2 id="learning-outcomes">Learning outcomes<a class="headerlink" href="#learning-outcomes" title="Permanent link">&para;</a></h2>
+<p>By the end of C1 you can:</p>
+<ol>
+<li><strong>Explain</strong> the pipeline text → tokens → embeddings → attention/MLP (or MoE) layers → next-token distribution → sampling, and predict how each stage affects cost, latency and failure modes.</li>
+<li><strong>Measure</strong> token counts for the same content in English and Bulgarian with <code>Microsoft.ML.Tokenizers</code> and reconcile them with provider-reported usage.</li>
+<li><strong>Demonstrate</strong> nondeterminism at temperature 0 and choose test strategies (schemas, graders, pass rates) that tolerate it.</li>
+<li><strong>Compare</strong> reasoning effort levels on accuracy, latency and cost for a Trakia task, and justify a default.</li>
+<li><strong>Calculate</strong> cost per task (not per token) for a feature, including system-prompt resend, reasoning tokens and caching.</li>
+<li><strong>Describe</strong> pretraining vs post-training (SFT, RLHF, DPO, RLVR) and use that to explain knowledge cutoffs, refusal behavior and why fine-tuning does not teach fresh facts.</li>
+<li><strong>Classify</strong> current models by capability class and choose a class (not a name) for a requirement.</li>
+<li><strong>Decide</strong> when <em>not</em> to use an LLM (classical ML, OCR/document models, rules) and defend the choice with evidence.</li>
+<li><strong>Apply</strong> the minimal ML vocabulary (loss, gradient descent, overfitting, train/val/test) to prompt iteration and eval sets.</li>
+</ol>
+<h2 id="concepts">Concepts<a class="headerlink" href="#concepts" title="Permanent link">&para;</a></h2>
+<h3 id="1-minimal-ml-you-actually-need">1. Minimal ML you actually need<a class="headerlink" href="#1-minimal-ml-you-actually-need" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Supervised learning loop:</strong> data → model with parameters → <strong>loss</strong> (a scalar measuring error) → <strong>gradient descent</strong> updates parameters to reduce loss → evaluate on <strong>held-out</strong> data. LLM pretraining minimizes next-token <strong>cross-entropy</strong> — self-supervised, labels come from the text itself.</li>
+<li><strong>Train / validation / test:</strong> fit on train, tune on validation, report once on test. The same discipline governs prompts: if you tweak a prompt until your 50 golden cases pass, those 50 cases are now <em>training</em> data; you need a held-out set (Gate G1's hidden suite exists for exactly this reason).</li>
+<li><strong>Overfitting:</strong> a model (or prompt) that memorizes its training examples and degrades on new ones. In LLM land: a prompt full of special cases for your eval set; a fine-tune on 20 examples that loses general capability.</li>
+<li><strong>Parameters and memory:</strong> weights are numbers; memory ≈ params × bytes/param (FP16 = 2, INT8 = 1, INT4 ≈ 0.5) plus KV cache. <strong>Fine-tuning changes weights; prompting and RAG do not.</strong> That single distinction drives most architecture decisions.</li>
+</ul>
+<h3 id="2-tokens-and-bpe">2. Tokens and BPE<a class="headerlink" href="#2-tokens-and-bpe" title="Permanent link">&para;</a></h3>
+<p>LLMs see <strong>token IDs</strong>, produced by subword tokenizers such as <strong>byte-pair encoding (BPE)</strong>: frequent character sequences become single tokens, rare ones split into several. Consequences:</p>
+<ul>
+<li><strong>Cost and limits are in tokens.</strong> Context windows, rate limits (TPM), prices and max output are all token-denominated.</li>
+<li><strong>Language skew.</strong> Tokenizer vocabularies are trained on corpora dominated by English; Cyrillic Bulgarian typically needs more tokens per word. No published measurement for current tokenizers was found, so <em>you</em> will produce Trakia's number in Lab 1. Expect it to matter for budgets, context limits and latency (output tokens are generated one at a time).</li>
+<li><strong>Quirks:</strong> spelling, character counting, arithmetic on long numbers, and look-alike characters (Bulgarian licence plates use Cyrillic letters that have Latin homoglyphs: "РВ 4521 КН" in Cyrillic vs "PB 4521 KH" in Latin are different token sequences and different strings to your database).</li>
+<li>Different model families use different tokenizers; a local count is an <em>estimate</em>. The provider's reported <code>usage</code> is the bill.</li>
+</ul>
+<h3 id="3-embeddings-attention-layers-at-practitioner-depth">3. Embeddings, attention, layers — at practitioner depth<a class="headerlink" href="#3-embeddings-attention-layers-at-practitioner-depth" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Embeddings:</strong> each token ID maps to a learned vector; geometry encodes meaning. Embedding <em>models</em> (C6) produce one vector per text for search.</li>
+<li><strong>Self-attention:</strong> each position computes queries, keys and values; output = softmax(QKᵀ/√d)·V, i.e. every token mixes information from previous tokens weighted by relevance. Many heads, many layers, interleaved with feed-forward (MLP) blocks.</li>
+<li><strong>Position:</strong> rotary position embeddings (RoPE) encode order; context-extension tricks build on them, which is one reason quality degrades unevenly over very long contexts.</li>
+<li><strong>Practical consequences:</strong> attention cost grows with context length (FlashAttention and grouped-query attention make long contexts affordable, not free); prompt <em>order</em> matters; information in the <strong>middle of long contexts is used less reliably</strong> ("lost in the middle"); one irrelevant distractor measurably hurts (context rot — C13).</li>
+</ul>
+<h3 id="4-context-window-and-kv-cache">4. Context window and KV cache<a class="headerlink" href="#4-context-window-and-kv-cache" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>One budget.</strong> On Azure, current GPT-5.x/GPT-6 models have a 1,050,000-token window (922,000 input, 128,000 output). Microsoft: "Input tokens, generated output tokens, and reasoning tokens share the available context budget"; max output is "an upper limit, not a guaranteed output size." Claude 5.5-generation models: 1M context, 128K max output.</li>
+<li><strong>KV cache:</strong> during generation the model stores keys/values for prior tokens so it doesn't recompute them. This explains <strong>TTFT</strong> (time to first token: processing the whole prompt, "prefill") vs <strong>inter-token latency</strong> (decode, roughly constant per token), why long prompts cost memory, and why <strong>prompt caching</strong> works: providers reuse the KV cache of an identical prefix at a discount. Example (Claude Opus 5.5 list): base input $4/MTok, cache read $0.20/MTok, cache write $5/MTok (5-min TTL), minimum cacheable prompt 512 tokens (cache-write price, TTL and minimum: verify against current documentation); Batch API −50%. Consequence for design: <strong>static content first</strong> (system prompt, tool schemas, policies), dynamic content last (C3).</li>
+<li><strong>"1M context" ≠ "use 1M".</strong> Cost scales linearly, latency grows, and quality on long inputs degrades; focused ~300-token inputs beat ~113k-token inputs for every model family in Chroma's 2025 study.</li>
+</ul>
+<h3 id="5-pretraining-vs-post-training">5. Pretraining vs post-training<a class="headerlink" href="#5-pretraining-vs-post-training" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Pretraining:</strong> next-token prediction on huge corpora → a <em>base</em> model that continues text. Knowledge is frozen at the <strong>cutoff</strong>.</li>
+<li><strong>Post-training</strong> turns it into an assistant:</li>
+<li><strong>SFT</strong> — supervised fine-tuning on (prompt, ideal response) demonstrations.</li>
+<li><strong>RLHF</strong> — reward model trained on human rankings, then RL (InstructGPT). <strong>RLAIF/Constitutional AI</strong> replaces much human labeling with AI feedback against written principles.</li>
+<li><strong>DPO</strong> — optimize directly on preferred/rejected pairs, no separate reward model.</li>
+<li><strong>RLVR</strong> — RL with <em>verifiable</em> rewards (unit tests, math checkers); DeepSeek-R1 showed long chain-of-thought reasoning emerging from it.</li>
+<li>These are now <em>your</em> tools too: Foundry offers managed <strong>SFT, DPO and RFT</strong> (reinforcement fine-tuning with a grader) — D1. Microsoft's own guidance: fine-tuning benefit "isn't guaranteed" (compare against a baseline with held-out evaluation) and it "doesn't replace retrieval for current information."</li>
+</ul>
+<h3 id="6-reasoning-models-and-test-time-compute">6. Reasoning models and test-time compute<a class="headerlink" href="#6-reasoning-models-and-test-time-compute" title="Permanent link">&para;</a></h3>
+<p>As of October 2026, effectively every frontier model is a <strong>reasoning model</strong>: it spends extra (often hidden) <strong>reasoning tokens</strong> before answering, and you control depth with an <strong>effort</strong> parameter. Claude 5.5-generation models use adaptive thinking with <code>effort</code> (Opus 5.5 default <code>medium</code>); Azure GPT models expose <code>reasoning_effort</code>, except <code>gpt-chat-latest</code>, which uses a fixed level you cannot set. <code>MAI-Thinking-1</code> (preview) ships <strong>encrypted</strong> chain-of-thought — billed, not readable. Test-time compute can substitute for model size on some tasks, but:</p>
+<ul>
+<li>reasoning tokens are <strong>billed</strong> and <strong>consume the context budget</strong>;</li>
+<li>they inflate <strong>latency</strong> (and TTFT perceived by users);</li>
+<li>higher effort helps multi-step reasoning, rarely helps lookup or extraction;</li>
+<li>many reasoning endpoints restrict or ignore sampling knobs (temperature/top-p) — your abstraction layer must tolerate provider-specific parameters (C2).</li>
+</ul>
+<h3 id="7-mixture-of-experts-and-multimodality">7. Mixture-of-Experts and multimodality<a class="headerlink" href="#7-mixture-of-experts-and-multimodality" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>MoE:</strong> a router activates a few expert feed-forward blocks per token. <strong>Memory follows total parameters; compute follows active parameters.</strong> A "35B-A3B" model needs memory for 35B weights but computes like ~3B per token — vital when sizing local or self-hosted models (D1). Reported 2026 extremes: ~2.8T total / ~104B active (Kimi K3, aggregator figure).</li>
+<li><strong>Multimodality:</strong> text+image input is standard at the frontier; Azure's catalog adds realtime speech-to-speech, transcription with diarization, TTS, image generation and (unstable) video. Each has distinct latency/cost profiles (D3).</li>
+</ul>
+<h3 id="8-sampling">8. Sampling<a class="headerlink" href="#8-sampling" title="Permanent link">&para;</a></h3>
+<p>The model outputs <strong>logits</strong> → softmax → a probability distribution over the vocabulary. Then:</p>
+<ul>
+<li><strong>Temperature</strong> rescales logits: low = peaked (near-greedy), high = flatter. Low for extraction/classification, higher for ideation; it is not a "creativity dial for facts".</li>
+<li><strong>Top-p (nucleus)</strong> samples from the smallest set whose cumulative probability ≥ p; <strong>top-k</strong> keeps the k most likely. Tune temperature <em>or</em> top-p, not both.</li>
+<li><strong>Max output tokens, stop sequences, penalties.</strong> A truncated answer reports <code>finish_reason = length</code>; unhandled truncation is a common production incident (half a JSON object).</li>
+<li><strong>Seed:</strong> best-effort reproducibility only.</li>
+</ul>
+<h3 id="9-nondeterminism-even-at-temperature-0">9. Nondeterminism even at temperature 0<a class="headerlink" href="#9-nondeterminism-even-at-temperature-0" title="Permanent link">&para;</a></h3>
+<p>Temperature 0 is <em>not</em> deterministic in production serving. Thinking Machines Lab showed the main cause is that inference kernels are not <strong>batch-invariant</strong>: your request's numerics depend on what else is in the batch (server load), not merely "GPU floating-point randomness". Batch-invariant kernels can fix it at a performance cost, but you don't control the provider's kernels. <strong>Engineering rule #1 of this course: never assert exact strings.</strong> Assert schemas, properties, grader verdicts, and statistical pass rates over N runs (C5).</p>
+<h3 id="10-why-models-hallucinate">10. Why models hallucinate<a class="headerlink" href="#10-why-models-hallucinate" title="Permanent link">&para;</a></h3>
+<p>Hallucinations are <strong>structural</strong>: next-token training and accuracy-only benchmarks reward guessing over "I don't know" (OpenAI, 2025). Types: <em>factual fabrication</em>, <em>unfaithfulness</em> to provided context (including lost-in-the-middle), and <em>tool-call hallucination</em> (invented tools or arguments). Mitigations are systemic: grounding/RAG with citations (C7), structured outputs and validation (C3), explicit permission and incentive to abstain, verification steps, and evals that <em>reward</em> abstention.</p>
+<h3 id="11-token-economics-price-per-token-cost-per-task">11. Token economics: price per token ≠ cost per task<a class="headerlink" href="#11-token-economics-price-per-token-cost-per-task" title="Permanent link">&para;</a></h3>
+<p>Cost per task = Σ over calls of (input tokens × input price + cached input × cache price + (output + reasoning) tokens × output price). It depends on:</p>
+<ul>
+<li><strong>Prompt overhead resent every turn</strong> (system prompt + tool schemas + history).</li>
+<li><strong>Reasoning tokens</strong> (hidden, billed at output price).</li>
+<li><strong>Verbosity</strong> — a newer model at the same token price can cost more per task (Gemini 3.8 Flash vs 3.7 Flash) because it uses more tokens; vendor "per-task" savings claims are estimates.</li>
+<li><strong>Language</strong> (token inflation), <strong>retries</strong>, <strong>tool loops</strong> (each iteration resends context), <strong>caching hit rate</strong>, <strong>Batch</strong> discounts.</li>
+</ul>
+<p>Illustrative list prices (research notes, Oct 2026; aggregator-sourced except Anthropic; verify against Azure pricing before teaching): GPT-6 Luna $0.10/$0.50; Claude Haiku 5.5 from $0.10/$0.50; GPT-6 Sol and Claude Sonnet 5.5 $2/$10; Claude Opus 5.5 $4/$20; GPT-6 Astra and Claude Fable 5.1 $10/$50; DeepSeek V4.1 Flash $0.30/$1.20.</p>
+<h3 id="12-the-model-landscape-by-capability-class-oct-2026">12. The model landscape by capability class (Oct 2026)<a class="headerlink" href="#12-the-model-landscape-by-capability-class-oct-2026" title="Permanent link">&para;</a></h3>
+<p>Teach and design by <strong>class</strong>; names churn monthly.</p>
+<table>
+<thead>
+<tr>
+<th>Class</th>
+<th>Examples (Oct 2026)</th>
+<th>On Microsoft Foundry?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Frontier reasoning</td>
+<td>GPT-6 Astra, Claude Fable 5.1, Gemini 4 Argon</td>
+<td>GPT-6 yes; Opus 5.5 confirmed; Fable unverified; Gemini no</td>
+</tr>
+<tr>
+<td>Balanced workhorse</td>
+<td>GPT-6/6.1 Sol, Claude Opus 5.5 / Sonnet 5.5, Grok 4.7</td>
+<td>GPT, Opus 5.5, Grok yes</td>
+</tr>
+<tr>
+<td>Cheap/fast high volume</td>
+<td>GPT-6 Luna, Claude Haiku 5.5, GPT-5.4-nano</td>
+<td>GPT yes; Haiku unverified</td>
+</tr>
+<tr>
+<td>Open-weight large</td>
+<td>DeepSeek V4/V4.1, Kimi K3, Qwen3.8, Mistral Large 3, gpt-oss-120b</td>
+<td>DeepSeek V4, Kimi K2.x, Mistral Large 3, gpt-oss yes</td>
+</tr>
+<tr>
+<td>SLM / on-device</td>
+<td>Phi family, Qwen3.8-27B, gpt-oss-20b, Ministral-3B</td>
+<td>Via Foundry Local / catalog</td>
+</tr>
+<tr>
+<td>Specialists</td>
+<td>coding (GPT-5.x-codex), realtime voice (gpt-realtime-2.1), embeddings/rerank (text-embedding-3-*, Cohere v4), document/OCR (mistral-ocr-4-0, Cohere-parse-v5)</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<p>Also: Microsoft Foundry is the most multi-vendor catalog; <strong>tool calling and JSON output are not universal</strong> (e.g., <code>Llama-3.3-70B-Instruct</code>, <code>Llama-4-Maverick</code>, <code>mistral-medium-3-5</code> listed without tool calling); benchmarks are saturating and mostly vendor-run — your own eval set (C5) is the only benchmark that matters; "open-weight" ≠ "open-source" ≠ "free for any use" (licences range from MIT/Apache-2.0 to custom).</p>
+<h3 id="13-when-not-to-use-an-llm">13. When NOT to use an LLM<a class="headerlink" href="#13-when-not-to-use-an-llm" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Need</th>
+<th>Prefer non-LLM when…</th>
+<th>Prefer LLM when…</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tabular prediction (e.g., Trakia breakdown risk from maintenance history)</td>
+<td>Almost always: gradient-boosted trees / ML.NET AutoML — cheaper, explainable</td>
+<td>Narrating the model's output</td>
+</tr>
+<tr>
+<td>Telematics anomaly detection / fuel forecasting</td>
+<td>Numeric, streaming, seasonal (ML.NET SSA, rules)</td>
+<td>Explaining anomalies, hypotheses</td>
+</tr>
+<tr>
+<td>Fixed-layout extraction (delivery notes, invoices)</td>
+<td>High volume, need per-field confidence/bounding boxes: Document Intelligence / Content Understanding</td>
+<td>Variable layouts, reasoning over content</td>
+</tr>
+<tr>
+<td>High-volume text classification</td>
+<td>Fine-tuned small model or typed "decision model"; ms latency</td>
+<td>Low volume, changing labels, zero-shot</td>
+</tr>
+<tr>
+<td>Deterministic rules (EU driving-time limits)</td>
+<td>Encode rules in code; they are law, not vibes</td>
+<td>Explaining a violation in plain language</td>
+</tr>
+<tr>
+<td>Batch speech transcription</td>
+<td>Azure Speech</td>
+<td>Conversational realtime agents</td>
+</tr>
+</tbody>
+</table>
+<p>Decide per task on <strong>accuracy, cost, latency, explainability</strong> evidence — not on fashion. The tachograph rule check is the canonical Trakia example: the LLM explains, code decides.</p>
+<h3 id="misconceptions-to-unlearn">Misconceptions to unlearn<a class="headerlink" href="#misconceptions-to-unlearn" title="Permanent link">&para;</a></h3>
+<p>"Tokens are words." "Temperature 0 is deterministic." "1M context means I can use 1M." "If it's in context the model uses it." "Fine-tuning teaches our latest facts." "The model executes tools" (it emits a structured request; <em>your code</em> executes — C3). "Cheaper per token = cheaper." "Benchmarks tell me which model is best for my app." "I can audit the chain of thought" (it may be hidden or encrypted). "MoE needs memory only for active params."</p>
+<h2 id="tools-versions-as-of-oct-2026">Tools &amp; versions (as of Oct 2026)<a class="headerlink" href="#tools-versions-as-of-oct-2026" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Tool / package</th>
+<th>Purpose</th>
+<th>Status</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Microsoft.ML.Tokenizers</code> (+ data packages, e.g. o200k encoding)</td>
+<td>Local token counting</td>
+<td>GA</td>
+<td>Local counts are estimates for non-matching tokenizers; reconcile with API <code>usage</code></td>
+</tr>
+<tr>
+<td><code>Microsoft.Extensions.AI</code> 10.x</td>
+<td>Provider-agnostic calls (<code>IChatClient</code>)</td>
+<td>GA</td>
+<td>Full treatment in C2; used here via a provided harness</td>
+</tr>
+<tr>
+<td><code>OpenAI</code> .NET package → <code>/openai/v1/</code></td>
+<td>Raw access incl. logprobs where supported</td>
+<td>GA</td>
+<td>Logprob support varies by model — verify per deployment</td>
+</tr>
+<tr>
+<td>Foundry deployments: fast, reasoning</td>
+<td>Experiments</td>
+<td>GA</td>
+<td>Roles from <code>models.json</code></td>
+</tr>
+<tr>
+<td>Foundry Local</td>
+<td>Local model comparisons</td>
+<td>GA</td>
+<td>Small models; CPU/GPU/NPU auto</td>
+</tr>
+<tr>
+<td>ML.NET (+ AutoML)</td>
+<td>Classical ML baseline</td>
+<td>GA</td>
+<td>"When not to use an LLM" lab</td>
+</tr>
+<tr>
+<td>Polyglot Notebooks / <code>dotnet run</code> scripts</td>
+<td>Plotting results</td>
+<td>—</td>
+<td>Or export CSV to Excel</td>
+</tr>
+<tr>
+<td>nanoGPT / micrograd [Python]</td>
+<td>Optional deep-dive</td>
+<td>—</td>
+<td>Side reading only; not required</td>
+</tr>
+</tbody>
+</table>
+<h2 id="labs">Labs<a class="headerlink" href="#labs" title="Permanent link">&para;</a></h2>
+<h3 id="lab-1-tokens-in-two-languages-15h">Lab 1 — Tokens in two languages (≈1.5h)<a class="headerlink" href="#lab-1-tokens-in-two-languages-15h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> Produce Trakia's own number: tokens per word and per character for Bulgarian vs English, and its monthly cost impact.</li>
+<li><strong>Start state:</strong> <code>c1/lab1-start</code> (<code>src/FleetOps.Lab.Tokens</code>, corpus sample: 20 paired BG/EN paragraphs from the fleet policy handbook and driver code of conduct).</li>
+<li><strong>Steps:</strong></li>
+<li>Count locally:
+     <div class="highlight"><pre><span></span><code><span class="k">using</span><span class="w"> </span><span class="nn">Microsoft.ML.Tokenizers</span><span class="p">;</span>
+<span class="n">Tokenizer</span><span class="w"> </span><span class="n">tok</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TiktokenTokenizer</span><span class="p">.</span><span class="n">CreateForModel</span><span class="p">(</span><span class="s">"gpt-4o"</span><span class="p">);</span><span class="w"> </span><span class="c1">// o200k proxy; verify encoding for your deployment</span>
+<span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">bg</span><span class="p">,</span><span class="w"> </span><span class="n">en</span><span class="p">)</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">pairs</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">bgT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tok</span><span class="p">.</span><span class="n">CountTokens</span><span class="p">(</span><span class="n">bg</span><span class="p">),</span><span class="w"> </span><span class="n">enT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tok</span><span class="p">.</span><span class="n">CountTokens</span><span class="p">(</span><span class="n">en</span><span class="p">);</span>
+<span class="w">    </span><span class="n">rows</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="k">new</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">bgT</span><span class="p">,</span><span class="w"> </span><span class="n">enT</span><span class="p">,</span><span class="w"> </span><span class="n">Words</span><span class="p">(</span><span class="n">bg</span><span class="p">),</span><span class="w"> </span><span class="n">Words</span><span class="p">(</span><span class="n">en</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">bgT</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">enT</span><span class="p">));</span>
+<span class="p">}</span>
+</code></pre></div></li>
+<li>Reconcile: send each paragraph to <code>chat-fast</code> with a trivial instruction and record <code>usage.InputTokenCount</code>. Subtract the fixed overhead (send an empty-content message to measure it). Compute the error of the local estimate.</li>
+<li>Repeat for <code>chat-local</code> (different tokenizer) using its reported usage.</li>
+<li>Plate-number homoglyphs: tokenize "РВ 4521 КН" (Cyrillic) and "PB 4521 KH" (Latin); write a 10-line normalizer and a unit test.</li>
+<li>Cost projection: 600 drivers × 10 questions/day × 22 workdays; average question + answer sizes from the corpus; system prompt 1,200 tokens resent each call. Produce a table: EN-only vs BG-only, fast vs reasoning class, with and without prompt caching.</li>
+<li><strong>Break it:</strong> Prepend the full 3,000-word driver code of conduct to every request "for context". Recompute monthly cost and measure TTFT.</li>
+<li><strong>Acceptance criteria:</strong> <code>dotnet test --filter Lab=C1.Tokens</code> green (normalizer tests, reconciliation error &lt; 5% for the matching tokenizer); <code>docs/c1/token-report.md</code> contains the BG/EN ratio with method, the reconciliation table and the cost projection.</li>
+<li><strong>Stretch:</strong> Add Bulgarian Latin transliteration ("шльокавица") inputs — how do token counts and answer quality change?</li>
+</ul>
+<h3 id="lab-2-sampling-and-nondeterminism-2h">Lab 2 — Sampling and nondeterminism (≈2h)<a class="headerlink" href="#lab-2-sampling-and-nondeterminism-2h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> Observe output distributions and design tests that survive them.</li>
+<li><strong>Start state:</strong> <code>c1/lab2-start</code> (<code>SamplingHarness</code> that runs a prompt N times and stores outputs as JSONL).</li>
+<li><strong>Steps:</strong></li>
+<li>Prompt: classify a Trakia incident note ("Шофьорът съобщава за силен шум от предната лява гума на АМ Тракия, км 142") into one of <code>{tyre, brakes, engine, cargo, accident, other}</code>; answer with the label only.</li>
+<li>Run 20× each at temperature 0, 0.7 and 1.2 on <code>chat-fast</code> (where temperature is supported). Record distinct outputs, label distribution and invalid-label rate.</li>
+<li>Run 20× at temperature 0 with a long free-text summary prompt. Count distinct outputs (string-exact) and semantically different outputs (compare extracted fields).</li>
+<li>Try the same on <code>chat-reasoning</code>; record which parameters are rejected or ignored.</li>
+<li>Force truncation with <code>MaxOutputTokens = 20</code> on a summary; detect <code>finish_reason = length</code> and handle it (retry with higher limit or return a typed "truncated" result).</li>
+<li>Optional (if the deployment returns logprobs): turn the classifier into a thresholded classifier — accept only if top-label probability ≥ 0.8, else route to a human.</li>
+<li><strong>Break it:</strong> Write an xUnit test that asserts the exact summary string. Run it 10 times in CI. Then rewrite it to assert (a) the label ∈ allowed set, (b) the summary mentions the km marker and the tyre, (c) pass rate ≥ 9/10.</li>
+<li><strong>Acceptance criteria:</strong> <code>docs/c1/sampling-report.md</code> with the three distributions and your explanation referencing batch invariance; the exact-string test is deleted; the property-based test passes in 3 consecutive CI runs; truncation handler has a unit test.</li>
+<li><strong>Stretch:</strong> Plot answer diversity (distinct outputs) vs temperature for 5 prompts.</li>
+</ul>
+<h3 id="lab-3-reasoning-effort-and-context-budget-2h">Lab 3 — Reasoning effort and context budget (≈2h)<a class="headerlink" href="#lab-3-reasoning-effort-and-context-budget-2h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> Quantify accuracy vs latency vs cost across effort levels and context sizes.</li>
+<li><strong>Start state:</strong> <code>c1/lab3-start</code> (12 driving-time questions with ground-truth answers computed by a deterministic C# rule engine from the EU driving-time summary; plus a "needle" document set).</li>
+<li><strong>Steps:</strong></li>
+<li>For each question, call <code>chat-reasoning</code> at effort low/medium/high (provider-specific option passed via the harness — verify the exact parameter name and its MEAI mapping for your deployment). Record correctness (compare to rule engine), latency, input/output/reasoning tokens, cost.</li>
+<li>Compare with <code>chat-fast</code> (no or minimal reasoning).</li>
+<li>Needle test: hide one fact ("Depot Varna's tyre supplier changed to Balkan Tyres on 3 Sept") at the start, middle and end of padded contexts of 2k, 20k and 100k tokens of policy text. Ask for it 5× per cell.</li>
+<li><strong>Break it:</strong> Set <code>MaxOutputTokens</code> low on high effort. Observe empty or truncated answers because reasoning consumed the budget.</li>
+<li><strong>Acceptance criteria:</strong> <code>docs/c1/effort-report.md</code> with an accuracy/latency/cost table per effort level and a one-paragraph recommended default <em>for this task</em>; needle grid (position × size) with recall; an ADR (<code>docs/adr/0001-default-reasoning-effort.md</code>) that cites your numbers. This is your first ADR: use the course template and checklist in <code>docs/adr/README.md</code> — context, <strong>≥ 3 options considered (incl. "do nothing / status quo" where meaningful)</strong>, decision, consequences, evidence links and a review date (the ADR linter enforces this from here on; here the options are effort levels plus the status-quo default).</li>
+<li><strong>Stretch:</strong> Replace the LLM for the driving-time questions with the rule engine plus an LLM that only explains the engine's output. Compare accuracy and cost.</li>
+</ul>
+<h3 id="lab-4-cost-calculator-and-local-vs-cloud-15h">Lab 4 — Cost calculator and local vs cloud (≈1.5h)<a class="headerlink" href="#lab-4-cost-calculator-and-local-vs-cloud-15h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> A reusable cost-per-task calculator and an evidence-based local-vs-cloud comparison.</li>
+<li><strong>Start state:</strong> <code>c1/lab4-start</code> (<code>pricing.json</code> with date-stamped list prices per role).</li>
+<li><strong>Steps:</strong></li>
+<li>Implement <code>CostCalculator.ForCall(UsageDetails usage, ModelPrice price)</code> including cached-input and reasoning tokens (reasoning billed as output); unit-test it with hand-computed cases.</li>
+<li>Run the incident-classification task (Lab 2) over 40 labeled incident notes on <code>chat-fast</code>, <code>chat-reasoning</code> and <code>chat-local</code>. Record accuracy, p50/p95 latency, cost per 1,000 tasks (local = €0 marginal; note hardware and energy as a footnote).</li>
+<li>Train an <strong>ML.NET</strong> text classifier on 400 labeled historical incident notes (provided) and evaluate on the same 40. Build a confusion matrix for each approach.</li>
+<li><strong>Break it:</strong> Swap <code>chat-fast</code> for a model in the catalog listed <em>without</em> tool calling / JSON support and request JSON-mode output — record the failure.</li>
+<li><strong>Acceptance criteria:</strong> Calculator tests green; <code>docs/c1/model-bakeoff.md</code> with a 4-row table (fast, reasoning, local, ML.NET) × (accuracy, p95 latency, cost/1k, explainability) and a recommendation; <code>pricing.json</code> carries a "retrieved on" date.</li>
+<li><strong>Stretch:</strong> Model a cascade: ML.NET first, LLM only when classifier confidence &lt; threshold; compute blended cost and accuracy.</li>
+</ul>
+<h2 id="kata">Kata<a class="headerlink" href="#kata" title="Permanent link">&para;</a></h2>
+<p><strong>"Predict, run, explain"</strong> (25–30 min, repeat with a new myth each time). Pick one misconception card (tokens = words; T=0 deterministic; 1M context usable; in-context = used; cheaper per token = cheaper; fine-tune = new facts; model executes tools). (1) Write your prediction and a falsifiable test in 3 sentences. (2) Run it with the harness on Trakia data (≤10 min). (3) Write a 5-sentence explanation citing the mechanism. Variation: switch model role or language (BG/EN) and predict whether the result changes.</p>
+<h2 id="product-increment-fleet-ops-copilot">Product increment — Fleet Ops Copilot<a class="headerlink" href="#product-increment-fleet-ops-copilot" title="Permanent link">&para;</a></h2>
+<p>No new user feature. The product gains its <strong>economic and behavioral baseline</strong>: the token report (BG/EN ratio), the effort ADR, the cost calculator and <code>pricing.json</code> (consumed by C2's cost logging middleware), and the incident-classification labeled set that seeds the golden dataset in C5.</p>
+<h2 id="factory-increment-your-agentic-sdlc">Factory increment — your agentic SDLC<a class="headerlink" href="#factory-increment-your-agentic-sdlc" title="Permanent link">&para;</a></h2>
+<p>The <code>SamplingHarness</code> (run N times, store JSONL, compute pass rates) and the cost calculator become shared factory tools in <code>tools/</code>, used by eval tests from C5 on. Rule recorded in the repo's conventions for later agents: <em>no exact-string assertions on model output</em>.</p>
+<h2 id="assessment">Assessment<a class="headerlink" href="#assessment" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th>Novice</th>
+<th>Competent</th>
+<th>Proficient</th>
+<th>Expert</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mechanistic explanation</td>
+<td>Repeats definitions</td>
+<td>Explains tokens, sampling, context correctly</td>
+<td>Predicts outcomes of experiments before running them</td>
+<td>Explains surprises (e.g., reasoning budget truncation, batch variance) and their engineering consequences</td>
+</tr>
+<tr>
+<td>Measurement rigor</td>
+<td>Single runs, anecdotes</td>
+<td>Repeated runs, basic tables</td>
+<td>N runs, distributions, reconciled with provider usage</td>
+<td>Confidence intervals, controlled variables, documented method others can rerun</td>
+</tr>
+<tr>
+<td>Cost reasoning</td>
+<td>Quotes per-token price</td>
+<td>Computes per-call cost</td>
+<td>Cost per task incl. overhead, reasoning, caching</td>
+<td>Cost model with sensitivity analysis (language mix, effort, cache hit rate) feeding an ADR</td>
+</tr>
+<tr>
+<td>Tool selection</td>
+<td>LLM for everything</td>
+<td>Knows alternatives exist</td>
+<td>Uses evidence to pick LLM vs ML.NET vs rules</td>
+<td>Designs hybrids/cascades and justifies on accuracy/cost/latency/explainability</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Auto-checked:</strong> lab test filters (<code>Lab=C1.*</code>), presence and structure of the four reports and ADR-0001 (required headings, numeric tables), no exact-string assertions on model output (analyzer rule in <code>tests/</code>).</p>
+<h2 id="common-pitfalls">Common pitfalls<a class="headerlink" href="#common-pitfalls" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Counting tokens with a tokenizer that doesn't match the deployment and treating it as truth.</li>
+<li>Forgetting the system prompt and tool schemas in cost estimates — they are resent every call.</li>
+<li>Comparing effort levels on a lookup task where reasoning can't help, and concluding "reasoning is useless".</li>
+<li>Setting both temperature and top-p, or setting them on a reasoning endpoint that ignores them, then drawing conclusions.</li>
+<li>Treating a single run as a measurement.</li>
+<li>Quoting aggregator prices as facts; always date-stamp and cite.</li>
+</ul>
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Vaswani et al., Attention Is All You Need: https://arxiv.org/abs/1706.03762 ; Illustrated Transformer: https://jalammar.github.io/illustrated-transformer/</li>
+<li>Sennrich et al., BPE: https://arxiv.org/abs/1508.07909 ; RoPE: https://arxiv.org/abs/2104.09864 ; GQA: https://arxiv.org/abs/2305.13245 ; FlashAttention: https://arxiv.org/abs/2205.14135 ; PagedAttention: https://arxiv.org/abs/2309.06180</li>
+<li>Liu et al., Lost in the Middle: https://arxiv.org/abs/2307.03172 ; Chroma, Context Rot: https://trychroma.com/research/context-rot</li>
+<li>Switch Transformers (MoE): https://arxiv.org/abs/2101.03961</li>
+<li>InstructGPT (RLHF): https://arxiv.org/abs/2203.02155 ; Constitutional AI: https://arxiv.org/abs/2212.08073 ; DPO: https://arxiv.org/abs/2305.18290 ; DeepSeek-R1 (RLVR): https://arxiv.org/abs/2501.12948 ; Test-time compute: https://arxiv.org/abs/2408.03314</li>
+<li>Holtzman et al., nucleus sampling: https://arxiv.org/abs/1904.09751</li>
+<li>Thinking Machines Lab, Defeating Nondeterminism in LLM Inference: https://thinkingmachines.ai/blog/defeating-nondeterminism-in-llm-inference/</li>
+<li>OpenAI, Why language models hallucinate: https://openai.com/index/why-language-models-hallucinate/</li>
+<li>Models sold directly by Azure (context windows, tool-calling support, reasoning_effort): https://learn.microsoft.com/en-us/azure/foundry/foundry-models/concepts/models-sold-directly-by-azure</li>
+<li>Claude models overview / Opus 5.5 pricing and caching: https://platform.claude.com/docs/en/models/overview ; https://platform.claude.com/docs/en/models/opus-5-5/overview</li>
+<li>Foundry fine-tuning overview (SFT/DPO/RFT): https://learn.microsoft.com/en-us/azure/foundry/fine-tuning/overview</li>
+<li>Aggregators (orientation only, verify): FutureAGI https://futureagi.com/blog/best-llms-september-2026/ ; Digital Applied https://www.digitalapplied.com/blog/ai-model-releases-september-2026-tracker</li>
+<li>ML.NET: https://dotnet.microsoft.com/apps/ai/ml-dotnet ; nanoGPT: https://github.com/karpathy/nanoGPT ; CS336: https://cs336.stanford.edu/</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../c00-orientation-setup-and-toolchain/" class="md-footer__link md-footer__link--prev" aria-label="Previous: C0 — Orientation, setup &amp; toolchain">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                C0 — Orientation, setup & toolchain
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../c02-your-first-ai-feature-in-net/" class="md-footer__link md-footer__link--next" aria-label="Next: C2 — Your first AI feature in .NET">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                C2 — Your first AI feature in .NET
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.top", "navigation.footer", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

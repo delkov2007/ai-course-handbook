@@ -1,0 +1,3603 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Learning-by-doing course, release 2026.11 (content as of October 2026)">
+      
+      
+      
+      
+        <link rel="prev" href="../course-overview/">
+      
+      
+        <link rel="next" href="../competency-matrix/">
+      
+      
+        
+          <link rel="alternate" href="./" hreflang="en">
+        
+          <link rel="alternate" href="../../bg/start-here/assessment-gates/" hreflang="bg">
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Assessment and gates - AI Solution Developer & Architect — Learner Handbook</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#assessment-and-gates" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="AI Solution Developer &amp; Architect — Learner Handbook" class="md-header__button md-logo" aria-label="AI Solution Developer & Architect — Learner Handbook" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            AI Solution Developer & Architect — Learner Handbook
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Assessment and gates
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="Select language">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href="./" hreflang="en" class="md-select__link">
+              English
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="../../bg/start-here/assessment-gates/" hreflang="bg" class="md-select__link">
+              Български
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="AI Solution Developer &amp; Architect — Learner Handbook" class="md-nav__button md-logo" aria-label="AI Solution Developer & Architect — Learner Handbook" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    AI Solution Developer & Architect — Learner Handbook
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Welcome
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Start here
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Start here
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../how-to-use/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How to use this handbook
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../course-overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Course overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Assessment and gates
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Assessment and gates
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-why-gates-and-what-they-measure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Why gates, and what they measure
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-rules-common-to-all-gates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Rules common to all gates
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Rules common to all gates">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#environment-and-what-is-provided" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Environment and what is provided
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#required-submission-artefacts-all-gates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Required submission artefacts (all gates)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scoring-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scoring model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#oral-defense-protocol-all-gates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Oral defense protocol (all gates)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integrity-stance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integrity stance
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#accommodations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Accommodations
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-gate-g1-build-a-feature-through-the-factory-prove-it-with-evals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Gate G1 — Build a feature through the Factory, prove it with evals
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Gate G1 — Build a feature through the Factory, prove it with evals">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#format-and-time-box-6-h-total" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Format and time box (6 h total)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-is-provided" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is provided
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tasks
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-the-hidden-suite-covers-g1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What the hidden suite covers (G1)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#g1-hard-gates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        G1 hard gates
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#g1-rubric" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        G1 rubric
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-gate-g2-debug-and-extend-a-rag-agent-system-you-did-not-write" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Gate G2 — Debug and extend a RAG + agent system you did not write
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Gate G2 — Debug and extend a RAG + agent system you did not write">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#format-and-time-box-6-h-total_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Format and time box (6 h total)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-is-provided_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is provided
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#debug-task" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Debug task
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#extension-task" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Extension task
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bug-table-in-gate-reportmd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bug table (in GATE-REPORT.md)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#design-defense-30-min" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Design defense (30 min)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-the-hidden-suite-covers-g2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What the hidden suite covers (G2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#g2-hard-gates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        G2 hard gates
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#g2-rubric" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        G2 rubric
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-gate-g3-operate-attack-migrate-redesign" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Gate G3 — Operate, attack, migrate, redesign
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Gate G3 — Operate, attack, migrate, redesign">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#format-and-time-box-6-h-one-day-four-blocks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Format and time box (6 h, one day, four blocks)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#block-a-production-incident-90-min" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Block A — Production incident (90 min)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#block-b-red-team-75-min" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Block B — Red team (75 min)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#block-c-model-migration-75-min" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Block C — Model migration (75 min)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#block-d-design-review-60-min" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Block D — Design review (60 min)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#g3-rubric-per-block-plus-one-overall" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        G3 rubric (per block, plus one overall)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-how-hidden-eval-suites-are-kept-fair" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. How hidden eval suites are kept fair
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-retake-and-appeal-policy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Retake and appeal policy
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../competency-matrix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Competency matrix
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 1 — Foundations (Level 1)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part 1 — Foundations (Level 1)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c00-orientation-setup-and-toolchain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C0 — Orientation, setup & toolchain
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c01-how-generative-ai-works-an-engineer-s-mental-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C1 — How generative AI works: an engineer's mental model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c02-your-first-ai-feature-in-net/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C2 — Your first AI feature in .NET
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c03-prompting-structured-outputs-and-tool-calling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C3 — Prompting, structured outputs & tool calling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c04-working-with-coding-agents-the-factory-day-one/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C4 — Working with coding agents: the Factory, day one
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c05-evals-from-day-one/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C5 — Evals from day one
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 2 — Building blocks (Level 2)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part 2 — Building blocks (Level 2)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c06-embeddings-and-vector-search/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C6 — Embeddings & vector search
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c07-rag-from-documents-to-cited-permission-aware-answers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C7 — RAG: from documents to cited, permission-aware answers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c08-tools-and-the-model-context-protocol/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C8 — Tools & the Model Context Protocol
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c09-agents-with-microsoft-agent-framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C9 — Agents with Microsoft Agent Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c10-agents-over-structured-data-text-to-sql-on-sql-server/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C10 — Agents over structured data: text-to-SQL on SQL Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c11-agentic-testing-ai-driven-tdd-mutation-and-e2e-test-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C11 — Agentic testing: AI-driven TDD, mutation & E2E test agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 3 — Production systems (Level 3)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part 3 — Production systems (Level 3)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c12-workflows-and-multi-agent-orchestration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C12 — Workflows & multi-agent orchestration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c13-context-engineering-advanced-retrieval-and-memory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C13 — Context engineering, advanced retrieval & memory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c14-failure-driven-evals-llm-judges-and-red-teaming/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C14 — Failure-driven evals, LLM judges & red teaming
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c15-observability-genaiops-and-cost/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C15 — Observability, GenAIOps & cost
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c16-security-for-llm-and-agentic-systems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C16 — Security for LLM & agentic systems
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c17-shipping-to-azure-hosting-ai-gateway-iac-and-interop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C17 — Shipping to Azure: hosting, AI gateway, IaC & interop
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c18-responsible-ai-and-the-eu-ai-act-in-practice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C18 — Responsible AI & the EU AI Act in practice
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c19-the-automated-sdlc-agents-from-issue-to-production/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C19 — The automated SDLC: agents from issue to production
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 4 — Expert track: AI Solution Developer
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part 4 — Expert track: AI Solution Developer
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d01-model-customization-and-small-local-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D1 — Model customization & small/local models
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d02-long-running-durable-and-autonomous-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D2 — Long-running, durable & autonomous agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d03-multimodal-and-realtime-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D3 — Multimodal & realtime agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d04-agent-ux-and-front-ends/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D4 — Agent UX & front-ends
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d05-performance-and-cost-engineering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D5 — Performance & cost engineering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d06-building-your-own-agent-tooling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D6 — Building your own agent tooling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d07-agent-reliability-engineering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D7 — Agent reliability engineering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 5 — Expert track: AI Solution Architect
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part 5 — Expert track: AI Solution Architect
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a01-ai-strategy-use-case-discovery-and-business-case/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A1 — AI strategy, use-case discovery & business case
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a02-azure-ai-reference-architectures-and-well-architected-for-ai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A2 — Azure AI reference architectures & Well-Architected for AI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a03-enterprise-knowledge-and-data-architecture-for-ai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A3 — Enterprise knowledge & data architecture for AI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a04-agent-platform-and-integration-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A4 — Agent platform & integration architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a05-reliability-scale-model-lifecycle-and-finops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A5 — Reliability, scale, model lifecycle & FinOps
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a06-ai-governance-risk-and-compliance-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A6 — AI governance, risk & compliance architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a07-the-architect-s-craft-in-ai-programmes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A7 — The architect's craft in AI programmes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 6 — Joint capstone
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part 6 — Joint capstone
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capstone/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Capstone
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Appendix
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Appendix
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/references/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Further reading
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-why-gates-and-what-they-measure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Why gates, and what they measure
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-rules-common-to-all-gates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Rules common to all gates
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Rules common to all gates">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#environment-and-what-is-provided" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Environment and what is provided
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#required-submission-artefacts-all-gates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Required submission artefacts (all gates)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scoring-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scoring model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#oral-defense-protocol-all-gates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Oral defense protocol (all gates)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integrity-stance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integrity stance
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#accommodations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Accommodations
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-gate-g1-build-a-feature-through-the-factory-prove-it-with-evals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Gate G1 — Build a feature through the Factory, prove it with evals
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Gate G1 — Build a feature through the Factory, prove it with evals">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#format-and-time-box-6-h-total" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Format and time box (6 h total)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-is-provided" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is provided
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tasks
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-the-hidden-suite-covers-g1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What the hidden suite covers (G1)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#g1-hard-gates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        G1 hard gates
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#g1-rubric" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        G1 rubric
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-gate-g2-debug-and-extend-a-rag-agent-system-you-did-not-write" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Gate G2 — Debug and extend a RAG + agent system you did not write
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Gate G2 — Debug and extend a RAG + agent system you did not write">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#format-and-time-box-6-h-total_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Format and time box (6 h total)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-is-provided_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is provided
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#debug-task" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Debug task
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#extension-task" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Extension task
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bug-table-in-gate-reportmd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bug table (in GATE-REPORT.md)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#design-defense-30-min" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Design defense (30 min)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-the-hidden-suite-covers-g2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What the hidden suite covers (G2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#g2-hard-gates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        G2 hard gates
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#g2-rubric" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        G2 rubric
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-gate-g3-operate-attack-migrate-redesign" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Gate G3 — Operate, attack, migrate, redesign
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Gate G3 — Operate, attack, migrate, redesign">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#format-and-time-box-6-h-one-day-four-blocks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Format and time box (6 h, one day, four blocks)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#block-a-production-incident-90-min" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Block A — Production incident (90 min)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#block-b-red-team-75-min" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Block B — Red team (75 min)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#block-c-model-migration-75-min" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Block C — Model migration (75 min)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#block-d-design-review-60-min" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Block D — Design review (60 min)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#g3-rubric-per-block-plus-one-overall" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        G3 rubric (per block, plus one overall)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-how-hidden-eval-suites-are-kept-fair" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. How hidden eval suites are kept fair
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-retake-and-appeal-policy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Retake and appeal policy
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="assessment-and-gates">Assessment and gates<a class="headerlink" href="#assessment-and-gates" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><strong>Release:</strong> 2026.11 · <strong>Duration:</strong> 6 h learner effort per gate (incl. oral) · <strong>Format:</strong> individual, practical, AI use expected · <strong>Assessed against:</strong> the <a href="../competency-matrix/">Competency matrix</a> (G1 and G2: Competent in their areas; G3: Proficient in at least 3 of 4 blocks with none below Competent, and all 12 areas evidenced through the blocks plus the G3 evidence pack, see §5)</p>
+</blockquote>
+<p>This chapter tells you what each gate assesses, how it is run, how it is scored and what happens if you do not pass. It deliberately does not describe gate variants, test cases or planted faults: the gates measure how you handle work you have not seen.</p>
+<h2 id="1-why-gates-and-what-they-measure">1. Why gates, and what they measure<a class="headerlink" href="#1-why-gates-and-what-they-measure" title="Permanent link">&para;</a></h2>
+<p>Gates turn the course into a mastery-learning system. You move to the next task class only after showing you can do the work at the required level, on cases you have not seen. Bloom's synthesis put feedback-corrective mastery learning alone at about 1 SD over conventional instruction. The gates are where that feedback and correction happen, so they report specific failure categories and include a resit path.</p>
+<p>Because AI assistance is <strong>expected</strong>, a gate does not ask whether you can produce code. Agents produce code. A gate measures three things that agents do not supply on your behalf:</p>
+<ol>
+<li><strong>Judgement.</strong> What to build, which failure matters, what to leave out, and which trade-off to accept.</li>
+<li><strong>Verification.</strong> Whether your evals, tests and traces actually catch what's wrong. The hidden suites check your system, and a gate-sensitivity check tests your own gates.</li>
+<li><strong>Explanation.</strong> Whether you can explain, predict and safely modify what you submitted. This is checked in the oral and the written explanation.</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>Gate</th>
+<th>After</th>
+<th>Task class</th>
+<th>Centre of gravity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>G1</strong></td>
+<td>C0–C5</td>
+<td>Prompt feature + first tool + evals</td>
+<td>Build a feature <em>through the Factory</em> and prove it with failure-driven evals</td>
+</tr>
+<tr>
+<td><strong>G2</strong></td>
+<td>C6–C11</td>
+<td>RAG + tools + single agent + SQL + test automation</td>
+<td><em>Debug and extend</em> a system you did not write, then defend a design decision</td>
+</tr>
+<tr>
+<td><strong>G3</strong></td>
+<td>C12–C19</td>
+<td>Production multi-agent system on Azure</td>
+<td><em>Operate, attack, migrate and redesign</em> a running system under time pressure</td>
+</tr>
+</tbody>
+</table>
+<p>Before G1, C0 includes a short, auto-marked gate-readiness quiz (pass 5/6, retake allowed) on the rules in this chapter. Use it to check that you understand the assessment components, the unaided segment, the ownership rule and the gate-sensitivity check before you need them.</p>
+<hr />
+<h2 id="2-rules-common-to-all-gates">2. Rules common to all gates<a class="headerlink" href="#2-rules-common-to-all-gates" title="Permanent link">&para;</a></h2>
+<h3 id="environment-and-what-is-provided">Environment and what is provided<a class="headerlink" href="#environment-and-what-is-provided" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>A private gate repository per candidate.</strong> It is created for you from the gate's start state. You get write access to your own gate repo only.</li>
+<li><strong>Bring your Factory.</strong> In the first 15 minutes you may copy your own Factory assets into the gate repo: AGENTS.md / CLAUDE.md, <code>.github/copilot-instructions.md</code>, <code>.github/agents/*.agent.md</code>, skills, hooks, custom commands, CI templates and eval helpers. Product code from your own repo may <strong>not</strong> be copied. This tests whether your Factory is portable and whether it helps you.</li>
+<li><strong>Model access</strong> goes through the course AI gateway with a per-candidate key. It exposes the roles <code>chat-fast</code>, <code>chat-reasoning</code> and <code>embedding</code> (plus <code>chat-local</code> via Foundry Local on your machine) and enforces a per-candidate <strong>token quota</strong>, published in the brief and set at about 3× the reference solution's consumption. Exceeding it ends model access, not the gate. Cost discipline is part of the assessment.</li>
+<li><strong>Coding agents:</strong> any agent is allowed (Copilot, Claude Code, Codex or others). <strong>Internet access</strong> is allowed for documentation and package registries.</li>
+<li><strong>Visible vs hidden evals.</strong> Each gate ships a small visible smoke suite. The hidden suite runs in the grader pipeline after submission and is never shown. Results come back per stratum and per failure category, never per case.</li>
+<li><strong>Submission</strong> is a tag <code>submit</code> on your gate repo before the time box ends. The grader pipeline checks out that tag, so commits after the deadline are ignored.</li>
+</ul>
+<h3 id="required-submission-artefacts-all-gates">Required submission artefacts (all gates)<a class="headerlink" href="#required-submission-artefacts-all-gates" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Code and Factory changes on the <code>submit</code> tag, with CI green on that commit.</li>
+<li><code>GATE-REPORT.md</code>, using the template for the gate.</li>
+<li><strong>Agent session evidence:</strong> exported transcripts or logs from your coding-agent sessions. Use the tool's export or your Factory's logging hook; the exact mechanism depends on the tool, so verify the current export options against current documentation. Session logs are not graded for style. They are used in the oral and to resolve integrity questions.</li>
+<li>A cost line: tokens consumed per role, taken from the gateway's per-key metrics.</li>
+</ol>
+<h3 id="scoring-model">Scoring model<a class="headerlink" href="#scoring-model" title="Permanent link">&para;</a></h3>
+<p>Every gate combines three elements:</p>
+<ul>
+<li><strong>Hard gates</strong> (must-pass, binary). Failing any hard gate means failing the gate, whatever else scores well. They protect non-negotiables: safety, security, honesty, a working build.</li>
+<li><strong>Hidden-eval thresholds</strong>, expressed <strong>relative to the reference solution</strong> run on the same day with the same pinned models, plus an <strong>absolute floor</strong>. Example: "≥ 90% of reference field accuracy and ≥ 0.85 absolute". Relative thresholds absorb model drift. Floors stop the bar falling when the reference has a bad day. The floors below are initial values and may be recalibrated for each course release.</li>
+<li><strong>Rubric</strong> (Novice / Competent / Proficient / Expert) on 5 criteria per gate, scored by two assessors from the artefacts and the oral.</li>
+</ul>
+<p><strong>Handling nondeterminism.</strong> The hidden suite runs <strong>3 times</strong>. Quality metrics use the mean of the 3 runs. Hard-gate safety items use <strong>pass^3</strong>: they must pass in all three runs, because a safety property that holds two times in three does not hold.</p>
+<p><strong>Gate-sensitivity check.</strong> After submission the grader mutates your system in known ways, such as degrading the prompt, removing a validation step or disabling a filter. It then reruns <strong>your own CI eval gate</strong>. A gate that stays green under a mutation that breaks the hidden suite indicates hollow evals, and this feeds the "Evals &amp; verification" rubric row. This is mutation testing applied to evals.</p>
+<h3 id="oral-defense-protocol-all-gates">Oral defense protocol (all gates)<a class="headerlink" href="#oral-defense-protocol-all-gates" title="Permanent link">&para;</a></h3>
+<ul>
+<li>G1 runs 20 minutes and G2 and G3 run 30 minutes. Orals happen within 3 working days of submission, with two assessors, and are recorded for moderation (retained for 90 days; consent required).</li>
+<li><strong>Explain:</strong> the assessors pick 3 diff hunks from your submission at random (a script picks them, so the selection is not cherry-picked). For each, you explain what it does, why it is there, and what breaks if it is removed.</li>
+<li><strong>Predict:</strong> the assessor proposes a change, such as "set max iterations to 1", "remove this filter" or "swap to a model without tool calling". You predict the effect on behaviour, evals and cost <em>before</em> running anything.</li>
+<li><strong>Modify:</strong> you make one small, specified change live, with or without your agent, while narrating how you verify it.</li>
+<li><strong>Challenge:</strong> one or two questions on your report (G1, G2) or design (G2 defense, G3 Block D).</li>
+<li><strong>Ownership rule:</strong> if you cannot explain code you submitted, the "Directing &amp; verifying agents" criterion is scored Novice, whatever the hidden-eval score. <strong>You own what you merge.</strong></li>
+</ul>
+<h3 id="integrity-stance">Integrity stance<a class="headerlink" href="#integrity-stance" title="Permanent link">&para;</a></h3>
+<p>AI use is expected and does not need to be declared beyond the session evidence. <strong>What is not allowed:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Not allowed</th>
+<th>How it is detected or prevented</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Help from another human during the time box (including asking another person to prompt for you)</td>
+<td>Light proctoring of the unaided segment, oral consistency checks, and comparison of session logs with the commit history</td>
+</tr>
+<tr>
+<td>Sharing gate content or hidden-eval results with other learners</td>
+<td>Variants rotate, hidden cases are regenerated for each cohort, and leaked content is detectable in later submissions and public repos</td>
+</tr>
+<tr>
+<td><strong>Eval gaming:</strong> special-casing hidden or visible cases, or detecting the grader</td>
+<td>Hidden cases are fresh paraphrases of the visible distributions; a grader check looks for case-specific branches and literal case strings; gaming is an automatic fail and an integrity review</td>
+</tr>
+<tr>
+<td>Copying product code from your own or others' earlier repos</td>
+<td>Repo provenance check against course repos (similarity scan); Factory assets are exempt</td>
+</tr>
+<tr>
+<td>Misrepresenting understanding</td>
+<td>The oral defense</td>
+</tr>
+</tbody>
+</table>
+<p><strong>What is not policed:</strong> which agent you use, how you prompt it, whether you read documentation, or whether you use an agent during the oral's "modify" step, as long as you narrate verification.</p>
+<p><strong>Proctoring is deliberately light.</strong> Only the short <strong>unaided segments</strong> are proctored (screen share or in-room). The rest relies on assessment design: hidden suites, the gate-sensitivity check, session logs and the oral. Recordings are processed as personal data under the cohort privacy notice.</p>
+<h3 id="accommodations">Accommodations<a class="headerlink" href="#accommodations" title="Permanent link">&para;</a></h3>
+<p>Learners with documented needs receive up to +25% time on the practical blocks (institutional policy governs the exact amount). They can also choose an alternative oral format: written questions answered live in chat with follow-up, or more time to think. The constructs assessed do not change. Raise accommodation needs with the course team well before your gate week.</p>
+<hr />
+<h2 id="3-gate-g1-build-a-feature-through-the-factory-prove-it-with-evals">3. Gate G1 — Build a feature through the Factory, prove it with evals<a class="headerlink" href="#3-gate-g1-build-a-feature-through-the-factory-prove-it-with-evals" title="Permanent link">&para;</a></h2>
+<p><strong>Prerequisites:</strong> C0–C5 complete and module acceptance checks green. <strong>Assesses:</strong> K1, K2, K7 and K8 at Competent, with K3 and K4 lightly.</p>
+<h3 id="format-and-time-box-6-h-total">Format and time box (6 h total)<a class="headerlink" href="#format-and-time-box-6-h-total" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Time</th>
+<th>Block</th>
+<th>Mode</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0:00–0:15</td>
+<td>Briefing, repo creation, bring-your-Factory copy</td>
+<td>—</td>
+</tr>
+<tr>
+<td>0:15–0:45</td>
+<td><strong>Unaided segment.</strong> Read a set of provided traces and the baseline's prompt; answer short questions: predict behaviour and name failure modes</td>
+<td><strong>No AI</strong>, proctored</td>
+</tr>
+<tr>
+<td>0:45–4:15</td>
+<td>Build: spec → tests → agent implementation → error analysis → evals → CI gate</td>
+<td>AI expected</td>
+</tr>
+<tr>
+<td>4:15–4:50</td>
+<td>Write <code>GATE-REPORT.md</code> (eval report + explanation)</td>
+<td>AI allowed; you are accountable for every claim</td>
+</tr>
+<tr>
+<td>4:50–5:00</td>
+<td>Tag <code>submit</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td>within 3 days</td>
+<td>Oral, 20 min (+ ~20 min prep)</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<h3 id="what-is-provided">What is provided<a class="headerlink" href="#what-is-provided" title="Permanent link">&para;</a></h3>
+<ul>
+<li>A <strong>standard</strong> Fleet Ops Copilot at C5 level (streaming API, <code>IChatClient</code> pipeline, one tool, golden set v1, eval project, CI). It is not your own product, so everyone starts from the same baseline and you must work in code you did not write.</li>
+<li><code>BRIEF.md</code>: a one-page feature brief written as a business request, with acceptance criteria and non-functional requirements (latency, cost per request, BG/EN).</li>
+<li><code>pilot-traces/</code>: unlabelled traces from a synthetic "pilot", in OTel JSON plus readable Markdown.</li>
+<li><code>evals/visible/</code>: a small set of example cases for the feature.</li>
+<li>Gateway key with token quota; Foundry Local available.</li>
+</ul>
+<p>Each candidate receives one feature from a rotated set of variants. All variants sit in the Fleet Ops domain and exercise the same skills: typed extraction or grounded answering, tool calls, abstention or clarification, Bulgarian and English input, and resistance to instructions embedded in untrusted input.</p>
+<h3 id="tasks">Tasks<a class="headerlink" href="#tasks" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Specify before building.</strong> Update <code>SPEC.md</code> for the feature. Write <strong>human-owned acceptance tests</strong> (xUnit) before implementation: schema validity, tool-call expectations, and abstention behaviour. No exact-string assertions on model output.</li>
+<li><strong>Build through the Factory.</strong> Direct your coding agent through plan → implement → verify. The commit history should show this shape, for example a plan commit or plan file, followed by implementation commits that turn tests green. Update AGENTS.md if you learn something the next agent session needs.</li>
+<li><strong>Error analysis.</strong> Run the feature over the pilot traces' inputs. Open-code the first failure in each failing trace. Axial-code the notes into a taxonomy of ≥ 3 failure modes, with counts, in <code>evals/error-analysis.md</code>.</li>
+<li><strong>Failure-driven evals.</strong> For each failure mode, write at least one evaluator, code-based where possible. Use an LLM judge only if no code check is possible, and say how you would validate it. Extend the golden set to ≥ 25 cases, including ≥ 5 BG and ≥ 3 abstention or clarification cases. Wire the evals into CI with response caching and a threshold that fails the build.</li>
+<li><strong>Explain.</strong> <code>GATE-REPORT.md</code> (≤ 2 pages) covers the taxonomy, eval results, what you fixed, <strong>what you chose not to fix and why</strong>, cost per request measured, and one risk you see for production.</li>
+</ol>
+<h3 id="what-the-hidden-suite-covers-g1">What the hidden suite covers (G1)<a class="headerlink" href="#what-the-hidden-suite-covers-g1" title="Permanent link">&para;</a></h3>
+<p>The hidden suite is stratified so that a feature tuned only to the visible cases does not pass. Strata include typical English and Bulgarian input, Latin-script Bulgarian, missing or ambiguous fields, unknown entities, adversarial embedded instructions, out-of-scope requests, tool failures and long inputs.</p>
+<p>Metrics: schema validity; field-level accuracy or citation correctness (depending on the variant); abstention correctness; tool-call correctness; leakage checks where customer-facing text is produced; p95 latency and cost per request on <code>chat-fast</code>.</p>
+<h3 id="g1-hard-gates">G1 hard gates<a class="headerlink" href="#g1-hard-gates" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Hard gate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>H1</td>
+<td><code>submit</code> builds, all your tests green in CI, no secrets (gitleaks), and the eval CI gate is present and enforced</td>
+</tr>
+<tr>
+<td>H2</td>
+<td>Hidden <strong>schema validity ≥ 98%</strong> (mean of 3 runs)</td>
+</tr>
+<tr>
+<td>H3</td>
+<td><strong>Safety item, pass^3:</strong> the safety property stated for your variant holds in all three runs (for example a high recall on safety-critical items, no unsupported answers to dangerous requests, or zero customer-facing leaks of internal or driver data)</td>
+</tr>
+<tr>
+<td>H4</td>
+<td>No exact-string assertions on model output in tests, and no case-specific branches (static check)</td>
+</tr>
+<tr>
+<td>H5</td>
+<td>Oral completed, and the ownership rule not triggered</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Hidden-eval thresholds (initial floors, may be recalibrated per release):</strong> primary accuracy metric ≥ 90% of reference and ≥ 0.80 absolute. Abstention correctness ≥ 0.80. Cost per request ≤ 1.5× reference.</p>
+<h3 id="g1-rubric">G1 rubric<a class="headerlink" href="#g1-rubric" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th>Novice</th>
+<th>Competent (pass level)</th>
+<th>Proficient</th>
+<th>Expert</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Problem framing &amp; spec</strong></td>
+<td>Builds from the brief without a spec; acceptance criteria are implicit</td>
+<td>Spec and human-owned tests precede implementation and cover the brief's criteria</td>
+<td>Spec makes non-obvious decisions explicit (abstention policy, enum boundaries, BG handling); tests cover edge strata</td>
+<td>Spec anticipates failure modes later confirmed by the hidden suite and scopes them deliberately</td>
+</tr>
+<tr>
+<td><strong>Directing &amp; verifying agents</strong></td>
+<td>Accepts agent output; can't explain parts of the diff</td>
+<td>Plan → implement → verify visible; tests and evals run before "done"; diff fully explained in the oral</td>
+<td>Constrains the agent effectively (memory-file updates, hooks, small batches); catches and corrects at least one agent error, with evidence in the logs</td>
+<td>Factory assets measurably sped up or de-risked the work, e.g. a reusable skill or check that a peer could adopt</td>
+</tr>
+<tr>
+<td><strong>Error analysis &amp; evals</strong></td>
+<td>Generic metrics; evals written before looking at traces</td>
+<td>Taxonomy from traces; one evaluator per failure mode; CI gate works</td>
+<td>Code-based checks preferred and justified; golden set stratified; gate-sensitivity check catches ≥ 2 of 3 grader mutations</td>
+<td>Gate-sensitivity check catches all mutations; report quantifies residual risk per failure mode</td>
+</tr>
+<tr>
+<td><strong>Engineering quality, security &amp; cost</strong></td>
+<td>Works on the happy path only</td>
+<td>Handles tool errors and unknown entities; keyless auth; cost per request measured</td>
+<td>Prompt laid out for caching; budgets or limits respected; injection-in-input handled by design (not "please ignore")</td>
+<td>Measurable cost and latency optimisation at equal quality, with the trade-off documented</td>
+</tr>
+<tr>
+<td><strong>Explanation (written + oral)</strong></td>
+<td>Describes what was done, not why</td>
+<td>Explains decisions and limitations correctly; predictions mostly right</td>
+<td>Predictions right, including cost effects; states what was deliberately not fixed and why</td>
+<td>Teaches: clear causal explanations a peer could act on; spots a weakness in their own design unprompted</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Pass:</strong> all hard gates, every criterion ≥ Competent, hidden thresholds met.</p>
+<hr />
+<h2 id="4-gate-g2-debug-and-extend-a-rag-agent-system-you-did-not-write">4. Gate G2 — Debug and extend a RAG + agent system you did not write<a class="headerlink" href="#4-gate-g2-debug-and-extend-a-rag-agent-system-you-did-not-write" title="Permanent link">&para;</a></h2>
+<p><strong>Prerequisites:</strong> G1 passed; C6–C11 acceptance checks green. <strong>Assesses:</strong> K2, K3, K4, K5, K7, K8, K10 and K12 at Competent.</p>
+<h3 id="format-and-time-box-6-h-total_1">Format and time box (6 h total)<a class="headerlink" href="#format-and-time-box-6-h-total_1" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Time</th>
+<th>Block</th>
+<th>Mode</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0:00–0:20</td>
+<td>Briefing; read <code>ARCHITECTURE.md</code>, the user complaints and the bug-report template</td>
+<td>—</td>
+</tr>
+<tr>
+<td>0:20–0:40</td>
+<td><strong>Unaided segment.</strong> From provided traces, write hypotheses for the complaints. No fixing.</td>
+<td><strong>No AI</strong>, proctored</td>
+</tr>
+<tr>
+<td>0:40–3:20</td>
+<td><strong>Debug:</strong> find, root-cause and fix injected defects, each with a regression test or eval</td>
+<td>AI expected</td>
+</tr>
+<tr>
+<td>3:20–4:50</td>
+<td><strong>Extend:</strong> implement the new capability with evals</td>
+<td>AI expected</td>
+</tr>
+<tr>
+<td>4:50–5:20</td>
+<td><code>GATE-REPORT.md</code>: bug table + one ADR</td>
+<td>—</td>
+</tr>
+<tr>
+<td>within 3 days</td>
+<td><strong>Design defense</strong>, 30 min (+ ~10 min prep)</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<h3 id="what-is-provided_1">What is provided<a class="headerlink" href="#what-is-provided_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Fleet Ops Copilot at C11 level. It includes BG/EN policy RAG (hybrid + rerank + <code>allowed_groups</code>), a Trakia MCP server, the Fleet Assistant agent (MAF, approval for actions), the Fleet Analyst text-to-SQL agent, the test pyramid, a mutation gate and Playwright tests.</li>
+<li>A <strong>shared read-only AI Search index</strong>, plus local SQL Server 2025 (<code>TrakiaOps</code> small profile).</li>
+<li><code>complaints/</code>: user complaints written as support tickets.</li>
+<li><code>traces/</code>: production-like traces, some showing the injected defects.</li>
+<li>The visible eval suite. <strong>Warning given in the brief:</strong> "the eval suite itself may not be trustworthy".</li>
+</ul>
+<h3 id="debug-task">Debug task<a class="headerlink" href="#debug-task" title="Permanent link">&para;</a></h3>
+<p>The system contains several injected defects; the brief tells you that there are "at least five". They span retrieval, security, agent and tool behaviour, and verification (including the Factory's own gates). Root-cause each one from evidence, fix it, and protect the fix with a regression test or eval. Fixing every security-category defect is a hard gate.</p>
+<h3 id="extension-task">Extension task<a class="headerlink" href="#extension-task" title="Permanent link">&para;</a></h3>
+<p>You also implement one new capability on the same system, with evals for its failure modes. The capability is specified in your brief and varies by variant. Expect it to involve consequential actions behind approval, cross-lingual retrieval, or multi-turn analytics, and to require that existing guarantees (permissions, read-only access, approvals, idempotency) still hold.</p>
+<h3 id="bug-table-in-gate-reportmd">Bug table (in <code>GATE-REPORT.md</code>)<a class="headerlink" href="#bug-table-in-gate-reportmd" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Symptom</th>
+<th>Evidence (trace id, query, metric)</th>
+<th>Root cause</th>
+<th>Fix (commit)</th>
+<th>Regression test / eval</th>
+<th>How I would have prevented it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="design-defense-30-min">Design defense (30 min)<a class="headerlink" href="#design-defense-30-min" title="Permanent link">&para;</a></h3>
+<p>You present one ADR from the gate, chosen from: retrieval fix approach, tool or approval design, or the eval-trust fix. The board probes it with changed constraints, for example a much larger corpus, an additional language, a model without tool calling, a new legal restriction on what may be indexed, or a halved cost budget. You must adapt the decision or explain why it holds.</p>
+<h3 id="what-the-hidden-suite-covers-g2">What the hidden suite covers (G2)<a class="headerlink" href="#what-the-hidden-suite-covers-g2" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Retrieval:</strong> BG/EN queries; recall@10 and nDCG@5.</li>
+<li><strong>Groundedness and citation correctness:</strong> a course judge, pinned and validated against human labels (TPR/TNR ≥ 0.85 on the course's labelled set).</li>
+<li><strong>Permission matrix:</strong> every role × restricted documents, through <em>every</em> endpoint.</li>
+<li><strong>SQL safety:</strong> write attempts, multi-statement batches, cross-scope access under RLS, prompt-injected SQL.</li>
+<li><strong>Tool-call accuracy</strong> on a set of tasks.</li>
+<li><strong>Approval enforcement:</strong> attempts at state change without approval.</li>
+<li><strong>Budget behaviour</strong> when a tool keeps failing.</li>
+<li><strong>Per-defect regression probes:</strong> hidden tests that fail if a defect is still present.</li>
+<li><strong>Extension suite</strong> for the new capability.</li>
+</ul>
+<h3 id="g2-hard-gates">G2 hard gates<a class="headerlink" href="#g2-hard-gates" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Hard gate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>H1</td>
+<td>Build and CI green; no secrets; eval and mutation gates enforced (thresholds &gt; 0)</td>
+</tr>
+<tr>
+<td>H2</td>
+<td><strong>Permission matrix: 0 leaks, pass^3</strong>, across all endpoints</td>
+</tr>
+<tr>
+<td>H3</td>
+<td><strong>SQL safety: 0 write or cross-scope statements executed, pass^3</strong></td>
+</tr>
+<tr>
+<td>H4</td>
+<td><strong>Approval: 0 unapproved state-changing tool calls, pass^3</strong></td>
+</tr>
+<tr>
+<td>H5</td>
+<td>All <strong>security-category</strong> defects root-caused and fixed, each with a regression test</td>
+</tr>
+<tr>
+<td>H6</td>
+<td>Design defense completed; ownership rule not triggered</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Thresholds (initial floors):</strong>
+- ≥ 5 defects correctly root-caused and fixed, including all security ones.
+- Retrieval recall@10 and groundedness ≥ 90% of the reference.
+- Extension suite ≥ 85% of the reference.
+- The agent terminates within budget on 100% of the budget probes.</p>
+<h3 id="g2-rubric">G2 rubric<a class="headerlink" href="#g2-rubric" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th>Novice</th>
+<th>Competent (pass level)</th>
+<th>Proficient</th>
+<th>Expert</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Diagnosis from evidence</strong></td>
+<td>Changes code until symptoms vanish</td>
+<td>Each fix tied to trace or metric evidence and a stated root cause</td>
+<td>Uses traces, the eval breakdown and the permission matrix systematically; distinguishes symptoms that share a cause</td>
+<td>Finds all defects, including the eval-trust defect, and explains how each escaped the existing gates</td>
+</tr>
+<tr>
+<td><strong>Fix quality &amp; regression protection</strong></td>
+<td>Fixes break other things; no tests</td>
+<td>Every fix has a regression test or eval; no new hidden-suite regressions</td>
+<td>Fixes address the class, not the instance (e.g., the filter enforced centrally for all endpoints)</td>
+<td>Adds a fitness function or gate that would have caught the class earlier (architecture test, policy check)</td>
+</tr>
+<tr>
+<td><strong>Extension design</strong></td>
+<td>Feature works on the happy path</td>
+<td>Meets the extension suite; approval and idempotency correct</td>
+<td>Tool design follows the course guidance (consolidated, paginated, actionable errors); evals cover the new failure modes</td>
+<td>Extension design is reusable as a pattern with documented trade-offs</td>
+</tr>
+<tr>
+<td><strong>Verification &amp; Factory use</strong></td>
+<td>Trusts the visible suite</td>
+<td>Notices that the suite may lie and verifies it independently</td>
+<td>Repairs the eval harness and the CI gates; the gate-sensitivity check passes</td>
+<td>Uses agents in parallel effectively (e.g., one agent per hypothesis in worktrees), with evidence of verification discipline</td>
+</tr>
+<tr>
+<td><strong>Design defense</strong></td>
+<td>Restates what was built</td>
+<td>Justifies the ADR with alternatives and consequences</td>
+<td>Adapts correctly to 2 or more changed constraints with quantified reasoning (cost, recall, risk)</td>
+<td>Identifies the constraint that would flip the decision before being asked</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Pass:</strong> all hard gates, all criteria ≥ Competent, ≥ 2 criteria at Proficient, thresholds met.</p>
+<hr />
+<h2 id="5-gate-g3-operate-attack-migrate-redesign">5. Gate G3 — Operate, attack, migrate, redesign<a class="headerlink" href="#5-gate-g3-operate-attack-migrate-redesign" title="Permanent link">&para;</a></h2>
+<p><strong>Prerequisites:</strong> G2 passed; C12–C19 acceptance checks green; a <strong>G3 evidence pack</strong> submitted 48 h before the gate. The pack links ADR-0012 (topology), ADR-0013 (retrieval choice), ADR-0014 (memory design), ADR-0015, ADR-0017, ADR-0018 and ADR-0019; the C13 context budget (<code>docs/context-budget.md</code>) with the context-rot and compaction results; the C14 eval report and judge cards; the C16 threat register and ASR report; the C18 risk file, DPIA delta, fairness report and <code>FairnessGateTests</code> output; and the C19 factory scorecard and agent policy. The pack is not scored on its own; the board uses it for Block D questions, and the bring-your-Factory rule (§2) applies to Blocks A–C.</p>
+<p><strong>Assesses:</strong> the pass decision follows the block rubric and pass rule below (≥ Proficient in 3 of 4 blocks). The 12 competency areas are evidenced across the blocks and the pack as mapped in the next table. An area not shown at Proficient does not fail a candidate who meets the pass rule, but it is recorded on your competency record as a remediation item before track entry. This is the last common gate before the tracks diverge.</p>
+<p><strong>How G3 evidences the 12 areas</strong></p>
+<table>
+<thead>
+<tr>
+<th>Area</th>
+<th>Primary evidence in G3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>K1 AI foundations</td>
+<td>Block C (token and cost-per-task deltas); Block A when the scenario involves cost</td>
+</tr>
+<tr>
+<td>K2 Prompting &amp; structured I/O</td>
+<td>Block C (structured-output and tool-calling behaviour of the candidate model)</td>
+</tr>
+<tr>
+<td>K3 Retrieval &amp; knowledge</td>
+<td>Block A when the scenario involves retrieval; otherwise ADR-0013, the C14 eval report's retrieval slices plus the Block D tenancy question on index isolation</td>
+</tr>
+<tr>
+<td>K4 Tools &amp; MCP</td>
+<td>Block B (tool scope, MCP descriptions)</td>
+</tr>
+<tr>
+<td>K5 Agents &amp; orchestration</td>
+<td>Block A (workflow behaviour); ADR-0012</td>
+</tr>
+<tr>
+<td>K6 Context &amp; memory</td>
+<td>Pack (ADR-0014, context budget, context-rot/compaction results) + <strong>mandatory Block D board question</strong>; Block B where memory is in scope</td>
+</tr>
+<tr>
+<td>K7 Evaluation</td>
+<td>Block C (pairwise per-failure-mode); Block A postmortem eval action</td>
+</tr>
+<tr>
+<td>K8 Testing &amp; SDLC automation</td>
+<td>Factory use in Blocks A–C; C19 scorecard</td>
+</tr>
+<tr>
+<td>K9 Operations, observability &amp; cost</td>
+<td>Block A</td>
+</tr>
+<tr>
+<td>K10 Security</td>
+<td>Block B</td>
+</tr>
+<tr>
+<td>K11 Responsible AI &amp; governance</td>
+<td>Block D (AI Act classification); pack (risk file, DPIA delta, fairness report) + <strong>mandatory Block D board question on fairness</strong></td>
+</tr>
+<tr>
+<td>K12 Architecture &amp; business</td>
+<td>Block D</td>
+</tr>
+</tbody>
+</table>
+<h3 id="format-and-time-box-6-h-one-day-four-blocks">Format and time box (6 h, one day, four blocks)<a class="headerlink" href="#format-and-time-box-6-h-one-day-four-blocks" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Time</th>
+<th>Block</th>
+<th>Mode</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0:00–0:15</td>
+<td>Briefing; access to your <strong>pre-provisioned Azure environment</strong></td>
+<td>—</td>
+</tr>
+<tr>
+<td>0:15–1:45</td>
+<td><strong>Block A — Production incident</strong> (90 min)</td>
+<td>AI expected; Azure SRE Agent (Reader mode) allowed</td>
+</tr>
+<tr>
+<td>1:45–2:00</td>
+<td>Break</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2:00–3:15</td>
+<td><strong>Block B — Red team</strong> (75 min)</td>
+<td>AI expected; [Python] PyRIT / AI Red Teaming Agent</td>
+</tr>
+<tr>
+<td>3:15–4:30</td>
+<td><strong>Block C — Model migration</strong> (75 min)</td>
+<td>AI expected</td>
+</tr>
+<tr>
+<td>4:30–4:45</td>
+<td>Break</td>
+<td>—</td>
+</tr>
+<tr>
+<td>4:45–5:45</td>
+<td><strong>Block D — Design review</strong> (20 min prep <strong>unaided</strong>, 40 min board)</td>
+<td>Prep proctored, no AI</td>
+</tr>
+<tr>
+<td>after</td>
+<td>Environment teardown (automated)</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>The environment contains Fleet Ops Copilot at C19 level:</p>
+<ul>
+<li>the multi-agent incident workflow</li>
+<li>Container Apps and a Foundry hosted agent</li>
+<li>the APIM AI gateway (PTU-style priority pool simulated with two backends, plus circuit breaker)</li>
+<li>AI Search</li>
+<li>App Insights with dashboards and KQL workbooks</li>
+<li>guardrails</li>
+<li>the CI/CD pipeline</li>
+<li>a synthetic traffic generator running throughout</li>
+</ul>
+<h3 id="block-a-production-incident-90-min">Block A — Production incident (90 min)<a class="headerlink" href="#block-a-production-incident-90-min" title="Permanent link">&para;</a></h3>
+<p>At T0 an alert fires. Each candidate gets one incident scenario, drawn from a pool covering cost, latency and throttling, answer quality, security and model-lifecycle failures. The cause is planted; your job is to contain it and prove it.</p>
+<p><strong>Tasks:</strong>
+1. Declare severity and impact within 15 minutes, as a status note in the incident channel file.
+2. <strong>Mitigate first</strong>: feature flag, rollback, quota, block or failover. Record the time to mitigate.
+3. Find the root cause from traces and KQL. SRE Agent hypotheses must be verified, not pasted.
+4. Write a <strong>blameless postmortem</strong> (<code>postmortems/G3.md</code>) with timeline, impact, root cause, contributing factors, and action items. The action items must include <strong>a new eval or alert that would have caught this earlier</strong> and a Factory change if relevant.</p>
+<p><strong>Hard gate:</strong> the mitigation contains the impact within the block, and no destructive action is taken outside scope (no data deletion, no disabling of security controls as a "fix").</p>
+<h3 id="block-b-red-team-75-min">Block B — Red team (75 min)<a class="headerlink" href="#block-b-red-team-75-min" title="Permanent link">&para;</a></h3>
+<p><strong>Target:</strong> a red-team variant of the environment with planted weaknesses that you are not told about.</p>
+<p><strong>Tasks:</strong>
+1. Run an automated scan with the AI Red Teaming Agent or PyRIT [Python]. Note the region and feature limitations: agent-specific risk categories are cloud-only in five regions, and some agent types are not supported as targets, so manual attacks fill the gaps.
+2. Write <strong>manual attacks in BG and EN</strong>. Content Safety classifiers are not validated for Bulgarian, so language-specific attacks matter.
+3. Produce a scorecard with <strong>ASR per category</strong>, the top findings with reproduction steps, each mapped to OWASP LLM / ASI IDs, and mitigations ranked architecture-first.
+4. Implement <strong>one architectural mitigation</strong>, such as removing a trifecta leg, constraining the action space or isolating a shared component, and re-measure ASR.</p>
+<p><strong>Hard gate:</strong> at least one valid, reproducible finding, plus a measured ASR before and after the mitigation.</p>
+<h3 id="block-c-model-migration-75-min">Block C — Model migration (75 min)<a class="headerlink" href="#block-c-model-migration-75-min" title="Permanent link">&para;</a></h3>
+<p><strong>Notice:</strong> "The model behind <code>chat-reasoning</code> retires in 60 days. Candidate replacement: <code>&lt;model-X&gt;</code>." The candidate model is chosen to differ from the current one in a way that matters; finding out how is part of the task.</p>
+<p><strong>Tasks:</strong>
+1. Swap by configuration only. Any code change must be justified.
+2. Run the production eval suite <strong>pairwise</strong>. Report per-failure-mode pass rates, cost per task and p95 latency deltas, and the changes in caching behaviour.
+3. Find the behaviour difference and decide whether to adapt the prompt or tool layer, choose a different candidate, or route by task.
+4. Write a <strong>go/no-go memo</strong>: decision, evidence, a canary plan (APIM weighted backends: stages, metrics, rollback triggers), a PTU consideration (provisioned deployments are not auto-upgraded) and owner sign-offs.</p>
+<p><strong>Hard gate:</strong> the decision is supported by per-failure-mode data. A "go" based on aggregate scores alone, or with no rollback criteria, fails.</p>
+<h3 id="block-d-design-review-60-min">Block D — Design review (60 min)<a class="headerlink" href="#block-d-design-review-60-min" title="Permanent link">&para;</a></h3>
+<p>You receive a <strong>change request</strong> from Trakia's leadership that extends the product's business scope.</p>
+<p><strong>Prep (20 min, unaided):</strong> write a one-page design note on paper or in a plain editor with no AI.</p>
+<p><strong>Board (40 min):</strong> present for 10 minutes, then 30 minutes of questions.</p>
+<p>The board probes your design but does not prompt you towards the issues. Expect to be asked about the architectural, regulatory and sequencing consequences of the request: what changes in the system, what the change means under the EU AI Act and GDPR (with legal questions flagged for counsel rather than answered as a lawyer), what to build first, what not to build, and what evidence each step requires.</p>
+<p><strong>Evidence-pack questions (mandatory, within the 30 min of questions).</strong> The board always asks at least two questions adapted to your own pack: one on your <strong>context and memory design</strong> (C13: ADR-0014 and <code>docs/context-budget.md</code>), and one on your <strong>fairness evidence</strong> (C18: the fairness report and its gate rule). Answer them from your own data.</p>
+<p><strong>Hard gate:</strong> you identify the principal architectural risk and the principal regulatory-classification implication of the change request without being prompted.</p>
+<h3 id="g3-rubric-per-block-plus-one-overall">G3 rubric (per block, plus one overall)<a class="headerlink" href="#g3-rubric-per-block-plus-one-overall" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th>Novice</th>
+<th>Competent</th>
+<th>Proficient (pass level)</th>
+<th>Expert</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>A — Incident</strong></td>
+<td>Root-causes before mitigating; impact grows</td>
+<td>Mitigates within the block; root cause found</td>
+<td>Mitigation in under 30 min; root cause proven from traces; postmortem actions include an eval or alert and a Factory change</td>
+<td>Finds contributing factors beyond the planted cause (e.g., the missing gate that let the change ship) and fixes the class</td>
+</tr>
+<tr>
+<td><strong>B — Red team</strong></td>
+<td>Runs the scanner, reports raw output</td>
+<td>Valid findings with repros; ASR measured</td>
+<td>Findings mapped to OWASP; architectural mitigation reduces ASR measurably; BG attacks included</td>
+<td>Finds planted weaknesses the scanner misses; the mitigation generalises; residual risk is stated honestly</td>
+</tr>
+<tr>
+<td><strong>C — Migration</strong></td>
+<td>Aggregate score comparison only</td>
+<td>Pairwise per-failure-mode comparison; decision stated</td>
+<td>Finds the behaviour difference and handles it; the canary plan has metrics and rollback triggers; cost per task considered</td>
+<td>Proposes a durable migration process (eval set, routing, lifecycle watch) beyond this one swap</td>
+</tr>
+<tr>
+<td><strong>D — Design review</strong></td>
+<td>Describes features, not design</td>
+<td>Identifies the key architectural and regulatory issues when prompted</td>
+<td>Identifies both unprompted; sound design for the change; correct classification reasoning with obligations; answers the context/memory and fairness pack questions from their own data</td>
+<td>Reshapes the request (scope, intended purpose, sequencing) to reduce risk while preserving business value, with clear trade-offs</td>
+</tr>
+<tr>
+<td><strong>Overall — Operational judgement</strong></td>
+<td>Unsafe actions or unsupported claims</td>
+<td>Safe, but slow or unverified</td>
+<td>Safe, verified, communicates status clearly under time pressure</td>
+<td>Calm prioritisation; communication others could act on</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Pass:</strong> all block hard gates, <strong>≥ Proficient in at least 3 of the 4 blocks</strong>, none below Competent, and "Overall" at Proficient or above.</p>
+<hr />
+<h2 id="6-how-hidden-eval-suites-are-kept-fair">6. How hidden eval suites are kept fair<a class="headerlink" href="#6-how-hidden-eval-suites-are-kept-fair" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Access.</strong> Hidden suites are held privately and are readable only by the grader pipeline and the gate owners. Your gate repo is checked out read-only by the grader.</li>
+<li><strong>Origin.</strong> Cases are written from failure modes observed in earlier cohorts, which is failure-driven evaluation applied to the course itself. Each cohort gets freshly paraphrased, human-reviewed cases, labelled by stratum.</li>
+<li><strong>Judges.</strong> Course LLM judges are pinned (model deployment plus judge prompt version) and validated against human-labelled examples per failure mode, with <strong>TPR and TNR ≥ 0.85</strong> on a held-out split (course-designer threshold). A judge that drifts after a model change is re-validated before grading resumes.</li>
+<li><strong>Calibration.</strong> Before each release and after any pinned-model change, thresholds are checked against the reference solution so that the bar stays stable.</li>
+<li><strong>Determinism for appeals.</strong> Responses are cached so that a graded run can be re-run exactly for re-grading and appeals. The 3 graded runs themselves are uncached.</li>
+<li><strong>Feedback.</strong> You receive per-stratum scores, the failure categories hit, and which gate-sensitivity mutations your CI missed. You do not receive cases.</li>
+<li><strong>Retirement.</strong> A case that leaks is retired immediately, and its variant is rotated out.</li>
+</ul>
+<hr />
+<h2 id="7-retake-and-appeal-policy">7. Retake and appeal policy<a class="headerlink" href="#7-retake-and-appeal-policy" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Situation</th>
+<th>Policy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>G1 or G2 not passed</td>
+<td>Remediation plan agreed with a mentor (targeted labs and katas mapped to the failed criteria and strata). Resit with a <strong>different variant</strong> no earlier than <strong>2 weeks</strong> later.</td>
+</tr>
+<tr>
+<td>G3: 1–2 blocks below Competent, or a block hard gate failed</td>
+<td><strong>Block-level resit</strong> of the failed blocks only, within 3 weeks, with a different scenario.</td>
+</tr>
+<tr>
+<td>G3: 3 or more blocks failed</td>
+<td>Full G3 resit after remediation.</td>
+</tr>
+<tr>
+<td>Attempts</td>
+<td>Up to <strong>3 attempts per gate</strong> per enrolment. After the third, you transfer to the next cohort at the start of the corresponding level, keeping the module credits already earned.</td>
+</tr>
+<tr>
+<td>Integrity breach</td>
+<td>The gate is void. An integrity review is held with the course lead, and the outcome may include removal. Not counted as an attempt if you are cleared.</td>
+</tr>
+<tr>
+<td>Appeals</td>
+<td>Within 5 working days, in writing, against specific rubric rows or hard-gate results. A second assessor who did not grade the attempt reviews the recording and artefacts; cached responses allow an exact re-run of the hidden suite.</td>
+</tr>
+<tr>
+<td>Technical failure (gateway outage, Azure incident)</td>
+<td>Time is extended by the outage duration, or a free resit is granted; the decision is logged.</td>
+</tr>
+</tbody>
+</table>
+<p>Failing a gate is not a failure of the course design. It is the feedback-corrective loop working, and the resit path is part of the design.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../course-overview/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Course overview">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Course overview
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../competency-matrix/" class="md-footer__link md-footer__link--next" aria-label="Next: Competency matrix">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Competency matrix
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.top", "navigation.footer", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

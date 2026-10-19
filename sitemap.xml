@@ -1,0 +1,591 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+    <url>
+        <loc>None./</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="None"/>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/"/>
+    </url>
+    <url>
+        <loc>Nonecapstone/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonecapstone/"/>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/capstone/"/>
+    </url>
+    <url>
+        <loc>Noneappendix/glossary/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="Noneappendix/glossary/"/>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/appendix/glossary/"/>
+    </url>
+    <url>
+        <loc>Noneappendix/references/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="Noneappendix/references/"/>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/appendix/references/"/>
+    </url>
+    <url>
+        <loc>Nonepart-1-foundations/c00-orientation-setup-and-toolchain/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonepart-1-foundations/c00-orientation-setup-and-toolchain/"/>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/part-1-foundations/c00-orientation-setup-and-toolchain/"/>
+    </url>
+    <url>
+        <loc>Nonepart-1-foundations/c01-how-generative-ai-works-an-engineer-s-mental-model/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonepart-1-foundations/c01-how-generative-ai-works-an-engineer-s-mental-model/"/>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/part-1-foundations/c01-how-generative-ai-works-an-engineer-s-mental-model/"/>
+    </url>
+    <url>
+        <loc>Nonepart-1-foundations/c02-your-first-ai-feature-in-net/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonepart-1-foundations/c02-your-first-ai-feature-in-net/"/>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/part-1-foundations/c02-your-first-ai-feature-in-net/"/>
+    </url>
+    <url>
+        <loc>Nonepart-1-foundations/c03-prompting-structured-outputs-and-tool-calling/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonepart-1-foundations/c03-prompting-structured-outputs-and-tool-calling/"/>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/part-1-foundations/c03-prompting-structured-outputs-and-tool-calling/"/>
+    </url>
+    <url>
+        <loc>Nonepart-1-foundations/c04-working-with-coding-agents-the-factory-day-one/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonepart-1-foundations/c04-working-with-coding-agents-the-factory-day-one/"/>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/part-1-foundations/c04-working-with-coding-agents-the-factory-day-one/"/>
+    </url>
+    <url>
+        <loc>Nonepart-1-foundations/c05-evals-from-day-one/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonepart-1-foundations/c05-evals-from-day-one/"/>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/part-1-foundations/c05-evals-from-day-one/"/>
+    </url>
+    <url>
+        <loc>Nonepart-2-building-blocks/c06-embeddings-and-vector-search/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonepart-2-building-blocks/c06-embeddings-and-vector-search/"/>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/part-2-building-blocks/c06-embeddings-and-vector-search/"/>
+    </url>
+    <url>
+        <loc>Nonepart-2-building-blocks/c07-rag-from-documents-to-cited-permission-aware-answers/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonepart-2-building-blocks/c07-rag-from-documents-to-cited-permission-aware-answers/"/>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/part-2-building-blocks/c07-rag-from-documents-to-cited-permission-aware-answers/"/>
+    </url>
+    <url>
+        <loc>Nonepart-2-building-blocks/c08-tools-and-the-model-context-protocol/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonepart-2-building-blocks/c08-tools-and-the-model-context-protocol/"/>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/part-2-building-blocks/c08-tools-and-the-model-context-protocol/"/>
+    </url>
+    <url>
+        <loc>Nonepart-2-building-blocks/c09-agents-with-microsoft-agent-framework/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonepart-2-building-blocks/c09-agents-with-microsoft-agent-framework/"/>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/part-2-building-blocks/c09-agents-with-microsoft-agent-framework/"/>
+    </url>
+    <url>
+        <loc>Nonepart-2-building-blocks/c10-agents-over-structured-data-text-to-sql-on-sql-server/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonepart-2-building-blocks/c10-agents-over-structured-data-text-to-sql-on-sql-server/"/>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/part-2-building-blocks/c10-agents-over-structured-data-text-to-sql-on-sql-server/"/>
+    </url>
+    <url>
+        <loc>Nonepart-2-building-blocks/c11-agentic-testing-ai-driven-tdd-mutation-and-e2e-test-agents/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonepart-2-building-blocks/c11-agentic-testing-ai-driven-tdd-mutation-and-e2e-test-agents/"/>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/part-2-building-blocks/c11-agentic-testing-ai-driven-tdd-mutation-and-e2e-test-agents/"/>
+    </url>
+    <url>
+        <loc>Nonepart-3-production/c12-workflows-and-multi-agent-orchestration/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonepart-3-production/c12-workflows-and-multi-agent-orchestration/"/>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/part-3-production/c12-workflows-and-multi-agent-orchestration/"/>
+    </url>
+    <url>
+        <loc>Nonepart-3-production/c13-context-engineering-advanced-retrieval-and-memory/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonepart-3-production/c13-context-engineering-advanced-retrieval-and-memory/"/>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/part-3-production/c13-context-engineering-advanced-retrieval-and-memory/"/>
+    </url>
+    <url>
+        <loc>Nonepart-3-production/c14-failure-driven-evals-llm-judges-and-red-teaming/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonepart-3-production/c14-failure-driven-evals-llm-judges-and-red-teaming/"/>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/part-3-production/c14-failure-driven-evals-llm-judges-and-red-teaming/"/>
+    </url>
+    <url>
+        <loc>Nonepart-3-production/c15-observability-genaiops-and-cost/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonepart-3-production/c15-observability-genaiops-and-cost/"/>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/part-3-production/c15-observability-genaiops-and-cost/"/>
+    </url>
+    <url>
+        <loc>Nonepart-3-production/c16-security-for-llm-and-agentic-systems/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonepart-3-production/c16-security-for-llm-and-agentic-systems/"/>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/part-3-production/c16-security-for-llm-and-agentic-systems/"/>
+    </url>
+    <url>
+        <loc>Nonepart-3-production/c17-shipping-to-azure-hosting-ai-gateway-iac-and-interop/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonepart-3-production/c17-shipping-to-azure-hosting-ai-gateway-iac-and-interop/"/>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/part-3-production/c17-shipping-to-azure-hosting-ai-gateway-iac-and-interop/"/>
+    </url>
+    <url>
+        <loc>Nonepart-3-production/c18-responsible-ai-and-the-eu-ai-act-in-practice/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonepart-3-production/c18-responsible-ai-and-the-eu-ai-act-in-practice/"/>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/part-3-production/c18-responsible-ai-and-the-eu-ai-act-in-practice/"/>
+    </url>
+    <url>
+        <loc>Nonepart-3-production/c19-the-automated-sdlc-agents-from-issue-to-production/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonepart-3-production/c19-the-automated-sdlc-agents-from-issue-to-production/"/>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/part-3-production/c19-the-automated-sdlc-agents-from-issue-to-production/"/>
+    </url>
+    <url>
+        <loc>Nonepart-4-developer-track/d01-model-customization-and-small-local-models/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonepart-4-developer-track/d01-model-customization-and-small-local-models/"/>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/part-4-developer-track/d01-model-customization-and-small-local-models/"/>
+    </url>
+    <url>
+        <loc>Nonepart-4-developer-track/d02-long-running-durable-and-autonomous-agents/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonepart-4-developer-track/d02-long-running-durable-and-autonomous-agents/"/>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/part-4-developer-track/d02-long-running-durable-and-autonomous-agents/"/>
+    </url>
+    <url>
+        <loc>Nonepart-4-developer-track/d03-multimodal-and-realtime-agents/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonepart-4-developer-track/d03-multimodal-and-realtime-agents/"/>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/part-4-developer-track/d03-multimodal-and-realtime-agents/"/>
+    </url>
+    <url>
+        <loc>Nonepart-4-developer-track/d04-agent-ux-and-front-ends/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonepart-4-developer-track/d04-agent-ux-and-front-ends/"/>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/part-4-developer-track/d04-agent-ux-and-front-ends/"/>
+    </url>
+    <url>
+        <loc>Nonepart-4-developer-track/d05-performance-and-cost-engineering/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonepart-4-developer-track/d05-performance-and-cost-engineering/"/>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/part-4-developer-track/d05-performance-and-cost-engineering/"/>
+    </url>
+    <url>
+        <loc>Nonepart-4-developer-track/d06-building-your-own-agent-tooling/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonepart-4-developer-track/d06-building-your-own-agent-tooling/"/>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/part-4-developer-track/d06-building-your-own-agent-tooling/"/>
+    </url>
+    <url>
+        <loc>Nonepart-4-developer-track/d07-agent-reliability-engineering/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonepart-4-developer-track/d07-agent-reliability-engineering/"/>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/part-4-developer-track/d07-agent-reliability-engineering/"/>
+    </url>
+    <url>
+        <loc>Nonepart-5-architect-track/a01-ai-strategy-use-case-discovery-and-business-case/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonepart-5-architect-track/a01-ai-strategy-use-case-discovery-and-business-case/"/>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/part-5-architect-track/a01-ai-strategy-use-case-discovery-and-business-case/"/>
+    </url>
+    <url>
+        <loc>Nonepart-5-architect-track/a02-azure-ai-reference-architectures-and-well-architected-for-ai/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonepart-5-architect-track/a02-azure-ai-reference-architectures-and-well-architected-for-ai/"/>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/part-5-architect-track/a02-azure-ai-reference-architectures-and-well-architected-for-ai/"/>
+    </url>
+    <url>
+        <loc>Nonepart-5-architect-track/a03-enterprise-knowledge-and-data-architecture-for-ai/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonepart-5-architect-track/a03-enterprise-knowledge-and-data-architecture-for-ai/"/>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/part-5-architect-track/a03-enterprise-knowledge-and-data-architecture-for-ai/"/>
+    </url>
+    <url>
+        <loc>Nonepart-5-architect-track/a04-agent-platform-and-integration-architecture/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonepart-5-architect-track/a04-agent-platform-and-integration-architecture/"/>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/part-5-architect-track/a04-agent-platform-and-integration-architecture/"/>
+    </url>
+    <url>
+        <loc>Nonepart-5-architect-track/a05-reliability-scale-model-lifecycle-and-finops/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonepart-5-architect-track/a05-reliability-scale-model-lifecycle-and-finops/"/>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/part-5-architect-track/a05-reliability-scale-model-lifecycle-and-finops/"/>
+    </url>
+    <url>
+        <loc>Nonepart-5-architect-track/a06-ai-governance-risk-and-compliance-architecture/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonepart-5-architect-track/a06-ai-governance-risk-and-compliance-architecture/"/>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/part-5-architect-track/a06-ai-governance-risk-and-compliance-architecture/"/>
+    </url>
+    <url>
+        <loc>Nonepart-5-architect-track/a07-the-architect-s-craft-in-ai-programmes/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonepart-5-architect-track/a07-the-architect-s-craft-in-ai-programmes/"/>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/part-5-architect-track/a07-the-architect-s-craft-in-ai-programmes/"/>
+    </url>
+    <url>
+        <loc>Nonestart-here/assessment-gates/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonestart-here/assessment-gates/"/>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/start-here/assessment-gates/"/>
+    </url>
+    <url>
+        <loc>Nonestart-here/competency-matrix/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonestart-here/competency-matrix/"/>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/start-here/competency-matrix/"/>
+    </url>
+    <url>
+        <loc>Nonestart-here/course-overview/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonestart-here/course-overview/"/>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/start-here/course-overview/"/>
+    </url>
+    <url>
+        <loc>Nonestart-here/how-to-use/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonestart-here/how-to-use/"/>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/start-here/how-to-use/"/>
+    </url>
+    <url>
+        <loc>Nonebg/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="None"/>
+    </url>
+    <url>
+        <loc>Nonebg/capstone/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/capstone/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonecapstone/"/>
+    </url>
+    <url>
+        <loc>Nonebg/appendix/glossary/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/appendix/glossary/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="Noneappendix/glossary/"/>
+    </url>
+    <url>
+        <loc>Nonebg/appendix/references/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/appendix/references/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="Noneappendix/references/"/>
+    </url>
+    <url>
+        <loc>Nonebg/part-1-foundations/c00-orientation-setup-and-toolchain/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/part-1-foundations/c00-orientation-setup-and-toolchain/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonepart-1-foundations/c00-orientation-setup-and-toolchain/"/>
+    </url>
+    <url>
+        <loc>Nonebg/part-1-foundations/c01-how-generative-ai-works-an-engineer-s-mental-model/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/part-1-foundations/c01-how-generative-ai-works-an-engineer-s-mental-model/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonepart-1-foundations/c01-how-generative-ai-works-an-engineer-s-mental-model/"/>
+    </url>
+    <url>
+        <loc>Nonebg/part-1-foundations/c02-your-first-ai-feature-in-net/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/part-1-foundations/c02-your-first-ai-feature-in-net/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonepart-1-foundations/c02-your-first-ai-feature-in-net/"/>
+    </url>
+    <url>
+        <loc>Nonebg/part-1-foundations/c03-prompting-structured-outputs-and-tool-calling/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/part-1-foundations/c03-prompting-structured-outputs-and-tool-calling/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonepart-1-foundations/c03-prompting-structured-outputs-and-tool-calling/"/>
+    </url>
+    <url>
+        <loc>Nonebg/part-1-foundations/c04-working-with-coding-agents-the-factory-day-one/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/part-1-foundations/c04-working-with-coding-agents-the-factory-day-one/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonepart-1-foundations/c04-working-with-coding-agents-the-factory-day-one/"/>
+    </url>
+    <url>
+        <loc>Nonebg/part-1-foundations/c05-evals-from-day-one/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/part-1-foundations/c05-evals-from-day-one/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonepart-1-foundations/c05-evals-from-day-one/"/>
+    </url>
+    <url>
+        <loc>Nonebg/part-2-building-blocks/c06-embeddings-and-vector-search/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/part-2-building-blocks/c06-embeddings-and-vector-search/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonepart-2-building-blocks/c06-embeddings-and-vector-search/"/>
+    </url>
+    <url>
+        <loc>Nonebg/part-2-building-blocks/c07-rag-from-documents-to-cited-permission-aware-answers/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/part-2-building-blocks/c07-rag-from-documents-to-cited-permission-aware-answers/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonepart-2-building-blocks/c07-rag-from-documents-to-cited-permission-aware-answers/"/>
+    </url>
+    <url>
+        <loc>Nonebg/part-2-building-blocks/c08-tools-and-the-model-context-protocol/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/part-2-building-blocks/c08-tools-and-the-model-context-protocol/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonepart-2-building-blocks/c08-tools-and-the-model-context-protocol/"/>
+    </url>
+    <url>
+        <loc>Nonebg/part-2-building-blocks/c09-agents-with-microsoft-agent-framework/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/part-2-building-blocks/c09-agents-with-microsoft-agent-framework/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonepart-2-building-blocks/c09-agents-with-microsoft-agent-framework/"/>
+    </url>
+    <url>
+        <loc>Nonebg/part-2-building-blocks/c10-agents-over-structured-data-text-to-sql-on-sql-server/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/part-2-building-blocks/c10-agents-over-structured-data-text-to-sql-on-sql-server/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonepart-2-building-blocks/c10-agents-over-structured-data-text-to-sql-on-sql-server/"/>
+    </url>
+    <url>
+        <loc>Nonebg/part-2-building-blocks/c11-agentic-testing-ai-driven-tdd-mutation-and-e2e-test-agents/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/part-2-building-blocks/c11-agentic-testing-ai-driven-tdd-mutation-and-e2e-test-agents/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonepart-2-building-blocks/c11-agentic-testing-ai-driven-tdd-mutation-and-e2e-test-agents/"/>
+    </url>
+    <url>
+        <loc>Nonebg/part-3-production/c12-workflows-and-multi-agent-orchestration/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/part-3-production/c12-workflows-and-multi-agent-orchestration/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonepart-3-production/c12-workflows-and-multi-agent-orchestration/"/>
+    </url>
+    <url>
+        <loc>Nonebg/part-3-production/c13-context-engineering-advanced-retrieval-and-memory/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/part-3-production/c13-context-engineering-advanced-retrieval-and-memory/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonepart-3-production/c13-context-engineering-advanced-retrieval-and-memory/"/>
+    </url>
+    <url>
+        <loc>Nonebg/part-3-production/c14-failure-driven-evals-llm-judges-and-red-teaming/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/part-3-production/c14-failure-driven-evals-llm-judges-and-red-teaming/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonepart-3-production/c14-failure-driven-evals-llm-judges-and-red-teaming/"/>
+    </url>
+    <url>
+        <loc>Nonebg/part-3-production/c15-observability-genaiops-and-cost/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/part-3-production/c15-observability-genaiops-and-cost/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonepart-3-production/c15-observability-genaiops-and-cost/"/>
+    </url>
+    <url>
+        <loc>Nonebg/part-3-production/c16-security-for-llm-and-agentic-systems/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/part-3-production/c16-security-for-llm-and-agentic-systems/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonepart-3-production/c16-security-for-llm-and-agentic-systems/"/>
+    </url>
+    <url>
+        <loc>Nonebg/part-3-production/c17-shipping-to-azure-hosting-ai-gateway-iac-and-interop/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/part-3-production/c17-shipping-to-azure-hosting-ai-gateway-iac-and-interop/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonepart-3-production/c17-shipping-to-azure-hosting-ai-gateway-iac-and-interop/"/>
+    </url>
+    <url>
+        <loc>Nonebg/part-3-production/c18-responsible-ai-and-the-eu-ai-act-in-practice/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/part-3-production/c18-responsible-ai-and-the-eu-ai-act-in-practice/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonepart-3-production/c18-responsible-ai-and-the-eu-ai-act-in-practice/"/>
+    </url>
+    <url>
+        <loc>Nonebg/part-3-production/c19-the-automated-sdlc-agents-from-issue-to-production/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/part-3-production/c19-the-automated-sdlc-agents-from-issue-to-production/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonepart-3-production/c19-the-automated-sdlc-agents-from-issue-to-production/"/>
+    </url>
+    <url>
+        <loc>Nonebg/part-4-developer-track/d01-model-customization-and-small-local-models/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/part-4-developer-track/d01-model-customization-and-small-local-models/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonepart-4-developer-track/d01-model-customization-and-small-local-models/"/>
+    </url>
+    <url>
+        <loc>Nonebg/part-4-developer-track/d02-long-running-durable-and-autonomous-agents/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/part-4-developer-track/d02-long-running-durable-and-autonomous-agents/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonepart-4-developer-track/d02-long-running-durable-and-autonomous-agents/"/>
+    </url>
+    <url>
+        <loc>Nonebg/part-4-developer-track/d03-multimodal-and-realtime-agents/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/part-4-developer-track/d03-multimodal-and-realtime-agents/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonepart-4-developer-track/d03-multimodal-and-realtime-agents/"/>
+    </url>
+    <url>
+        <loc>Nonebg/part-4-developer-track/d04-agent-ux-and-front-ends/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/part-4-developer-track/d04-agent-ux-and-front-ends/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonepart-4-developer-track/d04-agent-ux-and-front-ends/"/>
+    </url>
+    <url>
+        <loc>Nonebg/part-4-developer-track/d05-performance-and-cost-engineering/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/part-4-developer-track/d05-performance-and-cost-engineering/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonepart-4-developer-track/d05-performance-and-cost-engineering/"/>
+    </url>
+    <url>
+        <loc>Nonebg/part-4-developer-track/d06-building-your-own-agent-tooling/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/part-4-developer-track/d06-building-your-own-agent-tooling/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonepart-4-developer-track/d06-building-your-own-agent-tooling/"/>
+    </url>
+    <url>
+        <loc>Nonebg/part-4-developer-track/d07-agent-reliability-engineering/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/part-4-developer-track/d07-agent-reliability-engineering/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonepart-4-developer-track/d07-agent-reliability-engineering/"/>
+    </url>
+    <url>
+        <loc>Nonebg/part-5-architect-track/a01-ai-strategy-use-case-discovery-and-business-case/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/part-5-architect-track/a01-ai-strategy-use-case-discovery-and-business-case/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonepart-5-architect-track/a01-ai-strategy-use-case-discovery-and-business-case/"/>
+    </url>
+    <url>
+        <loc>Nonebg/part-5-architect-track/a02-azure-ai-reference-architectures-and-well-architected-for-ai/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/part-5-architect-track/a02-azure-ai-reference-architectures-and-well-architected-for-ai/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonepart-5-architect-track/a02-azure-ai-reference-architectures-and-well-architected-for-ai/"/>
+    </url>
+    <url>
+        <loc>Nonebg/part-5-architect-track/a03-enterprise-knowledge-and-data-architecture-for-ai/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/part-5-architect-track/a03-enterprise-knowledge-and-data-architecture-for-ai/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonepart-5-architect-track/a03-enterprise-knowledge-and-data-architecture-for-ai/"/>
+    </url>
+    <url>
+        <loc>Nonebg/part-5-architect-track/a04-agent-platform-and-integration-architecture/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/part-5-architect-track/a04-agent-platform-and-integration-architecture/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonepart-5-architect-track/a04-agent-platform-and-integration-architecture/"/>
+    </url>
+    <url>
+        <loc>Nonebg/part-5-architect-track/a05-reliability-scale-model-lifecycle-and-finops/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/part-5-architect-track/a05-reliability-scale-model-lifecycle-and-finops/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonepart-5-architect-track/a05-reliability-scale-model-lifecycle-and-finops/"/>
+    </url>
+    <url>
+        <loc>Nonebg/part-5-architect-track/a06-ai-governance-risk-and-compliance-architecture/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/part-5-architect-track/a06-ai-governance-risk-and-compliance-architecture/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonepart-5-architect-track/a06-ai-governance-risk-and-compliance-architecture/"/>
+    </url>
+    <url>
+        <loc>Nonebg/part-5-architect-track/a07-the-architect-s-craft-in-ai-programmes/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/part-5-architect-track/a07-the-architect-s-craft-in-ai-programmes/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonepart-5-architect-track/a07-the-architect-s-craft-in-ai-programmes/"/>
+    </url>
+    <url>
+        <loc>Nonebg/start-here/assessment-gates/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/start-here/assessment-gates/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonestart-here/assessment-gates/"/>
+    </url>
+    <url>
+        <loc>Nonebg/start-here/competency-matrix/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/start-here/competency-matrix/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonestart-here/competency-matrix/"/>
+    </url>
+    <url>
+        <loc>Nonebg/start-here/course-overview/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/start-here/course-overview/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonestart-here/course-overview/"/>
+    </url>
+    <url>
+        <loc>Nonebg/start-here/how-to-use/</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="bg" href="Nonebg/start-here/how-to-use/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonestart-here/how-to-use/"/>
+    </url>
+</urlset>

@@ -1,0 +1,3251 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Learning-by-doing course, release 2026.11 (content as of October 2026)">
+      
+      
+      
+      
+        <link rel="prev" href="../d06-building-your-own-agent-tooling/">
+      
+      
+        <link rel="next" href="../../part-5-architect-track/a01-ai-strategy-use-case-discovery-and-business-case/">
+      
+      
+        
+          <link rel="alternate" href="./" hreflang="en">
+        
+          <link rel="alternate" href="../../bg/part-4-developer-track/d07-agent-reliability-engineering/" hreflang="bg">
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>D7 — Agent reliability engineering - AI Solution Developer & Architect — Learner Handbook</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#d7-agent-reliability-engineering" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="AI Solution Developer &amp; Architect — Learner Handbook" class="md-header__button md-logo" aria-label="AI Solution Developer & Architect — Learner Handbook" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            AI Solution Developer & Architect — Learner Handbook
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              D7 — Agent reliability engineering
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="Select language">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href="./" hreflang="en" class="md-select__link">
+              English
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="../../bg/part-4-developer-track/d07-agent-reliability-engineering/" hreflang="bg" class="md-select__link">
+              Български
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="AI Solution Developer &amp; Architect — Learner Handbook" class="md-nav__button md-logo" aria-label="AI Solution Developer & Architect — Learner Handbook" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    AI Solution Developer & Architect — Learner Handbook
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Welcome
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Start here
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Start here
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/how-to-use/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How to use this handbook
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/course-overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Course overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/assessment-gates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Assessment and gates
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/competency-matrix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Competency matrix
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 1 — Foundations (Level 1)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part 1 — Foundations (Level 1)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c00-orientation-setup-and-toolchain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C0 — Orientation, setup & toolchain
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c01-how-generative-ai-works-an-engineer-s-mental-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C1 — How generative AI works: an engineer's mental model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c02-your-first-ai-feature-in-net/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C2 — Your first AI feature in .NET
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c03-prompting-structured-outputs-and-tool-calling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C3 — Prompting, structured outputs & tool calling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c04-working-with-coding-agents-the-factory-day-one/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C4 — Working with coding agents: the Factory, day one
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c05-evals-from-day-one/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C5 — Evals from day one
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 2 — Building blocks (Level 2)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part 2 — Building blocks (Level 2)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c06-embeddings-and-vector-search/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C6 — Embeddings & vector search
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c07-rag-from-documents-to-cited-permission-aware-answers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C7 — RAG: from documents to cited, permission-aware answers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c08-tools-and-the-model-context-protocol/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C8 — Tools & the Model Context Protocol
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c09-agents-with-microsoft-agent-framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C9 — Agents with Microsoft Agent Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c10-agents-over-structured-data-text-to-sql-on-sql-server/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C10 — Agents over structured data: text-to-SQL on SQL Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c11-agentic-testing-ai-driven-tdd-mutation-and-e2e-test-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C11 — Agentic testing: AI-driven TDD, mutation & E2E test agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 3 — Production systems (Level 3)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part 3 — Production systems (Level 3)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c12-workflows-and-multi-agent-orchestration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C12 — Workflows & multi-agent orchestration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c13-context-engineering-advanced-retrieval-and-memory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C13 — Context engineering, advanced retrieval & memory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c14-failure-driven-evals-llm-judges-and-red-teaming/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C14 — Failure-driven evals, LLM judges & red teaming
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c15-observability-genaiops-and-cost/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C15 — Observability, GenAIOps & cost
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c16-security-for-llm-and-agentic-systems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C16 — Security for LLM & agentic systems
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c17-shipping-to-azure-hosting-ai-gateway-iac-and-interop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C17 — Shipping to Azure: hosting, AI gateway, IaC & interop
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c18-responsible-ai-and-the-eu-ai-act-in-practice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C18 — Responsible AI & the EU AI Act in practice
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c19-the-automated-sdlc-agents-from-issue-to-production/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C19 — The automated SDLC: agents from issue to production
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 4 — Expert track: AI Solution Developer
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part 4 — Expert track: AI Solution Developer
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../d01-model-customization-and-small-local-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D1 — Model customization & small/local models
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../d02-long-running-durable-and-autonomous-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D2 — Long-running, durable & autonomous agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../d03-multimodal-and-realtime-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D3 — Multimodal & realtime agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../d04-agent-ux-and-front-ends/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D4 — Agent UX & front-ends
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../d05-performance-and-cost-engineering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D5 — Performance & cost engineering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../d06-building-your-own-agent-tooling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D6 — Building your own agent tooling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D7 — Agent reliability engineering
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D7 — Agent reliability engineering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-this-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why this matters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learning outcomes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concepts
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Concepts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-reliability-is-not-accuracy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Reliability is not accuracy
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-simulation-based-testing-bench-style" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Simulation-based testing (τ-bench style)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-scenario-libraries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Scenario libraries
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-statistics-for-regression-gates-and-flakiness" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Statistics for regression gates and flakiness
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-chaos-engineering-for-agents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Chaos engineering for agents
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-benchmark-literacy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Benchmark literacy
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-slos-for-agents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. SLOs for agents
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-continuous-evaluation-in-production" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Continuous evaluation in production
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-postmortems-for-ai-failures" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Postmortems for AI failures
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tools-versions-as-of-oct-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tools &amp; versions (as of Oct 2026)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#labs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Labs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Labs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lab-1-trakiasim-a-bench-style-harness-for-the-fleet-assistant-5h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 1 — TrakiaSim: a τ-bench-style harness for the Fleet Assistant (≈5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-2-scenario-library-flakiness-and-a-statistically-sound-regression-gate-3h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 2 — Scenario library, flakiness and a statistically sound regression gate (≈3h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-3-chaos-for-tools-and-models-3h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 3 — Chaos for tools and models (≈3h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-4-slos-continuous-evaluation-and-an-ai-incident-postmortem-3h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 4 — SLOs, continuous evaluation and an AI incident postmortem (≈3h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kata
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#product-increment-fleet-ops-copilot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Product increment — Fleet Ops Copilot
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#factory-increment-your-agentic-sdlc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Factory increment — your agentic SDLC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assessment
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common pitfalls
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 5 — Expert track: AI Solution Architect
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part 5 — Expert track: AI Solution Architect
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a01-ai-strategy-use-case-discovery-and-business-case/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A1 — AI strategy, use-case discovery & business case
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a02-azure-ai-reference-architectures-and-well-architected-for-ai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A2 — Azure AI reference architectures & Well-Architected for AI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a03-enterprise-knowledge-and-data-architecture-for-ai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A3 — Enterprise knowledge & data architecture for AI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a04-agent-platform-and-integration-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A4 — Agent platform & integration architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a05-reliability-scale-model-lifecycle-and-finops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A5 — Reliability, scale, model lifecycle & FinOps
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a06-ai-governance-risk-and-compliance-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A6 — AI governance, risk & compliance architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a07-the-architect-s-craft-in-ai-programmes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A7 — The architect's craft in AI programmes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 6 — Joint capstone
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part 6 — Joint capstone
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capstone/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Capstone
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Appendix
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Appendix
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/references/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Further reading
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-this-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why this matters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learning outcomes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concepts
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Concepts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-reliability-is-not-accuracy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Reliability is not accuracy
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-simulation-based-testing-bench-style" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Simulation-based testing (τ-bench style)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-scenario-libraries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Scenario libraries
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-statistics-for-regression-gates-and-flakiness" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Statistics for regression gates and flakiness
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-chaos-engineering-for-agents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Chaos engineering for agents
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-benchmark-literacy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Benchmark literacy
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-slos-for-agents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. SLOs for agents
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-continuous-evaluation-in-production" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Continuous evaluation in production
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-postmortems-for-ai-failures" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Postmortems for AI failures
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tools-versions-as-of-oct-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tools &amp; versions (as of Oct 2026)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#labs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Labs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Labs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lab-1-trakiasim-a-bench-style-harness-for-the-fleet-assistant-5h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 1 — TrakiaSim: a τ-bench-style harness for the Fleet Assistant (≈5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-2-scenario-library-flakiness-and-a-statistically-sound-regression-gate-3h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 2 — Scenario library, flakiness and a statistically sound regression gate (≈3h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-3-chaos-for-tools-and-models-3h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 3 — Chaos for tools and models (≈3h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-4-slos-continuous-evaluation-and-an-ai-incident-postmortem-3h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 4 — SLOs, continuous evaluation and an AI incident postmortem (≈3h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kata
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#product-increment-fleet-ops-copilot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Product increment — Fleet Ops Copilot
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#factory-increment-your-agentic-sdlc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Factory increment — your agentic SDLC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assessment
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common pitfalls
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="d7-agent-reliability-engineering">D7 — Agent reliability engineering<a class="headerlink" href="#d7-agent-reliability-engineering" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><strong>Level:</strong> Expert (AI Solution Developer track) · <strong>Duration:</strong> 18h (theory 25% / labs 75%) · <strong>Prerequisites:</strong> Core C0–C19 and Gate G3; especially C5/C14 (evals, calibrated judges), C15 (tracing, versioning), C17 (APIM, deployment); D2 (durable agents) and D5 (CPST) recommended · <strong>Volatility:</strong> Medium (methods are stable; Foundry evaluator status, benchmark leaderboards and tooling change quarterly)</p>
+</blockquote>
+<h2 id="why-this-matters">Why this matters<a class="headerlink" href="#why-this-matters" title="Permanent link">&para;</a></h2>
+<p>A proficient practitioner has an eval suite, an LLM judge and a CI gate. An expert treats agent reliability <strong>statistically and operationally</strong>:
+- measures whether the agent succeeds <strong>every</strong> time (pass^k), not whether it <em>can</em> succeed (pass@1);
+- tells a real regression from noise with the right test and sample size;
+- covers the long tail with simulated users and environments;
+- injects faults into tools and models to prove graceful degradation;
+- runs agent behaviour under SLOs with error budgets;
+- writes postmortems whose output is new evals;
+- reads every benchmark claim, including vendors' and Microsoft's own, with a critic's eye.</p>
+<p>The τ-bench authors introduced <strong>pass^k</strong> precisely because agents that look strong at pass@1 collapse when asked to succeed consistently. If one trial succeeds with p = 0.9 and trials are independent, pass^4 ≈ 0.66 and pass^8 ≈ 0.43.</p>
+<p>Trakia now runs the Fleet Assistant, the Fleet Analyst, the incident workflow, the durable planner, the voice assistant and two customer pilots. Last month three things happened:
+- A provider-side model update shifted the Fleet Assistant's tool-calling behaviour, and maintenance bookings started missing the depot parameter. The cached CI evals stayed green.
+- A dispatcher "flaky test" was quarantined for weeks. It turned out to be a real 12% failure mode on Bulgarian plates.
+- A conference talk claimed a memory feature gave "+14% on τ-bench", and someone proposed adopting it immediately. Microsoft's own two posts disagree on the size of that gain (≈5% vs 7–14%).</p>
+<p>Reliability engineering is the discipline that would have caught all three.</p>
+<h2 id="learning-outcomes">Learning outcomes<a class="headerlink" href="#learning-outcomes" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Build</strong> a τ-bench-style simulation harness (LLM user simulator, policy document, tool backends over a database snapshot, end-state graders) for a Trakia agent, and <strong>audit</strong> simulator-induced false failures.</li>
+<li><strong>Curate</strong> a versioned scenario library with an explicit taxonomy and coverage matrix, fed by production failures and synthetic tuples.</li>
+<li><strong>Quantify</strong> reliability with pass@1, pass^k and per-scenario success rates with confidence intervals, and <strong>distinguish</strong> flaky scenarios from hard ones and regressions from noise (paired tests, sample-size planning).</li>
+<li><strong>Design and run</strong> chaos experiments for tools and models (errors, latency, malformed results, 429s, model swap, retirement <code>410 Gone</code>, injection) with steady-state hypotheses and expected behaviours.</li>
+<li><strong>Define</strong> agent SLIs/SLOs (task success, safety violations, escalations, latency, CPST) with error budgets and multi-window burn-rate alerts, including measurement error from judges.</li>
+<li><strong>Operate</strong> continuous evaluation in production (sampling, online judges, canary comparisons, drift detection), and <strong>feed</strong> it back into offline suites.</li>
+<li><strong>Lead</strong> a blameless postmortem for an AI failure that produces concrete new scenarios, checks and guardrails.</li>
+<li><strong>Critique</strong> public benchmark and vendor claims (SWE-bench, Terminal-Bench, GAIA, τ-bench, OSWorld): saturation, harness effects, contamination, variance, cost.</li>
+</ol>
+<h2 id="concepts">Concepts<a class="headerlink" href="#concepts" title="Permanent link">&para;</a></h2>
+<h3 id="1-reliability-is-not-accuracy">1. Reliability is not accuracy<a class="headerlink" href="#1-reliability-is-not-accuracy" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Definition</th>
+<th>Answers</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pass@1</td>
+<td>Success rate of a single attempt (averaged over scenarios)</td>
+<td>"How good is it typically?"</td>
+</tr>
+<tr>
+<td>pass@k</td>
+<td>≥ 1 success in k attempts</td>
+<td>"Can it ever do this?" (useful with a verifier and retries)</td>
+</tr>
+<tr>
+<td><strong>pass^k</strong></td>
+<td>All k attempts succeed</td>
+<td>"Will it do this <em>every time</em> a user asks?"</td>
+</tr>
+<tr>
+<td>Per-scenario success distribution</td>
+<td>Success rate per scenario across N trials</td>
+<td>"Which scenarios are reliable, flaky or broken?"</td>
+</tr>
+</tbody>
+</table>
+<p>Users experience per-attempt behaviour, repeatedly. A dispatcher who asks 30 questions a day experiences pass^30 on a scenario family, not pass@1. Report pass^k alongside pass@1 for agentic tasks with side effects. Track the <strong>share of scenarios with success ≥ 0.95</strong> (the "reliable set"); it is more actionable than the mean.</p>
+<p>Non-determinism is structural. Temperature 0 is not deterministic in production serving, because inference kernels are not batch-invariant. Your tests must therefore be statistical. Use MEAI.Evaluation response caching to make PR-time CI <em>repeatable</em> for unchanged prompts. Never mistake that for reliability, and always run an <strong>uncached</strong> suite nightly against live endpoints.</p>
+<h3 id="2-simulation-based-testing-bench-style">2. Simulation-based testing (τ-bench style)<a class="headerlink" href="#2-simulation-based-testing-bench-style" title="Permanent link">&para;</a></h3>
+<p>τ-bench evaluates tool-agent-user interaction with four parts:
+- an <strong>LLM-simulated user</strong> that has a goal and private information;
+- a <strong>domain policy</strong> document;
+- <strong>tools</strong> over a database;
+- a check of the <strong>database end state</strong> against the goal.</p>
+<p><strong>τ²-bench</strong> adds dual-control environments in which the user also acts on the world. The design lesson: grade <strong>outcomes and policy adherence</strong>, not the exact turn-by-turn path. Stateful agents can reach the right end state many ways.</p>
+<p><strong>TrakiaSim</strong> generalises the C14 Lab 3 dispatcher simulator (one persona family, 30 scenarios, pass^4) into a reusable, statistically sound harness. Do not rebuild C14's simulator; extend it:
+- <strong>Environment:</strong> a containerized SQL Server snapshot of <code>TrakiaOps</code> (reset per episode), the mock ticketing, scheduling and parts APIs, and the real Trakia MCP server.
+- <strong>Simulated users:</strong>
+  - a dispatcher (terse, Bulgarian/English code-switching);
+  - a customer-service agent (relays a customer's angry email);
+  - a driver (voice transcripts from D3);
+  - an adversarial user (pressure to bypass approval).</p>
+<p>Each has a <strong>goal</strong>, <strong>known facts</strong>, <strong>hidden facts</strong> revealed only if asked, and a <strong>termination rule</strong>.
+- <strong>Policy:</strong> excerpts of the fleet policy handbook, for example "maintenance bookings require depot capacity check; urgent DTCs override routing".
+- <strong>Graders:</strong>
+  - (a) end-state diff (expected rows created or updated, nothing else changed);
+  - (b) policy-violation checks in code (booking without a capacity check, notification before approval);
+  - (c) a calibrated judge for conversational requirements (asked for missing info, confirmed before acting, language matched).</p>
+<p><strong>Simulator fidelity is a threat to validity:</strong>
+- simulated users are often too cooperative, too verbose, or leak hidden facts early;
+- they also make mistakes that cause <strong>false failures</strong>.</p>
+<p>Mitigations:
+- calibrate personas against 30+ real transcripts;
+- run the simulator at low temperature with a different model family from the agent's (reduces correlated blind spots);
+- <strong>audit every failure cluster</strong> and label it "agent fault", "simulator fault" or "scenario bug";
+- report the agent's pass rate only over valid episodes, and track the simulator fault rate as a metric.</p>
+<h3 id="3-scenario-libraries">3. Scenario libraries<a class="headerlink" href="#3-scenario-libraries" title="Permanent link">&para;</a></h3>
+<p>A scenario is data: <code>{id, version, persona, goal, hidden_facts, initial_db_fixture, policy_refs, expected_end_state, checks[], tags[]}</code>.</p>
+<ul>
+<li><strong>Taxonomy dimensions:</strong></li>
+<li>intent family;</li>
+<li>complexity (number of tools and turns);</li>
+<li>language (BG/EN/mixed);</li>
+<li>data condition (missing, stale, conflicting);</li>
+<li>permission context (role);</li>
+<li>adversarial type (injection, social pressure);</li>
+<li>modality (text/voice).</li>
+</ul>
+<p>Maintain a <strong>coverage matrix</strong> and target the cells that production traffic and risk say matter. Do not aim for uniform coverage.
+- <strong>Sources:</strong>
+  1. <strong>production failures</strong> from error analysis and postmortems (highest value);
+  2. synthetic tuples: define the dimensions, hand-write about 20 tuples, generate more, then turn each tuple into a scenario in a separate step and review it by hand (Hamel &amp; Shankar);
+  3. policy-derived edge cases;
+  4. red-team findings (C14/C16).</p>
+<p>Synthetic data cannot tell you how <em>frequent</em> a failure is. Use production sampling for that.
+- <strong>Sets:</strong>
+  - <strong>smoke</strong> (20, every PR, cached);
+  - <strong>regression</strong> (150–300, every PR touching prompts, tools or models, multiple trials, nightly uncached);
+  - <strong>exploratory/long-tail</strong> (weekly);
+  - <strong>holdout</strong> (never used for tuning; quarterly, to detect overfitting to the suite).
+- <strong>Versioning:</strong> scenarios evolve with policy. Pin each suite version in the eval report and keep the old versions for trend comparability.</p>
+<h3 id="4-statistics-for-regression-gates-and-flakiness">4. Statistics for regression gates and flakiness<a class="headerlink" href="#4-statistics-for-regression-gates-and-flakiness" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Confidence intervals.</strong> 45/50 successes is 90%, with a Wilson 95% CI of ≈ 79–96%. A 50-scenario suite cannot distinguish 88% from 92%. Report intervals, always.</li>
+<li><strong>Sample size.</strong> To detect a drop from 90% to 85% with an unpaired two-proportion test (α = 0.05 two-sided, power 0.8), you need ≈ 690 episodes per arm. <strong>Paired</strong> designs (the same scenarios under both versions) are far more efficient. Use <strong>McNemar's test</strong> on discordant pairs, and with multiple trials per scenario, a paired test on per-scenario success rates (or a permutation test).</li>
+<li><strong>Pre-register the primary metric.</strong> Gate on 1–2 primary metrics (for example, task success on the regression set, and safety violations = 0 on the safety set). Monitor the others. With 20 metrics at α = 0.05, one "regression" per run is expected by chance. Correct with Holm if you must gate on many.</li>
+<li><strong>Flaky vs hard vs regressed.</strong> Run each scenario N = 5–10 times:</li>
+<li>success near 0 → <strong>broken/hard</strong>: fix the agent or the scenario;</li>
+<li>near 1 → <strong>reliable</strong>;</li>
+<li>in between → <strong>flaky</strong>: a real reliability defect <em>or</em> a scenario/simulator defect.</li>
+</ul>
+<p><strong>Never auto-quarantine flaky agent scenarios.</strong> Quarantine is legitimate only after an audit attributes the variance to the simulator or the environment, and the scenario is fixed within an SLA.
+- <strong>Variance decomposition.</strong> Separate between-scenario variance (difficulty) from within-scenario variance (stochasticity). A change that lowers within-scenario variance at equal mean is a reliability improvement worth shipping.
+- <strong>Cost.</strong> Trials multiply cost (scenarios × trials × tokens). Use cached PR runs, a smaller smoke set, nightly full runs and budget caps (D5).</p>
+<h3 id="5-chaos-engineering-for-agents">5. Chaos engineering for agents<a class="headerlink" href="#5-chaos-engineering-for-agents" title="Permanent link">&para;</a></h3>
+<p>Start from a <strong>steady-state hypothesis</strong> ("≥ 95% of booking scenarios succeed or escalate correctly"). Inject one fault class at a time, observe, and widen the blast radius gradually.</p>
+<table>
+<thead>
+<tr>
+<th>Fault</th>
+<th>Injection point</th>
+<th>Expected agent behaviour</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tool 5xx / timeout</td>
+<td>Tool wrapper, toxiproxy</td>
+<td>Code retries with backoff (not the model); after N failures, an actionable error message to the model; graceful partial answer or escalation</td>
+</tr>
+<tr>
+<td>Tool returns malformed or partial data</td>
+<td>Tool wrapper</td>
+<td>Schema validation catches it; the model is told <em>what</em> is wrong; no fabricated fill-in</td>
+</tr>
+<tr>
+<td>Slow tool (P99 × 10)</td>
+<td>Latency injection</td>
+<td>Timeout budget respected; user informed (D4); no duplicate side effects on retry (D2 idempotency)</td>
+</tr>
+<tr>
+<td>429 with <code>Retry-After</code></td>
+<td>APIM fault policy / mock backend</td>
+<td>Honour <code>Retry-After</code>; spill to the secondary pool (D5); no retry storm</td>
+</tr>
+<tr>
+<td><strong>Model swap</strong> (new version, router change, fallback model)</td>
+<td>Config via <code>IChatClient</code> registration</td>
+<td>Eval deltas within tolerance; tool-call argument accuracy unchanged; if not, the gate blocks the promotion</td>
+</tr>
+<tr>
+<td>Model <strong>retired → <code>410 Gone</code></strong></td>
+<td>Mock backend</td>
+<td>Fail over to the configured successor; alert; no silent outage. GA models are deprecated at 12 months and retired at 18; partner models get 12 months (Grok sometimes 6); notice is ≥ 60 days; dates cannot be extended</td>
+</tr>
+<tr>
+<td>Context pressure (huge tool result, long session)</td>
+<td>Tool wrapper</td>
+<td>Truncation/pagination or compaction kicks in; no lost instructions</td>
+</tr>
+<tr>
+<td>Stale or conflicting data</td>
+<td>DB fixture</td>
+<td>The agent surfaces the conflict, prefers the authoritative source, cites the version</td>
+</tr>
+<tr>
+<td>Injected instructions in tool results</td>
+<td>Tool wrapper</td>
+<td>No consequential action (C16 patterns); a violation counts as a safety SLI breach</td>
+</tr>
+</tbody>
+</table>
+<p>In .NET, faults are injected as <strong>middleware</strong>, so the same agent code is tested:</p>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">sealed</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nf">ChaosChatClient</span><span class="p">(</span><span class="n">IChatClient</span><span class="w"> </span><span class="n">inner</span><span class="p">,</span><span class="w"> </span><span class="n">ChaosPolicy</span><span class="w"> </span><span class="n">policy</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">DelegatingChatClient</span><span class="p">(</span><span class="n">inner</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="n">Task</span><span class="o">&lt;</span><span class="n">ChatResponse</span><span class="o">&gt;</span><span class="w"> </span><span class="n">GetResponseAsync</span><span class="p">(</span><span class="n">IEnumerable</span><span class="o">&lt;</span><span class="n">ChatMessage</span><span class="o">&gt;</span><span class="w"> </span><span class="n">messages</span><span class="p">,</span>
+<span class="w">        </span><span class="n">ChatOptions</span><span class="o">?</span><span class="w"> </span><span class="n">options</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">null</span><span class="p">,</span><span class="w"> </span><span class="n">CancellationToken</span><span class="w"> </span><span class="n">ct</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">policy</span><span class="p">.</span><span class="n">ShouldFail</span><span class="p">(</span><span class="s">"model.429"</span><span class="p">))</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HttpRequestException</span><span class="p">(</span><span class="s">"429"</span><span class="p">,</span><span class="w"> </span><span class="k">null</span><span class="p">,</span><span class="w"> </span><span class="n">HttpStatusCode</span><span class="p">.</span><span class="n">TooManyRequests</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">policy</span><span class="p">.</span><span class="n">ShouldFail</span><span class="p">(</span><span class="s">"model.410"</span><span class="p">))</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HttpRequestException</span><span class="p">(</span><span class="s">"410 Gone"</span><span class="p">,</span><span class="w"> </span><span class="k">null</span><span class="p">,</span><span class="w"> </span><span class="n">HttpStatusCode</span><span class="p">.</span><span class="n">Gone</span><span class="p">);</span>
+<span class="w">        </span><span class="k">await</span><span class="w"> </span><span class="n">policy</span><span class="p">.</span><span class="n">MaybeDelayAsync</span><span class="p">(</span><span class="s">"model.latency"</span><span class="p">,</span><span class="w"> </span><span class="n">ct</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="k">base</span><span class="p">.</span><span class="n">GetResponseAsync</span><span class="p">(</span><span class="n">messages</span><span class="p">,</span><span class="w"> </span><span class="n">options</span><span class="p">,</span><span class="w"> </span><span class="n">ct</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="c1">// Tools: wrap each AIFunction with ChaosToolDecorator (errors, latency, malformed JSON, injected text) — same ChaosPolicy, seeded per episode.</span>
+</code></pre></div>
+<p>Run chaos in <strong>TrakiaSim</strong> (the simulator plus faults), not only in unit tests. Behaviour under faults is a property of the whole loop.</p>
+<h3 id="6-benchmark-literacy">6. Benchmark literacy<a class="headerlink" href="#6-benchmark-literacy" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Benchmark</th>
+<th>Measures</th>
+<th>Read with care because</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SWE-bench / <strong>Verified</strong> (500 human-validated tasks)</td>
+<td>Resolving real GitHub issues, verified by tests</td>
+<td>Saturating (Vals AI archived its coverage citing saturation); the harness/scaffold matters as much as the model; contamination risk</td>
+</tr>
+<tr>
+<td>Terminal-Bench</td>
+<td>Agent tasks in real terminals</td>
+<td>Newer, differentiating in 2026; harness-dependent</td>
+</tr>
+<tr>
+<td>GAIA</td>
+<td>General assistant tasks (reasoning, browsing, tools); humans ≈ 92% at release</td>
+<td>Web drift changes answers; tool set matters</td>
+</tr>
+<tr>
+<td>τ-bench / τ²-bench</td>
+<td>Tool-agent-user interaction with policies; pass^k</td>
+<td>Simulator fidelity; domain is retail/airline/telecom, not yours</td>
+</tr>
+<tr>
+<td>OSWorld</td>
+<td>Real OS tasks for computer-use agents</td>
+<td>Environment setup variance; pixel vs accessibility approaches</td>
+</tr>
+</tbody>
+</table>
+<p>A checklist for any claim, including vendor and Microsoft posts:
+1. Who ran it (vendor-run or independent)?
+2. Which harness/scaffold, which settings (effort, tools, retries, best-of-n)?
+3. pass@1 or best-of-k? Is variance reported?
+4. Is cost per task reported?
+5. Is there a contamination analysis?
+6. Is the gain relative or absolute, against which baseline?
+7. Does the task distribution resemble ours?</p>
+<p>Course examples:
+- Anthropic's multi-agent system beat single-agent Opus by <strong>90.2% on an internal eval</strong>: not reproducible by you, but internally consistent with token-usage findings.
+- Microsoft's procedural memory: "≈5% on STATE-Bench and τ-bench" in one post vs "+7–14% absolute on τ-bench" in another.
+- Mem0's vendor-authored LOCOMO gains are publicly disputed by Letta.</p>
+<p>The expert response: "promising; run it on TrakiaSim with pass^k before adopting".</p>
+<h3 id="7-slos-for-agents">7. SLOs for agents<a class="headerlink" href="#7-slos-for-agents" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>SLI</th>
+<th>Measurement</th>
+<th>Example SLO (Fleet Assistant)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Task success</td>
+<td>Online sampled judges (calibrated, TPR/TNR known) + outcome signals (no human override, no rollback)</td>
+<td>≥ 92% over 28 days</td>
+</tr>
+<tr>
+<td>Safety violations</td>
+<td>Policy-check failures, guardrail-confirmed unsafe actions</td>
+<td>0 critical; ≤ 0.1% minor</td>
+</tr>
+<tr>
+<td>Escalation rate</td>
+<td>Agent → human handoffs</td>
+<td>5–15% (too low can mean overconfidence)</td>
+</tr>
+<tr>
+<td>Latency</td>
+<td>P95 E2E / TTFT per task type</td>
+<td>P95 ≤ 6 s (analyst), ≤ 2.5 s (assistant)</td>
+</tr>
+<tr>
+<td>Availability</td>
+<td>Non-error responses / requests</td>
+<td>≥ 99.5%</td>
+</tr>
+<tr>
+<td>Cost</td>
+<td>CPST (D5)</td>
+<td>≤ €0.04 per successful assistant task</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Error budgets</strong> and <strong>multi-window burn-rate alerts</strong> (for example, 1h and 6h windows at 14× and 6× burn) apply as in classic SRE, with one twist.</li>
+<li><strong>Judge-based SLIs carry measurement error.</strong> A judge with TPR 0.92 and TNR 0.95 biases the observed success rate. Correct for it (Rogan–Gladen style: true ≈ (observed + TNR − 1)/(TPR + TNR − 1)) or report the bounds.</li>
+<li><strong>Sample enough traffic for the alert windows.</strong> Low-traffic tenants need longer windows.</li>
+<li>Separate <strong>behavioural SLOs</strong> (success, safety) from <strong>infrastructure SLOs</strong> (availability, latency). A behavioural burn should page the AI owner, not the platform on-call.</li>
+</ul>
+<h3 id="8-continuous-evaluation-in-production">8. Continuous evaluation in production<a class="headerlink" href="#8-continuous-evaluation-in-production" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Sampling:</strong> random (unbiased SLI estimation) plus <strong>targeted</strong> (thumbs-down, retries, long traces, unusual tool sequences, new intents). Keep the two pools separate, because targeted samples bias rates.</li>
+<li><strong>Online judges:</strong> small, calibrated, cost-capped. <strong>Foundry continuous evaluation</strong> samples live agent responses, scores quality and risk dimensions, shows results on the agent's Monitor tab and supports alerts. It requires App Insights and the project managed identity with the Foundry User role. Some agent evaluators are still preview, and per a practitioner source, evaluations, monitoring and tracing reached GA in March 2026.</li>
+<li><strong>Canary and shadow:</strong> route 5–10% through APIM weighted backends to the new model or prompt version, then compare SLIs with a paired-by-intent analysis before promotion. Shadow mode (run the new version without showing the result) for side-effect-free tasks.</li>
+<li><strong>Drift:</strong></li>
+<li>input drift: intent mix, language mix, token lengths;</li>
+<li>output drift: length, tool-usage patterns, refusal rate;</li>
+<li>judge pass-rate drift;</li>
+<li>the provider changing under you, detected by the nightly <em>uncached</em> golden run.</li>
+<li><strong>The loop:</strong> online failures → error analysis queue → new scenarios in TrakiaSim → regression set. A failure seen twice in production without a scenario is a process defect.</li>
+</ul>
+<h3 id="9-postmortems-for-ai-failures">9. Postmortems for AI failures<a class="headerlink" href="#9-postmortems-for-ai-failures" title="Permanent link">&para;</a></h3>
+<p>Use the classic blameless format plus AI-specific sections:
+- <strong>Versions at incident time:</strong> model and deployment version, router version, prompt/agent definition hash, tool contract versions, index alias/corpus version, guardrail config, cache state.
+- <strong>Failure class:</strong> provider drift, prompt change, retrieval/index, tool contract change, injection/abuse, runaway cost, unsafe action, regulated-value hallucination, simulator/eval blind spot.
+- <strong>"Why didn't our evals catch it?"</strong> This section is mandatory. Typical answers: no scenario covered it, the judge was miscalibrated, the cached CI masked drift, flaky-quarantined, SLI not sampled.
+- <strong>Outputs:</strong> ≥ 1 new scenario, ≥ 1 new check or judge, a guardrail or design change, SLO or alert tuning, and an owner and date for each.
+- <strong>Regulatory hooks:</strong> personal-data leaks trigger GDPR breach assessment (72-hour notification duty). For high-risk systems, AI Act serious-incident duties apply once the Annex III obligations take effect (2 Dec 2027 after the Digital Omnibus). Know which applies to which Trakia component (C18).</p>
+<p><strong>Misconceptions to unlearn:</strong>
+- "Green CI = reliable." Cached, single-trial, small-N suites prove little.
+- "Flaky tests are noise." In agents, flakiness <em>is</em> the reliability defect.
+- "A leaderboard win transfers to our domain."
+- "The judge's score is the truth." It is a measurement instrument with error rates.</p>
+<h2 id="tools-versions-as-of-oct-2026">Tools &amp; versions (as of Oct 2026)<a class="headerlink" href="#tools-versions-as-of-oct-2026" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Tool / package</th>
+<th>Purpose</th>
+<th>Status</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Microsoft.Extensions.AI.Evaluation</code> (+ <code>.Quality</code>, <code>.Safety</code>, <code>.Reporting</code>, <code>dotnet aieval</code>)</td>
+<td>Evaluators, caching, reports in xUnit/MSTest</td>
+<td>GA (verify package versions on NuGet)</td>
+<td>Agent evaluators: IntentResolution, TaskAdherence, ToolCallAccuracy</td>
+</tr>
+<tr>
+<td>MEAI <code>DelegatingChatClient</code> / MAF middleware</td>
+<td>Chaos injection, budgets</td>
+<td>GA</td>
+<td>Same code path as production</td>
+</tr>
+<tr>
+<td>Foundry evaluations &amp; continuous evaluation</td>
+<td>Cloud/agent evaluators, live sampling, alerts</td>
+<td>GA (Mar 2026 per practitioner source); some evaluators preview</td>
+<td>Cloud evaluation authoring is mostly <strong>[Python]</strong> (<code>azure-ai-evaluation</code>)</td>
+</tr>
+<tr>
+<td>Foundry Rubric evaluator</td>
+<td>Weighted custom criteria</td>
+<td>Preview</td>
+<td></td>
+</tr>
+<tr>
+<td>Azure Monitor / App Insights (KQL, alerts, workbooks)</td>
+<td>SLIs, burn-rate alerts</td>
+<td>GA</td>
+<td>GenAI semconv "Development": pin and map</td>
+</tr>
+<tr>
+<td>APIM weighted/priority backends, fault simulation via policies</td>
+<td>Canary, 429/latency chaos at the gateway</td>
+<td>GA</td>
+<td></td>
+</tr>
+<tr>
+<td>toxiproxy / Chaos Studio</td>
+<td>Network-level fault injection</td>
+<td>OSS / GA</td>
+<td>Chaos Studio for Azure-resource faults</td>
+</tr>
+<tr>
+<td>SQL Server 2025 container</td>
+<td>Resettable environment snapshots for simulation</td>
+<td>GA</td>
+<td></td>
+</tr>
+<tr>
+<td>Azure SRE Agent</td>
+<td>Incident triage over App Insights/Monitor</td>
+<td>GA per secondary source (Mar 2026); Reader/Privileged modes; 3 regions</td>
+<td>Use Reader mode in labs</td>
+</tr>
+<tr>
+<td>τ-bench / τ²-bench (reference implementations)</td>
+<td>Methodology reference</td>
+<td>Research code</td>
+<td><strong>[Python]</strong> reading only; TrakiaSim is .NET</td>
+</tr>
+</tbody>
+</table>
+<h2 id="labs">Labs<a class="headerlink" href="#labs" title="Permanent link">&para;</a></h2>
+<p>Lab repo: <code>trakia-fleetops</code>, folder <code>reliability/</code> (<code>TrakiaSim</code> .NET project, <code>scenarios/</code> YAML library, <code>chaos/</code> policies, <code>slo/</code> Bicep for alerts and workbooks).</p>
+<h3 id="lab-1-trakiasim-a-bench-style-harness-for-the-fleet-assistant-5h">Lab 1 — TrakiaSim: a τ-bench-style harness for the Fleet Assistant (≈5h)<a class="headerlink" href="#lab-1-trakiasim-a-bench-style-harness-for-the-fleet-assistant-5h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> Measure the Fleet Assistant's reliability on realistic multi-turn tasks with end-state grading and pass^k.</li>
+<li><strong>Start state:</strong> tag <code>d7/lab1-start</code> (your C14 Lab 3 dispatcher simulator and scenarios, plus the scenario schema, the SQL Server snapshot container with a reset script, and the mock APIs). New relative to C14: per-episode DB reset and end-state diff, four persona families incl. adversarial, simulator-fault attribution, CIs and the reliable-set share.</li>
+<li><strong>Steps:</strong></li>
+<li>Implement <code>UserSimulator</code>, a separate <code>IChatClient</code> (a different model family from the agent's) with a persona prompt containing the goal, known facts and hidden facts, the rule "reveal hidden facts only when asked", and a <code>###STOP###</code> termination token.</li>
+<li>Implement <code>Episode.RunAsync</code>: reset the DB, then loop between simulator and agent until stop, max turns or budget. Record the trace and compute the end-state diff:
+     <div class="highlight"><pre><span></span><code><span class="kt">var</span><span class="w"> </span><span class="n">before</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">Db</span><span class="p">.</span><span class="n">SnapshotAsync</span><span class="p">(</span><span class="n">scenario</span><span class="p">.</span><span class="n">Fixture</span><span class="p">);</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">transcript</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">Episode</span><span class="p">.</span><span class="n">RunAsync</span><span class="p">(</span><span class="n">agent</span><span class="p">,</span><span class="w"> </span><span class="n">simulator</span><span class="p">,</span><span class="w"> </span><span class="n">scenario</span><span class="p">,</span><span class="w"> </span><span class="n">budget</span><span class="p">,</span><span class="w"> </span><span class="n">ct</span><span class="p">);</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">diff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">Db</span><span class="p">.</span><span class="n">DiffAsync</span><span class="p">(</span><span class="n">before</span><span class="p">);</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">verdict</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Graders</span><span class="p">.</span><span class="n">EndState</span><span class="p">(</span><span class="n">diff</span><span class="p">,</span><span class="w"> </span><span class="n">scenario</span><span class="p">.</span><span class="n">ExpectedEndState</span><span class="p">)</span>
+<span class="w">            </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Graders</span><span class="p">.</span><span class="n">Policy</span><span class="p">(</span><span class="n">transcript</span><span class="p">.</span><span class="n">ToolCalls</span><span class="p">,</span><span class="w"> </span><span class="n">scenario</span><span class="p">.</span><span class="n">PolicyRefs</span><span class="p">)</span><span class="w">       </span><span class="c1">// code checks</span>
+<span class="w">            </span><span class="o">&amp;</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">Judges</span><span class="p">.</span><span class="n">Conversation</span><span class="p">(</span><span class="n">transcript</span><span class="p">,</span><span class="w"> </span><span class="n">scenario</span><span class="p">.</span><span class="n">ConversationChecks</span><span class="p">);</span><span class="w"> </span><span class="c1">// calibrated judges</span>
+</code></pre></div></li>
+<li>Author 40 scenarios across 4 personas and 8 intents, including Bulgarian and code-switched dispatcher scenarios and 6 adversarial "skip approval" scenarios.</li>
+<li>Run 4 trials per scenario. Report pass@1, pass^4, the reliable-set share (≥ 0.95 success) and the per-intent breakdown, all with Wilson CIs.</li>
+<li>Audit every failing episode and label it agent fault, simulator fault or scenario bug. Fix the simulator and scenario bugs, and report the simulator fault rate.</li>
+<li><strong>Break it:</strong> Make the simulator "helpful", so it volunteers hidden facts in the first message. Observe the inflated pass rate on information-gathering scenarios, then restore it and add a simulator-fidelity check (hidden facts may not appear before the agent asks).</li>
+<li><strong>Acceptance criteria:</strong></li>
+<li><code>TrakiaSim</code> runs in CI on the 40-scenario suite (nightly, uncached, budget-capped).</li>
+<li>The report contains pass@1, pass^4, CIs and failure attribution.</li>
+<li>The simulator fault rate is ≤ 5% after fixes.</li>
+<li>The 6 adversarial scenarios have 0 approval bypasses.</li>
+<li><strong>Stretch:</strong> Add a τ²-style dual-control scenario in which the driver must perform a step (confirm the odometer reading) that the agent cannot do itself.</li>
+</ul>
+<h3 id="lab-2-scenario-library-flakiness-and-a-statistically-sound-regression-gate-3h">Lab 2 — Scenario library, flakiness and a statistically sound regression gate (≈3h)<a class="headerlink" href="#lab-2-scenario-library-flakiness-and-a-statistically-sound-regression-gate-3h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> Turn the suite into a library with coverage, and a gate that catches real regressions without crying wolf.</li>
+<li><strong>Start state:</strong> tag <code>d7/lab2-start</code>.</li>
+<li><strong>Steps:</strong></li>
+<li>Define the taxonomy (intent, complexity, language, data condition, role, adversarial, modality) and generate a coverage matrix report. Add 30 scenarios from last month's production failure clusters (C14 error-analysis exports) and 20 from synthetic tuples, reviewed by hand.</li>
+<li>Run 8 trials per scenario on the current version. Classify each scenario as reliable, flaky or broken, and investigate the top 5 flaky ones.</li>
+<li>Make a prompt change (the Fleet Assistant v3.2, "more concise confirmations"). Compare it with v3.1 on the same scenarios and trials: a paired per-scenario analysis plus McNemar on first-trial outcomes, with primary metrics pre-registered in <code>gate.yaml</code>.</li>
+<li>Implement the gate:<ul>
+<li>fail if the paired lower 95% bound of the success delta is &lt; −2 points on the primary set;</li>
+<li>fail on any safety-set violation;</li>
+<li><strong>warn</strong> (not fail) on secondary metrics, with a Holm correction.</li>
+</ul>
+</li>
+<li>Write a sample-size note: how many scenarios × trials are needed to detect a 3-point drop on this suite.</li>
+<li><strong>Break it:</strong> Gate on a single cached trial of 50 scenarios, re-run the identical version 10 times uncached, and count the false alarms. Compare with your gate.</li>
+<li><strong>Acceptance criteria:</strong></li>
+<li><code>gate.yaml</code> and the gate implementation are committed.</li>
+<li>The false-alarm rate is ≤ 1 in 10 identical-version runs.</li>
+<li>The seeded real regression (the instructor provides a v3.2b that drops the depot parameter in 10% of bookings) is caught.</li>
+<li>The flaky-scenario investigation finds at least one real agent defect, or documents why none exists.</li>
+<li><strong>Stretch:</strong> Add sequential testing, stopping early when the evidence is conclusive, to cut trial costs. Report the savings.</li>
+</ul>
+<h3 id="lab-3-chaos-for-tools-and-models-3h">Lab 3 — Chaos for tools and models (≈3h)<a class="headerlink" href="#lab-3-chaos-for-tools-and-models-3h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> Prove graceful degradation under realistic faults, including a model swap and a retirement.</li>
+<li><strong>Start state:</strong> tag <code>d7/lab3-start</code> (<code>ChaosChatClient</code>, <code>ChaosToolDecorator</code> and the APIM fault policy fragments, all disabled).</li>
+<li><strong>Steps:</strong></li>
+<li>Write steady-state hypotheses for 3 intents (booking, analyst query, incident triage).</li>
+<li>Run the experiments in TrakiaSim, one fault class at a time, at 5%, 20% and 50% intensity:<ul>
+<li>tool 5xx;</li>
+<li>tool latency ×10;</li>
+<li>malformed JSON;</li>
+<li>429 with <code>Retry-After</code> at the gateway;</li>
+<li>injected instructions in tool output;</li>
+<li>a stale fixture.</li>
+</ul>
+</li>
+<li><strong>Model-swap drill:</strong> point <code>Models:Assistant</code> at a different version or model through config, run the regression set (paired), and decide go/no-go with the Lab 2 gate.</li>
+<li><strong>Retirement drill:</strong> the mock backend returns <code>410 Gone</code> for the primary deployment. Verify failover to the configured successor and the alert, and write the runbook step.</li>
+<li>Fix at least two weaknesses found. Typical ones: the model was retrying tools itself (move the retries into code); fabricated values after a malformed result (strengthen validation and the error message).</li>
+<li><strong>Break it:</strong> Remove idempotency keys from the booking tool (D2) and rerun the latency fault. Count the duplicate bookings, then restore the keys.</li>
+<li><strong>Acceptance criteria:</strong></li>
+<li><code>ChaosSuite</code> passes: each steady-state hypothesis holds at 20% intensity.</li>
+<li>There are 0 duplicate side effects.</li>
+<li>There are 0 consequential actions from injected tool text.</li>
+<li>The 410 drill fails over within the configured time and raises the alert.</li>
+<li>The model-swap decision is documented with paired evidence.</li>
+<li><strong>Stretch:</strong> Run a gateway-level chaos experiment in a staging environment with Azure Chaos Studio (network latency to the Foundry endpoint) while the load test from D5 runs.</li>
+</ul>
+<h3 id="lab-4-slos-continuous-evaluation-and-an-ai-incident-postmortem-3h">Lab 4 — SLOs, continuous evaluation and an AI incident postmortem (≈3h)<a class="headerlink" href="#lab-4-slos-continuous-evaluation-and-an-ai-incident-postmortem-3h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> Operate the agents against behavioural SLOs, detect a live incident, and learn from it.</li>
+<li><strong>Start state:</strong> tag <code>d7/lab4-start</code> (staging environment with synthetic traffic generators).</li>
+<li><strong>Steps:</strong></li>
+<li>Define the SLIs and SLOs in <code>slo/slo.yaml</code> for the Fleet Assistant and the Fleet Analyst. Implement them as KQL over traces and judge events, and deploy multi-window burn-rate alerts via Bicep.</li>
+<li>Enable online evaluation. Either use <strong>Foundry continuous evaluation</strong> on the hosted agent, or a .NET sampler that scores a 5% random sample plus all targeted samples with calibrated judges. Apply the judge-error correction to the reported success SLI.</li>
+<li>Run a canary: 10% of traffic to the assistant prompt v3.2 via APIM weighted backends, and compare SLIs per intent.</li>
+<li><strong>Incident:</strong> the instructor flips a hidden change (the provider deployment or the index alias switches to a version that drops a policy chapter). Detect it from the burn-rate alert, triage it with traces (optionally with Azure SRE Agent in Reader mode), and mitigate it (roll back the alias or route).</li>
+<li>Write the postmortem with the AI-specific sections (versions, failure class, "why evals didn't catch it"). Add the new scenarios and checks to TrakiaSim and prove they fail on the broken version and pass on the fixed one.</li>
+<li><strong>Break it:</strong> Silence the uncached nightly run and repeat the incident. How long until detection? Quantify the value of the nightly run in hours of exposure.</li>
+<li><strong>Acceptance criteria:</strong></li>
+<li>SLO alerts are deployed as code.</li>
+<li>The incident is detected within the target window (≤ 1h at the staging traffic level).</li>
+<li>The postmortem is merged with ≥ 2 new scenarios and ≥ 1 new check, all red on the broken version and green on the fixed one.</li>
+<li>The canary analysis report is attached.</li>
+<li><strong>Stretch:</strong> An error-budget policy. Write the rule for freezing prompt and model changes when the budget is exhausted, and automate it as a CI check reading the SLO status.</li>
+</ul>
+<h2 id="kata">Kata<a class="headerlink" href="#kata" title="Permanent link">&para;</a></h2>
+<p><strong>"Signal or noise?" (25 min, repeat 4×).</strong> You get two eval reports (version A vs B) with per-scenario, per-trial outcomes:
+- Variant 1: 50 scenarios × 1 trial, −4 points.
+- Variant 2: 200 × 5, −1.5 points, concentrated in Bulgarian scenarios.
+- Variant 3: +3 points on pass@1 but lower pass^4.
+- Variant 4: a vendor blog claiming +12% on τ-bench.</p>
+<p>For each, decide ship/hold/investigate and justify it with the right statistic: a CI, a paired test, a pass^k comparison, or the benchmark checklist. The instructor reveals the ground truth (simulated with known effects).</p>
+<h2 id="product-increment-fleet-ops-copilot">Product increment — Fleet Ops Copilot<a class="headerlink" href="#product-increment-fleet-ops-copilot" title="Permanent link">&para;</a></h2>
+<p>Fleet Ops Copilot is now operated as a reliable service:
+- <strong>TrakiaSim</strong> covers the core agents with pass^k reporting.
+- A versioned <strong>scenario library</strong> has a coverage matrix fed by production failures.
+- A <strong>statistical regression gate</strong> with pre-registered primary metrics.
+- A <strong>chaos suite</strong> covers tool, gateway and model faults, with retirement and model-swap drills.
+- <strong>Behavioural SLOs</strong> with burn-rate alerts.
+- <strong>Continuous evaluation</strong> with judge-error correction, and a canary process.
+- A postmortem template whose outputs land as tests.</p>
+<h2 id="factory-increment-your-agentic-sdlc">Factory increment — your agentic SDLC<a class="headerlink" href="#factory-increment-your-agentic-sdlc" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Coding agents must run the smoke set (cached) and attach the <code>TrakiaSim</code> delta for any PR touching prompts, tools or agent definitions. A <code>Stop</code> hook or Copilot custom-agent rule enforces it.</li>
+<li>A <strong>regression triage agent</strong> (headless, D6 tooling) runs on every nightly failure. It clusters failing episodes, labels likely simulator faults vs agent faults for human confirmation, and opens issues with traces attached. It may <em>not</em> quarantine scenarios.</li>
+<li>Postmortem action items are created as issues tagged <code>eval-gap</code>. The cloud agent drafts the scenario YAML and the check, and humans review the expected end states.</li>
+<li>The error-budget policy is enforced in CI: prompt and model changes are blocked while the budget is exhausted, unless the PR is labelled as a reliability fix.</li>
+</ul>
+<h2 id="assessment">Assessment<a class="headerlink" href="#assessment" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th>Novice</th>
+<th>Competent</th>
+<th>Proficient</th>
+<th>Expert</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Simulation &amp; scenarios</td>
+<td>Single-turn Q&amp;A evals</td>
+<td>Multi-turn scripted tests</td>
+<td>Simulator + end-state grading + library</td>
+<td>Calibrated simulator with fault attribution; coverage matrix driven by risk and production failures; holdout set</td>
+</tr>
+<tr>
+<td>Statistics</td>
+<td>Point estimates</td>
+<td>Averages over trials</td>
+<td>CIs and pass^k</td>
+<td>Paired tests, pre-registered gates, sample-size planning, judge-error correction, measured false-alarm rate</td>
+</tr>
+<tr>
+<td>Chaos</td>
+<td>None</td>
+<td>Unit tests for tool errors</td>
+<td>Fault injection in the loop</td>
+<td>Hypothesis-driven experiments incl. model swap and retirement; fixes verified; no duplicate side effects</td>
+</tr>
+<tr>
+<td>Operations</td>
+<td>Dashboards</td>
+<td>SLIs defined</td>
+<td>SLOs + alerts + online evals</td>
+<td>Error budgets with policy, canary analysis, drift detection, incident detected and mitigated within target</td>
+</tr>
+<tr>
+<td>Learning from failure</td>
+<td>Fixes the bug</td>
+<td>Writes an incident note</td>
+<td>Blameless postmortem</td>
+<td>"Why evals missed it" answered; new scenarios/checks proven red→green; benchmark claims critiqued with the checklist</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Auto-checked:</strong> the nightly TrakiaSim run, the simulator fault-rate threshold, the gate false-alarm test (10 identical runs), detection of the seeded regression, <code>ChaosSuite</code>, the 410 drill, SLO alert deployment, postmortem scenarios red→green on the broken and fixed versions, and the error-budget CI check.</p>
+<h2 id="common-pitfalls">Common pitfalls<a class="headerlink" href="#common-pitfalls" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Gating on cached, single-trial, small-N suites and calling it reliability.</li>
+<li>Reporting only pass@1 for agents with side effects.</li>
+<li>Auto-quarantining flaky scenarios, which hides the real reliability defect.</li>
+<li>Trusting simulators without auditing simulator-caused failures.</li>
+<li>Grading exact tool-call sequences instead of end state plus policy checks, and so failing valid alternative paths.</li>
+<li>Retrying tools via the model instead of in code. Retrying side effects without idempotency.</li>
+<li>Treating judge scores as ground truth in SLIs.</li>
+<li>Paging platform on-call for behavioural SLO burns, or not paging anyone at all.</li>
+<li>Adopting features on vendor benchmark deltas without running them on your own simulator.</li>
+<li>Postmortems without new tests.</li>
+</ul>
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Yao et al., τ-bench (pass^k, simulated users, policy + DB end state): https://arxiv.org/abs/2406.12045 ; τ²-bench: https://arxiv.org/abs/2506.07982</li>
+<li>Jimenez et al., SWE-bench: https://arxiv.org/abs/2310.06770 ; SWE-bench Verified: https://openai.com/index/introducing-swe-bench-verified/</li>
+<li>Mialon et al., GAIA: https://arxiv.org/abs/2311.12983 · Terminal-Bench: https://www.tbench.ai · OSWorld: https://arxiv.org/abs/2404.07972</li>
+<li>FutureAGI, Best LLMs Sept 2026 (benchmark saturation, vendor-run scores; aggregator): https://futureagi.com/blog/best-llms-september-2026/</li>
+<li>Hamel Husain &amp; Shreya Shankar, Evals FAQ (error analysis, judges, synthetic tuples, sampling): https://hamel.dev/blog/posts/evals-faq/</li>
+<li>Microsoft Learn — MEAI Evaluation libraries: https://learn.microsoft.com/en-us/dotnet/ai/evaluation/libraries</li>
+<li>Microsoft Learn — Foundry built-in evaluators: https://learn.microsoft.com/en-us/azure/foundry/concepts/built-in-evaluators ; Reinhard, Foundry agent evaluations &amp; continuous evaluation (practitioner): https://jannikreinhard.com/microsoft-foundry-agent-evaluations/</li>
+<li>Thinking Machines Lab — Defeating nondeterminism in LLM inference: https://thinkingmachines.ai/blog/defeating-nondeterminism-in-llm-inference/</li>
+<li>Microsoft Learn — Foundry model retirements (<code>410 Gone</code>, notice periods): https://learn.microsoft.com/en-us/azure/foundry/openai/concepts/model-retirements</li>
+<li>Microsoft Learn — APIM AI gateway (backend pools, circuit breaker): https://learn.microsoft.com/en-us/azure/api-management/genai-gateway-capabilities</li>
+<li>Microsoft Learn — Azure SRE Agent FAQ: https://learn.microsoft.com/en-us/azure/sre-agent/faq</li>
+<li>Foundry blog — Memory at Build 2026 (≈5% claim) vs Agent Service at Build 2026 (7–14% claim): https://devblogs.microsoft.com/foundry/memory-build2026/ ; https://devblogs.microsoft.com/foundry/agent-service-build2026/</li>
+<li>Mem0 paper: https://arxiv.org/abs/2504.19413 ; Letta on memory benchmarking: https://www.letta.com/blog/benchmarking-ai-agent-memory</li>
+<li>Anthropic — Multi-agent research system (internal eval, rubric judging): https://www.anthropic.com/engineering/multi-agent-research-system</li>
+<li>EU AI Act Digital Omnibus timing: https://www.addleshawgoddard.com/en/insights/insights-briefings/2026/technology/eu-ai-act-ai-omnibus-formally-adopted/</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../d06-building-your-own-agent-tooling/" class="md-footer__link md-footer__link--prev" aria-label="Previous: D6 — Building your own agent tooling">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                D6 — Building your own agent tooling
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../part-5-architect-track/a01-ai-strategy-use-case-discovery-and-business-case/" class="md-footer__link md-footer__link--next" aria-label="Next: A1 — AI strategy, use-case discovery &amp; business case">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                A1 — AI strategy, use-case discovery & business case
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.top", "navigation.footer", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

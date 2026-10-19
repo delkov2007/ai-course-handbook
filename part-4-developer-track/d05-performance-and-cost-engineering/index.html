@@ -1,0 +1,3080 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Learning-by-doing course, release 2026.11 (content as of October 2026)">
+      
+      
+      
+      
+        <link rel="prev" href="../d04-agent-ux-and-front-ends/">
+      
+      
+        <link rel="next" href="../d06-building-your-own-agent-tooling/">
+      
+      
+        
+          <link rel="alternate" href="./" hreflang="en">
+        
+          <link rel="alternate" href="../../bg/part-4-developer-track/d05-performance-and-cost-engineering/" hreflang="bg">
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>D5 — Performance & cost engineering - AI Solution Developer & Architect — Learner Handbook</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#d5-performance-cost-engineering" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="AI Solution Developer &amp; Architect — Learner Handbook" class="md-header__button md-logo" aria-label="AI Solution Developer & Architect — Learner Handbook" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            AI Solution Developer & Architect — Learner Handbook
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              D5 — Performance & cost engineering
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="Select language">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href="./" hreflang="en" class="md-select__link">
+              English
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="../../bg/part-4-developer-track/d05-performance-and-cost-engineering/" hreflang="bg" class="md-select__link">
+              Български
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="AI Solution Developer &amp; Architect — Learner Handbook" class="md-nav__button md-logo" aria-label="AI Solution Developer & Architect — Learner Handbook" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    AI Solution Developer & Architect — Learner Handbook
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Welcome
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Start here
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Start here
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/how-to-use/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How to use this handbook
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/course-overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Course overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/assessment-gates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Assessment and gates
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/competency-matrix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Competency matrix
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 1 — Foundations (Level 1)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part 1 — Foundations (Level 1)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c00-orientation-setup-and-toolchain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C0 — Orientation, setup & toolchain
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c01-how-generative-ai-works-an-engineer-s-mental-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C1 — How generative AI works: an engineer's mental model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c02-your-first-ai-feature-in-net/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C2 — Your first AI feature in .NET
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c03-prompting-structured-outputs-and-tool-calling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C3 — Prompting, structured outputs & tool calling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c04-working-with-coding-agents-the-factory-day-one/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C4 — Working with coding agents: the Factory, day one
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c05-evals-from-day-one/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C5 — Evals from day one
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 2 — Building blocks (Level 2)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part 2 — Building blocks (Level 2)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c06-embeddings-and-vector-search/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C6 — Embeddings & vector search
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c07-rag-from-documents-to-cited-permission-aware-answers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C7 — RAG: from documents to cited, permission-aware answers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c08-tools-and-the-model-context-protocol/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C8 — Tools & the Model Context Protocol
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c09-agents-with-microsoft-agent-framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C9 — Agents with Microsoft Agent Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c10-agents-over-structured-data-text-to-sql-on-sql-server/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C10 — Agents over structured data: text-to-SQL on SQL Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c11-agentic-testing-ai-driven-tdd-mutation-and-e2e-test-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C11 — Agentic testing: AI-driven TDD, mutation & E2E test agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 3 — Production systems (Level 3)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part 3 — Production systems (Level 3)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c12-workflows-and-multi-agent-orchestration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C12 — Workflows & multi-agent orchestration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c13-context-engineering-advanced-retrieval-and-memory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C13 — Context engineering, advanced retrieval & memory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c14-failure-driven-evals-llm-judges-and-red-teaming/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C14 — Failure-driven evals, LLM judges & red teaming
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c15-observability-genaiops-and-cost/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C15 — Observability, GenAIOps & cost
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c16-security-for-llm-and-agentic-systems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C16 — Security for LLM & agentic systems
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c17-shipping-to-azure-hosting-ai-gateway-iac-and-interop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C17 — Shipping to Azure: hosting, AI gateway, IaC & interop
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c18-responsible-ai-and-the-eu-ai-act-in-practice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C18 — Responsible AI & the EU AI Act in practice
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c19-the-automated-sdlc-agents-from-issue-to-production/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C19 — The automated SDLC: agents from issue to production
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 4 — Expert track: AI Solution Developer
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part 4 — Expert track: AI Solution Developer
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../d01-model-customization-and-small-local-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D1 — Model customization & small/local models
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../d02-long-running-durable-and-autonomous-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D2 — Long-running, durable & autonomous agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../d03-multimodal-and-realtime-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D3 — Multimodal & realtime agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../d04-agent-ux-and-front-ends/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D4 — Agent UX & front-ends
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D5 — Performance & cost engineering
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D5 — Performance & cost engineering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-this-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why this matters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learning outcomes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concepts
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Concepts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-the-kpi-cost-per-successful-task" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. The KPI: cost per successful task
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-latency-anatomy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Latency anatomy
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-designing-for-provider-prompt-caching" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Designing for provider prompt caching
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-semantic-caching-at-the-gateway" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Semantic caching at the gateway
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-routing-and-cascades" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Routing and cascades
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-batch-parallelism-and-speculation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Batch, parallelism and speculation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-context-size-reduction-without-quality-loss" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Context-size reduction without quality loss
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-ptu-vs-payg-arithmetic-before-purchase" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. PTU vs PAYG: arithmetic before purchase
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-load-testing-ai-endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Load testing AI endpoints
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-quotas-and-fairness" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Quotas and fairness
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tools-versions-as-of-oct-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tools &amp; versions (as of Oct 2026)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#labs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Labs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Labs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lab-1-latency-and-cost-anatomy-and-the-cpst-baseline-25h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 1 — Latency and cost anatomy, and the CPST baseline (≈2.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-2-prompt-cache-layout-and-context-diet-25h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 2 — Prompt-cache layout and context diet (≈2.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-3-semantic-cache-router-and-cascade-3h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 3 — Semantic cache, router and cascade (≈3h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-4-batch-capacity-model-and-load-test-with-spillover-25h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 4 — Batch, capacity model and load test with spillover (≈2.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kata
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#product-increment-fleet-ops-copilot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Product increment — Fleet Ops Copilot
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#factory-increment-your-agentic-sdlc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Factory increment — your agentic SDLC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assessment
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common pitfalls
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../d06-building-your-own-agent-tooling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D6 — Building your own agent tooling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../d07-agent-reliability-engineering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D7 — Agent reliability engineering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 5 — Expert track: AI Solution Architect
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part 5 — Expert track: AI Solution Architect
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a01-ai-strategy-use-case-discovery-and-business-case/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A1 — AI strategy, use-case discovery & business case
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a02-azure-ai-reference-architectures-and-well-architected-for-ai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A2 — Azure AI reference architectures & Well-Architected for AI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a03-enterprise-knowledge-and-data-architecture-for-ai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A3 — Enterprise knowledge & data architecture for AI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a04-agent-platform-and-integration-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A4 — Agent platform & integration architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a05-reliability-scale-model-lifecycle-and-finops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A5 — Reliability, scale, model lifecycle & FinOps
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a06-ai-governance-risk-and-compliance-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A6 — AI governance, risk & compliance architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a07-the-architect-s-craft-in-ai-programmes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A7 — The architect's craft in AI programmes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 6 — Joint capstone
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part 6 — Joint capstone
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capstone/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Capstone
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Appendix
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Appendix
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/references/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Further reading
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-this-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why this matters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learning outcomes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concepts
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Concepts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-the-kpi-cost-per-successful-task" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. The KPI: cost per successful task
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-latency-anatomy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Latency anatomy
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-designing-for-provider-prompt-caching" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Designing for provider prompt caching
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-semantic-caching-at-the-gateway" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Semantic caching at the gateway
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-routing-and-cascades" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Routing and cascades
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-batch-parallelism-and-speculation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Batch, parallelism and speculation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-context-size-reduction-without-quality-loss" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Context-size reduction without quality loss
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-ptu-vs-payg-arithmetic-before-purchase" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. PTU vs PAYG: arithmetic before purchase
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-load-testing-ai-endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Load testing AI endpoints
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-quotas-and-fairness" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Quotas and fairness
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tools-versions-as-of-oct-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tools &amp; versions (as of Oct 2026)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#labs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Labs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Labs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lab-1-latency-and-cost-anatomy-and-the-cpst-baseline-25h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 1 — Latency and cost anatomy, and the CPST baseline (≈2.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-2-prompt-cache-layout-and-context-diet-25h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 2 — Prompt-cache layout and context diet (≈2.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-3-semantic-cache-router-and-cascade-3h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 3 — Semantic cache, router and cascade (≈3h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-4-batch-capacity-model-and-load-test-with-spillover-25h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 4 — Batch, capacity model and load test with spillover (≈2.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kata
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#product-increment-fleet-ops-copilot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Product increment — Fleet Ops Copilot
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#factory-increment-your-agentic-sdlc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Factory increment — your agentic SDLC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assessment
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common pitfalls
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="d5-performance-cost-engineering">D5 — Performance &amp; cost engineering<a class="headerlink" href="#d5-performance-cost-engineering" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><strong>Level:</strong> Expert (AI Solution Developer track) · <strong>Duration:</strong> 14h (theory 25% / labs 75%) · <strong>Prerequisites:</strong> Core C0–C19 and Gate G3; especially C13 (context engineering), C14 (eval gates), C15 (tracing, cost per task), C17 (APIM AI gateway); D1 (small models, calibration) recommended · <strong>Volatility:</strong> High (prices, cache discounts, router versions, PTU sizing, batch terms)</p>
+</blockquote>
+<h2 id="why-this-matters">Why this matters<a class="headerlink" href="#why-this-matters" title="Permanent link">&para;</a></h2>
+<p>A proficient practitioner cuts tokens and switches to a cheaper model. An expert optimizes <strong>cost per successful task under a latency SLO, with quality held constant by evals</strong>, and can prove each claim:
+- every optimization is a paired experiment (quality delta with confidence interval, cost delta, latency delta);
+- the expert knows which optimizations silently trade quality or safety for money (semantic caching across users, routers with smaller context windows, aggressive truncation);
+- they decompose latency to the stage that dominates;
+- they model capacity with arithmetic before buying provisioned throughput;
+- they load-test AI endpoints with realistic token distributions rather than "100 users saying hello".</p>
+<p>By month six, Fleet Ops Copilot serves ~1,500 internal users and two pilot customer fleets. The monthly bill tripled after the D2 planner and the D3 voice assistant launched. Dispatchers complain about 6-second answers at 08:00, when every depot opens. Finance proposes "switch everything to the cheapest model". Platform proposes "buy PTUs". Both proposals are guesses.</p>
+<p>The evidence points elsewhere:
+- per-token price is not per-task cost (a cheaper-per-token model can cost more per task because it uses more tokens);
+- reasoning tokens are billed and inflate time-to-first-token;
+- prompt caching can cut cached input cost by roughly 95% for some providers (Claude Opus 5.5: $0.20 vs $4 per MTok);
+- most latency is decode time for output you did not need.</p>
+<p>This module turns those facts into an engineering method. C15 already introduced the levers (prompt and semantic caching, routing, batch, PTU vs PAYG, APIM pools) at concept level; D5 does not re-teach them. It adds the experimental discipline around them: CPST as the KPI, paired quality checks per optimization, thresholds tuned on labelled curves, and capacity arithmetic validated under realistic load.</p>
+<h2 id="learning-outcomes">Learning outcomes<a class="headerlink" href="#learning-outcomes" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Define and compute</strong> cost per successful task (model + tools + infrastructure + human review ÷ eval-verified successes), and <strong>use</strong> it as the release KPI with quality and latency guardrails.</li>
+<li><strong>Decompose</strong> end-to-end latency into queueing, prefill/TTFT, decode, reasoning, tool and orchestration time from OTel traces, and <strong>target</strong> the dominant term.</li>
+<li><strong>Design</strong> prompts and tool catalogs for provider prompt caching (static-first layout, deterministic tool order), and <strong>measure</strong> the cache hit ratio and the savings.</li>
+<li><strong>Implement</strong> gateway semantic caching with correct partitioning and eligibility rules, and <strong>quantify</strong> its false-hit rate and leakage risk.</li>
+<li><strong>Choose and tune</strong> routing (Foundry model router modes, custom subsets) or a confidence-based cascade, setting thresholds from dev-set curves.</li>
+<li><strong>Apply</strong> batch processing, parallel tool execution and context-size reduction where each fits, with paired quality checks.</li>
+<li><strong>Model</strong> PTU vs PAYG economics from observed traffic distributions, including spillover, and <strong>validate</strong> the model with Azure Load Testing against the APIM gateway.</li>
+</ol>
+<h2 id="concepts">Concepts<a class="headerlink" href="#concepts" title="Permanent link">&para;</a></h2>
+<h3 id="1-the-kpi-cost-per-successful-task">1. The KPI: cost per successful task<a class="headerlink" href="#1-the-kpi-cost-per-successful-task" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>CPST = (Σ model token cost + Σ tool/API cost + infra (search, compute, gateway, cache) + human review cost)
+       ÷ (# tasks judged successful by evals or by business outcome)
+</code></pre></div>
+<ul>
+<li><strong>Success</strong> must be defined per task type. For a policy question: a grounded, correct answer with valid citations (C14 judges). For a fault triage: the decision matched the mechanic outcome (D1). For a weekly plan: approved without edits, executed without compensation (D2).</li>
+<li>Optimizations that cut cost but also cut success can <strong>raise</strong> CPST. Retries, escalations and human review count.</li>
+<li><strong>Guardrails:</strong> the quality floor (a paired eval delta whose lower 95% bound is ≥ −1 point) and the latency SLO (for example, the dispatcher P95 end-to-end time) are both non-negotiable. Optimize CPST <em>within</em> them.</li>
+<li>Report CPST per task type, per tenant and per model version. A single blended number hides cross-subsidies.</li>
+</ul>
+<p><strong>Misconceptions to unlearn:</strong>
+- "Cheaper per token = cheaper." Token <em>usage</em> varies by model. A vendor's ~40% per-task saving claim is a vendor estimate, not a list price.
+- "Latency is the model's problem." Orchestration, tools and output length usually dominate.
+- "Caching is free money." Wrong-cache hits are quality incidents, and cross-user hits are data leaks.</p>
+<h3 id="2-latency-anatomy">2. Latency anatomy<a class="headerlink" href="#2-latency-anatomy" title="Permanent link">&para;</a></h3>
+<p>For an agent run with <em>n</em> model calls:</p>
+<div class="highlight"><pre><span></span><code>E2E ≈ queue + Σᵢ [ TTFTᵢ + (reasoning_tokensᵢ + output_tokensᵢ) × ITLᵢ + toolsᵢ ] + orchestration overhead
+TTFTᵢ ≈ network + prefill(input_tokensᵢ − cached_tokensᵢ) + provider queueing
+</code></pre></div>
+<ul>
+<li><strong>Prefill</strong> grows with <em>uncached</em> input tokens. <strong>Decode</strong> grows with output tokens, <em>including hidden reasoning tokens</em>. For most chat workloads, decode dominates. Halving output length helps more than halving input.</li>
+<li><strong>Reasoning effort</strong> is the biggest single latency/cost dial on 2026 frontier models. Input, output and reasoning tokens share one context budget, and reasoning may be invisible (encrypted chain-of-thought exists).</li>
+<li><strong>Sequential tool rounds</strong> multiply TTFT. Three rounds of "think → call → read" cost three TTFTs plus tool time.</li>
+<li><strong>Measure</strong> with the OTel GenAI metrics (still "Development" status, so pin the semconv version):</li>
+<li><code>gen_ai.client.operation.duration</code>;</li>
+<li><code>gen_ai.client.operation.time_to_first_chunk</code> and <code>time_per_output_chunk</code> (streaming);</li>
+<li><code>gen_ai.client.token.usage</code> by token type;</li>
+<li><code>gen_ai.usage.cache_read.input_tokens</code> and <code>gen_ai.usage.reasoning.output_tokens</code> on spans.</li>
+</ul>
+<p>Lever ranking for interactive agents (typical, verify on your traces):
+1. cut output tokens and reasoning effort;
+2. remove sequential rounds (parallel tools, pre-fetch);
+3. cache the static prefix;
+4. use smaller or faster models for sub-steps;
+5. regional proximity and gateway overhead.</p>
+<h3 id="3-designing-for-provider-prompt-caching">3. Designing for provider prompt caching<a class="headerlink" href="#3-designing-for-provider-prompt-caching" title="Permanent link">&para;</a></h3>
+<p>Providers cache the KV state of an <strong>identical prefix</strong>. Layout rules:
+1. <strong>Static first:</strong> system instructions, tool schemas (in a <strong>deterministic order</strong>; the MCP 2026-07-28 spec says servers SHOULD return <code>tools/list</code> deterministically "to improve LLM prompt cache hit rates"), skills metadata, few-shot examples, and the stable corpus (if under the ~200k-token "skip RAG" threshold).
+2. <strong>Semi-static next:</strong> tenant/depot context and user profile.
+3. <strong>Dynamic last:</strong> retrieved chunks, the conversation tail, and the current question. <strong>Never put timestamps, request IDs or random IDs at the top.</strong></p>
+<p>Economics: for Claude Opus 5.5 a cache read costs $0.20/MTok against $4/MTok base input. Writes cost $5/MTok (5-minute TTL) or $8/MTok (1-hour TTL), and the minimum cacheable prompt is 512 tokens (write prices and minimum: verify against current documentation). A prefix pays off when expected reads × (base − read price) &gt; write premium. Azure OpenAI caches repeated prefixes of ≥ 1,024 tokens at a discount. The discount level and model coverage are unverified for GPT-6-era deployments, so check the pricing page.</p>
+<p>Measure <code>cache_read.input_tokens ÷ input_tokens</code> per route, and alert when a deploy drops it. That usually means someone added a dynamic field to the system prompt.</p>
+<h3 id="4-semantic-caching-at-the-gateway">4. Semantic caching at the gateway<a class="headerlink" href="#4-semantic-caching-at-the-gateway" title="Permanent link">&para;</a></h3>
+<p>APIM's <code>llm-semantic-cache-lookup</code> / <code>llm-semantic-cache-store</code> embed the prompt and return a cached completion when vector proximity exceeds a threshold. They need Azure Managed Redis or another RediSearch-compatible cache.</p>
+<p><strong>Eligibility rules:</strong>
+- <strong>Cache only</strong> answers that are identical for everyone in a partition and stable over the TTL. Policy FAQs ("What is the overtime rule for weekend loading?") qualify.
+- <strong>Never cache</strong> user-specific, time-sensitive or tool-calling/agentic responses: driving hours, a truck's status, "my shipments".
+- <strong>Partition keys:</strong> tenant, role (security trimming!), language, and corpus version. A cache shared across roles bypasses C7's permission trimming. That is a data leak.
+- <strong>TTL</strong> aligned with document refresh, plus invalidation on corpus re-index (index alias swap → new partition key).
+- <strong>Threshold</strong> tuned on a labelled set of paraphrase pairs and near-miss pairs ("overtime on weekends" vs "overtime on holidays"). Measure the false-hit rate and accept only thresholds where false hits are ≤ 0.5% on near-misses.
+- <strong>Poisoning:</strong> never store responses that failed guardrails or judges. Store only after the online groundedness check passes.</p>
+<h3 id="5-routing-and-cascades">5. Routing and cascades<a class="headerlink" href="#5-routing-and-cascades" title="Permanent link">&para;</a></h3>
+<p><strong>Foundry model router.</strong>
+- Version <code>2025-11-18</code> is "Active (latest)" and <strong>auto-updated</strong>; <code>2025-08-07</code> and <code>2025-05-19</code> are frozen.
+- Modes are <strong>Balanced</strong> (default), <strong>Quality</strong> and <strong>Cost</strong>. A <strong>custom model subset</strong> restricts the pool and doubles as the failover set.
+- The effective context window is <strong>the smallest model's in the pool</strong>.
+- It runs on Global Standard and Data Zone Standard.</p>
+<p>The routing pool can span OpenAI, Anthropic (Claude must be deployed separately), Grok, DeepSeek, Llama and others. Check the data-residency implications per model. An auto-updating router is a drift source, so pin a frozen version for regulated paths, or re-run evals on router updates.</p>
+<p><strong>Your own cascade.</strong> A cheap model, or the D1 distilled student, answers first. Escalate to the frontier model when a <strong>calibrated</strong> signal is below τ: the classifier probability, judge score, retrieval coverage, or a schema/validator failure.</p>
+<div class="highlight"><pre><span></span><code>E[cost] = c_small + P(escalate) × c_large
+E[quality] = Q_small|accepted × (1 − P(esc)) + Q_large|escalated × P(esc)
+</code></pre></div>
+<p>Pick τ from the dev-set curve of (P(escalate), quality). Validate on test with paired comparisons against "always frontier".</p>
+<p><strong>When to use which:</strong>
+- Use the router for heterogeneous open-ended chat where you cannot build a confidence signal.
+- Use a cascade where you have a calibrated signal and a narrow task (triage, classification, extraction).
+- Use static routing by task type (planner → frontier, summarizer → small) whenever the task type is known. It is the cheapest router of all.</p>
+<h3 id="6-batch-parallelism-and-speculation">6. Batch, parallelism and speculation<a class="headerlink" href="#6-batch-parallelism-and-speculation" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Batch API:</strong> asynchronous bulk processing at a ~50% discount (Claude: input and output; Azure Batch deployments: about 50% cheaper with a 24h target, verify current terms). Use it for anything not user-blocking: nightly incident-report summarization, contextual-retrieval chunk enrichment (C13), embedding back-fills, eval runs and red-team sweeps. Design for partial failure and idempotent result ingestion.</li>
+<li><strong>Parallel tool calls:</strong> when the model emits several independent calls in one turn, execute them concurrently (<code>Task.WhenAll</code>). Check that your function-invocation layer allows concurrent invocation (verify the MEAI <code>FunctionInvokingChatClient</code> option name), and that tools are thread-safe and rate-limit aware. Prompt the model to batch independent lookups ("call all needed tools in one step").</li>
+<li><strong>Pre-fetch (speculative tool execution):</strong> when the next tool is near-certain (the driver's tachograph state at the start of a voice session), fetch it before the model asks. It costs some wasted reads and saves a full round.</li>
+<li><strong>Speculative decoding</strong> (a draft model proposes tokens, the large model verifies) speeds decoding without changing the output distribution. It is a <strong>serving-engine</strong> feature (vLLM, self-hosted), not something you toggle on a managed API.</li>
+<li><strong>Hedged requests</strong> (sending to two backends and taking the first) cut tail latency at up to 2× cost. Use them only on small, cheap, latency-critical calls.</li>
+</ul>
+<h3 id="7-context-size-reduction-without-quality-loss">7. Context-size reduction without quality loss<a class="headerlink" href="#7-context-size-reduction-without-quality-loss" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Trim tool results at the source: pagination, field projection, <code>response_format: concise|detailed</code>, and summaries plus IDs instead of raw rows (C8 tool design).</li>
+<li>Clear tool results from history once they have been used. Compact long sessions (C13).</li>
+<li>Reduce the tool catalog per task (fewer tools means a shorter prefix and better selection). Foundry <strong>tool search</strong> (preview) and skills' progressive disclosure load definitions on demand.</li>
+<li><strong>Code execution as the tool interface:</strong> filter data in a sandbox before it reaches the model. Anthropic's example went from ~150k to ~2k tokens.</li>
+<li>Cap output with explicit length instructions plus <code>max_output_tokens</code>, and handle <code>finish_reason=length</code> (C1).</li>
+<li>Every cut is a paired eval. Context reduction is where silent quality regressions hide (lost-in-the-middle helps you, but missing evidence hurts).</li>
+</ul>
+<h3 id="8-ptu-vs-payg-arithmetic-before-purchase">8. PTU vs PAYG: arithmetic before purchase<a class="headerlink" href="#8-ptu-vs-payg-arithmetic-before-purchase" title="Permanent link">&para;</a></h3>
+<p>Notation:
+- <em>P_ptu</em>: price per PTU-hour.
+- <em>k</em>: input tokens/min one PTU sustains for <em>your</em> input/output mix and model (same unit as <em>T</em> below) (from the capacity calculator plus a benchmark; verify per model).
+- <em>p_in</em>, <em>p_out</em>: PAYG prices.
+- <em>r</em>: the output/input ratio.</p>
+<div class="highlight"><pre><span></span><code>PAYG cost per hour at throughput T (input tok/min) = 60 × T × (p_in + r × p_out)
+PTU cost per hour for N units                          = N × P_ptu, serving up to N × k
+Break-even utilisation u* = P_ptu ÷ [60 × k × (p_in + r × p_out)]
+</code></pre></div>
+<p>If your sustained utilisation of the provisioned capacity exceeds <em>u*</em>, PTU wins on cost. Below it, PAYG wins.</p>
+<p>Real traffic is peaky (08:00 depot opening), so the expert design is:
+- <strong>PTU sized near the P60–P70 of the TPM distribution</strong>;
+- <strong>PAYG spillover</strong> for peaks via APIM <strong>priority backend pools</strong> (PTU priority 1, PAYG priority 2), with a circuit breaker that honours <code>Retry-After</code>.</p>
+<p>Include in the model:
+- PTU deployments are <strong>not auto-upgraded</strong>, so a model retirement means a planned migration with capacity overlap;
+- Data Zone (EU) vs Global pricing for GDPR residency;
+- the predictability benefit, which has real value for the CFO.</p>
+<p>All prices are taken from the pricing pages on the day of the exercise. The course does not freeze them.</p>
+<h3 id="9-load-testing-ai-endpoints">9. Load testing AI endpoints<a class="headerlink" href="#9-load-testing-ai-endpoints" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Workload realism:</strong></li>
+<li>sample prompt and response token-length <em>distributions</em> from production traces (C15);</li>
+<li>mix task types in the observed ratios;</li>
+<li>add think time;</li>
+<li>drive streaming endpoints with clients that record TTFT and completion separately.</li>
+<li><strong>Little's law:</strong> concurrency = throughput × latency. 30 req/s at 4 s mean latency means ~120 in-flight requests. Size connection pools, APIM limits and rate limits accordingly.</li>
+<li><strong>Separate concerns:</strong></li>
+<li><strong>gateway/orchestration tests</strong> against a mock LLM backend (cheap, run often);</li>
+<li><strong>capacity tests</strong> against real deployments (expensive, run rarely, budgeted);</li>
+<li><strong>failover tests</strong> that force 429s on the priority-1 pool.</li>
+<li><strong>Load tests cost money.</strong> Estimate the token bill before running (requests × mean tokens × price) and cap it with a gateway quota on the test subscription key.</li>
+<li>Tools: <strong>Azure Load Testing</strong> (managed; JMeter, and Locust per recent docs, verify), k6 and NBomber (.NET). Report P50/P95/P99 TTFT and E2E, 429 rate, spillover share and € per 1,000 tasks.</li>
+</ul>
+<h3 id="10-quotas-and-fairness">10. Quotas and fairness<a class="headerlink" href="#10-quotas-and-fairness" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>llm-token-limit</code> per tenant, per feature and per user (TPM and longer-period quotas, with pre-estimation of prompt tokens) prevents one tenant's batch from starving dispatchers.</li>
+<li><code>llm-emit-token-metric</code> with tenant/feature dimensions feeds chargeback and CPST dashboards.</li>
+<li>Interactive traffic gets priority. Background agents (the D2 planner) get lower quotas and the batch path.</li>
+</ul>
+<h2 id="tools-versions-as-of-oct-2026">Tools &amp; versions (as of Oct 2026)<a class="headerlink" href="#tools-versions-as-of-oct-2026" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Tool / feature</th>
+<th>Purpose</th>
+<th>Status</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>APIM AI gateway policies: <code>llm-token-limit</code>, <code>llm-emit-token-metric</code>, <code>llm-semantic-cache-lookup/store</code>, backend pools (priority/weighted), circuit breaker</td>
+<td>Quotas, chargeback, semantic cache, spillover</td>
+<td>GA (policies)</td>
+<td>Semantic cache needs Azure Managed Redis or RediSearch-compatible</td>
+</tr>
+<tr>
+<td>APIM unified model API; AI gateway in Foundry</td>
+<td>Single endpoint across providers</td>
+<td><strong>Preview</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>Foundry model router <code>2025-11-18</code></td>
+<td>Per-prompt routing; Balanced/Quality/Cost; custom subset</td>
+<td>Active, auto-updating</td>
+<td>Frozen: <code>2025-08-07</code>, <code>2025-05-19</code>; smallest-context constraint</td>
+</tr>
+<tr>
+<td>Provider prompt caching</td>
+<td>Prefix KV reuse</td>
+<td>GA (per provider)</td>
+<td>Opus 5.5 read $0.20 vs $4/MTok; Azure discount level: verify</td>
+</tr>
+<tr>
+<td>Batch API / Batch deployments</td>
+<td>~50% discount, async</td>
+<td>GA (per provider)</td>
+<td>Verify Azure terms per model</td>
+</tr>
+<tr>
+<td>Azure Load Testing</td>
+<td>Managed load tests</td>
+<td>GA</td>
+<td>Verify Locust support; JMeter supported</td>
+</tr>
+<tr>
+<td>NBomber / k6</td>
+<td>Code-first load testing</td>
+<td>OSS</td>
+<td>NBomber for .NET-native scenarios</td>
+</tr>
+<tr>
+<td>OTel GenAI semconv (<code>gen_ai.client.*</code>, <code>gen_ai.usage.*</code>)</td>
+<td>Latency/usage metrics</td>
+<td><strong>Development</strong></td>
+<td>Pin semconv version; map in Collector</td>
+</tr>
+<tr>
+<td>MEAI <code>ChatClientBuilder</code> (+ caching, OTel) and MAF middleware</td>
+<td>Client-side caching, budgets, metrics</td>
+<td>GA</td>
+<td><code>IDistributedCache</code> response cache for exact repeats in tests</td>
+</tr>
+<tr>
+<td>MEAI.Evaluation (+ response caching)</td>
+<td>Paired quality checks for every optimization</td>
+<td>GA</td>
+<td>Nightly uncached run for drift</td>
+</tr>
+</tbody>
+</table>
+<h2 id="labs">Labs<a class="headerlink" href="#labs" title="Permanent link">&para;</a></h2>
+<p>Lab repo: <code>trakia-fleetops</code>. The <code>perf/</code> folder holds the k6/NBomber scenarios, the <code>TraceSampler</code> that extracts token-length distributions from App Insights, and the <code>infra/apim</code> Bicep modules. Two Foundry deployments simulate "PTU" (priority 1, low quota) and "PAYG" (priority 2).</p>
+<h3 id="lab-1-latency-and-cost-anatomy-and-the-cpst-baseline-25h">Lab 1 — Latency and cost anatomy, and the CPST baseline (≈2.5h)<a class="headerlink" href="#lab-1-latency-and-cost-anatomy-and-the-cpst-baseline-25h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> Know where time and money go for the three main task types (policy Q&amp;A, fleet analyst query, fault triage), and establish CPST.</li>
+<li><strong>Start state:</strong> tag <code>d5/lab1-start</code> (the full product from C19 with tracing).</li>
+<li><strong>Steps:</strong></li>
+<li>Add the missing span attributes: <code>gen_ai.usage.cache_read.input_tokens</code>, <code>gen_ai.usage.reasoning.output_tokens</code>, tool durations, and a <code>task.type</code> attribute. Add a <code>CostEnricher</code> (an OTel processor) that computes € per span from a pinned price table in config.</li>
+<li>Join traces to eval outcomes, from the nightly eval run and online judges: <code>success = judge_pass ∧ no_human_override</code>.</li>
+<li>Build a KQL workbook with: the latency waterfall per task type (queue, TTFT, decode, reasoning, tools, overhead), the output-token share of latency, CPST per task type and tenant, and the cache hit ratio.
+     <div class="highlight"><pre><span></span><code><span class="n">dependencies</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">customDimensions</span><span class="p">[</span><span class="s">"gen_ai.operation.name"</span><span class="p">]</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="s">"chat"</span>
+<span class="p">|</span><span class="w"> </span><span class="k">extend</span><span class="w"> </span><span class="n">task</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">tostring</span><span class="p">(</span><span class="n">customDimensions</span><span class="p">[</span><span class="s">"task.type"</span><span class="p">]),</span><span class="w"> </span><span class="n">eur</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">todouble</span><span class="p">(</span><span class="n">customDimensions</span><span class="p">[</span><span class="s">"cost.eur"</span><span class="p">])</span>
+<span class="p">|</span><span class="w"> </span><span class="k">summarize</span><span class="w"> </span><span class="n">cost</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">sum</span><span class="p">(</span><span class="n">eur</span><span class="p">),</span><span class="w"> </span><span class="n">p95_ttft</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">percentile</span><span class="p">(</span><span class="n">todouble</span><span class="p">(</span><span class="n">customDimensions</span><span class="p">[</span><span class="s">"ttft_ms"</span><span class="p">]),</span><span class="w"> </span><span class="mi">95</span><span class="p">)</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">task</span><span class="p">,</span><span class="w"> </span><span class="n">bin</span><span class="p">(</span><span class="n">timestamp</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="n">h</span><span class="p">)</span>
+</code></pre></div></li>
+<li>Write <code>perf/baseline.md</code> with the top three latency contributors and the CPST per task type.</li>
+<li><strong>Break it:</strong> Raise the fleet analyst's reasoning effort to high. Quantify the change in TTFT, cost and success. Is the quality gain worth it under the CPST definition?</li>
+<li><strong>Acceptance criteria:</strong></li>
+<li>The workbook is deployed via Bicep.</li>
+<li>A <code>CpstTests</code> integration test recomputes CPST from a fixture trace set within ±1%.</li>
+<li>The baseline report names the dominant latency term per task type, with evidence.</li>
+<li><strong>Stretch:</strong> Add human-review minutes (from the D3 delivery-note review queue) into CPST at a loaded hourly rate.</li>
+</ul>
+<h3 id="lab-2-prompt-cache-layout-and-context-diet-25h">Lab 2 — Prompt-cache layout and context diet (≈2.5h)<a class="headerlink" href="#lab-2-prompt-cache-layout-and-context-diet-25h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> Cut input cost and TTFT without losing quality.</li>
+<li><strong>Start state:</strong> tag <code>d5/lab2-start</code>.</li>
+<li><strong>Steps:</strong></li>
+<li>Audit the prompts of the Fleet Assistant and the planner. Move the static parts first, remove the timestamp and request ID from the system prompt, and make the Trakia MCP server return tools in a deterministic (sorted) order.</li>
+<li>Trim tool outputs: <code>GetVehicleStatus</code> returns concise fields by default, and telematics queries paginate with a summary plus IDs. Clear consumed tool results from history.</li>
+<li>Cap output length per task type, and handle <code>finish_reason=length</code> with a "continue?" affordance.</li>
+<li>Run the golden suites before and after. Report paired quality deltas with 95% CIs, the cache hit ratio, TTFT P50/P95 and CPST.</li>
+<li><strong>Break it:</strong> Insert <code>Current time: {DateTime.UtcNow:O}</code> at the top of the system prompt and watch the cache hit ratio collapse in the workbook. Add an alert rule for it.</li>
+<li><strong>Acceptance criteria:</strong></li>
+<li>Cache hit ratio ≥ 70% on the assistant route.</li>
+<li>Input cost per task −40% or better.</li>
+<li>TTFT P95 improved.</li>
+<li>Paired quality delta lower bound ≥ −1 point on every suite.</li>
+<li>The cache-regression alert fires in the Break-it scenario.</li>
+<li><strong>Stretch:</strong> Move rarely used instructions into skills (progressive disclosure) and measure prefix length vs skill-load frequency.</li>
+</ul>
+<h3 id="lab-3-semantic-cache-router-and-cascade-3h">Lab 3 — Semantic cache, router and cascade (≈3h)<a class="headerlink" href="#lab-3-semantic-cache-router-and-cascade-3h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> Serve repetitive questions from cache safely, and route each request to the cheapest model that meets quality.</li>
+<li><strong>Start state:</strong> tag <code>d5/lab3-start</code> (APIM in front of the deployments, Azure Managed Redis provisioned).</li>
+<li><strong>Steps:</strong></li>
+<li>Enable <code>llm-semantic-cache-lookup/store</code> <strong>only</strong> on the <code>/policy-faq</code> route. Use a partition key of <code>tenant|role|lang|corpusVersion</code>, a TTL of 24h, and invalidation on index alias swap. Store only responses with <code>x-trakia-judge: pass</code> set by the backend.</li>
+<li>Build <code>SemanticCacheEval</code>: 200 paraphrase pairs (should hit) and 200 near-miss pairs (should not). Sweep the similarity threshold and choose the highest hit rate with false hits ≤ 0.5%.</li>
+<li>Deploy the <strong>Foundry model router</strong> with a custom subset (fast small model + workhorse + frontier, all EU-resident). Compare the Balanced, Quality and Cost modes on the policy and analyst suites, logging the <code>model</code> actually used per response.</li>
+<li>Build a <strong>cascade</strong> for fault triage: D1 student first, then escalation to frontier when <code>Confidence &lt; τ</code> or the schema is invalid. Pick τ on dev and report test results.</li>
+<li>Produce a decision table: route by task type, router mode or cascade, with CPST, quality and P95 for each.</li>
+<li><strong>Break it:</strong></li>
+<li>Remove <code>role</code> from the cache partition key and replay the HR-restricted question set as a dispatcher. Count the leaked answers, then restore the key and add <code>CacheLeakTests</code>.</li>
+<li>Add a pool model with a much smaller context window to the router subset and observe failures on long analyst prompts.</li>
+<li><strong>Acceptance criteria:</strong></li>
+<li>Semantic cache false-hit rate ≤ 0.5% on near-misses, with <strong>0 cross-role hits</strong> (<code>CacheLeakTests</code>).</li>
+<li>The cascade's triage CPST is ≤ 30% of always-frontier, with a paired quality delta lower bound ≥ −1 point and <code>StopNow</code> recall ≥ 0.97.</li>
+<li>The router-mode comparison is committed, including a pinning decision (frozen vs latest) with justification.</li>
+<li><strong>Stretch:</strong> Implement the cascade as MEAI middleware (<code>EscalatingChatClient</code>) so any route can opt in by configuration.</li>
+</ul>
+<h3 id="lab-4-batch-capacity-model-and-load-test-with-spillover-25h">Lab 4 — Batch, capacity model and load test with spillover (≈2.5h)<a class="headerlink" href="#lab-4-batch-capacity-model-and-load-test-with-spillover-25h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> Move non-interactive work to batch, and decide PTU vs PAYG with arithmetic validated by a load test.</li>
+<li><strong>Start state:</strong> tag <code>d5/lab4-start</code>.</li>
+<li><strong>Steps:</strong></li>
+<li>Move the nightly incident-report summarization (≈3,000 reports per night) to the Batch path. Make result ingestion idempotent by report ID and handle partial failures. Compare cost and wall time with the synchronous run.</li>
+<li>Using <code>TraceSampler</code>, extract the TPM distribution per 5-minute bucket for a week. Fill <code>perf/capacity-model.xlsx</code> (or a C# notebook) using today's prices, the PTU throughput per unit for your model and token mix (calculator plus benchmark), and the break-even utilisation u*. Size PTU at the P60–P70 TPM and compute the monthly cost of PAYG-only, PTU-only (sized for peak) and PTU+spillover.</li>
+<li>Configure APIM priority backend pools (simulated PTU deployment priority 1, PAYG priority 2) with a circuit breaker honouring <code>Retry-After</code>.</li>
+<li>Run an Azure Load Testing scenario that replays the sampled token distribution at a 08:00-peak profile against APIM. First set a test-key quota as a cost cap. Record the TTFT and E2E percentiles, the 429 rate, the spillover share and €/1,000 tasks.</li>
+<li><strong>Break it:</strong> Remove the circuit breaker and repeat the run. Observe 429 storms and retry amplification. Then set the client retry policy to ignore <code>Retry-After</code> and measure the damage.</li>
+<li><strong>Acceptance criteria:</strong></li>
+<li>The batch run is ≥ 45% cheaper with no lost reports (<code>BatchIngestionTests</code>).</li>
+<li>The capacity model includes u*, the TPM percentiles and three scenarios, with the price sources and date cited.</li>
+<li>The load test report shows the P95 E2E SLO met at peak with spillover, and the client-visible 429 rate below 0.5%.</li>
+<li>The ADR <code>ADR-0D5-capacity.md</code> is committed.</li>
+<li><strong>Stretch:</strong> Repeat the load test with the semantic cache and prompt caching on vs off, and attribute the latency gain to each.</li>
+</ul>
+<h2 id="kata">Kata<a class="headerlink" href="#kata" title="Permanent link">&para;</a></h2>
+<p><strong>"Find the euro" (30 min, repeat 4×).</strong> You get one trace export (20 runs) and the current price table:
+- Variant 1: a planner run.
+- Variant 2: a voice session.
+- Variant 3: an analyst query with 5 tool rounds.
+- Variant 4: a RAG answer with a 60k-token context.</p>
+<p>Within 30 minutes, produce:
+1. the CPST and latency waterfall;
+2. the top two optimizations with an estimated € and ms saving;
+3. the quality risk of each and the paired eval you would run;
+4. what you would <em>not</em> do, and why.</p>
+<p>The instructor scores against the measured outcome of each optimization.</p>
+<h2 id="product-increment-fleet-ops-copilot">Product increment — Fleet Ops Copilot<a class="headerlink" href="#product-increment-fleet-ops-copilot" title="Permanent link">&para;</a></h2>
+<p>Fleet Ops Copilot now runs on a cost and performance baseline:
+- Prompts and tool catalogs are cache-friendly, with a cache-regression alert.
+- Semantic caching covers the policy FAQ route only, with tenant/role/language/version partitioning and a measured false-hit rate.
+- Routing is per task type, combining a pinned model router for open chat with a D1-student cascade for fault triage.
+- Nightly enrichment runs through batch.
+- PTU-plus-spillover capacity sits behind APIM priority pools.
+- CPST dashboards break down cost per task type and per tenant.</p>
+<h2 id="factory-increment-your-agentic-sdlc">Factory increment — your agentic SDLC<a class="headerlink" href="#factory-increment-your-agentic-sdlc" title="Permanent link">&para;</a></h2>
+<ul>
+<li>A <strong>perf gate</strong> in CI runs the mock-backend NBomber suite for orchestration overhead and the cached eval suite for each PR. It fails on a P95 regression over 15%, a CPST regression over 10% on the fixture traces, or a cache-hit drop over 10 points.</li>
+<li>A <code>/cost-review</code> skill lets an agent read a PR diff and the trace workbook and comment on prompt-layout changes, new dynamic prefix fields, unbounded tool outputs and missing <code>max_output_tokens</code>.</li>
+<li>An agent may propose an optimization, but merging needs the paired eval report attached. This is recorded in <code>AGENTS.md</code>.</li>
+</ul>
+<h2 id="assessment">Assessment<a class="headerlink" href="#assessment" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th>Novice</th>
+<th>Competent</th>
+<th>Proficient</th>
+<th>Expert</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>KPI discipline</td>
+<td>Tracks the token bill</td>
+<td>Cost per request</td>
+<td>CPST per task type with success from evals</td>
+<td>CPST with guardrails (quality CI bound, latency SLO), per tenant, including human review</td>
+</tr>
+<tr>
+<td>Latency diagnosis</td>
+<td>Total time</td>
+<td>TTFT vs total</td>
+<td>Per-stage waterfall from traces</td>
+<td>Targets the dominant term; quantifies reasoning and output share; validates under load</td>
+</tr>
+<tr>
+<td>Caching</td>
+<td>None or global</td>
+<td>Prompt reordering</td>
+<td>Prompt cache + semantic cache with TTL</td>
+<td>Partitioned semantic cache with measured false-hit and leak tests; cache-regression alerting</td>
+</tr>
+<tr>
+<td>Routing &amp; batch</td>
+<td>One model for all</td>
+<td>Static routing</td>
+<td>Router or cascade with chosen thresholds</td>
+<td>Thresholds from dev curves, paired tests, a router pinning policy; batch for all non-blocking work</td>
+</tr>
+<tr>
+<td>Capacity &amp; load</td>
+<td>Buys PTU on instinct</td>
+<td>Uses the calculator</td>
+<td>Break-even math</td>
+<td>Distribution-based sizing with spillover, validated by a cost-capped realistic load test</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Auto-checked:</strong> <code>CpstTests</code>, the cache-hit alert, <code>CacheLeakTests</code>, <code>SemanticCacheEval</code> thresholds, the cascade quality/cost gates, <code>BatchIngestionTests</code>, the perf gate thresholds, and the Bicep deployment of the workbook and APIM policies.</p>
+<h2 id="common-pitfalls">Common pitfalls<a class="headerlink" href="#common-pitfalls" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Optimizing cost per token instead of cost per successful task.</li>
+<li>Dynamic fields (time, IDs) at the start of prompts, and nondeterministic tool order.</li>
+<li>Semantic caching personalized, time-sensitive or role-trimmed answers. That is a data leak, not an optimization.</li>
+<li>Router pools that include a small-context model, or EU-residency violations through Global deployments.</li>
+<li>Escalation thresholds picked by intuition instead of dev curves.</li>
+<li>Load-testing with uniform tiny prompts, and running real-model load tests without a cost cap.</li>
+<li>Ignoring <code>Retry-After</code>, so retries amplify 429 storms.</li>
+<li>Buying PTU for peak, or for a model about to be deprecated (PTU deployments are not auto-upgraded).</li>
+<li>Shipping "optimizations" without paired quality evals.</li>
+</ul>
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Microsoft Learn — APIM AI gateway capabilities (token limits, metrics, semantic cache, backend pools, circuit breaker): https://learn.microsoft.com/en-us/azure/api-management/genai-gateway-capabilities</li>
+<li>Microsoft Learn — Foundry model router concepts: https://learn.microsoft.com/en-us/azure/ai-foundry/openai/concepts/model-router</li>
+<li>Microsoft Learn — Models sold directly by Azure (shared context budget, reasoning tokens): https://learn.microsoft.com/en-us/azure/foundry/foundry-models/concepts/models-sold-directly-by-azure</li>
+<li>Microsoft Learn — Foundry model retirements (PTU not auto-upgraded): https://learn.microsoft.com/en-us/azure/foundry/openai/concepts/model-retirements</li>
+<li>Claude Opus 5.5 overview (prompt caching and batch pricing): https://platform.claude.com/docs/en/models/opus-5-5/overview</li>
+<li>MCP 2026-07-28 changelog (deterministic <code>tools/list</code> for cache hit rates): https://modelcontextprotocol.io/specification/2026-07-28/changelog</li>
+<li>Anthropic — Code execution with MCP (token reduction): https://www.anthropic.com/engineering/code-execution-with-mcp</li>
+<li>Anthropic — Contextual retrieval (cost with caching, &lt;200k-token rule of thumb): https://www.anthropic.com/news/contextual-retrieval</li>
+<li>OTel GenAI semantic conventions status: https://www.dash0.com/knowledge/opentelemetry-genai-semantic-conventions-explained ; https://dev.to/azena-ai/opentelemetrys-genai-semantic-conventions-are-not-stable-yet-heres-what-actually-shipped-in-2026-3mke</li>
+<li>Digital Applied — September 2026 model tracker (per-task vs per-token cost): https://www.digitalapplied.com/blog/ai-model-releases-september-2026-tracker</li>
+<li>Leviathan et al., Speculative decoding: https://arxiv.org/abs/2211.17192 · Kwon et al., PagedAttention: https://arxiv.org/abs/2309.06180</li>
+<li>Azure Architecture Center — Baseline Foundry chat RA (PTU for baseline, PAYG for variable load): https://learn.microsoft.com/en-us/azure/architecture/ai-ml/architecture/baseline-microsoft-foundry-chat</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../d04-agent-ux-and-front-ends/" class="md-footer__link md-footer__link--prev" aria-label="Previous: D4 — Agent UX &amp; front-ends">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                D4 — Agent UX & front-ends
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../d06-building-your-own-agent-tooling/" class="md-footer__link md-footer__link--next" aria-label="Next: D6 — Building your own agent tooling">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                D6 — Building your own agent tooling
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.top", "navigation.footer", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

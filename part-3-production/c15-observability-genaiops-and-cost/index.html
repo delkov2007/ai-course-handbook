@@ -1,0 +1,3112 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Learning-by-doing course, release 2026.11 (content as of October 2026)">
+      
+      
+      
+      
+        <link rel="prev" href="../c14-failure-driven-evals-llm-judges-and-red-teaming/">
+      
+      
+        <link rel="next" href="../c16-security-for-llm-and-agentic-systems/">
+      
+      
+        
+          <link rel="alternate" href="./" hreflang="en">
+        
+          <link rel="alternate" href="../../bg/part-3-production/c15-observability-genaiops-and-cost/" hreflang="bg">
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>C15 — Observability, GenAIOps & cost - AI Solution Developer & Architect — Learner Handbook</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#c15-observability-genaiops-cost" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="AI Solution Developer &amp; Architect — Learner Handbook" class="md-header__button md-logo" aria-label="AI Solution Developer & Architect — Learner Handbook" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            AI Solution Developer & Architect — Learner Handbook
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              C15 — Observability, GenAIOps & cost
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="Select language">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href="./" hreflang="en" class="md-select__link">
+              English
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="../../bg/part-3-production/c15-observability-genaiops-and-cost/" hreflang="bg" class="md-select__link">
+              Български
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="AI Solution Developer &amp; Architect — Learner Handbook" class="md-nav__button md-logo" aria-label="AI Solution Developer & Architect — Learner Handbook" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    AI Solution Developer & Architect — Learner Handbook
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Welcome
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Start here
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Start here
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/how-to-use/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How to use this handbook
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/course-overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Course overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/assessment-gates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Assessment and gates
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/competency-matrix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Competency matrix
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 1 — Foundations (Level 1)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part 1 — Foundations (Level 1)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c00-orientation-setup-and-toolchain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C0 — Orientation, setup & toolchain
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c01-how-generative-ai-works-an-engineer-s-mental-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C1 — How generative AI works: an engineer's mental model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c02-your-first-ai-feature-in-net/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C2 — Your first AI feature in .NET
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c03-prompting-structured-outputs-and-tool-calling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C3 — Prompting, structured outputs & tool calling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c04-working-with-coding-agents-the-factory-day-one/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C4 — Working with coding agents: the Factory, day one
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c05-evals-from-day-one/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C5 — Evals from day one
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 2 — Building blocks (Level 2)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part 2 — Building blocks (Level 2)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c06-embeddings-and-vector-search/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C6 — Embeddings & vector search
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c07-rag-from-documents-to-cited-permission-aware-answers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C7 — RAG: from documents to cited, permission-aware answers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c08-tools-and-the-model-context-protocol/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C8 — Tools & the Model Context Protocol
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c09-agents-with-microsoft-agent-framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C9 — Agents with Microsoft Agent Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c10-agents-over-structured-data-text-to-sql-on-sql-server/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C10 — Agents over structured data: text-to-SQL on SQL Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c11-agentic-testing-ai-driven-tdd-mutation-and-e2e-test-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C11 — Agentic testing: AI-driven TDD, mutation & E2E test agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 3 — Production systems (Level 3)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part 3 — Production systems (Level 3)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../c12-workflows-and-multi-agent-orchestration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C12 — Workflows & multi-agent orchestration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../c13-context-engineering-advanced-retrieval-and-memory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C13 — Context engineering, advanced retrieval & memory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../c14-failure-driven-evals-llm-judges-and-red-teaming/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C14 — Failure-driven evals, LLM judges & red teaming
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C15 — Observability, GenAIOps & cost
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C15 — Observability, GenAIOps & cost
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-this-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why this matters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learning outcomes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concepts
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Concepts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-what-llm-observability-must-answer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. What LLM observability must answer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-opentelemetry-genai-semantic-conventions-status-and-shape" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. OpenTelemetry GenAI semantic conventions — status and shape
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-instrumenting-the-net-stack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Instrumenting the .NET stack
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-metrics-that-matter-for-fleet-ops" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Metrics that matter for Fleet Ops
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-user-feedback-loops" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. User feedback loops
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-genaiops-lifecycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. GenAIOps lifecycle
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-model-lifecycle-and-deprecation-policy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Model lifecycle and deprecation policy
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-cost-engineering-basics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Cost engineering basics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-finops-dashboards" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. FinOps dashboards
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tools-versions-as-of-oct-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tools &amp; versions (as of Oct 2026)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#labs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Labs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Labs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lab-1-one-incident-one-trace-25h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 1 — One incident, one trace (≈2.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-2-dashboards-alerts-and-the-feedback-loop-25h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 2 — Dashboards, alerts and the feedback loop (≈2.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-3-versioning-canary-and-a-model-retirement-drill-25h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 3 — Versioning, canary and a model-retirement drill (≈2.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-4-cost-engineering-and-finops-25h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 4 — Cost engineering and FinOps (≈2.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kata
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#product-increment-fleet-ops-copilot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Product increment — Fleet Ops Copilot
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#factory-increment-your-agentic-sdlc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Factory increment — your agentic SDLC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assessment
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common pitfalls
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../c16-security-for-llm-and-agentic-systems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C16 — Security for LLM & agentic systems
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../c17-shipping-to-azure-hosting-ai-gateway-iac-and-interop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C17 — Shipping to Azure: hosting, AI gateway, IaC & interop
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../c18-responsible-ai-and-the-eu-ai-act-in-practice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C18 — Responsible AI & the EU AI Act in practice
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../c19-the-automated-sdlc-agents-from-issue-to-production/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C19 — The automated SDLC: agents from issue to production
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 4 — Expert track: AI Solution Developer
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part 4 — Expert track: AI Solution Developer
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d01-model-customization-and-small-local-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D1 — Model customization & small/local models
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d02-long-running-durable-and-autonomous-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D2 — Long-running, durable & autonomous agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d03-multimodal-and-realtime-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D3 — Multimodal & realtime agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d04-agent-ux-and-front-ends/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D4 — Agent UX & front-ends
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d05-performance-and-cost-engineering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D5 — Performance & cost engineering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d06-building-your-own-agent-tooling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D6 — Building your own agent tooling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d07-agent-reliability-engineering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D7 — Agent reliability engineering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 5 — Expert track: AI Solution Architect
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part 5 — Expert track: AI Solution Architect
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a01-ai-strategy-use-case-discovery-and-business-case/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A1 — AI strategy, use-case discovery & business case
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a02-azure-ai-reference-architectures-and-well-architected-for-ai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A2 — Azure AI reference architectures & Well-Architected for AI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a03-enterprise-knowledge-and-data-architecture-for-ai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A3 — Enterprise knowledge & data architecture for AI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a04-agent-platform-and-integration-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A4 — Agent platform & integration architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a05-reliability-scale-model-lifecycle-and-finops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A5 — Reliability, scale, model lifecycle & FinOps
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a06-ai-governance-risk-and-compliance-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A6 — AI governance, risk & compliance architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a07-the-architect-s-craft-in-ai-programmes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A7 — The architect's craft in AI programmes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 6 — Joint capstone
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part 6 — Joint capstone
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capstone/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Capstone
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Appendix
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Appendix
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/references/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Further reading
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-this-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why this matters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learning outcomes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concepts
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Concepts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-what-llm-observability-must-answer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. What LLM observability must answer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-opentelemetry-genai-semantic-conventions-status-and-shape" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. OpenTelemetry GenAI semantic conventions — status and shape
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-instrumenting-the-net-stack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Instrumenting the .NET stack
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-metrics-that-matter-for-fleet-ops" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Metrics that matter for Fleet Ops
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-user-feedback-loops" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. User feedback loops
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-genaiops-lifecycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. GenAIOps lifecycle
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-model-lifecycle-and-deprecation-policy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Model lifecycle and deprecation policy
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-cost-engineering-basics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Cost engineering basics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-finops-dashboards" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. FinOps dashboards
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tools-versions-as-of-oct-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tools &amp; versions (as of Oct 2026)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#labs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Labs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Labs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lab-1-one-incident-one-trace-25h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 1 — One incident, one trace (≈2.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-2-dashboards-alerts-and-the-feedback-loop-25h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 2 — Dashboards, alerts and the feedback loop (≈2.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-3-versioning-canary-and-a-model-retirement-drill-25h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 3 — Versioning, canary and a model-retirement drill (≈2.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-4-cost-engineering-and-finops-25h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 4 — Cost engineering and FinOps (≈2.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kata
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#product-increment-fleet-ops-copilot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Product increment — Fleet Ops Copilot
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#factory-increment-your-agentic-sdlc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Factory increment — your agentic SDLC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assessment
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common pitfalls
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="c15-observability-genaiops-cost">C15 — Observability, GenAIOps &amp; cost<a class="headerlink" href="#c15-observability-genaiops-cost" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><strong>Level:</strong> 3 — Production systems (Advanced) · <strong>Duration:</strong> 14h (theory 30% / labs 70%) · <strong>Prerequisites:</strong> C9 (agent), C12 (incident workflow), C13 (context/caching), C14 (eval suite, CI gate) · <strong>Volatility:</strong> High (OTel GenAI conventions are "Development"; prices, model lifecycles, APIM/Foundry preview features change quarterly)</p>
+</blockquote>
+<h2 id="why-this-matters">Why this matters<a class="headerlink" href="#why-this-matters" title="Permanent link">&para;</a></h2>
+<p>Three weeks after Fleet Ops Copilot goes live at the Varna depot, finance asks why the Azure bill for "AI" doubled while incident volume rose 8%. Operations asks why the incident workflow sometimes takes four minutes. A dispatcher reports that "since Tuesday the customer notices sound different." Nobody can answer any of the three from data: the logs contain HTTP status codes and nothing about which agent, prompt version or model produced what; token usage exists only as a monthly invoice line; and Tuesday was the day the model router silently started favouring a different model in its pool.</p>
+<p>LLM systems fail along dimensions classic APM does not see: <em>which</em> tokens were spent and why, which prompt and model version produced an answer, where in a multi-agent trajectory the time went, which tool is failing, what users thought, and what each outcome cost. Without that, every quality conversation is anecdotal and every cost conversation is a surprise. Worse, models are <em>retired on a schedule you do not control</em> — standard GA models on Foundry get about 18 months, several partner families 12 — so the system must be ready to change models as a routine operation, not a fire drill.</p>
+<p>Experts instrument the whole trajectory with OpenTelemetry GenAI conventions (pinned, because the spec is still moving), keep message content out of production telemetry by default, turn traces into unit-economics dashboards (cost per incident, per depot, per shift), close the loop from user feedback into error analysis, version every prompt and agent like code with canaries and rollbacks, and treat model migrations and cost optimisation as measured, eval-gated releases. This module builds that operating layer for Fleet Ops Copilot.</p>
+<h2 id="learning-outcomes">Learning outcomes<a class="headerlink" href="#learning-outcomes" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Instrument</strong> a MAF multi-agent workflow, MEAI clients and the C# MCP server with OpenTelemetry so one incident yields one connected trace (<code>invoke_workflow</code> → <code>invoke_agent</code> → <code>chat</code> → <code>execute_tool</code> → MCP server → SQL).</li>
+<li><strong>Apply</strong> the OTel GenAI semantic conventions with a pinned version, and <strong>handle</strong> attribute renames (e.g., <code>gen_ai.system</code> → <code>gen_ai.provider.name</code>) with Collector-side mapping.</li>
+<li><strong>Configure</strong> privacy-safe telemetry: content capture off in production, redaction, retention, DPIA notes.</li>
+<li><strong>Build</strong> dashboards and alerts for TTFT, latency, tokens (input/output/cached/reasoning), cost per task, tool error rate, budget escalations and HITL metrics in Application Insights/Azure Monitor and the Aspire dashboard.</li>
+<li><strong>Implement</strong> a user-feedback loop joined to traces that feeds the C14 error-analysis queue.</li>
+<li><strong>Operate</strong> a GenAIOps lifecycle: versioned prompts/agents/models, offline gates, feature-flag and gateway canaries, rollback.</li>
+<li><strong>Plan and rehearse</strong> a model migration under Foundry's deprecation policy (≥ 60 days' notice, PTU not auto-upgraded).</li>
+<li><strong>Reduce</strong> cost per task with evidence using caching, routing (Foundry model router or cascades), batch, gateway quotas and PTU-vs-PAYG analysis — without regressing evals.</li>
+<li><strong>Produce</strong> FinOps chargeback/showback dashboards with unit economics.</li>
+</ol>
+<h2 id="concepts">Concepts<a class="headerlink" href="#concepts" title="Permanent link">&para;</a></h2>
+<h3 id="1-what-llm-observability-must-answer">1. What LLM observability must answer<a class="headerlink" href="#1-what-llm-observability-must-answer" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Signal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Why did this incident get this outcome?</td>
+<td>distributed trace with agent/tool spans, prompt &amp; model versions</td>
+</tr>
+<tr>
+<td>Where does time go?</td>
+<td>span durations, TTFT, HITL wait time</td>
+</tr>
+<tr>
+<td>What does it cost, per what?</td>
+<td>token usage by type × versioned price table → cost per task/tenant/feature</td>
+</tr>
+<tr>
+<td>Is quality drifting?</td>
+<td>online eval scores, feedback rate, approval/edit rates</td>
+</tr>
+<tr>
+<td>Is anything failing silently?</td>
+<td>tool error rate, retrieval-empty rate, budget escalations, judge Fail spikes</td>
+</tr>
+<tr>
+<td>Who did what (audit)?</td>
+<td>approver identity, agent identity, version attributes</td>
+</tr>
+</tbody>
+</table>
+<p>Misconception to unlearn: "logging the prompt and response is observability." It is the least useful and most dangerous part (PII, cost); structure, versions and token accounting matter more.</p>
+<h3 id="2-opentelemetry-genai-semantic-conventions-status-and-shape">2. OpenTelemetry GenAI semantic conventions — status and shape<a class="headerlink" href="#2-opentelemetry-genai-semantic-conventions-status-and-shape" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Status:</strong> all <code>gen_ai.*</code> spans, metrics, attributes and events are at <strong>"Development"</strong> stability; only generic attributes such as <code>error.type</code>, <code>server.address</code>, <code>server.port</code> are stable. Names can change without a deprecation window. In <strong>v1.42.0 (12 June 2026)</strong> the GenAI conventions (including MCP) moved from the main repo to <strong><code>open-telemetry/semantic-conventions-genai</code></strong> (schema <code>gen-ai/1.42.0</code>; that repo had no tagged release as of mid-July 2026). Transition to stability is expected to use dual emission via <code>OTEL_SEMCONV_STABILITY_OPT_IN</code>; no date announced.</li>
+<li><strong>Operations / span names:</strong> <code>create_agent</code>, <code>invoke_agent</code> (<code>{operation} {agent.name}</code>; split into client and internal spans in v1.41.0), <code>invoke_workflow {workflow.name}</code>, <code>execute_tool {tool.name}</code>, <code>plan</code>, <code>retrieval</code>, memory operations (<code>create_memory</code>, <code>search_memory</code>, <code>upsert_memory</code>); model calls <code>{operation} {request.model}</code>, e.g. <code>chat &lt;model&gt;</code>. Typical tree: <code>invoke_agent</code> → <code>chat</code> → <code>execute_tool</code>.</li>
+<li><strong>Attributes:</strong> required <code>gen_ai.operation.name</code>, <code>gen_ai.provider.name</code>; recommended/conditional <code>gen_ai.request.model</code>, <code>gen_ai.response.model</code>, <code>gen_ai.response.finish_reasons</code>, <code>gen_ai.conversation.id</code>, <code>error.type</code>; agent/tool <code>gen_ai.agent.name|id|version</code>, <code>gen_ai.tool.name</code>, <code>gen_ai.tool.call.id</code>, <code>gen_ai.tool.type</code>, <code>gen_ai.workflow.name</code>; usage <code>gen_ai.usage.input_tokens</code>, <code>gen_ai.usage.output_tokens</code>, <code>gen_ai.usage.cache_read.input_tokens</code>, <code>gen_ai.usage.reasoning.output_tokens</code>.</li>
+<li><strong>Renames/removals to expect:</strong> <code>gen_ai.system</code> → <code>gen_ai.provider.name</code>; <code>prompt_tokens</code>/<code>completion_tokens</code> → <code>input_tokens</code>/<code>output_tokens</code>; <code>gen_ai.prompt</code>/<code>gen_ai.completion</code> <strong>removed</strong> (not renamed).</li>
+<li><strong>Content</strong> is opt-in: <code>gen_ai.system_instructions</code>, <code>gen_ai.input.messages</code>, <code>gen_ai.output.messages</code>, carried on the <code>gen_ai.client.inference.operation.details</code> event; switches vary by library (e.g., <code>OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT</code>; MEAI's <code>EnableSensitiveData</code>).</li>
+<li><strong>Metrics:</strong> <code>gen_ai.client.token.usage</code> (histogram by <code>gen_ai.token.type</code>), <code>gen_ai.client.operation.duration</code>; streaming (Apr 2026) <code>gen_ai.client.operation.time_to_first_chunk</code>, <code>time_per_output_chunk</code>; server-side <code>gen_ai.server.request.duration</code>, <code>gen_ai.server.time_to_first_token</code>, <code>gen_ai.server.time_per_output_token</code>.</li>
+<li><strong>MCP:</strong> 2026-07-28 propagates W3C trace context in <code>_meta</code> (<code>traceparent</code>, <code>tracestate</code>, <code>baggage</code>) and recommends OpenTelemetry instead of protocol Logging; MCP tool calls emit the same <code>execute_tool</code> shape.</li>
+</ul>
+<p><strong>Operating rule:</strong> pin the semconv version your dashboards, alerts and C14 trajectory assertions read; normalise attributes in an OpenTelemetry Collector <code>transform</code> processor (e.g., copy <code>gen_ai.system</code> to <code>gen_ai.provider.name</code> for older emitters); review on every instrumentation upgrade.</p>
+<h3 id="3-instrumenting-the-net-stack">3. Instrumenting the .NET stack<a class="headerlink" href="#3-instrumenting-the-net-stack" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>MEAI:</strong> <code>ChatClientBuilder(...).UseOpenTelemetry(...)</code> emits GenAI spans and metrics for every <code>IChatClient</code>; <code>UseLogging</code> for structured logs.</li>
+<li><strong>MAF:</strong> OpenTelemetry-based observability for agents and workflows (spans, metrics, events); verify ActivitySource/Meter names in your pinned version.</li>
+<li><strong>Aspire 13.x:</strong> <code>ServiceDefaults</code> wires OTLP; the dashboard shows GenAI calls with a "sparkles" marker — your local trace viewer.</li>
+<li><strong>Azure Monitor / Application Insights:</strong> Azure Monitor OpenTelemetry Distro (<code>UseAzureMonitor()</code>); span attributes land in <code>customDimensions</code> (classic) / <code>Properties</code> (workspace tables) — verify mapping for your workspace.</li>
+<li><strong>Foundry tracing:</strong> model calls, tool invocations, sub-agent hops and handoffs flow through one OpenTelemetry pipeline in the <strong>Foundry Control Plane</strong>, with evaluations linked to traces; "tracing and evaluations for any agent framework" was public preview at Build 2026. Per a practitioner source, Foundry tracing/monitoring/evaluations reached GA in March 2026 — verify per feature. Foundry continuous evaluation and agent monitoring require App Insights.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">builder</span><span class="p">.</span><span class="n">AddServiceDefaults</span><span class="p">();</span><span class="w">                                    </span><span class="c1">// Aspire: OTLP exporter, resource attrs</span>
+<span class="n">builder</span><span class="p">.</span><span class="n">Services</span><span class="p">.</span><span class="n">AddOpenTelemetry</span><span class="p">()</span>
+<span class="w">    </span><span class="p">.</span><span class="n">WithTracing</span><span class="p">(</span><span class="n">t</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">t</span><span class="p">.</span><span class="n">AddSource</span><span class="p">(</span><span class="s">"Trakia.FleetOps.*"</span><span class="p">)</span>
+<span class="w">                       </span><span class="p">.</span><span class="n">AddSource</span><span class="p">(</span><span class="s">"Microsoft.Extensions.AI*"</span><span class="p">)</span><span class="w">   </span><span class="c1">// verify source names</span>
+<span class="w">                       </span><span class="p">.</span><span class="n">AddSource</span><span class="p">(</span><span class="s">"Microsoft.Agents.AI*"</span><span class="p">))</span><span class="w">      </span><span class="c1">// verify source names</span>
+<span class="w">    </span><span class="p">.</span><span class="n">WithMetrics</span><span class="p">(</span><span class="n">m</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">m</span><span class="p">.</span><span class="n">AddMeter</span><span class="p">(</span><span class="s">"Trakia.FleetOps"</span><span class="p">)</span>
+<span class="w">                       </span><span class="p">.</span><span class="n">AddMeter</span><span class="p">(</span><span class="s">"Microsoft.Extensions.AI*"</span><span class="p">))</span><span class="w">   </span><span class="c1">// verify meter names</span>
+<span class="w">    </span><span class="p">.</span><span class="n">UseAzureMonitor</span><span class="p">();</span><span class="w">                                          </span><span class="c1">// Azure.Monitor.OpenTelemetry.AspNetCore</span>
+
+<span class="n">IChatClient</span><span class="w"> </span><span class="n">chat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ChatClientBuilder</span><span class="p">(</span><span class="n">foundryClient</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="n">UseOpenTelemetry</span><span class="p">(</span><span class="n">sourceName</span><span class="p">:</span><span class="w"> </span><span class="s">"Trakia.FleetOps.Llm"</span><span class="p">,</span>
+<span class="w">                      </span><span class="n">configure</span><span class="p">:</span><span class="w"> </span><span class="n">o</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">EnableSensitiveData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">env</span><span class="p">.</span><span class="n">IsDevelopment</span><span class="p">())</span><span class="w">  </span><span class="c1">// content OFF in prod</span>
+<span class="w">    </span><span class="p">.</span><span class="n">UseFunctionInvocation</span><span class="p">()</span>
+<span class="w">    </span><span class="p">.</span><span class="n">Build</span><span class="p">();</span>
+
+<span class="c1">// Business correlation: what finance and dispatch care about</span>
+<span class="n">Activity</span><span class="p">.</span><span class="n">Current</span><span class="o">?.</span><span class="n">SetTag</span><span class="p">(</span><span class="s">"trakia.incident.id"</span><span class="p">,</span><span class="w"> </span><span class="n">ticket</span><span class="p">.</span><span class="n">IncidentId</span><span class="p">);</span>
+<span class="n">Activity</span><span class="p">.</span><span class="n">Current</span><span class="o">?.</span><span class="n">SetTag</span><span class="p">(</span><span class="s">"trakia.depot"</span><span class="p">,</span><span class="w"> </span><span class="n">ticket</span><span class="p">.</span><span class="n">Depot</span><span class="p">);</span><span class="w">            </span><span class="c1">// chargeback dimension</span>
+<span class="n">Activity</span><span class="p">.</span><span class="n">Current</span><span class="o">?.</span><span class="n">SetTag</span><span class="p">(</span><span class="s">"trakia.prompt.id"</span><span class="p">,</span><span class="w"> </span><span class="s">"notifier@v7#3f9c2a"</span><span class="p">);</span><span class="w"> </span><span class="c1">// name@version#hash</span>
+</code></pre></div>
+<p><strong>Sampling:</strong> agent traces are long and valuable; head-based 1% sampling destroys exactly the rare failures you need. Use tail sampling at the Collector: keep 100% of traces with errors, budget escalations, negative feedback or Fail judgements, plus a random share (e.g., 10%) of the rest; keep metrics unsampled.</p>
+<p><strong>Privacy (EU/GDPR):</strong> content capture off by default in production; if needed for a debugging window, enable with redaction (driver names, phone numbers, plates mapped to pseudonyms) in a Collector processor, separate retention for content (e.g., 14 days vs 90 for spans), access restricted, and documented in the DPIA (C18).</p>
+<h3 id="4-metrics-that-matter-for-fleet-ops">4. Metrics that matter for Fleet Ops<a class="headerlink" href="#4-metrics-that-matter-for-fleet-ops" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Definition</th>
+<th>Initial SLO / budget</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TTFT (chat)</td>
+<td><code>time_to_first_chunk</code> p95</td>
+<td>≤ 2.5 s</td>
+</tr>
+<tr>
+<td>Incident workflow latency</td>
+<td><code>invoke_workflow</code> duration excl. HITL wait, p95</td>
+<td>≤ 90 s</td>
+</tr>
+<tr>
+<td>HITL wait</td>
+<td>time from <code>RequestInfoEvent</code> to decision, p50/p95</td>
+<td>p95 ≤ 2 h (Severity ≥ High)</td>
+</tr>
+<tr>
+<td>Tokens per incident</td>
+<td>input / cached input / output / reasoning</td>
+<td>trend; regression alert +15%</td>
+</tr>
+<tr>
+<td>Cost per incident</td>
+<td>Σ tokens × price-table version</td>
+<td>≤ €0.25 (example target)</td>
+</tr>
+<tr>
+<td>Tool error rate</td>
+<td><code>execute_tool</code> spans with <code>error.type</code> / total, per tool</td>
+<td>≤ 1%</td>
+</tr>
+<tr>
+<td>Budget escalations</td>
+<td>runs ending in <code>EscalationRequired</code></td>
+<td>≤ 2%</td>
+</tr>
+<tr>
+<td>Approval rate &amp; edit rate</td>
+<td>approvals without change; notices edited before send</td>
+<td>watch &gt; 97% (automation bias, C18)</td>
+</tr>
+<tr>
+<td>Retrieval empty rate</td>
+<td>retrieval spans with 0 results above threshold</td>
+<td>≤ 3%</td>
+</tr>
+<tr>
+<td>Online judge Fail rate</td>
+<td>C14 judges on sampled traffic, corrected for TPR/TNR</td>
+<td>per failure mode</td>
+</tr>
+<tr>
+<td>Feedback</td>
+<td>thumbs-down rate, reason codes</td>
+<td>trend</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Per-token price is not per-task cost</strong> — a model with a lower token price can cost more per task if it uses more tokens (reasoning, retries, longer answers). Always report cost per <em>task</em>.</p>
+<h3 id="5-user-feedback-loops">5. User feedback loops<a class="headerlink" href="#5-user-feedback-loops" title="Permanent link">&para;</a></h3>
+<p>Explicit feedback (thumbs + reason code: wrong facts / wrong vehicle / policy wrong / tone / too slow) and implicit signals (customer notice edited before sending, approval rejected, question re-asked within 2 minutes, escalation) are recorded as events carrying <code>gen_ai.conversation.id</code>, trace ID, incident ID, prompt/agent versions. Pipeline: feedback → join with trace → <strong>error-analysis queue</strong> (C14 viewer, prioritised) → taxonomy update → evaluator or fix → CI gate. Feedback rates are biased (angry users click more); never use them as prevalence estimates — use them to <em>find</em> traces.</p>
+<h3 id="6-genaiops-lifecycle">6. GenAIOps lifecycle<a class="headerlink" href="#6-genaiops-lifecycle" title="Permanent link">&para;</a></h3>
+<p>Versioned artifacts (all in git): prompts and instruction files, tool schemas, agent definitions (MAF declarative YAML or code), workflow topology, judge prompts, eval datasets and labels, model deployment config, price table. The Baseline Foundry chat reference architecture adds three requirements: <strong>agents-as-code via CI/CD</strong>, <strong>immutable agent versions</strong>, and <strong>regression suites</strong> because behaviour is nondeterministic.</p>
+<p>Promotion path:
+1. PR → offline gate (C14, cached) → merge.
+2. Deploy new version <strong>dark</strong> (shadow traffic or 0% flag).
+3. <strong>Canary</strong>: Azure App Configuration feature flags (percentage/targeting, variant flags for prompt versions — verify variant API in your <code>Microsoft.FeatureManagement</code> version) or <strong>APIM weighted backend pools</strong> for model versions; 5–10% of a depot.
+4. Compare online metrics per version (<code>gen_ai.agent.version</code>, <code>trakia.prompt.id</code>): judge Fail rates, feedback, cost/task, latency.
+5. Promote or roll back by <strong>config only</strong> (no redeploy).
+6. Nightly uncached eval run detects provider-side drift.</p>
+<h3 id="7-model-lifecycle-and-deprecation-policy">7. Model lifecycle and deprecation policy<a class="headerlink" href="#7-model-lifecycle-and-deprecation-policy" title="Permanent link">&para;</a></h3>
+<p>Foundry model retirements (from the Learn page; re-verify each quarter):
+- <strong>Standard GA models: at least 18 months</strong> — deprecated at 12, retired at 18.
+- <strong>Anthropic, DeepSeek, Fireworks and Mistral models: 12 months</strong>; some Grok models: 6.
+- <strong>Preview models: about 90 days.</strong>
+- <strong>Retirement notice ≥ 60 days</strong>; retirement dates cannot be extended.
+- <strong>Retired models return <code>410 Gone</code>.</strong>
+- <strong>PTU deployments are not auto-upgraded</strong> — you must migrate them yourself.</p>
+<p><strong>Model router</strong> (<code>2025-11-18</code>, "Active (latest)", auto-updated; <code>2025-08-07</code> and <code>2025-05-19</code> frozen) routes per prompt across a pool in <strong>Balanced (default) / Quality / Cost</strong> modes; a <strong>custom model subset</strong> also serves as the failover set; effective context window = the <strong>smallest</strong> model in the pool; Global Standard and Data Zone Standard. An auto-updating router is convenient for cost but changes behaviour without your release — for regulated or customer-facing paths, either pin a frozen version or treat router updates as model migrations with online monitoring per routed model (<code>gen_ai.response.model</code>).</p>
+<p>Migration as a routine: lifecycle watcher (scheduled job reading model lifecycle status; verify API) → issue at ≥ 120 days before retirement (same window as the instructor watch, D1 and A5) → C14 migration A/B → canary → promote → decommission old deployment. Keep model <em>roles</em> in config (C0), never model names in code.</p>
+<h3 id="8-cost-engineering-basics">8. Cost engineering basics<a class="headerlink" href="#8-cost-engineering-basics" title="Permanent link">&para;</a></h3>
+<p>Order of levers (biggest first, measured per task):
+1. <strong>Don't call a model</strong> — deterministic code for rules (C12).
+2. <strong>Shrink context</strong> — budgets, compaction, rerank to top-k (C13).
+3. <strong>Cache</strong> — provider prompt caching (static-first layout; Opus 5.5 cache reads $0.20 vs $4/MTok base input; Azure OpenAI prefix caching — verify threshold/discount); <strong>semantic caching</strong> at APIM (<code>llm-semantic-cache-store/lookup</code>, needs Azure Managed Redis or RediSearch-compatible cache) <strong>only</strong> for answers that are not user-, vehicle- or time-specific (policy FAQs) — cross-user leakage and staleness risks otherwise.
+4. <strong>Route</strong> — small models for triage/judging/summaries; cascade (cheap first, escalate on low confidence); or Foundry model router in Cost mode with a custom subset.
+5. <strong>Batch</strong> — offline jobs (nightly incident-history summarisation, eval runs) via Batch at ~50% discount (Anthropic documents −50%; Azure Batch discount/turnaround target — verify for your models).
+6. <strong>Capacity model</strong> — PAYG (Global/Data Zone Standard) vs <strong>PTU</strong>: PTU buys predictable throughput/latency at a fixed hourly cost; break-even depends on sustained utilisation. Compute from your observed TPM distribution: PAYG_month = Σ(tokens × price); PTU_month = units × hourly rate × 730; choose PTU for the steady base load, PAYG overflow for peaks (APIM priority pools). Verify PTU minimums and prices before modelling.</p>
+<p>Worked example (prices from the course price table; frontier tiers as reported by an aggregator in Oct 2026 — verify before use): GPT-6 "Sol" $2/$10 per MTok in/out, "Luna" $0.10/$0.50. Incident: triage (Luna, 2k/0.3k) ≈ $0.0004; diagnostics (Sol, 15k/1.5k) ≈ $0.045; policy (Sol, 10k/0.8k) ≈ $0.028; planner ×2 (Sol, 8k/1k each) ≈ $0.052; notifier (Sol, 6k/0.6k) ≈ $0.018; judge (Luna, 3k/0.1k) ≈ $0.0004 → <strong>≈ $0.14 per incident</strong>. Running everything on the "Astra" tier ($10/$50) would be ~5× more. Caching the static 40% of diagnostics/policy input and routing the planner's first pass to Luna are the next levers — validate each with the C14 gate.</p>
+<p><strong>APIM AI gateway</strong> (policies GA): <code>llm-token-limit</code> (TPM or token quotas per counter key — per depot subscription, per tenant in A-track), <code>llm-emit-token-metric</code> (token metrics with custom dimensions such as depot, feature, user → chargeback), backend pools (round-robin, weighted, priority, session-aware) with <strong>PTU first, PAYG overflow</strong> and a circuit breaker that honours <code>Retry-After</code>, <code>llm-content-safety-policy</code>. Unified OpenAI-compatible model API and "AI gateway in Microsoft Foundry" are <strong>preview</strong>.</p>
+<h3 id="9-finops-dashboards">9. FinOps dashboards<a class="headerlink" href="#9-finops-dashboards" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Showback/chargeback</strong> per depot (Plovdiv, Sofia, Varna), feature (incident workflow, assistant chat, analyst SQL), and later tenant (A-track).</li>
+<li><strong>Unit economics:</strong> € per incident, per dispatcher-shift, per 1,000 chat turns; trend vs volume.</li>
+<li><strong>Reconciliation:</strong> telemetry-estimated cost vs Azure Cost Management actuals monthly; the gap (unmetered calls, eval runs, retries, embeddings, search units) is itself a finding.</li>
+<li><strong>Alerts:</strong> cost/task +20% week-over-week, token quota at 80%, anomaly on a single conversation (runaway loop).</li>
+<li>Eval and red-team runs are real cost — tag them (<code>trakia.workload=eval</code>) and budget them separately.</li>
+</ul>
+<h2 id="tools-versions-as-of-oct-2026">Tools &amp; versions (as of Oct 2026)<a class="headerlink" href="#tools-versions-as-of-oct-2026" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Tool / package</th>
+<th>Purpose</th>
+<th>Status</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OTel GenAI semantic conventions (<code>semantic-conventions-genai</code>, schema gen-ai/1.42.0)</td>
+<td>span/metric/attribute names</td>
+<td><strong>Development</strong></td>
+<td>Pin; dual emission via <code>OTEL_SEMCONV_STABILITY_OPT_IN</code> later</td>
+</tr>
+<tr>
+<td>OpenTelemetry .NET SDK + OTLP exporter</td>
+<td>instrumentation</td>
+<td>GA</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>Microsoft.Extensions.AI</code> <code>UseOpenTelemetry</code></td>
+<td>GenAI spans/metrics for <code>IChatClient</code></td>
+<td>GA (10.x)</td>
+<td><code>EnableSensitiveData</code> off in prod</td>
+</tr>
+<tr>
+<td>MAF observability</td>
+<td>agent/workflow spans</td>
+<td>GA in 1.0 (Foundry observability integration was preview at 1.0)</td>
+<td>Verify source names</td>
+</tr>
+<tr>
+<td>OpenTelemetry Collector (contrib)</td>
+<td>tail sampling, <code>transform</code>, redaction</td>
+<td>GA</td>
+<td>Attribute normalisation</td>
+</tr>
+<tr>
+<td>Aspire 13.6 dashboard</td>
+<td>local traces/metrics, GenAI marker</td>
+<td>GA</td>
+<td>Dashboard persistence features in Oct 2026 posts</td>
+</tr>
+<tr>
+<td>Azure Monitor OpenTelemetry Distro / Application Insights</td>
+<td>production telemetry, KQL, workbooks, alerts</td>
+<td>GA</td>
+<td>Workbooks as IaC</td>
+</tr>
+<tr>
+<td>Foundry tracing, monitoring, continuous evaluation</td>
+<td>traces + evals in Control Plane</td>
+<td>GA (Mar 2026, practitioner source); any-framework tracing <strong>preview</strong> at Build 2026</td>
+<td>Needs App Insights</td>
+</tr>
+<tr>
+<td>Azure App Configuration + <code>Microsoft.FeatureManagement</code></td>
+<td>feature flags, canaries, prompt variants</td>
+<td>GA (variant API — verify)</td>
+<td>Config-only rollback</td>
+</tr>
+<tr>
+<td>APIM AI gateway policies</td>
+<td>token limits/metrics, semantic cache, pools, circuit breaker</td>
+<td>GA; unified model API &amp; AI gateway in Foundry <strong>preview</strong></td>
+<td>Semantic cache needs Azure Managed Redis</td>
+</tr>
+<tr>
+<td>Foundry model router <code>2025-11-18</code></td>
+<td>per-prompt routing (Balanced/Quality/Cost)</td>
+<td>Available, auto-updating</td>
+<td>Smallest-model context limit</td>
+</tr>
+<tr>
+<td>Azure Cost Management</td>
+<td>actual cost, budgets</td>
+<td>GA</td>
+<td>Reconcile monthly</td>
+</tr>
+</tbody>
+</table>
+<h2 id="labs">Labs<a class="headerlink" href="#labs" title="Permanent link">&para;</a></h2>
+<h3 id="lab-1-one-incident-one-trace-25h">Lab 1 — One incident, one trace (≈2.5h)<a class="headerlink" href="#lab-1-one-incident-one-trace-25h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> End-to-end, privacy-safe tracing across workflow, agents, MCP server and database.</li>
+<li><strong>Start state:</strong> tag <code>c15/lab1-start</code> — C12 workflow, C8 MCP server (C# SDK 2.0), Aspire AppHost, OTel Collector container with a stub config.</li>
+<li><strong>Steps:</strong></li>
+<li>Instrument API, workflow host, agents (MAF + MEAI <code>UseOpenTelemetry</code>), MCP server and <code>SqlClient</code>; add business tags (<code>trakia.incident.id</code>, <code>trakia.depot</code>, <code>trakia.prompt.id</code>, <code>gen_ai.agent.version</code>).</li>
+<li>Propagate context to the MCP server via <code>_meta.traceparent</code> (verify how the C# SDK 2.0 surfaces <code>_meta</code> on client/server; add a small client filter/server handler if needed). Confirm MCP server spans are children of the agent's <code>execute_tool</code> span.</li>
+<li>Pin semconv: record the schema URL/version in <code>docs/observability/semconv.md</code>; add a Collector <code>transform</code> rule that maps <code>gen_ai.system</code> → <code>gen_ai.provider.name</code> (the PyRIT/Python harness from C14 still emits the old name).</li>
+<li>Collector: tail sampling (keep errors, <code>EscalationRequired</code>, negative feedback, judge Fail; 10% of the rest); redaction processor for plates/names/phones in any content attributes; content capture disabled in the <code>Production</code> profile.</li>
+<li>View in Aspire; then export to Application Insights.</li>
+<li><strong>Break it:</strong> Remove propagation in the MCP client; observe orphaned MCP spans and a broken trajectory assertion from C14. Then turn on content capture in <code>Production</code> config and make the privacy test fail.</li>
+<li><strong>Acceptance criteria:</strong> integration test with an in-memory exporter asserts: a single trace ID spans API → <code>invoke_workflow</code> → ≥ 4 <code>invoke_agent</code> → <code>chat</code> → <code>execute_tool</code> → MCP server → SQL; required GenAI attributes present on every model span; zero orphan spans across 20 incidents; <code>Production</code> config test asserts no <code>gen_ai.input.messages</code>/<code>output.messages</code> attributes or events.</li>
+<li><strong>Stretch:</strong> Emit <code>retrieval</code> and memory-operation spans from the C13 knowledge-base and memory code following the conventions.</li>
+</ul>
+<h3 id="lab-2-dashboards-alerts-and-the-feedback-loop-25h">Lab 2 — Dashboards, alerts and the feedback loop (≈2.5h)<a class="headerlink" href="#lab-2-dashboards-alerts-and-the-feedback-loop-25h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> Turn traces into operational and quality signals that close the loop to C14.</li>
+<li><strong>Start state:</strong> tag <code>c15/lab2-start</code> — App Insights workspace with 3 days of simulator traffic; <code>infra/monitoring/</code> Bicep skeleton.</li>
+<li><strong>Steps:</strong></li>
+<li>KQL for cost per incident (verify attribute-to-column mapping in your workspace):
+     <div class="highlight"><pre><span></span><code><span class="n">let</span><span class="w"> </span><span class="n">Price</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">datatable</span><span class="p">(</span><span class="n">model</span><span class="p">:</span><span class="k">string</span><span class="p">,</span><span class="w"> </span><span class="n">inUsd</span><span class="p">:</span><span class="k">real</span><span class="p">,</span><span class="w"> </span><span class="n">cachedUsd</span><span class="p">:</span><span class="k">real</span><span class="p">,</span><span class="w"> </span><span class="n">outUsd</span><span class="p">:</span><span class="k">real</span><span class="p">)</span>
+<span class="w">  </span><span class="p">[</span><span class="w"> </span><span class="s">"luna-deploy"</span><span class="p">,</span><span class="w"> </span><span class="mf">0.10</span><span class="p">,</span><span class="w"> </span><span class="mf">0.01</span><span class="p">,</span><span class="w"> </span><span class="mf">0.50</span><span class="p">,</span><span class="w"> </span><span class="s">"sol-deploy"</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.20</span><span class="p">,</span><span class="w"> </span><span class="mf">10.0</span><span class="w"> </span><span class="p">];</span><span class="w">   </span><span class="c">// from price-table v3 (illustrative)</span>
+<span class="n">dependencies</span>
+<span class="p">|</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">timestamp</span><span class="w"> </span><span class="p">&gt;</span><span class="w"> </span><span class="n">ago</span><span class="p">(</span><span class="mi">7</span><span class="n">d</span><span class="p">)</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">tostring</span><span class="p">(</span><span class="n">customDimensions</span><span class="p">[</span><span class="s">"gen_ai.operation.name"</span><span class="p">])</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="s">"chat"</span>
+<span class="p">|</span><span class="w"> </span><span class="k">extend</span><span class="w"> </span><span class="n">model</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">tostring</span><span class="p">(</span><span class="n">customDimensions</span><span class="p">[</span><span class="s">"gen_ai.response.model"</span><span class="p">]),</span>
+<span class="w">         </span><span class="n">inTok</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">toint</span><span class="p">(</span><span class="n">customDimensions</span><span class="p">[</span><span class="s">"gen_ai.usage.input_tokens"</span><span class="p">]),</span>
+<span class="w">         </span><span class="n">cached</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">toint</span><span class="p">(</span><span class="n">customDimensions</span><span class="p">[</span><span class="s">"gen_ai.usage.cache_read.input_tokens"</span><span class="p">]),</span>
+<span class="w">         </span><span class="n">outTok</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">toint</span><span class="p">(</span><span class="n">customDimensions</span><span class="p">[</span><span class="s">"gen_ai.usage.output_tokens"</span><span class="p">]),</span>
+<span class="w">         </span><span class="n">incident</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">tostring</span><span class="p">(</span><span class="n">customDimensions</span><span class="p">[</span><span class="s">"trakia.incident.id"</span><span class="p">]),</span>
+<span class="w">         </span><span class="n">depot</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">tostring</span><span class="p">(</span><span class="n">customDimensions</span><span class="p">[</span><span class="s">"trakia.depot"</span><span class="p">])</span>
+<span class="p">|</span><span class="w"> </span><span class="k">lookup</span><span class="w"> </span><span class="n">Price</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">model</span>
+<span class="p">|</span><span class="w"> </span><span class="k">extend</span><span class="w"> </span><span class="n">usd</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">(</span><span class="n">inTok</span><span class="w"> </span><span class="p">-</span><span class="w"> </span><span class="n">coalesce</span><span class="p">(</span><span class="n">cached</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span><span class="w"> </span><span class="p">*</span><span class="w"> </span><span class="n">inUsd</span><span class="w"> </span><span class="p">/</span><span class="w"> </span><span class="mi">1</span><span class="n">e6</span><span class="w"> </span><span class="p">+</span><span class="w"> </span><span class="n">coalesce</span><span class="p">(</span><span class="n">cached</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">*</span><span class="w"> </span><span class="n">cachedUsd</span><span class="w"> </span><span class="p">/</span><span class="w"> </span><span class="mi">1</span><span class="n">e6</span><span class="w"> </span><span class="p">+</span><span class="w"> </span><span class="n">outTok</span><span class="w"> </span><span class="p">*</span><span class="w"> </span><span class="n">outUsd</span><span class="w"> </span><span class="p">/</span><span class="w"> </span><span class="mi">1</span><span class="n">e6</span>
+<span class="p">|</span><span class="w"> </span><span class="k">summarize</span><span class="w"> </span><span class="n">incidentUsd</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">sum</span><span class="p">(</span><span class="n">usd</span><span class="p">)</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">incident</span><span class="p">,</span><span class="w"> </span><span class="n">depot</span>
+<span class="p">|</span><span class="w"> </span><span class="k">summarize</span><span class="w"> </span><span class="n">p50</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">percentile</span><span class="p">(</span><span class="n">incidentUsd</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">),</span><span class="w"> </span><span class="n">p95</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">percentile</span><span class="p">(</span><span class="n">incidentUsd</span><span class="p">,</span><span class="w"> </span><span class="mi">95</span><span class="p">),</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">sum</span><span class="p">(</span><span class="n">incidentUsd</span><span class="p">)</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">depot</span>
+</code></pre></div></li>
+<li>Workbook (as code) with tiles: TTFT p50/p95, workflow latency excl. HITL, tokens by agent and type, cost/incident by depot, tool error rate per tool, budget escalations, HITL wait and approval/edit rates, cache-read share.</li>
+<li>Alerts (Bicep): tool error rate &gt; 1% for 15 min; cost/incident p95 +20% WoW; any single trace &gt; €1; HITL wait p95 &gt; 2h.</li>
+<li>Feedback API: <code>POST /feedback {traceId, conversationId, verdict, reasonCode, comment}</code> → custom event + span event; implicit signals from the notice editor (diff size) and approval rejections.</li>
+<li>Queue job: negative feedback and judge-Fail traces → C14 trace viewer queue with priority.</li>
+<li><strong>Break it:</strong> Inject a tool that fails 5% of calls (parts API timeout); confirm the alert fires and the failing traces appear in the queue.</li>
+<li><strong>Acceptance criteria:</strong> workbook and alerts deployed from <code>infra/monitoring</code> via CI; KQL cost per incident matches the offline calculation from exported usage within ±5%; the injected failure triggers the alert within 20 min of simulated traffic; ≥ 95% of feedback events join to a trace.</li>
+<li><strong>Stretch:</strong> Show the same KPIs in the Foundry Monitor tab for a hosted-agent wrapper and compare numbers.</li>
+</ul>
+<h3 id="lab-3-versioning-canary-and-a-model-retirement-drill-25h">Lab 3 — Versioning, canary and a model-retirement drill (≈2.5h)<a class="headerlink" href="#lab-3-versioning-canary-and-a-model-retirement-drill-25h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> Ship a prompt change and a model migration as safe, reversible releases.</li>
+<li><strong>Start state:</strong> tag <code>c15/lab3-start</code> — notifier prompt v7 in production; candidate v8; instructor "retirement notice" for the deployment behind the planner role (60 days).</li>
+<li><strong>Steps:</strong></li>
+<li>Prompt registry: <code>prompts/registry.json</code> maps <code>notifier</code> → versions with SHA-256 of the rendered template; a CI check fails if a prompt file changes without a version bump. Emit <code>trakia.prompt.id</code> and <code>gen_ai.agent.version</code> on spans.</li>
+<li>Feature flag in Azure App Configuration: variant <code>notifier-prompt</code> = v7 (90%) / v8 (10%), targeted to the Sofia depot; resolved per incident so a run uses one variant consistently.
+     <div class="highlight"><pre><span></span><code><span class="c1">// shape only — verify variant API in your Microsoft.FeatureManagement version</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">variant</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">featureManager</span><span class="p">.</span><span class="n">GetVariantAsync</span><span class="p">(</span><span class="s">"notifier-prompt"</span><span class="p">,</span><span class="w"> </span><span class="n">targetingContext</span><span class="p">,</span><span class="w"> </span><span class="n">ct</span><span class="p">);</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">prompt</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">promptRegistry</span><span class="p">.</span><span class="n">Get</span><span class="p">(</span><span class="s">"notifier"</span><span class="p">,</span><span class="w"> </span><span class="n">variant</span><span class="o">?.</span><span class="n">Configuration</span><span class="p">.</span><span class="n">Get</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="o">??</span><span class="w"> </span><span class="s">"v7"</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Compare v7 vs v8 online for 2 simulated days: judge Fail rates (corrected), edit rate, cost/incident, latency. Decide; promote or roll back via config only.</li>
+<li>Model-retirement drill: run the C14 migration A/B for the planner role (current vs candidate deployment); configure APIM weighted backend (90/10) for the planner's model endpoint; watch per-<code>gen_ai.response.model</code> metrics; promote; record the runbook.</li>
+<li>Lifecycle watcher: scheduled GitHub Actions job that lists your deployments' models and their deprecation/retirement dates (verify the Foundry/Azure OpenAI API you use) and opens an issue when any pinned model retires in &lt; 120 days, or a PTU deployment references a model with a retirement date.</li>
+<li><strong>Break it:</strong> Point a deployment config at a "retired" model (instructor mock returns <code>410 Gone</code>); verify the gateway fails over to the configured backup pool and an alert fires instead of user-facing errors.</li>
+<li><strong>Acceptance criteria:</strong> rollback from v8 to v7 in &lt; 5 minutes with no deployment; migration runbook <code>docs/runbooks/model-migration.md</code> executed end-to-end with eval evidence attached; lifecycle watcher opens an issue for the mocked retirement; <code>410</code> path covered by an integration test.</li>
+<li><strong>Stretch:</strong> Add the Foundry model router (custom subset = current + candidate, Cost mode) for the chat assistant behind a flag; monitor which model serves which share of turns.</li>
+</ul>
+<h3 id="lab-4-cost-engineering-and-finops-25h">Lab 4 — Cost engineering and FinOps (≈2.5h)<a class="headerlink" href="#lab-4-cost-engineering-and-finops-25h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> Cut cost per incident by ≥ 40% without quality regression, and give finance a chargeback view.</li>
+<li><strong>Start state:</strong> tag <code>c15/lab4-start</code> — baseline cost/incident from Lab 2; APIM instance in front of two Foundry deployments (priority 1 "PTU-simulated", priority 2 PAYG).</li>
+<li><strong>Steps:</strong></li>
+<li>Baseline: cost/incident, tokens by agent, cache-read share.</li>
+<li>Apply levers one at a time, each followed by the C14 gate: (a) static-first prompt layout and sorted tools (C13); (b) triage + judge + summaries on the fast small model; (c) planner cascade — small model first, escalate when the deterministic <code>ProposalGuard</code> rejects; (d) nightly incident-history summarisation and GraphRAG refresh moved to Batch; (e) context budget tightening from C13 Lab 1.</li>
+<li>APIM: <code>llm-token-limit</code> per depot subscription (monthly quota + TPM), <code>llm-emit-token-metric</code> with dimensions <code>depot</code>, <code>feature</code>; semantic cache <strong>only</strong> on the policy-FAQ route (cache key excludes vehicle/user data), measure hit rate; priority pool with circuit breaker; Azure Load Testing to force 429s on priority 1 and observe overflow.</li>
+<li>PTU vs PAYG sheet from the observed TPM distribution (p50/p95 per hour); recommend base-load PTU size or stay PAYG.</li>
+<li>Chargeback workbook by depot and feature; reconcile with Cost Management for the lab subscription.</li>
+<li><strong>Break it:</strong> Enable semantic cache on the vehicle-status route; demonstrate a stale/cross-user answer (TRK-0471 status served for TRK-0417) and remove it — document why in ADR-0015.</li>
+<li><strong>Acceptance criteria:</strong> cost/incident ≥ 40% lower than baseline; no C14 failure mode regresses &gt; 2 pp (McNemar not significant at 0.05); per-lever contribution table; overflow observed under load with zero user-facing 429s; ADR-0015 "Cost architecture" with PTU/PAYG decision and semantic-cache scope.</li>
+<li><strong>Stretch:</strong> Model the A-track scenario: three external fleet tenants with per-tenant quotas and noisy-neighbour protection.</li>
+</ul>
+<h2 id="kata">Kata<a class="headerlink" href="#kata" title="Permanent link">&para;</a></h2>
+<p><strong>"Five-minute incident review" (20–30 min, repeated).</strong> You receive an alert (e.g., "cost/incident p95 +35% since 11:00", "tool error rate 4% on parts_check_availability", "TTFT p95 doubled for Bulgarian chats", "thumbs-down spike on customer notices"). Using only the dashboards, KQL and traces: identify the cause, the first bad version/model/time, the blast radius (depots, incidents), and the remediation (rollback flag, failover, quota, fix). Write a 5-line postmortem. Variations rotate the root cause: router behaviour change (<code>gen_ai.response.model</code> shift), prompt variant, compaction bug (cache-read share collapse), MCP server deploy, provider latency, a runaway loop.</p>
+<h2 id="product-increment-fleet-ops-copilot">Product increment — Fleet Ops Copilot<a class="headerlink" href="#product-increment-fleet-ops-copilot" title="Permanent link">&para;</a></h2>
+<p>Fleet Ops Copilot now has <strong>full OTel tracing</strong> across workflow, agents, MCP server and SQL with pinned GenAI conventions and production-safe content handling; <strong>dashboards and alerts</strong> for latency/TTFT, tokens, <strong>cost per incident</strong> by depot, tool errors, HITL and quality signals; a <strong>feedback loop</strong> into C14 error analysis; <strong>versioned prompts, agents and models</strong> with feature-flag and gateway canaries and config-only rollback; a rehearsed <strong>model-migration</strong> runbook and lifecycle watcher; and a measured <strong>cost architecture</strong> (caching, routing, batch, APIM quotas/metrics, PTU/PAYG analysis) with chargeback per depot. These operational artifacts are inputs to <strong>Gate G3</strong> (see G3), C17 deployment and the C19 SRE loop.</p>
+<h2 id="factory-increment-your-agentic-sdlc">Factory increment — your agentic SDLC<a class="headerlink" href="#factory-increment-your-agentic-sdlc" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Prompt/model registry automated:</strong> CI computes prompt hashes, enforces version bumps, regenerates <code>prompts/registry.json</code>, and blocks merges where a prompt changed without an eval run attached.</li>
+<li><strong>Lifecycle bot:</strong> the scheduled lifecycle watcher opens a migration issue with the template (candidate model, eval A/B checklist, canary plan); a cloud coding agent (Copilot cloud agent or Claude Code in Actions) picks it up, drafts the config change and runs the C14 migration suite, and leaves promotion to a human.</li>
+<li><strong>Telemetry as agent context:</strong> coding agents get read-only access to traces/metrics (e.g., Azure MCP Server monitor tools with a Reader identity) to debug from evidence; a skill <code>investigate-trace</code> teaches the KQL patterns from Lab 2.</li>
+<li><strong>Cost guard in CI:</strong> the golden-set run reports tokens and € per incident; PRs that raise cost/incident &gt; 10% require an explicit <code>cost-approved</code> label from a human.</li>
+</ul>
+<h2 id="assessment">Assessment<a class="headerlink" href="#assessment" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th>Novice</th>
+<th>Competent</th>
+<th>Proficient</th>
+<th>Expert</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tracing</td>
+<td>Logs only</td>
+<td>Model calls traced</td>
+<td>One connected trace incl. MCP + SQL; pinned semconv; privacy-safe config tested</td>
+<td>Collector normalisation and tail sampling designed for failure discovery; trajectory evals read spans reliably</td>
+</tr>
+<tr>
+<td>Metrics &amp; dashboards</td>
+<td>Monthly bill</td>
+<td>Token and latency charts</td>
+<td>Cost/task by depot, tool errors, HITL, alerts as code</td>
+<td>SLOs with error budgets; reconciliation with actual cost; actionable runbooks</td>
+</tr>
+<tr>
+<td>Feedback loop</td>
+<td>None</td>
+<td>Thumbs captured</td>
+<td>Joined to traces, queued into error analysis</td>
+<td>Implicit signals; bias-aware use; measurable reduction of top failure modes</td>
+</tr>
+<tr>
+<td>GenAIOps</td>
+<td>Manual edits in portal</td>
+<td>Prompts in git</td>
+<td>Versioned prompts/agents, canary, config-only rollback</td>
+<td>Migration drill with eval evidence; lifecycle automation; router updates treated as migrations</td>
+</tr>
+<tr>
+<td>Cost engineering</td>
+<td>Picks cheapest model</td>
+<td>Applies caching</td>
+<td>≥ 40% reduction with eval gate and per-lever attribution</td>
+<td>PTU/PAYG and semantic-cache scope decisions with risk analysis; chargeback adopted</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Auto-checked:</strong> trace-connectivity and privacy integration tests; required GenAI attributes; workbook/alerts deployed via CI; KQL vs offline cost within ±5%; rollback &lt; 5 min script; lifecycle watcher issue on mocked retirement; <code>410</code> failover test; cost reduction ≥ 40% with C14 gate green.</p>
+<h2 id="common-pitfalls">Common pitfalls<a class="headerlink" href="#common-pitfalls" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Logging full prompts/responses in production "for debugging" — GDPR exposure and cost.</li>
+<li>Treating GenAI semconv as stable; dashboards silently break on attribute renames.</li>
+<li>Head sampling at 1% — the interesting failures disappear.</li>
+<li>Reporting tokens per call instead of cost per task; ignoring cached and reasoning tokens.</li>
+<li>No version attributes on spans — impossible to attribute a regression to a prompt or model.</li>
+<li>Letting an auto-updating model router change customer-facing behaviour without monitoring per routed model.</li>
+<li>Discovering a model retirement from a <code>410</code> in production; forgetting PTU is not auto-upgraded.</li>
+<li>Semantic caching personalised or time-sensitive answers.</li>
+<li>Optimising cost without re-running evals (quality regressions disguised as savings).</li>
+<li>Eval and red-team spend mixed into product cost — distorted unit economics.</li>
+</ul>
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Dash0 — OpenTelemetry GenAI semantic conventions explained (updated Sep 2026): https://www.dash0.com/knowledge/opentelemetry-genai-semantic-conventions-explained</li>
+<li>DEV Community (Azena AI) — GenAI semconv not stable yet; what shipped in 2026: https://dev.to/azena-ai/opentelemetrys-genai-semantic-conventions-are-not-stable-yet-heres-what-actually-shipped-in-2026-3mke</li>
+<li>Greptime — OpenTelemetry GenAI semantic conventions (May 2026): https://www.greptime.com/blogs/2026-05-09-opentelemetry-genai-semantic-conventions</li>
+<li>MCP 2026-07-28 changelog (trace context in <code>_meta</code>): https://modelcontextprotocol.io/specification/2026-07-28/changelog</li>
+<li>.NET AI essentials (MEAI <code>UseOpenTelemetry</code>, Aspire GenAI marker): https://devblogs.microsoft.com/dotnet/dotnet-ai-essentials-the-core-building-blocks-explained/</li>
+<li>Aspire blog: https://devblogs.microsoft.com/aspire/</li>
+<li>Foundry Agent Service at Build 2026 (Control Plane OTel pipeline; any-framework tracing <strong>preview</strong>): https://devblogs.microsoft.com/foundry/agent-service-build2026/</li>
+<li>J. Reinhard — Foundry observability / evaluations (practitioner): https://jannikreinhard.com/microsoft-foundry-observability/ · https://jannikreinhard.com/microsoft-foundry-agent-evaluations/</li>
+<li>Foundry model retirements: https://learn.microsoft.com/en-us/azure/foundry/openai/concepts/model-retirements</li>
+<li>Foundry model router: https://learn.microsoft.com/en-us/azure/ai-foundry/openai/concepts/model-router</li>
+<li>APIM AI gateway capabilities (<code>llm-token-limit</code>, <code>llm-emit-token-metric</code>, semantic cache, pools; unified API <strong>preview</strong>): https://learn.microsoft.com/en-us/azure/api-management/genai-gateway-capabilities</li>
+<li>Baseline Microsoft Foundry chat reference architecture (agents-as-code, immutable versions): https://learn.microsoft.com/en-us/azure/architecture/ai-ml/architecture/baseline-microsoft-foundry-chat</li>
+<li>GenAIOps for organisations with MLOps investments: https://learn.microsoft.com/en-us/azure/architecture/ai-ml/guide/genaiops-for-mlops</li>
+<li>Claude Opus 5.5 overview (cache and batch pricing): https://platform.claude.com/docs/en/models/opus-5-5/overview</li>
+<li>Digital Applied — per-task vs per-token cost example: https://www.digitalapplied.com/blog/ai-model-releases-september-2026-tracker</li>
+<li>FutureAGI — model landscape and prices (aggregator, verify): https://futureagi.com/blog/best-llms-september-2026/</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../c14-failure-driven-evals-llm-judges-and-red-teaming/" class="md-footer__link md-footer__link--prev" aria-label="Previous: C14 — Failure-driven evals, LLM judges &amp; red teaming">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                C14 — Failure-driven evals, LLM judges & red teaming
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../c16-security-for-llm-and-agentic-systems/" class="md-footer__link md-footer__link--next" aria-label="Next: C16 — Security for LLM &amp; agentic systems">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                C16 — Security for LLM & agentic systems
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.top", "navigation.footer", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

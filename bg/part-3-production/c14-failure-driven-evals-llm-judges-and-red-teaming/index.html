@@ -1,0 +1,3194 @@
+
+<!doctype html>
+<html lang="bg" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Learning-by-doing course, release 2026.11 (content as of October 2026)">
+      
+      
+      
+      
+        <link rel="prev" href="../c13-context-engineering-advanced-retrieval-and-memory/">
+      
+      
+        <link rel="next" href="../c15-observability-genaiops-and-cost/">
+      
+      
+        
+          <link rel="alternate" href="../../../part-3-production/c14-failure-driven-evals-llm-judges-and-red-teaming/" hreflang="en">
+        
+          <link rel="alternate" href="./" hreflang="bg">
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>C14 — Evals, водени от грешките, LLM съдии и red teaming - AI Solution Developer & Architect — Наръчник за курсиста</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#c14-failure-driven-evals-llm-judges-red-teaming" class="md-skip">
+          Към съдържанието
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Горен колонтитул">
+    <a href="../../" title="AI Solution Developer &amp; Architect — Наръчник за курсиста" class="md-header__button md-logo" aria-label="AI Solution Developer & Architect — Наръчник за курсиста" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            AI Solution Developer & Architect — Наръчник за курсиста
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              C14 — Evals, водени от грешките, LLM съдии и red teaming
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="Избери език">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href="../../../part-3-production/c14-failure-driven-evals-llm-judges-and-red-teaming/" hreflang="en" class="md-select__link">
+              English
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="./" hreflang="bg" class="md-select__link">
+              Български
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Търси" placeholder="Търси" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Търси">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Изчисти" aria-label="Изчисти" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Инициализирано търсене
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Навигация" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../" title="AI Solution Developer &amp; Architect — Наръчник за курсиста" class="md-nav__button md-logo" aria-label="AI Solution Developer & Architect — Наръчник за курсиста" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    AI Solution Developer & Architect — Наръчник за курсиста
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Добре дошли
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Започнете оттук
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Започнете оттук
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/how-to-use/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Как да използвате наръчника
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/course-overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Преглед на курса
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/assessment-gates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Оценяване и гейтове
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/competency-matrix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Матрица на компетентностите
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Част 1 — Основи (ниво 1)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Част 1 — Основи (ниво 1)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c00-orientation-setup-and-toolchain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C0 — Ориентация, настройка и инструменти
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c01-how-generative-ai-works-an-engineer-s-mental-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C1 — Как работи генеративният AI: мисловен модел за инженери
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c02-your-first-ai-feature-in-net/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C2 — Първата ви AI функционалност в .NET
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c03-prompting-structured-outputs-and-tool-calling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C3 — Промптинг, структуриран изход и извикване на инструменти
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c04-working-with-coding-agents-the-factory-day-one/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C4 — Работа с кодиращи агенти: Фабриката, първи ден
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c05-evals-from-day-one/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C5 — Evals от първия ден
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Част 2 — Градивни елементи (ниво 2)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Част 2 — Градивни елементи (ниво 2)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c06-embeddings-and-vector-search/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C6 — Embeddings и векторно търсене
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c07-rag-from-documents-to-cited-permission-aware-answers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C7 — RAG: от документи до отговори с цитати, съобразени с правата на достъп
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c08-tools-and-the-model-context-protocol/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C8 — Инструменти и Model Context Protocol
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c09-agents-with-microsoft-agent-framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C9 — Агенти с Microsoft Agent Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c10-agents-over-structured-data-text-to-sql-on-sql-server/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C10 — Агенти върху структурирани данни: text-to-SQL върху SQL Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c11-agentic-testing-ai-driven-tdd-mutation-and-e2e-test-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C11 — Агентно тестване: TDD с AI, мутационно тестване и агенти за E2E тестове
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Част 3 — Продукционни системи (ниво 3)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Част 3 — Продукционни системи (ниво 3)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../c12-workflows-and-multi-agent-orchestration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C12 — Workflows и многоагентна оркестрация
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../c13-context-engineering-advanced-retrieval-and-memory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C13 — Инженеринг на контекста, напреднало извличане и памет
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C14 — Evals, водени от грешките, LLM съдии и red teaming
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C14 — Evals, водени от грешките, LLM съдии и red teaming
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Съдържание">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Съдържание
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-this-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why this matters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learning outcomes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concepts
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Concepts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-failure-driven-evals-not-speculative-evals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Failure-driven evals, not speculative evals
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-error-analysis-protocol" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Error analysis protocol
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-from-taxonomy-to-evaluators" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. From taxonomy to evaluators
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-llm-judges-design-and-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. LLM judges: design and validation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-trajectory-tool-call-and-outcome-evals-for-agents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Trajectory, tool-call and outcome evals for agents
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-offline-vs-online-evaluation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Offline vs online evaluation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-ab-and-model-migration-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. A/B and model-migration testing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-synthetic-data-carefully" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Synthetic data, carefully
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-red-teaming" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Red teaming
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-bulgarian-when-safety-features-are-english-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Bulgarian: when safety features are English-only
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11-ci-regression-gates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. CI regression gates
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-the-tools-market-and-vendor-neutrality" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. The tools market and vendor neutrality
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tools-versions-as-of-oct-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tools &amp; versions (as of Oct 2026)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#labs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Labs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Labs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lab-1-error-analysis-on-100-incident-traces-25h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 1 — Error analysis on 100 incident traces (≈2.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-2-code-checks-and-calibrated-binary-judges-3h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 2 — Code checks and calibrated binary judges (≈3h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-3-trajectory-tool-call-and-end-state-evals-with-simulated-dispatchers-25h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 3 — Trajectory, tool-call and end-state evals with simulated dispatchers (≈2.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-4-red-teaming-and-the-bulgarian-groundedness-fallback-2h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 4 — Red teaming and the Bulgarian groundedness fallback (≈2h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-5-ci-regression-gate-and-model-migration-ab-2h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 5 — CI regression gate and model-migration A/B (≈2h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kata
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#product-increment-fleet-ops-copilot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Product increment — Fleet Ops Copilot
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#factory-increment-your-agentic-sdlc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Factory increment — your agentic SDLC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assessment
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common pitfalls
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../c15-observability-genaiops-and-cost/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C15 — Наблюдаемост, GenAIOps и разходи
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../c16-security-for-llm-and-agentic-systems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C16 — Сигурност на LLM и агентни системи
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../c17-shipping-to-azure-hosting-ai-gateway-iac-and-interop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C17 — Пускане в Azure: хостинг, AI gateway, IaC и оперативна съвместимост
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../c18-responsible-ai-and-the-eu-ai-act-in-practice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C18 — Отговорен AI и Актът за изкуствения интелект на ЕС на практика
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../c19-the-automated-sdlc-agents-from-issue-to-production/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C19 — Автоматизираният SDLC: агенти от issue до продукция
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Част 4 — Експертна специализация: AI Solution Developer
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Част 4 — Експертна специализация: AI Solution Developer
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d01-model-customization-and-small-local-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D1 — Адаптиране на модели и малки/локални модели
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d02-long-running-durable-and-autonomous-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D2 — Дълго работещи, устойчиви и автономни агенти
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d03-multimodal-and-realtime-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D3 — Мултимодални агенти и агенти в реално време
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d04-agent-ux-and-front-ends/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D4 — UX и фронтенди за агенти
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d05-performance-and-cost-engineering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D5 — Инженеринг на производителността и разходите
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d06-building-your-own-agent-tooling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D6 — Изграждане на собствени инструменти за агенти
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d07-agent-reliability-engineering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D7 — Инженеринг на надеждността на агенти
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Част 5 — Експертна специализация: AI Solution Architect
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Част 5 — Експертна специализация: AI Solution Architect
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a01-ai-strategy-use-case-discovery-and-business-case/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A1 — AI стратегия, откриване на сценарии на употреба и бизнес обосновка
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a02-azure-ai-reference-architectures-and-well-architected-for-ai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A2 — Референтни AI архитектури в Azure и Well-Architected за AI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a03-enterprise-knowledge-and-data-architecture-for-ai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A3 — Корпоративна архитектура на знанията и данните за AI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a04-agent-platform-and-integration-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A4 — Платформа за агенти и интеграционна архитектура
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a05-reliability-scale-model-lifecycle-and-finops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A5 — Надеждност, мащаб, жизнен цикъл на моделите и FinOps
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a06-ai-governance-risk-and-compliance-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A6 — Архитектура за управление на AI, риска и съответствието
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a07-the-architect-s-craft-in-ai-programmes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A7 — Занаятът на архитекта в AI програми
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Част 6 — Съвместен финален проект
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Част 6 — Съвместен финален проект
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capstone/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Финален проект
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Приложение
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Приложение
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Речник на термините
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/references/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Допълнителна литература
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Съдържание">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Съдържание
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-this-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why this matters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learning outcomes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concepts
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Concepts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-failure-driven-evals-not-speculative-evals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Failure-driven evals, not speculative evals
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-error-analysis-protocol" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Error analysis protocol
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-from-taxonomy-to-evaluators" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. From taxonomy to evaluators
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-llm-judges-design-and-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. LLM judges: design and validation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-trajectory-tool-call-and-outcome-evals-for-agents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Trajectory, tool-call and outcome evals for agents
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-offline-vs-online-evaluation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Offline vs online evaluation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-ab-and-model-migration-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. A/B and model-migration testing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-synthetic-data-carefully" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Synthetic data, carefully
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-red-teaming" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Red teaming
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-bulgarian-when-safety-features-are-english-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Bulgarian: when safety features are English-only
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11-ci-regression-gates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. CI regression gates
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-the-tools-market-and-vendor-neutrality" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. The tools market and vendor neutrality
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tools-versions-as-of-oct-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tools &amp; versions (as of Oct 2026)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#labs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Labs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Labs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lab-1-error-analysis-on-100-incident-traces-25h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 1 — Error analysis on 100 incident traces (≈2.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-2-code-checks-and-calibrated-binary-judges-3h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 2 — Code checks and calibrated binary judges (≈3h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-3-trajectory-tool-call-and-end-state-evals-with-simulated-dispatchers-25h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 3 — Trajectory, tool-call and end-state evals with simulated dispatchers (≈2.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-4-red-teaming-and-the-bulgarian-groundedness-fallback-2h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 4 — Red teaming and the Bulgarian groundedness fallback (≈2h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-5-ci-regression-gate-and-model-migration-ab-2h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 5 — CI regression gate and model-migration A/B (≈2h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kata
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#product-increment-fleet-ops-copilot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Product increment — Fleet Ops Copilot
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#factory-increment-your-agentic-sdlc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Factory increment — your agentic SDLC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assessment
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common pitfalls
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="c14-failure-driven-evals-llm-judges-red-teaming">C14 — Failure-driven evals, LLM judges &amp; red teaming<a class="headerlink" href="#c14-failure-driven-evals-llm-judges-red-teaming" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><strong>Level:</strong> 3 — Production systems (Advanced) · <strong>Duration:</strong> 16h (theory 25% / labs 75%) · <strong>Prerequisites:</strong> C5 (golden set v1, MEAI.Evaluation basics), C11 (test pyramid, CI), C12 (incident workflow + traces), C13 (retrieval &amp; memory) · <strong>Volatility:</strong> Med (method is stable; Foundry evaluator statuses, red-teaming regions/targets and tool ownership change)</p>
+</blockquote>
+<h2 id="why-this-matters">Why this matters<a class="headerlink" href="#why-this-matters" title="Permanent link">&para;</a></h2>
+<p>Fleet Ops Copilot passed all 50 golden-set questions from C5 and the incident workflow from C12 passes its invariant tests. In the first two weeks of shadow traffic the dispatchers still flag 9% of incident runs as "wrong." When the team opens the traces, the failures are not what anyone wrote evaluators for: customer notices that promise an ETA the maintenance slot cannot meet; Bulgarian policy citations that point to the right document but the wrong paragraph; triage that rates a reefer compressor fault "Medium" because the text never mentions temperature. The team's dashboard shows "Helpfulness 4.3/5" and "Coherence 4.6/5" — numbers that move with nothing and predict nothing.</p>
+<p>This is the most common way AI products stall: evaluation that measures what was easy to imagine rather than what actually fails. The leading practitioners (Husain &amp; Shankar) are explicit: "avoid eval-driven development in general" — do not write speculative evaluators or rely on generic metrics; <strong>look at real traces first</strong>, build a failure taxonomy, write one binary check per observed failure mode, validate every LLM judge against human labels, and only then gate CI. They report spending 60–80% of development time on error analysis and evaluation.</p>
+<p>Experts also know their evaluators lie in specific ways: a judge with 70% true-negative rate will hide real regressions; a cached CI run cannot see provider drift; Azure's groundedness detection does not support Bulgarian; and the red-teaming service cannot target a workflow agent. This module industrialises the practice for Fleet Ops: error analysis on ~100 traces, calibrated judges, trajectory and tool-call evals, red teaming with Attack Success Rate, model-migration A/B tests and a CI regression gate that coding agents must keep green.</p>
+<h2 id="learning-outcomes">Learning outcomes<a class="headerlink" href="#learning-outcomes" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Perform</strong> error analysis on ~100 production-like traces using open and axial coding, and <strong>produce</strong> a failure taxonomy with counts and a saturation curve.</li>
+<li><strong>Choose</strong> for each failure mode between a direct fix, a code-based check and an LLM judge, and <strong>justify</strong> the choice.</li>
+<li><strong>Implement</strong> binary, single-failure-mode LLM judges as MEAI <code>IEvaluator</code>s and <strong>validate</strong> them against 100–200 human labels with train/dev/test splits, reporting TPR and TNR.</li>
+<li><strong>Correct</strong> observed pass rates for judge error and <strong>report</strong> uncertainty.</li>
+<li><strong>Implement</strong> trajectory, tool-call and end-state evals (MEAI IntentResolution, TaskAdherence, ToolCallAccuracy; span-based assertions; τ-bench-style simulation with pass^k).</li>
+<li><strong>Distinguish</strong> offline and online evaluation and <strong>configure</strong> Foundry evaluations/continuous evaluation alongside .NET evals.</li>
+<li><strong>Run</strong> red-team campaigns with PyRIT and the AI Red Teaming Agent, <strong>report</strong> Attack Success Rate per category, and <strong>verify</strong> architectural mitigations.</li>
+<li><strong>Design</strong> a calibrated Bulgarian groundedness judge as a fallback for English-only safety features.</li>
+<li><strong>Build</strong> a CI regression gate in GitHub Actions (cached PR runs, nightly uncached runs, model-migration A/B) with statistically defensible thresholds.</li>
+</ol>
+<h2 id="concepts">Concepts<a class="headerlink" href="#concepts" title="Permanent link">&para;</a></h2>
+<h3 id="1-failure-driven-evals-not-speculative-evals">1. Failure-driven evals, not speculative evals<a class="headerlink" href="#1-failure-driven-evals-not-speculative-evals" title="Permanent link">&para;</a></h3>
+<p>Course stance (introduced in C5, now industrialised): <strong>observe failures → write evaluators for them → gate CI.</strong> Consequences:
+- No generic "helpfulness/coherence" scores as quality measures. BLEU/ROUGE/BERTScore are generally not useful for LLM outputs (embedding similarity can help evaluate retrieval).
+- <strong>Binary pass/fail</strong> over 1–5 Likert scales: Likert scores are hard to calibrate, drift between annotators and hide the decision you actually need ("ship or not").
+- Report a <strong>pass-all rate</strong> (fraction of cases that pass every check) and drill into per-check rates.
+- Many failures need a <strong>fix, not an evaluator</strong> (a prompt bug, a missing tool parameter). Add a regression check only if the failure can plausibly recur.</p>
+<p><strong>Misconception to unlearn:</strong> "more evaluators = more quality." Each evaluator has a cost (labels, maintenance, false alarms). Prefer few, validated, failure-specific checks.</p>
+<h3 id="2-error-analysis-protocol">2. Error analysis protocol<a class="headerlink" href="#2-error-analysis-protocol" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Sample ~100 diverse traces.</strong> Start exploratory (random, clustering); then targeted (negative user feedback, retries, unusually long traces, unusual tool sequences, budget escalations). Keep some random traces in every batch.</li>
+<li><strong>Open coding.</strong> For each trace, write a free-text note on the <strong>first</strong> failure you see (upstream errors cause downstream ones). Annotate at least the first 30 yourself before letting an LLM suggest failures; do not outsource core error analysis. Record non-model problems (missing feature, bad data) too.</li>
+<li><strong>Axial coding.</strong> Group notes into a taxonomy of failure modes with counts. An LLM can propose groupings; you decide.</li>
+<li><strong>Saturation.</strong> Continue until new traces stop revealing new failure modes ("theoretical saturation").</li>
+<li><strong>Governance.</strong> One domain expert acts as a "benevolent dictator" for quality calls (for Trakia: a senior dispatcher). With multiple annotators, label independently, measure agreement (Cohen's κ), then hold alignment sessions.</li>
+<li><strong>Cadence.</strong> Refresh with 100+ new traces every 2–4 weeks plus 10–20 outliers weekly.</li>
+</ol>
+<p>Tooling: build a <strong>custom trace viewer</strong> — trace next to outcome, keyboard shortcuts for pass/fail and note, progress counter. Generic observability UIs are too slow for 100 traces.</p>
+<h3 id="3-from-taxonomy-to-evaluators">3. From taxonomy to evaluators<a class="headerlink" href="#3-from-taxonomy-to-evaluators" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Failure mode (example from Trakia traces)</th>
+<th>Detectable by rule?</th>
+<th>Evaluator</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Customer notice contains internal fault codes (<code>P0087</code>)</td>
+<td>Yes</td>
+<td>regex code check</td>
+</tr>
+<tr>
+<td>Booking before driving-time check</td>
+<td>Yes (span order)</td>
+<td>trajectory assertion</td>
+</tr>
+<tr>
+<td>Booked slot violates depot hours</td>
+<td>Yes (DB)</td>
+<td>end-state check</td>
+</tr>
+<tr>
+<td>Notice promises ETA earlier than booked slot + repair estimate</td>
+<td>Mostly (parse ETA, compare)</td>
+<td>code check with parser; judge fallback for free-form phrasing</td>
+</tr>
+<tr>
+<td>Policy citation does not support the claim (BG/EN)</td>
+<td>No</td>
+<td>LLM judge (groundedness, per claim)</td>
+</tr>
+<tr>
+<td>Severity under-rated given cargo/SLA context</td>
+<td>No</td>
+<td>LLM judge with rubric of decisive features</td>
+</tr>
+<tr>
+<td>Tone inappropriate for B2B customer</td>
+<td>No — and rare</td>
+<td><strong>no evaluator yet</strong>; monitor via feedback</td>
+</tr>
+</tbody>
+</table>
+<h3 id="4-llm-judges-design-and-validation">4. LLM judges: design and validation<a class="headerlink" href="#4-llm-judges-design-and-validation" title="Permanent link">&para;</a></h3>
+<p>Judge design: one failure mode per judge; binary output plus a short critique; few-shot examples drawn from the <strong>train</strong> split; explicit definition of Pass and Fail with borderline examples; structured output (<code>{ "critique": "...", "pass": false }</code>); temperature as low as the model allows (still not deterministic). The same model family may serve as app model and judge <strong>if</strong> it aligns with human labels — measure, don't assume.</p>
+<p>Validation (per failure mode):
+- <strong>100–200 labelled examples</strong>; split ~10–20% <strong>train</strong> (few-shot pool), 40–45% <strong>dev</strong> (iterate the prompt), 40–45% <strong>test</strong> (touch once); aim for 30–50 Pass and 30–50 Fail in each of dev and test.
+- Report <strong>TPR</strong> (judge says Pass when human says Pass) and <strong>TNR</strong> (judge says Fail when human says Fail). With imbalanced classes raw agreement misleads: a judge that always says Pass scores 92% agreement on a 92%-pass dataset and catches nothing.
+- If test ≪ dev, you overfit the prompt to dev.
+- <strong>Correct the observed pass rate</strong> for judge error: θ̂ = (p_obs + TNR − 1) / (TPR + TNR − 1). With p_obs = 0.88, TPR = 0.93, TNR = 0.85: θ̂ = (0.88 + 0.85 − 1)/(0.93 + 0.85 − 1) = 0.73/0.78 ≈ 0.936. Bootstrap the labelled set to get a confidence interval. If TPR + TNR − 1 is small, the judge is too weak to gate anything.</p>
+<h3 id="5-trajectory-tool-call-and-outcome-evals-for-agents">5. Trajectory, tool-call and outcome evals for agents<a class="headerlink" href="#5-trajectory-tool-call-and-outcome-evals-for-agents" title="Permanent link">&para;</a></h3>
+<p>Three layers (matching the agentic-RAG SoK's component / trajectory / system split):
+- <strong>Outcome (system):</strong> did the world end in the right state? τ-bench pioneered simulated users + domain policies + <strong>database end-state checks</strong> and <strong>pass^k</strong> (all k trials succeed) — the reliability metric agents need, because pass@1 hides flakiness. For Trakia: after the run, exactly one booking exists, at an allowed depot slot, parts reserved match the plan, one customer notice sent.
+- <strong>Trajectory:</strong> right tools, valid arguments, correct order, no forbidden tools, efficiency (steps/tokens vs reference). Prefer asserting <strong>invariants</strong> (ordering, forbidden actions) over exact paths — many paths are valid.
+- <strong>Component:</strong> retrieval quality, triage accuracy, judge-checked groundedness per node.</p>
+<p>.NET: <code>Microsoft.Extensions.AI.Evaluation.Quality</code> includes agent evaluators <strong>IntentResolution</strong>, <strong>TaskAdherence</strong> and <strong>ToolCallAccuracy</strong> (LLM-judged; they need the conversation, the response and tool definitions as context). Foundry offers agent evaluators: Task Adherence, Intent Resolution, Task Completion (<strong>preview</strong>), Tool Call Accuracy, Tool Selection, Tool Input Accuracy, Tool Output Utilization, Tool Call Success, Task Navigation Efficiency, and a weighted <strong>Rubric</strong> evaluator (<strong>preview</strong>), runnable at turn or conversation level. Treat these as <em>generic</em> signals: useful for triage, but calibrate them like any judge before gating on them.</p>
+<p>Trajectories come from <strong>OTel spans</strong> (C15): <code>invoke_agent</code>, <code>execute_tool</code> with <code>gen_ai.tool.name</code>, <code>gen_ai.tool.call.id</code>. Because GenAI semantic conventions are still "Development", pin the semconv version your assertions read.</p>
+<h3 id="6-offline-vs-online-evaluation">6. Offline vs online evaluation<a class="headerlink" href="#6-offline-vs-online-evaluation" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Offline (pre-release)</th>
+<th>Online (production)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Data</td>
+<td>golden + regression sets, simulations, red-team sets</td>
+<td>sampled live traces</td>
+</tr>
+<tr>
+<td>Purpose</td>
+<td>gate changes</td>
+<td>detect drift, discover new failures</td>
+</tr>
+<tr>
+<td>Tools</td>
+<td>MEAI.Evaluation in xUnit + <code>dotnet aieval</code>; Foundry cloud evaluations</td>
+<td>Foundry <strong>continuous evaluation</strong>; MEAI scores published to telemetry; user feedback</td>
+</tr>
+<tr>
+<td>Determinism</td>
+<td>response caching → cheap, repeatable</td>
+<td>none — sample and trend</td>
+</tr>
+</tbody>
+</table>
+<p>Foundry evaluations: per a practitioner source, evaluations, monitoring and tracing reached GA in March 2026 with some evaluators still preview (verify on Learn). Cloud evaluation references built-ins by ID (e.g., <code>builtin.task_adherence</code>), requires <strong>Entra ID</strong> (no API keys), and takes synthetic data, uploaded JSONL/CSV, benchmarks or existing traces (traces need App Insights). Authoring samples are Python-first (<code>azure-ai-evaluation</code>, <code>azure-ai-projects</code>) <strong>[Python]</strong>. Continuous evaluation samples live agent responses, shows results on the agent's Monitor tab next to latency/tokens/run success, supports alerts, and requires App Insights plus the project managed identity holding the Foundry User role. Online evals never replace error analysis: low-scoring traces go <strong>into</strong> the next error-analysis batch.</p>
+<h3 id="7-ab-and-model-migration-testing">7. A/B and model-migration testing<a class="headerlink" href="#7-ab-and-model-migration-testing" title="Permanent link">&para;</a></h3>
+<p>Models retire (C15: ≥18 months for standard GA Azure models, 12 for several partner families, ≥60 days' notice). A migration is a <strong>release with a pairwise eval report</strong>:
+- Freeze the suite (golden + regression + simulation + red-team sets).
+- Run current and candidate; compare <strong>per failure mode</strong> pass rates, pass^k, cost/task, latency p50/p95.
+- <strong>Pairwise judge</strong> for open-ended outputs (customer notice quality): show both outputs, ask for the better one with a reason; <strong>swap positions</strong> and count only consistent verdicts (position bias).
+- Paired binary outcomes → <strong>McNemar's test</strong> on discordant pairs; with 200 cases, a 5-point swing may well be noise. Pre-register the decision rule ("no failure mode worse by &gt; 3 pp with p &lt; 0.05; cost/task ≤ +10%").
+- Online, promote via canary/feature flags (C15) with the same metrics.</p>
+<h3 id="8-synthetic-data-carefully">8. Synthetic data, carefully<a class="headerlink" href="#8-synthetic-data-carefully" title="Permanent link">&para;</a></h3>
+<p>Synthetic data fills coverage gaps; it cannot tell you how <strong>common</strong> a failure is in production. Recipe: define dimensions (incident type × severity × language × customer contract type × data quality), hand-write ~20 tuples, generate more tuples, then convert each tuple to a natural-language incident in a <strong>separate</strong> step (avoids homogeneous phrasing), and human-review before use. RAGAS can generate KG-based test sets <strong>[Python]</strong>. Never mix synthetic and production-sampled cases in the same prevalence statistic.</p>
+<h3 id="9-red-teaming">9. Red teaming<a class="headerlink" href="#9-red-teaming" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>PyRIT</strong> <strong>[Python]</strong>: orchestrators, converters (encodings, translations, rephrasings), scorers; you point it at an HTTP target.</li>
+<li><strong>AI Red Teaming Agent</strong> (Foundry): wraps PyRIT with <strong>24 attack strategies</strong> (encodings/ciphers, obfuscation, jailbreak/indirect jailbreak, multi-turn, Crescendo) and reports <strong>Attack Success Rate (ASR)</strong> per risk category. Agent-specific risks (prohibited actions, sensitive data leakage, task adherence) are <strong>cloud-only</strong>, in East US 2, France Central, Sweden Central, Switzerland West and North Central US. Targets: Foundry prompt and hosted (container) agents; <strong>workflow agents, non-Foundry agents, function tools, connected agents and computer use are not supported</strong>; text-only; run in a "purple" (non-production, production-like) environment. GA/preview status is not stated on Learn — verify.</li>
+<li><strong>ASR</strong> = successful attacks / attempted attacks, per category and strategy. Track it like a regression metric; it should trend down but will not reach zero for classifier-only defences.</li>
+<li>Also: MEAI.Evaluation safety evaluators (IndirectAttack, CodeVulnerability, content harms, ProtectedMaterial, UngroundedAttributes) call the Foundry Evaluation service; <strong>ASSERT</strong> (open-sourced at Build 2026) generates adversarial tests from policies; garak; Promptfoo (now OpenAI-owned).</li>
+<li>Red-team the <strong>architecture</strong>, not just the prompt: the C12 approval gate means a successful injection in incident text should still not produce a booking. Measure "attack reached a consequential action" separately from "model produced unsafe text."</li>
+</ul>
+<h3 id="10-bulgarian-when-safety-features-are-english-only">10. Bulgarian: when safety features are English-only<a class="headerlink" href="#10-bulgarian-when-safety-features-are-english-only" title="Permanent link">&para;</a></h3>
+<p>Azure AI Content Safety <strong>groundedness detection</strong> (preview) is <strong>English-only</strong> and region-limited (East US, East US 2, France Central, Sweden Central, UK South, West US); protected material and custom categories are English-only; other classifiers are trained/tested on zh, en, fr, de, es, it, ja, pt — Bulgarian "may work" with variable quality. Fleet Ops answers dispatchers and customers in Bulgarian, so: build a <strong>Bulgarian groundedness judge</strong> (claim-level: each claim → supported / not supported by cited passage), calibrated on ≥150 Bulgarian examples labelled by a Bulgarian-speaking domain expert; compare against translate-then-check (cheaper, but translation can repair or introduce errors) and record both TPR/TNR. Run classifier-based safety on BG text, but measure its BG performance on your own labelled set before trusting it.</p>
+<h3 id="11-ci-regression-gates">11. CI regression gates<a class="headerlink" href="#11-ci-regression-gates" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>PR gate:</strong> MEAI.Evaluation tests with <strong>response caching</strong> (cheap, deterministic when prompt/model unchanged) → thresholds per failure mode → <code>dotnet aieval</code> report as artifact → PR comment.</li>
+<li><strong>Nightly uncached run</strong> against live models to detect provider-side drift; weekly full simulation with pass^k.</li>
+<li><strong>Thresholds</strong>: per failure mode, with tolerance bands derived from run-to-run variance (measure: run uncached ×5 and take the spread); never "exact equality" on model outputs.</li>
+<li><strong>Ownership:</strong> eval datasets, judge prompts and thresholds are versioned artifacts under CODEOWNERS; coding agents may <em>read</em> them and must keep them green, but cannot change them.</li>
+</ul>
+<h3 id="12-the-tools-market-and-vendor-neutrality">12. The tools market and vendor neutrality<a class="headerlink" href="#12-the-tools-market-and-vendor-neutrality" title="Permanent link">&para;</a></h3>
+<p>Promptfoo (OSS evals/red teaming) — OpenAI announced its acquisition on 9 March 2026; Langfuse (OSS tracing/evals/prompt management) — acquired by ClickHouse in January 2026. Both remain usable, but the lesson is architectural: <strong>capture traces with OpenTelemetry</strong>, keep datasets/labels as JSONL in git, keep judges as code (<code>IEvaluator</code>). Then any platform — Foundry, Langfuse, Phoenix, LangSmith, Braintrust — is a replaceable viewer, not the system of record.</p>
+<h2 id="tools-versions-as-of-oct-2026">Tools &amp; versions (as of Oct 2026)<a class="headerlink" href="#tools-versions-as-of-oct-2026" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Tool / package</th>
+<th>Purpose</th>
+<th>Status</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Microsoft.Extensions.AI.Evaluation</code> (+ <code>.Quality</code>, <code>.NLP</code>, <code>.Safety</code>, <code>.Reporting</code>, <code>.Reporting.Azure</code>, <code>.Console</code>)</td>
+<td>evaluators, caching, reports, <code>dotnet aieval</code></td>
+<td>Libraries documented on Learn; package versions/GA per package — verify on NuGet</td>
+<td>Agent evaluators: IntentResolution, TaskAdherence, ToolCallAccuracy</td>
+</tr>
+<tr>
+<td>xUnit / MSTest + Testcontainers (SQL Server 2025)</td>
+<td>eval tests, end-state checks</td>
+<td>GA</td>
+<td>DB snapshot per run</td>
+</tr>
+<tr>
+<td>Foundry evaluations &amp; continuous evaluation</td>
+<td>cloud/batch and online evaluation</td>
+<td>GA (Mar 2026, per practitioner source); several agent evaluators + Rubric <strong>preview</strong></td>
+<td>Entra ID only; authoring <strong>[Python]</strong></td>
+</tr>
+<tr>
+<td><code>azure-ai-evaluation</code>, <code>azure-ai-projects</code> <strong>[Python]</strong></td>
+<td>cloud eval authoring</td>
+<td>GA SDKs (verify versions)</td>
+<td>Used in Lab 3 stretch</td>
+</tr>
+<tr>
+<td>PyRIT <strong>[Python]</strong></td>
+<td>red-team automation</td>
+<td>OSS</td>
+<td>Lab 4</td>
+</tr>
+<tr>
+<td>AI Red Teaming Agent (Foundry)</td>
+<td>24 strategies, ASR scorecards</td>
+<td>Status not stated — verify; agent risks cloud-only, 5 regions</td>
+<td>Not for workflow agents/function tools</td>
+</tr>
+<tr>
+<td>ASSERT</td>
+<td>policy-driven adversarial tests</td>
+<td>Open source (Build 2026)</td>
+<td>Optional</td>
+</tr>
+<tr>
+<td>Azure AI Content Safety (Prompt Shields, groundedness)</td>
+<td>classifiers</td>
+<td>Prompt Shields available; groundedness <strong>preview, English-only</strong></td>
+<td>BG fallback required</td>
+</tr>
+<tr>
+<td>GitHub Actions</td>
+<td>CI gates</td>
+<td>GA</td>
+<td><code>actions/upload-artifact</code> for reports</td>
+</tr>
+<tr>
+<td>Promptfoo / Langfuse</td>
+<td>alternative eval/trace tools</td>
+<td>OSS; owned by OpenAI / ClickHouse</td>
+<td>Use via OTel/JSONL only</td>
+</tr>
+</tbody>
+</table>
+<h2 id="labs">Labs<a class="headerlink" href="#labs" title="Permanent link">&para;</a></h2>
+<h3 id="lab-1-error-analysis-on-100-incident-traces-25h">Lab 1 — Error analysis on 100 incident traces (≈2.5h)<a class="headerlink" href="#lab-1-error-analysis-on-100-incident-traces-25h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> Build the Fleet Ops failure taxonomy from real behaviour.</li>
+<li><strong>Start state:</strong> tag <code>c14/lab1-start</code> — 400 exported traces (OTLP JSON) from two weeks of shadow traffic of the C12 workflow driven by the dispatcher simulator, with 31 dispatcher thumbs-down events; a <strong>pre-built trace viewer</strong> (Blazor Server page: left pane = incident input + final outputs (booking, notice); right pane = span tree with tool arguments/results; keys <code>P</code>/<code>F</code>/<code>N</code> (pass/fail/note), progress counter; saves <code>labels/c14-open-coding.jsonl</code> with <code>traceId, verdict, firstFailureNote, annotator</code>).</li>
+<li><strong>Steps:</strong></li>
+<li>Run the provided trace viewer against the export and label 3 traces to check it works (≤10 min). Do not extend it in this lab; customising it is the stretch and the factory increment.</li>
+<li>Sample 100: 60 random, 25 targeted (thumbs-down, budget escalations, &gt;2 planner loops), 15 longest traces.</li>
+<li>Open-code all 100 yourself (first failure only).</li>
+<li>Axial-code: use an LLM to propose clusters from your notes, then edit to a taxonomy <code>docs/evals/failure-taxonomy.md</code> with definitions, examples (trace IDs) and counts.</li>
+<li>Plot new-failure-mode discovery vs traces reviewed (saturation curve).</li>
+<li>For each mode decide: <strong>fix now</strong> / <strong>code check</strong> / <strong>LLM judge</strong> / <strong>monitor only</strong>; open issues for fixes.</li>
+<li><strong>Break it:</strong> Have a peer annotate 30 of your traces independently; compute Cohen's κ; hold a 15-minute alignment session and update definitions.</li>
+<li><strong>Acceptance criteria:</strong> ≥ 100 labelled traces; taxonomy with ≥ 5 modes, each with definition, ≥ 2 example trace IDs and count; κ reported; decision table complete; at least two "fix now" issues opened and linked.</li>
+<li><strong>Stretch:</strong> Cluster trace embeddings (input + first-failure note) to find a mode you missed. Extend the viewer (e.g., filter by taxonomy mode, show the judge verdict next to your label) under C11 test discipline.</li>
+</ul>
+<h3 id="lab-2-code-checks-and-calibrated-binary-judges-3h">Lab 2 — Code checks and calibrated binary judges (≈3h)<a class="headerlink" href="#lab-2-code-checks-and-calibrated-binary-judges-3h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> Turn the top failure modes into validated evaluators.</li>
+<li><strong>Start state:</strong> tag <code>c14/lab2-start</code>.</li>
+<li><strong>Steps:</strong></li>
+<li>Implement code checks as <code>IEvaluator</code>s (no model): <code>NoInternalFaultCodes</code>, <code>EtaConsistentWithBooking</code> (parse ETA in BG/EN; compare with slot + repair estimate).
+     <div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">sealed</span><span class="w"> </span><span class="k">partial</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">NoInternalFaultCodesEvaluator</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IEvaluator</span><span class="w">   </span><span class="c1">// partial: required by [GeneratedRegex]</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Metric</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"NoInternalFaultCodes"</span><span class="p">;</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">IReadOnlyCollection</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">EvaluationMetricNames</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">[</span><span class="n">Metric</span><span class="p">];</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">ValueTask</span><span class="o">&lt;</span><span class="n">EvaluationResult</span><span class="o">&gt;</span><span class="w"> </span><span class="n">EvaluateAsync</span><span class="p">(</span><span class="n">IEnumerable</span><span class="o">&lt;</span><span class="n">ChatMessage</span><span class="o">&gt;</span><span class="w"> </span><span class="n">messages</span><span class="p">,</span><span class="w"> </span><span class="n">ChatResponse</span><span class="w"> </span><span class="n">modelResponse</span><span class="p">,</span>
+<span class="w">        </span><span class="n">ChatConfiguration</span><span class="o">?</span><span class="w"> </span><span class="n">chatConfiguration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">null</span><span class="p">,</span><span class="w"> </span><span class="n">IEnumerable</span><span class="o">&lt;</span><span class="n">EvaluationContext</span><span class="o">&gt;?</span><span class="w"> </span><span class="n">additionalContext</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">null</span><span class="p">,</span>
+<span class="w">        </span><span class="n">CancellationToken</span><span class="w"> </span><span class="n">cancellationToken</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">)</span><span class="w">   </span><span class="c1">// verify signature for your pinned version</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">hit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FaultCodeRegex</span><span class="p">().</span><span class="n">Match</span><span class="p">(</span><span class="n">modelResponse</span><span class="p">.</span><span class="n">Text</span><span class="p">);</span>
+<span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BooleanMetric</span><span class="p">(</span><span class="n">Metric</span><span class="p">,</span><span class="w"> </span><span class="k">value</span><span class="p">:</span><span class="w"> </span><span class="o">!</span><span class="n">hit</span><span class="p">.</span><span class="n">Success</span><span class="p">,</span><span class="w"> </span><span class="n">reason</span><span class="p">:</span><span class="w"> </span><span class="n">hit</span><span class="p">.</span><span class="n">Success</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s">$"Leaked {hit.Value}"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="k">null</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ValueTask</span><span class="p">.</span><span class="n">FromResult</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">EvaluationResult</span><span class="p">(</span><span class="n">m</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="na">[GeneratedRegex(@"\b[PBCU]</span><span class="p">[</span><span class="mi">0</span><span class="o">-</span><span class="mi">3</span><span class="p">][</span><span class="mi">0</span><span class="o">-</span><span class="mi">9</span><span class="n">A</span><span class="o">-</span><span class="n">F</span><span class="p">]{</span><span class="mi">3</span><span class="p">}</span><span class="err">\</span><span class="n">b</span><span class="s">")] private static partial Regex FaultCodeRegex();</span>
+<span class="p">}</span>
+</code></pre></div></li>
+<li>Implement two LLM judges with structured output (<code>{critique, pass}</code>): <code>SeverityUnderratedJudge</code> and <code>PolicyClaimSupportedJudge</code> (claim-level, BG and EN).</li>
+<li>Assemble 150–200 labelled examples per judge: the start tag ships ~100 expert-labelled examples per judge, and you label the rest from Lab 1 traces + targeted additions (fewer than ~140 cannot satisfy the per-split minimums below). Split train 15% / dev 42.5% / test 42.5% with ≥ 30 Pass and ≥ 30 Fail in dev and test (<code>labels/judges/{judge}/{split}.jsonl</code>).</li>
+<li>Iterate the judge prompt on dev only; then run once on test. Compute TPR, TNR, and the corrected pass rate on the full 400-trace population with a bootstrap 95% CI.
+     <div class="highlight"><pre><span></span><code><span class="k">static</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">tpr</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">tnr</span><span class="p">)</span><span class="w"> </span><span class="n">Score</span><span class="p">(</span><span class="n">IEnumerable</span><span class="o">&lt;</span><span class="p">(</span><span class="kt">bool</span><span class="w"> </span><span class="n">human</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">judge</span><span class="p">)</span><span class="o">&gt;</span><span class="w"> </span><span class="n">xs</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">l</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xs</span><span class="p">.</span><span class="n">ToList</span><span class="p">();</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">tp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">l</span><span class="p">.</span><span class="n">Count</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">x</span><span class="p">.</span><span class="n">human</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">x</span><span class="p">.</span><span class="n">judge</span><span class="p">),</span><span class="w"> </span><span class="n">fn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">l</span><span class="p">.</span><span class="n">Count</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">x</span><span class="p">.</span><span class="n">human</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">!</span><span class="n">x</span><span class="p">.</span><span class="n">judge</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">tn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">l</span><span class="p">.</span><span class="n">Count</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="o">!</span><span class="n">x</span><span class="p">.</span><span class="n">human</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">!</span><span class="n">x</span><span class="p">.</span><span class="n">judge</span><span class="p">),</span><span class="w"> </span><span class="n">fp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">l</span><span class="p">.</span><span class="n">Count</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="o">!</span><span class="n">x</span><span class="p">.</span><span class="n">human</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">x</span><span class="p">.</span><span class="n">judge</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">tp</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">tp</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">fn</span><span class="p">),</span><span class="w"> </span><span class="n">tn</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">tn</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">fp</span><span class="p">));</span>
+<span class="p">}</span>
+<span class="k">static</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="nf">Corrected</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">pObs</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">tpr</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">tnr</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">(</span><span class="n">pObs</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tnr</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">tpr</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tnr</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+</code></pre></div></li>
+<li><strong>Break it:</strong> Swap the judge model for a fast small model; re-measure TPR/TNR on test and observe which metric collapses.</li>
+<li><strong>Acceptance criteria:</strong> each judge has TPR ≥ 0.85 and TNR ≥ 0.85 on <strong>test</strong> (or a documented decision to use it for monitoring only); dev–test gap ≤ 0.08; <code>docs/evals/judge-cards/*.md</code> (purpose, definition, model, prompt hash, splits, TPR/TNR, known blind spots); code checks have unit tests with positive and negative examples.</li>
+<li><strong>Stretch:</strong> Compare the built-in MEAI <code>GroundednessEvaluator</code> against your claim-level judge on the same BG test split.</li>
+</ul>
+<h3 id="lab-3-trajectory-tool-call-and-end-state-evals-with-simulated-dispatchers-25h">Lab 3 — Trajectory, tool-call and end-state evals with simulated dispatchers (≈2.5h)<a class="headerlink" href="#lab-3-trajectory-tool-call-and-end-state-evals-with-simulated-dispatchers-25h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> Evaluate the agentic behaviour, not just final text.</li>
+<li><strong>Start state:</strong> tag <code>c14/lab3-start</code> — Testcontainers SQL Server 2025 with a <code>TrakiaOps</code> snapshot; OTel in-memory exporter wired into the test host.</li>
+<li><strong>Steps:</strong></li>
+<li>Configure reporting with caching and agent evaluators:
+     <div class="highlight"><pre><span></span><code><span class="n">ReportingConfiguration</span><span class="w"> </span><span class="n">cfg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DiskBasedReportingConfiguration</span><span class="p">.</span><span class="n">Create</span><span class="p">(</span>
+<span class="w">    </span><span class="n">storageRootPath</span><span class="p">:</span><span class="w"> </span><span class="s">"artifacts/aieval"</span><span class="p">,</span>
+<span class="w">    </span><span class="n">evaluators</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="k">new</span><span class="w"> </span><span class="n">IntentResolutionEvaluator</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">TaskAdherenceEvaluator</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ToolCallAccuracyEvaluator</span><span class="p">(),</span>
+<span class="w">                 </span><span class="k">new</span><span class="w"> </span><span class="nf">NoInternalFaultCodesEvaluator</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">PolicyClaimSupportedJudge</span><span class="p">()],</span>
+<span class="w">    </span><span class="n">chatConfiguration</span><span class="p">:</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ChatConfiguration</span><span class="p">(</span><span class="n">judgeChatClient</span><span class="p">),</span>
+<span class="w">    </span><span class="n">enableResponseCaching</span><span class="p">:</span><span class="w"> </span><span class="k">true</span><span class="p">,</span>
+<span class="w">    </span><span class="n">executionName</span><span class="p">:</span><span class="w"> </span><span class="n">Environment</span><span class="p">.</span><span class="n">GetEnvironmentVariable</span><span class="p">(</span><span class="s">"GITHUB_RUN_ID"</span><span class="p">)</span><span class="w"> </span><span class="o">??</span><span class="w"> </span><span class="s">"local"</span><span class="p">);</span><span class="w">   </span><span class="c1">// verify names</span>
+<span class="k">await</span><span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="nn">ScenarioRun</span><span class="w"> </span><span class="n">run</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">cfg</span><span class="p">.</span><span class="n">CreateScenarioRunAsync</span><span class="p">(</span><span class="s">$"incident/{tc.Id}"</span><span class="p">);</span>
+<span class="n">EvaluationResult</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">run</span><span class="p">.</span><span class="n">EvaluateAsync</span><span class="p">(</span><span class="n">messages</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="p">,</span>
+<span class="w">    </span><span class="n">additionalContext</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="k">new</span><span class="w"> </span><span class="n">ToolCallAccuracyEvaluatorContext</span><span class="p">(</span><span class="n">toolDefinitions</span><span class="p">)]);</span><span class="w">       </span><span class="c1">// verify context type</span>
+</code></pre></div></li>
+<li>Trajectory assertions from captured spans: driving-time check precedes any <code>scheduling_book_slot</code>; no state-changing tool without an approval span; ≤ 2 planner loops; every <code>execute_tool</code> argument <code>vehicleId</code> exists in the snapshot.</li>
+<li>End-state check after each run: SQL assertions on bookings, reservations, notices (exactly-once, allowed slot, parts match plan).</li>
+<li>τ-bench-style simulation: an LLM <strong>dispatcher simulator</strong> with persona cards (terse Sofia dispatcher; anxious new hire; Bulgarian-only) and the fleet policy; 30 scenarios × k = 4. Report pass^1 and pass^4.</li>
+<li><strong>Break it:</strong> Introduce a regression — reorder two edges so the planner can run before the policy check returns. Confirm trajectory assertions fail while text-only evaluators still pass.</li>
+<li><strong>Acceptance criteria:</strong> trajectory and end-state tests in <code>tests/Evals.Agentic</code> green on <code>main</code>; the induced regression is caught; pass^4 reported with the gap to pass^1 explained; calibration note on the three MEAI agent evaluators (agreement with your Lab 1 labels on ≥ 40 traces).</li>
+<li><strong>Stretch [Python]:</strong> Run Foundry cloud evaluation with <code>builtin.task_adherence</code> and Tool Call Accuracy on the same traces from App Insights; compare with MEAI results.</li>
+</ul>
+<h3 id="lab-4-red-teaming-and-the-bulgarian-groundedness-fallback-2h">Lab 4 — Red teaming and the Bulgarian groundedness fallback (≈2h)<a class="headerlink" href="#lab-4-red-teaming-and-the-bulgarian-groundedness-fallback-2h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> Quantify attack success and prove the architecture holds.</li>
+<li><strong>Start state:</strong> tag <code>c14/lab4-start</code> — "purple" environment (separate Foundry project, synthetic data only); PyRIT environment in the scripts container.</li>
+<li><strong>Steps:</strong></li>
+<li><strong>[Python]</strong> PyRIT campaign against <code>POST /incidents</code> and the Fleet Assistant chat endpoint: (a) indirect injection in incident free text and in a retrieved historical incident report; (b) exfiltration via customer notice (try to get driver personal data into the notice); (c) BG-language jailbreaks and encoded variants; (d) multi-turn Crescendo on the chat endpoint. Score with PyRIT scorers + your Lab 2 judges.</li>
+<li>Compute ASR per category and the <strong>consequential-action ASR</strong> (attack produced a booking/notice/tool call it should not have) from traces.</li>
+<li>AI Red Teaming Agent cloud scan (France Central or Sweden Central) against a <strong>Foundry hosted-agent wrapper</strong> of the Fleet Assistant (workflow agents are unsupported targets — document this limitation in the report).</li>
+<li>Mitigate: Prompt Shields at input + spotlighting of retrieved documents (layer 1); confirm approval gate and read-only planner (architecture); re-run and compare.</li>
+<li>BG groundedness: run your <code>PolicyClaimSupportedJudge</code> on 150 BG cases vs translate-then-check using English-only groundedness detection; report TPR/TNR for both.</li>
+<li><strong>Break it:</strong> Temporarily allow the planner to call <code>scheduling_book_slot</code> directly (remove the approval edge in the purple env). Show consequential-action ASR jumps from 0.</li>
+<li><strong>Acceptance criteria:</strong> <code>artifacts/c14/redteam-report.md</code> with ASR per category before/after, consequential-action ASR = 0 with architecture intact, scan configuration and region, unsupported-target note; BG groundedness comparison table; the red-team set added to the regression suite.</li>
+<li><strong>Stretch:</strong> Generate policy-derived adversarial tests with ASSERT and add the failing ones to the suite.</li>
+</ul>
+<h3 id="lab-5-ci-regression-gate-and-model-migration-ab-2h">Lab 5 — CI regression gate and model-migration A/B (≈2h)<a class="headerlink" href="#lab-5-ci-regression-gate-and-model-migration-ab-2h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> Make evals a merge gate and rehearse a model migration decision.</li>
+<li><strong>Start state:</strong> tag <code>c14/lab5-start</code>.</li>
+<li><strong>Steps:</strong></li>
+<li>GitHub Actions workflow:
+     <div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">evals</span>
+<span class="nt">on</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">pull_request</span><span class="p p-Indicator">]</span>
+<span class="nt">jobs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">evals</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+<span class="w">    </span><span class="nt">permissions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> id-token</span><span class="p">:</span><span class="w"> </span><span class="nv">write</span><span class="p p-Indicator">,</span><span class="nt"> contents</span><span class="p">:</span><span class="w"> </span><span class="nv">read</span><span class="p p-Indicator">,</span><span class="nt"> pull-requests</span><span class="p">:</span><span class="w"> </span><span class="nv">write</span><span class="w"> </span><span class="p p-Indicator">}</span>
+<span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v4</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">azure/login@v2</span><span class="w">            </span><span class="c1"># OIDC federated credential, no secrets</span>
+<span class="w">        </span><span class="nt">with</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">client-id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ vars.AZURE_CLIENT_ID }}</span>
+<span class="w">          </span><span class="nt">tenant-id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ vars.AZURE_TENANT_ID }}</span>
+<span class="w">          </span><span class="nt">subscription-id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ vars.AZURE_SUBSCRIPTION_ID }}</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/setup-dotnet@v4</span>
+<span class="w">        </span><span class="nt">with</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> dotnet-version</span><span class="p">:</span><span class="w"> </span><span class="s">'10.0.x'</span><span class="w"> </span><span class="p p-Indicator">}</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dotnet test tests/Evals.Agentic --filter "Category=Gate" --logger trx</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dotnet tool restore &amp;&amp; dotnet aieval report --path artifacts/aieval --output artifacts/aieval/report.html</span><span class="w">   </span><span class="c1"># verify flags</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/upload-artifact@v4</span>
+<span class="w">        </span><span class="nt">with</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> name</span><span class="p">:</span><span class="w"> </span><span class="nv">aieval-report</span><span class="p p-Indicator">,</span><span class="nt"> path</span><span class="p">:</span><span class="w"> </span><span class="nv">artifacts/aieval/report.html</span><span class="w"> </span><span class="p p-Indicator">}</span>
+</code></pre></div>
+     Threshold logic lives in the tests (per failure mode, tolerance from measured variance), not in YAML. Cache the response store between runs keyed by prompt/model hashes.</li>
+<li>Nightly workflow: same suite with caching disabled + simulation pass^4; open an issue automatically on threshold breach.</li>
+<li>Model migration A/B: candidate deployment vs current on the frozen suite; pairwise judge with position swap for customer notices; McNemar on each binary failure mode; cost/task and p95 deltas; write <code>docs/evals/migration-&lt;candidate&gt;.md</code> with a go/no-go per the pre-registered rule.</li>
+<li>Online loop: enable Foundry continuous evaluation (portal or REST) on the staging Fleet Assistant with one built-in agent evaluator, a sampling rate and one alert; route low-scoring traces into the next error-analysis batch (Lab 1 viewer queue). Note in the migration memo which online signal you would watch during the canary.</li>
+<li><strong>Break it:</strong> Commit a prompt change that makes notices longer and occasionally drops the SLA clause; the PR gate must fail with the failing cases linked in the report.</li>
+<li><strong>Acceptance criteria:</strong> PR gate blocks the bad change; nightly run green on <code>main</code>; migration memo contains per-mode table, McNemar p-values, cost/latency deltas and a decision; branch protection requires the <code>evals</code> check.</li>
+<li><strong>Stretch:</strong> Add a pass^k-based flake guard: a failing case is re-run k = 3 uncached before the gate fails.</li>
+</ul>
+<h2 id="kata">Kata<a class="headerlink" href="#kata" title="Permanent link">&para;</a></h2>
+<p><strong>"Label sprint" (25 min, repeated).</strong> Open 20 fresh traces from the latest shadow-traffic batch in your trace viewer. Annotate first failures in ≤ 60 s each, then spend 5 minutes updating the taxonomy counts and deciding whether any new mode has appeared. Variations: only Bulgarian traces; only traces with budget escalations; only traces your judges marked Pass (hunt judge false positives); a peer's batch (compute κ against them). Track your labels/minute and κ over repetitions.</p>
+<h2 id="product-increment-fleet-ops-copilot">Product increment — Fleet Ops Copilot<a class="headerlink" href="#product-increment-fleet-ops-copilot" title="Permanent link">&para;</a></h2>
+<p>Fleet Ops Copilot now ships with a <strong>production eval suite</strong>: a failure taxonomy maintained from trace review; code checks and calibrated binary LLM judges (with judge cards and TPR/TNR); trajectory, tool-call and end-state evals with simulated dispatchers and pass^k; a Bulgarian groundedness judge replacing the English-only classifier; a <strong>red-team report</strong> with ASR per category and zero consequential-action ASR; a <strong>CI regression gate</strong> on PRs, nightly uncached drift runs, and a documented model-migration A/B procedure. These artifacts are core evidence for <strong>Gate G3</strong> (see G3) and for the AI Act risk file in C18.</p>
+<h2 id="factory-increment-your-agentic-sdlc">Factory increment — your agentic SDLC<a class="headerlink" href="#factory-increment-your-agentic-sdlc" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Eval gates in GitHub Actions</strong> are required status checks; coding agents (Copilot cloud agent, Claude Code in Actions) must run <code>dotnet test --filter Category=Gate</code> locally before claiming done (instruction in <code>AGENTS.md</code>, enforced by a stop/pre-PR hook).</li>
+<li><strong>Protected eval assets:</strong> <code>eval/**</code>, <code>labels/**</code>, <code>docs/evals/judge-cards/**</code> and threshold constants are under CODEOWNERS (human reviewers only); a hook blocks agent edits to these paths.</li>
+<li><strong>Regression triage agent:</strong> a headless agent (<code>claude -p</code> or a Copilot custom agent <code>.github/agents/eval-triage.agent.md</code>) triggered on gate failure. It reads the aieval report and the failing traces, maps each failure to the taxonomy, posts a PR comment with suspected cause and the smallest reproducing case, and proposes a fix in a separate commit — never touching evals.</li>
+<li><strong>Label tooling as product:</strong> the trace viewer lives in the repo and is maintained by agents under the same test discipline (C11).</li>
+</ul>
+<h2 id="assessment">Assessment<a class="headerlink" href="#assessment" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th>Novice</th>
+<th>Competent</th>
+<th>Proficient</th>
+<th>Expert</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Error analysis</td>
+<td>Writes evaluators from imagination</td>
+<td>100 traces coded; taxonomy with counts</td>
+<td>Targeted + random sampling, saturation shown, κ measured and aligned</td>
+<td>Analysis drives roadmap (fixes vs evals vs monitoring) with cadence and ownership</td>
+</tr>
+<tr>
+<td>Judge quality</td>
+<td>Likert "quality" judge</td>
+<td>Binary judge per mode with dev/test</td>
+<td>TPR/TNR ≥ 0.85 on test; corrected pass rate with CI; judge cards</td>
+<td>Knows each judge's blind spots; detects judge drift; BG calibration done</td>
+</tr>
+<tr>
+<td>Agentic evals</td>
+<td>Final-text only</td>
+<td>MEAI agent evaluators used</td>
+<td>Trajectory invariants + end-state + pass^k</td>
+<td>Simulation personas reveal reliability gaps; evaluators calibrated against labels</td>
+</tr>
+<tr>
+<td>Red teaming</td>
+<td>Ad-hoc prompts</td>
+<td>PyRIT campaign with ASR</td>
+<td>ASR before/after mitigations; consequential-action ASR separated</td>
+<td>Red-team set in regression suite; platform limitations (targets, regions, language) designed around</td>
+</tr>
+<tr>
+<td>CI &amp; migration</td>
+<td>Manual runs</td>
+<td>PR gate with cached evals</td>
+<td>Nightly uncached drift + per-mode thresholds from variance</td>
+<td>Pre-registered migration rule with McNemar/pairwise; agents kept green without touching evals</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Auto-checked:</strong> labels files and taxonomy schema; judge TPR/TNR on hidden test split (instructor holds an extra 40 labels per judge); trajectory/end-state suites green; induced-regression detection; red-team report schema and consequential-action ASR = 0 on the hidden attack set; <code>evals</code> workflow is a required check and blocks the seeded bad PR.</p>
+<h2 id="common-pitfalls">Common pitfalls<a class="headerlink" href="#common-pitfalls" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Starting with metrics instead of traces; generic "helpfulness" dashboards.</li>
+<li>Letting an LLM do the open coding; never reading traces yourself.</li>
+<li>1–5 scales; averaging Likert scores across annotators.</li>
+<li>Validating judges on the same examples used as few-shots (train leakage), or iterating on test.</li>
+<li>Reporting agreement instead of TPR/TNR; ignoring class imbalance.</li>
+<li>Gating on uncalibrated built-in evaluators.</li>
+<li>Exact-path trajectory assertions that break on valid alternatives — assert invariants.</li>
+<li>Only cached CI runs — provider drift goes unseen.</li>
+<li>Treating ASR from classifier tweaks as success while the architecture still allows consequential actions.</li>
+<li>Assuming English-only safety features cover Bulgarian.</li>
+<li>Letting coding agents "fix" failing evals by editing thresholds or datasets.</li>
+<li>Mixing synthetic cases into production prevalence numbers.</li>
+</ul>
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Husain &amp; Shankar — LLM evals FAQ (updated 21 Sep 2026): https://hamel.dev/blog/posts/evals-faq/</li>
+<li>Husain — Using LLM-as-a-Judge (TPR/TNR, critique shadowing): https://hamel.dev/blog/posts/llm-judge/</li>
+<li>Microsoft Learn — MEAI Evaluation libraries: https://learn.microsoft.com/en-us/dotnet/ai/evaluation/libraries</li>
+<li>Microsoft Foundry — built-in evaluators (agent evaluators, Rubric <strong>preview</strong>): https://learn.microsoft.com/en-us/azure/foundry/concepts/built-in-evaluators</li>
+<li>Microsoft Foundry — RAG evaluators: https://learn.microsoft.com/en-my/Azure/foundry/concepts/evaluation-evaluators/rag-evaluators</li>
+<li>J. Reinhard — How to Evaluate AI Agents in Microsoft Foundry (practitioner; GA date, continuous eval prerequisites): https://jannikreinhard.com/microsoft-foundry-agent-evaluations/</li>
+<li>Yao et al. — τ-bench (pass^k): https://arxiv.org/abs/2406.12045 · τ²-bench: https://arxiv.org/abs/2506.07982</li>
+<li>Agentic RAG SoK (component/trajectory/system evaluation): https://arxiv.org/html/2603.07379v1</li>
+<li>Microsoft Learn — AI Red Teaming Agent (targets, regions, ASR): https://learn.microsoft.com/azure/ai-foundry/concepts/ai-red-teaming-agent</li>
+<li>PyRIT: https://github.com/Azure/PyRIT</li>
+<li>Microsoft Learn — Azure AI Content Safety overview (language/region limits): https://learn.microsoft.com/en-gb/azure/ai-services/content-safety/overview</li>
+<li>Foundry — What's new at Build 2026 (ASSERT, Agent Control Specification): https://devblogs.microsoft.com/foundry/whats-new-in-microsoft-foundry-build-2026/</li>
+<li>OpenAI — to acquire Promptfoo: https://openai.com/blog/openai-to-acquire-promptfoo</li>
+<li>Langfuse — joining ClickHouse: https://langfuse.com/blog/joining-clickhouse</li>
+<li>RAGAS metrics and testset generation <strong>[Python]</strong>: https://docs.ragas.io/en/stable/concepts/metrics/available_metrics/</li>
+<li>Anthropic — Writing effective tools for agents (tool evals): https://www.anthropic.com/engineering/writing-tools-for-agents</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Върни се в началото
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Долен колонтитул" >
+        
+          
+          <a href="../c13-context-engineering-advanced-retrieval-and-memory/" class="md-footer__link md-footer__link--prev" aria-label="Предишна: C13 — Инженеринг на контекста, напреднало извличане и памет">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Предишна
+              </span>
+              <div class="md-ellipsis">
+                C13 — Инженеринг на контекста, напреднало извличане и памет
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../c15-observability-genaiops-and-cost/" class="md-footer__link md-footer__link--next" aria-label="Следваща: C15 — Наблюдаемост, GenAIOps и разходи">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Следваща
+              </span>
+              <div class="md-ellipsis">
+                C15 — Наблюдаемост, GenAIOps и разходи
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.sections", "navigation.top", "navigation.footer", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u041a\u043e\u043f\u0438\u0440\u0430\u043d\u043e", "clipboard.copy": "\u041a\u043e\u043f\u0438\u0440\u0430\u0439", "search.result.more.one": "\u043e\u0449\u0435 1 \u043d\u0430 \u0442\u0430\u0437\u0438 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0430", "search.result.more.other": "\u043e\u0449\u0435 # \u043d\u0430 \u0442\u0430\u0437\u0438 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0430", "search.result.none": "\u041d\u044f\u043c\u0430 \u0440\u0435\u0437\u0443\u043b\u0442\u0430\u0442\u0438", "search.result.one": "1 \u0440\u0435\u0437\u0443\u043b\u0442\u0430\u0442", "search.result.other": "# \u0440\u0435\u0437\u0443\u043b\u0442\u0430\u0442\u0430", "search.result.placeholder": "\u0417\u0430\u043f\u043e\u0447\u043d\u0435\u0442\u0435 \u0434\u0430 \u043f\u0438\u0448\u0435\u0442\u0435, \u0437\u0430 \u0434\u0430 \u0442\u044a\u0440\u0441\u0438\u0442\u0435", "search.result.term.missing": "\u041b\u0438\u043f\u0441\u0432\u0430\u0449\u043e", "select.version": "\u0418\u0437\u0431\u0435\u0440\u0438 \u0432\u0435\u0440\u0441\u0438\u044f"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

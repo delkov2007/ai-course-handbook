@@ -1,0 +1,3155 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Learning-by-doing course, release 2026.11 (content as of October 2026)">
+      
+      
+      
+      
+        <link rel="prev" href="../c10-agents-over-structured-data-text-to-sql-on-sql-server/">
+      
+      
+        <link rel="next" href="../../part-3-production/c12-workflows-and-multi-agent-orchestration/">
+      
+      
+        
+          <link rel="alternate" href="./" hreflang="en">
+        
+          <link rel="alternate" href="../../bg/part-2-building-blocks/c11-agentic-testing-ai-driven-tdd-mutation-and-e2e-test-agents/" hreflang="bg">
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>C11 — Agentic testing: AI-driven TDD, mutation & E2E test agents - AI Solution Developer & Architect — Learner Handbook</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#c11-agentic-testing-ai-driven-tdd-mutation-e2e-test-agents" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="AI Solution Developer &amp; Architect — Learner Handbook" class="md-header__button md-logo" aria-label="AI Solution Developer & Architect — Learner Handbook" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            AI Solution Developer & Architect — Learner Handbook
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              C11 — Agentic testing: AI-driven TDD, mutation & E2E test agents
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="Select language">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href="./" hreflang="en" class="md-select__link">
+              English
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="../../bg/part-2-building-blocks/c11-agentic-testing-ai-driven-tdd-mutation-and-e2e-test-agents/" hreflang="bg" class="md-select__link">
+              Български
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="AI Solution Developer &amp; Architect — Learner Handbook" class="md-nav__button md-logo" aria-label="AI Solution Developer & Architect — Learner Handbook" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    AI Solution Developer & Architect — Learner Handbook
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Welcome
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Start here
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Start here
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/how-to-use/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How to use this handbook
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/course-overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Course overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/assessment-gates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Assessment and gates
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/competency-matrix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Competency matrix
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 1 — Foundations (Level 1)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part 1 — Foundations (Level 1)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c00-orientation-setup-and-toolchain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C0 — Orientation, setup & toolchain
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c01-how-generative-ai-works-an-engineer-s-mental-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C1 — How generative AI works: an engineer's mental model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c02-your-first-ai-feature-in-net/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C2 — Your first AI feature in .NET
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c03-prompting-structured-outputs-and-tool-calling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C3 — Prompting, structured outputs & tool calling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c04-working-with-coding-agents-the-factory-day-one/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C4 — Working with coding agents: the Factory, day one
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c05-evals-from-day-one/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C5 — Evals from day one
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 2 — Building blocks (Level 2)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part 2 — Building blocks (Level 2)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../c06-embeddings-and-vector-search/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C6 — Embeddings & vector search
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../c07-rag-from-documents-to-cited-permission-aware-answers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C7 — RAG: from documents to cited, permission-aware answers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../c08-tools-and-the-model-context-protocol/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C8 — Tools & the Model Context Protocol
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../c09-agents-with-microsoft-agent-framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C9 — Agents with Microsoft Agent Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../c10-agents-over-structured-data-text-to-sql-on-sql-server/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C10 — Agents over structured data: text-to-SQL on SQL Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C11 — Agentic testing: AI-driven TDD, mutation & E2E test agents
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C11 — Agentic testing: AI-driven TDD, mutation & E2E test agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-this-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why this matters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learning outcomes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concepts
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Concepts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tests-as-the-oracle-for-agents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tests as the oracle for agents
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ai-driven-tdd-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AI-driven TDD workflow
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-generation-with-agents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Test generation with agents
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mutation-testing-with-strykernet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mutation testing with Stryker.NET
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#property-based-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Property-based testing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#playwright-test-agents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Playwright test agents
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#contract-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contract tests
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testing-llm-features-vs-deterministic-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testing LLM features vs deterministic code
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-data-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Test data generation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ci-gates-and-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CI gates and metrics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#misconceptions-to-unlearn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Misconceptions to unlearn
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tools-versions-as-of-oct-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tools &amp; versions (as of Oct 2026)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#labs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Labs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Labs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lab-1-test-first-with-a-protected-oracle-2h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 1 — Test-first with a protected oracle (≈2h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-2-generated-tests-under-the-mutation-microscope-25h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 2 — Generated tests under the mutation microscope (≈2.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-3-properties-that-find-bugs-examples-miss-15h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 3 — Properties that find bugs examples miss (≈1.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-4-playwright-planner-generator-and-healer-on-fleet-ops-25h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 4 — Playwright planner, generator and healer on Fleet Ops (≈2.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-5-contracts-llm-lanes-and-the-full-ci-gate-15h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 5 — Contracts, LLM lanes and the full CI gate (≈1.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kata
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#product-increment-fleet-ops-copilot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Product increment — Fleet Ops Copilot
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#factory-increment-your-agentic-sdlc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Factory increment — your agentic SDLC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assessment
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common pitfalls
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 3 — Production systems (Level 3)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part 3 — Production systems (Level 3)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c12-workflows-and-multi-agent-orchestration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C12 — Workflows & multi-agent orchestration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c13-context-engineering-advanced-retrieval-and-memory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C13 — Context engineering, advanced retrieval & memory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c14-failure-driven-evals-llm-judges-and-red-teaming/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C14 — Failure-driven evals, LLM judges & red teaming
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c15-observability-genaiops-and-cost/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C15 — Observability, GenAIOps & cost
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c16-security-for-llm-and-agentic-systems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C16 — Security for LLM & agentic systems
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c17-shipping-to-azure-hosting-ai-gateway-iac-and-interop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C17 — Shipping to Azure: hosting, AI gateway, IaC & interop
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c18-responsible-ai-and-the-eu-ai-act-in-practice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C18 — Responsible AI & the EU AI Act in practice
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c19-the-automated-sdlc-agents-from-issue-to-production/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C19 — The automated SDLC: agents from issue to production
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 4 — Expert track: AI Solution Developer
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part 4 — Expert track: AI Solution Developer
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d01-model-customization-and-small-local-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D1 — Model customization & small/local models
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d02-long-running-durable-and-autonomous-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D2 — Long-running, durable & autonomous agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d03-multimodal-and-realtime-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D3 — Multimodal & realtime agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d04-agent-ux-and-front-ends/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D4 — Agent UX & front-ends
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d05-performance-and-cost-engineering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D5 — Performance & cost engineering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d06-building-your-own-agent-tooling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D6 — Building your own agent tooling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d07-agent-reliability-engineering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D7 — Agent reliability engineering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 5 — Expert track: AI Solution Architect
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part 5 — Expert track: AI Solution Architect
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a01-ai-strategy-use-case-discovery-and-business-case/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A1 — AI strategy, use-case discovery & business case
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a02-azure-ai-reference-architectures-and-well-architected-for-ai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A2 — Azure AI reference architectures & Well-Architected for AI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a03-enterprise-knowledge-and-data-architecture-for-ai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A3 — Enterprise knowledge & data architecture for AI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a04-agent-platform-and-integration-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A4 — Agent platform & integration architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a05-reliability-scale-model-lifecycle-and-finops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A5 — Reliability, scale, model lifecycle & FinOps
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a06-ai-governance-risk-and-compliance-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A6 — AI governance, risk & compliance architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a07-the-architect-s-craft-in-ai-programmes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A7 — The architect's craft in AI programmes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 6 — Joint capstone
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part 6 — Joint capstone
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capstone/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Capstone
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Appendix
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Appendix
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/references/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Further reading
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-this-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why this matters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learning outcomes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concepts
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Concepts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tests-as-the-oracle-for-agents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tests as the oracle for agents
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ai-driven-tdd-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AI-driven TDD workflow
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-generation-with-agents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Test generation with agents
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mutation-testing-with-strykernet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mutation testing with Stryker.NET
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#property-based-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Property-based testing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#playwright-test-agents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Playwright test agents
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#contract-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contract tests
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testing-llm-features-vs-deterministic-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testing LLM features vs deterministic code
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-data-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Test data generation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ci-gates-and-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CI gates and metrics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#misconceptions-to-unlearn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Misconceptions to unlearn
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tools-versions-as-of-oct-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tools &amp; versions (as of Oct 2026)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#labs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Labs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Labs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lab-1-test-first-with-a-protected-oracle-2h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 1 — Test-first with a protected oracle (≈2h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-2-generated-tests-under-the-mutation-microscope-25h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 2 — Generated tests under the mutation microscope (≈2.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-3-properties-that-find-bugs-examples-miss-15h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 3 — Properties that find bugs examples miss (≈1.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-4-playwright-planner-generator-and-healer-on-fleet-ops-25h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 4 — Playwright planner, generator and healer on Fleet Ops (≈2.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-5-contracts-llm-lanes-and-the-full-ci-gate-15h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 5 — Contracts, LLM lanes and the full CI gate (≈1.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kata
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#product-increment-fleet-ops-copilot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Product increment — Fleet Ops Copilot
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#factory-increment-your-agentic-sdlc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Factory increment — your agentic SDLC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assessment
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common pitfalls
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="c11-agentic-testing-ai-driven-tdd-mutation-e2e-test-agents">C11 — Agentic testing: AI-driven TDD, mutation &amp; E2E test agents<a class="headerlink" href="#c11-agentic-testing-ai-driven-tdd-mutation-e2e-test-agents" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><strong>Level:</strong> 2 — Building blocks (Intermediate) · <strong>Duration:</strong> 14h (theory 30% / labs 70%) · <strong>Prerequisites:</strong> C4 (agent-ready repo, plan → implement → verify, permissions), C5 (evals in CI), C7–C10 (the product code you will now test); Node.js LTS installed (Playwright test agents) · <strong>Volatility:</strong> High</p>
+</blockquote>
+<h2 id="why-this-matters">Why this matters<a class="headerlink" href="#why-this-matters" title="Permanent link">&para;</a></h2>
+<p>By now coding agents write most of Fleet Ops Copilot's code. Ask one to "add tests" and it will happily produce 140 green tests and a coverage report showing 87%. Then run a mutation tester: flip <code>&gt;</code> to <code>&gt;=</code> in the EU driving-time validator, delete the line that adds the 45-minute break, return <code>null</code> from the slot planner — and two-thirds of those mutants survive. The tests execute the code; they don't check it. Worse, because the agent wrote the tests <em>after</em> the code, the tests faithfully encode the current behaviour, bugs included: the off-by-one in the weekly driving limit now has a test asserting it.</p>
+<p>In an agentic SDLC, tests stop being only a quality artifact and become the <strong>agent's oracle</strong> — the executable definition of "done" that a coding agent iterates against. If the oracle is weak, every agent iteration converges on the wrong thing, faster. Thoughtworks Radar Vol. 34 puts two practices in Trial for exactly this reason: <strong>mutation testing</strong> ("catches hollow tests that high coverage can hide") and <strong>feedback sensors for coding agents</strong> (compilers, linters, tests run during the session). Anthropic's own guidance is to write a failing test first and to split test-writer and implementer into separate sessions.</p>
+<p>Experts design verification first. Humans own the assertions for behaviour that matters; agents implement against them and generate the long tail of tests; mutation score — not line coverage — measures whether tests can catch bugs; property-based tests explore inputs nobody thought of; E2E test agents explore the UI but their "healing" is reviewed like product code; and LLM features are tested statistically in a separate lane, never with exact-string assertions. This module builds that test system for the product and makes it the backbone of your Factory.</p>
+<h2 id="learning-outcomes">Learning outcomes<a class="headerlink" href="#learning-outcomes" title="Permanent link">&para;</a></h2>
+<p>By the end of this module you can:</p>
+<ol>
+<li><strong>Design</strong> a test strategy for an LLM-based product that separates deterministic tests, contract tests, LLM-feature evals and E2E tests, with appropriate gates and cadences for each.</li>
+<li><strong>Run</strong> an AI-driven TDD loop: write acceptance tests as the spec, have a coding agent implement in a separate session with tests protected from modification, and verify.</li>
+<li><strong>Generate</strong> tests with the Visual Studio 2026 <code>@Test</code> agent and with CLI/cloud coding agents, and <strong>audit</strong> them with Stryker.NET mutation testing.</li>
+<li><strong>Direct</strong> an agent to kill surviving mutants, distinguishing real test gaps from equivalent mutants.</li>
+<li><strong>Write</strong> property-based tests with FsCheck or CsCheck for domain rules and for the retrieval/SQL components built in C6–C10.</li>
+<li><strong>Set up</strong> Playwright test agents (planner, generator, healer) for the Fleet Ops UI and <strong>govern</strong> healer changes so tests don't adapt to regressions.</li>
+<li><strong>Implement</strong> contract tests for the mock REST APIs and the MCP server, and synthetic test-data generation that is GDPR-safe and reproducible.</li>
+<li><strong>Configure</strong> CI gates (mutation threshold on changed code, eval gates, E2E smoke, flaky-test policy, protected test paths) and <strong>report</strong> agent-relevant quality metrics.</li>
+</ol>
+<h2 id="concepts">Concepts<a class="headerlink" href="#concepts" title="Permanent link">&para;</a></h2>
+<h3 id="tests-as-the-oracle-for-agents">Tests as the oracle for agents<a class="headerlink" href="#tests-as-the-oracle-for-agents" title="Permanent link">&para;</a></h3>
+<p>A coding agent's loop is: read context → change code → run feedback sensors → iterate until the sensors are green or it gives up. The sensors are the build, analyzers, tests and evals. Three consequences:</p>
+<ol>
+<li><strong>The agent optimizes for the sensors you give it.</strong> If "green" is achievable by weakening an assertion, an agent under pressure will sometimes do exactly that. Protect the assertions that encode requirements.</li>
+<li><strong>Test-after generation encodes current behaviour.</strong> Tests generated from existing code are characterization tests: useful as a regression net for refactoring, useless as evidence of correctness.</li>
+<li><strong>Fast, deterministic sensors make agents better.</strong> A 40-second unit suite is run on every iteration; a 25-minute E2E suite is not. Structure the pyramid so the agent's inner loop is fast and meaningful.</li>
+</ol>
+<h3 id="ai-driven-tdd-workflow">AI-driven TDD workflow<a class="headerlink" href="#ai-driven-tdd-workflow" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Spec as examples.</strong> For a behaviour that matters, a human writes acceptance tests (xUnit) from the requirement — often with the agent's help drafting cases, but the human decides the expected values. Choose the ceremony level (C4): a bug fix needs one failing reproduction test; a feature needs an acceptance test file plus a short SPEC.md.</li>
+<li><strong>Protect the oracle.</strong> Implementer sessions may not edit acceptance tests: enforce with agent permissions (deny edit/write on <code>tests/**/Acceptance/**</code>), a pre-tool hook, and in CI a CODEOWNERS rule requiring human review for changes there.</li>
+<li><strong>Separate sessions.</strong> Test writer and implementer are different sessions (or subagents) so the implementer can't "see" how the tests were reasoned and the tester can't bend tests toward an implementation.</li>
+<li><strong>Implement until green</strong> with the inner loop: build → unit tests → analyzers.</li>
+<li><strong>Strengthen</strong>: mutation testing on changed code; agent adds tests to kill surviving mutants (it may add tests, not change acceptance tests); property-based tests for invariants.</li>
+<li><strong>Review</strong>: the human explains and defends the diff (counter to "codebase cognitive debt", Thoughtworks Caution).</li>
+</ol>
+<h3 id="test-generation-with-agents">Test generation with agents<a class="headerlink" href="#test-generation-with-agents" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>VS 2026 <code>@Test</code> agent</strong> (GitHub Copilot testing for .NET, GA in Visual Studio 2026 v18.3 on 11 Feb 2026): generates tests for a member, class, file, project, solution or the current git diff; creates the test project if needed; builds, runs, fixes and reruns until stable; reports coverage before/after, testability gaps and unstable tests; accepts targets like "80% coverage"; needs a paid Copilot plan; framework support beyond the xUnit example in the announcement is not documented — verify.</li>
+<li><strong>CLI / cloud agents</strong> (Claude Code, Copilot CLI and cloud agent, Codex): same generation, scriptable in CI, can follow your test conventions from AGENTS.md and skills.</li>
+<li>Risks: coverage-chasing (tests that call code without meaningful assertions), tautologies (<code>Assert.Equal(sut.Compute(x), sut.Compute(x))</code>), over-mocking (testing the mock), snapshotting current bugs, flaky time/culture-dependent tests (Bulgarian culture <code>bg-BG</code> decimal comma breaks naïve string parsing — a real Trakia bug class).</li>
+<li>Policy: generated tests are welcome for coverage of the long tail and characterization before refactors; they are accepted only with a <strong>mutation score</strong> on the code they claim to cover.</li>
+</ul>
+<h3 id="mutation-testing-with-strykernet">Mutation testing with Stryker.NET<a class="headerlink" href="#mutation-testing-with-strykernet" title="Permanent link">&para;</a></h3>
+<p>A mutation tester makes small changes (mutants) to production code — arithmetic, equality and boundary operators, boolean logic, string and LINQ mutations, null-coalescing, removed statements — and runs the tests. A mutant is <strong>killed</strong> if some test fails, <strong>survives</strong> if all pass. <strong>Mutation score</strong> = killed / (killed + survived) (timeouts usually count as killed; no-coverage mutants count against you — verify Stryker's exact formula in your version). It measures the fault-detection power of tests, which coverage cannot.</p>
+<p>Practicalities:</p>
+<ul>
+<li><code>dotnet tool install dotnet-stryker</code> (local tool manifest), run <code>dotnet stryker</code> in the test project directory; HTML and JSON reports.</li>
+<li>Thresholds <code>high</code> / <code>low</code> / <code>break</code> in <code>stryker-config.json</code>; <code>break</code> fails the run below the score.</li>
+<li>Mutation testing is slow (it re-runs tests per mutant). Use <strong>diff-based runs</strong> on PRs (<code>since</code> the target branch) and a baseline for full runs nightly.</li>
+<li><strong>Equivalent mutants</strong> (changes that don't alter observable behaviour) exist; mark them with Stryker's ignore comments plus a justification — reviewed, never bulk-ignored by an agent.</li>
+<li>Target domain logic and validators (driving-time rules, slot planner, SQL validator, citation validator, RRF), not generated DTOs or framework glue.</li>
+</ul>
+<p>The agent loop "here are the surviving mutants, add tests that kill them, don't change production code" is one of the highest-value uses of a coding agent in testing.</p>
+<h3 id="property-based-testing">Property-based testing<a class="headerlink" href="#property-based-testing" title="Permanent link">&para;</a></h3>
+<p>Instead of examples, you state <strong>properties</strong> that must hold for all inputs and the framework generates hundreds of inputs, then <strong>shrinks</strong> a failing input to a minimal counterexample. .NET options: <strong>FsCheck</strong> (xUnit integration via <code>[Property]</code>) and <strong>CsCheck</strong> (C#-first generators, <code>Sample</code>, built-in shrinking). Kiro's GA added property-based testing to check spec correctness — the idea that properties are the most compact spec is spreading into agent tooling.</p>
+<p>Good Trakia properties:</p>
+<ul>
+<li>Driving-time validator (EU rules as implemented in Trakia policy: e.g., 4.5 h driving → 45 min break; daily driving ≤ 9 h, extendable to 10 h twice per week; weekly ≤ 56 h; two-week ≤ 90 h — the lab spec is the source of truth): converting a driving segment into rest of the same duration, with all timestamps unchanged, never creates a weekly (56 h) or two-week (90 h) violation and never lengthens any continuous-driving run (invariant <strong>INV-1</strong> in <code>docs/specs/driving-time.md</code>); parsing the serialised activity log round-trips to identical violations; violations are invariant to time-zone representation. Beware the tempting "adding rest never adds violations": under the daily rules extra rest can create a new (reduced) daily rest, re-partition driving days and count against reduced-rest or extended-day allowances — a property must be derived from the spec, not from intuition.</li>
+<li>RRF (C7): result is a permutation of the union; a document ranked first in every list is ranked first overall; deterministic for equal inputs.</li>
+<li>SQL validator (C10): any statement containing DML/DDL anywhere is rejected (fuzz with generated statement compositions).</li>
+<li>Result-set comparer (C10): symmetric; invariant under row permutation; reflexive.</li>
+<li>Citation validator (C7): never accepts a source ID not in the retrieved set.</li>
+</ul>
+<h3 id="playwright-test-agents">Playwright test agents<a class="headerlink" href="#playwright-test-agents" title="Permanent link">&para;</a></h3>
+<p>Playwright ships three test agents:</p>
+<ul>
+<li><strong>Planner</strong> explores the app from a seed test (and optional PRD) and writes Markdown test plans in <code>specs/</code>.</li>
+<li><strong>Generator</strong> turns plans into Playwright tests, validating selectors live against the running app.</li>
+<li><strong>Healer</strong> reruns failing tests, inspects the UI for equivalent elements, and patches the test — or skips it if the feature itself appears broken.</li>
+</ul>
+<p>Setup: <code>npx playwright init-agents --loop=&lt;vscode|claude|codex|opencode&gt;</code>; <strong>re-run after each Playwright update</strong>; VS Code needs v1.105 or later. The agents run in Node; Fleet Ops' UI is Blazor/ASP.NET, which Playwright tests through the browser like any web app.</p>
+<p><strong>The healer's core risk:</strong> it can "fix" a test to match a regression — a renamed button is a locator change, but a booking form that no longer requires the approval checkbox is a bug, and a healer may happily update or skip the test. Governance: healer diffs go through PR review like product code; a guard script flags any change to assertions (<code>expect(...)</code> lines) or new <code>test.skip</code>/<code>fixme</code>; track <strong>healer skip rate</strong> and <strong>assertion-change rate</strong> as metrics.</p>
+<p><strong>LLM UIs in E2E tests:</strong> never assert generated text. Run E2E against a <strong>deterministic fake <code>IChatClient</code></strong> (scripted responses keyed by scenario) for UI flows — streaming rendering, citation chips, approval cards, error states — and keep a handful of live-model smoke tests that assert structure (a citation chip exists, the approval card shows a slot ID), not wording.</p>
+<h3 id="contract-tests">Contract tests<a class="headerlink" href="#contract-tests" title="Permanent link">&para;</a></h3>
+<p>Agents change interfaces confidently. Contracts catch it:</p>
+<ul>
+<li><strong>OpenAPI contract tests</strong> for the mock Ticketing, Scheduling and Parts APIs: a generated client + response schema validation against the spec; provider tests verifying the mock (and later the real API) honours the spec. Consumer-driven contracts with Pact (PactNet) are an option — not researched for this course; verify maturity before adopting.</li>
+<li><strong>MCP contract</strong>: <code>tools.snapshot.json</code> from C8 (names, descriptions, input/output schemas) — snapshot test fails on unreviewed change; ties into definition pinning.</li>
+<li><strong>Prompt and tool-schema contracts</strong>: structured-output schemas (C3) and agent tool sets (C9) are versioned and snapshot-tested.</li>
+</ul>
+<h3 id="testing-llm-features-vs-deterministic-code">Testing LLM features vs deterministic code<a class="headerlink" href="#testing-llm-features-vs-deterministic-code" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>Deterministic code</th>
+<th>LLM feature</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Assertion</td>
+<td>Exact</td>
+<td>Schema + code checks + calibrated judges</td>
+</tr>
+<tr>
+<td>Unit of result</td>
+<td>Pass/fail per test</td>
+<td>Pass rate over a dataset; pass^k</td>
+</tr>
+<tr>
+<td>Determinism</td>
+<td>Yes</td>
+<td>No — cache responses for PR runs (MEAI response caching), uncached nightly for drift</td>
+</tr>
+<tr>
+<td>Speed / cost</td>
+<td>Milliseconds, free</td>
+<td>Seconds, tokens</td>
+</tr>
+<tr>
+<td>Lane in CI</td>
+<td><code>unit</code>, <code>integration</code></td>
+<td><code>evals</code> (C5, C7, C9, C10), separate job, separate thresholds</td>
+</tr>
+<tr>
+<td>Orchestration logic around the model</td>
+<td>Test with a <strong>fake <code>IChatClient</code></strong> — deterministic</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>Keep the agent's inner loop on deterministic lanes plus cached evals; never let a coding agent "fix" an eval regression by editing the golden set (protected path, like acceptance tests).</p>
+<h3 id="test-data-generation">Test data generation<a class="headerlink" href="#test-data-generation" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Never copy production data</strong> into tests (GDPR); Trakia data is synthetic by design.</li>
+<li>Deterministic generators with fixed seeds (e.g., Bogus — general knowledge, verify current version) for structured entities.</li>
+<li>LLM-generated realistic text (BG/EN incident reports, driver messages) using the dimension-tuple method: define dimensions (vehicle type, fault severity, language, writing style, presence of PII, injection attempt yes/no), hand-write ~20 tuples, generate more tuples, then convert each tuple to text in a <strong>separate</strong> step; human-review a sample. Synthetic data shows coverage, not production frequency.</li>
+<li>Snapshot databases with pinned clocks (C10) for reproducible integration and eval tests.</li>
+</ul>
+<h3 id="ci-gates-and-metrics">CI gates and metrics<a class="headerlink" href="#ci-gates-and-metrics" title="Permanent link">&para;</a></h3>
+<p>Pipeline (GitHub Actions; Azure Pipelines equivalent in the stretch):</p>
+<ol>
+<li>Build + analyzers + <code>dotnet format --verify-no-changes</code>.</li>
+<li>Unit + property tests (fast lane).</li>
+<li>Integration tests with Testcontainers (SQL Server 2025, WireMock for APIs).</li>
+<li>Contract tests (OpenAPI, MCP snapshot).</li>
+<li>Stryker on changed projects (<code>since</code> target branch) — <strong>break threshold on changed code</strong>.</li>
+<li>Cached eval lanes (RAG, agent, SQL).</li>
+<li>E2E smoke (fake LLM) on PR; full Playwright + live-model smoke nightly.</li>
+<li>Policy checks: protected paths (acceptance tests, golden sets, eval thresholds) changed only with CODEOWNERS approval; healer-diff guard; dependency allow-list (slopsquatting — 19.7% of 2.23M AI code samples referenced hallucinated packages in a USENIX 2025 study).</li>
+</ol>
+<p>Metrics: mutation score (changed code and overall), escaped defects, flaky-test rate, healer skip/assertion-change rate, first-pass acceptance of agent PRs, rework rate. Coverage is reported, not gated.</p>
+<h3 id="misconceptions-to-unlearn">Misconceptions to unlearn<a class="headerlink" href="#misconceptions-to-unlearn" title="Permanent link">&para;</a></h3>
+<ul>
+<li>"87% coverage means well tested." Coverage measures execution, not checking.</li>
+<li>"The agent wrote tests and they pass, so the feature works." The tests may encode the bug.</li>
+<li>"Self-healing tests reduce maintenance." They also reduce detection unless governed.</li>
+<li>"LLM features can't be tested." They can — statistically, in their own lane.</li>
+<li>"Mutation testing is too slow for CI." Diff-based runs on PRs, full runs nightly.</li>
+</ul>
+<h2 id="tools-versions-as-of-oct-2026">Tools &amp; versions (as of Oct 2026)<a class="headerlink" href="#tools-versions-as-of-oct-2026" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Tool / package</th>
+<th>Purpose</th>
+<th>Status</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Visual Studio 2026 v18.3+ <code>@Test</code> agent</td>
+<td>Generate/run/fix .NET tests, coverage targets</td>
+<td>GA (11 Feb 2026)</td>
+<td>Paid Copilot plan</td>
+</tr>
+<tr>
+<td>Claude Code / Copilot CLI &amp; cloud agent / Codex</td>
+<td>Test writing, implementation, mutant-killing loops</td>
+<td>GA (feature sets churn)</td>
+<td>Map primitives, not UIs</td>
+</tr>
+<tr>
+<td>Stryker.NET (<code>dotnet-stryker</code>)</td>
+<td>Mutation testing</td>
+<td>OSS, mature</td>
+<td>Verify config keys (<code>since</code>, thresholds) for your version</td>
+</tr>
+<tr>
+<td>FsCheck (+ FsCheck.Xunit) / CsCheck</td>
+<td>Property-based testing</td>
+<td>OSS</td>
+<td>Pick one per repo</td>
+</tr>
+<tr>
+<td>xUnit / MSTest / NUnit</td>
+<td>Test frameworks</td>
+<td>GA</td>
+<td>Lab repo uses xUnit</td>
+</tr>
+<tr>
+<td>Testcontainers for .NET</td>
+<td>SQL Server 2025, dependencies in tests</td>
+<td>OSS</td>
+<td></td>
+</tr>
+<tr>
+<td>WireMock.Net</td>
+<td>HTTP API stubs</td>
+<td>OSS</td>
+<td></td>
+</tr>
+<tr>
+<td>Playwright Test + test agents</td>
+<td>Planner / Generator / Healer</td>
+<td>GA (agents: re-init after updates)</td>
+<td><code>npx playwright init-agents --loop=…</code>; VS Code ≥ 1.105; <strong>Node.js</strong></td>
+</tr>
+<tr>
+<td><code>Microsoft.Extensions.AI.Evaluation</code> (+ caching, <code>dotnet aieval</code>)</td>
+<td>LLM-feature lanes</td>
+<td>GA</td>
+<td>From C5</td>
+</tr>
+<tr>
+<td>Pact (PactNet)</td>
+<td>Consumer-driven contracts</td>
+<td>OSS</td>
+<td>Not researched — verify before adopting</td>
+</tr>
+<tr>
+<td>Bogus</td>
+<td>Synthetic structured data</td>
+<td>OSS</td>
+<td>Verify version</td>
+</tr>
+</tbody>
+</table>
+<h2 id="labs">Labs<a class="headerlink" href="#labs" title="Permanent link">&para;</a></h2>
+<h3 id="lab-1-test-first-with-a-protected-oracle-2h">Lab 1 — Test-first with a protected oracle (≈2h)<a class="headerlink" href="#lab-1-test-first-with-a-protected-oracle-2h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> Run a full AI-driven TDD loop where the agent cannot move the goalposts.</li>
+<li><strong>Start state:</strong> <code>c11/lab1-start</code> — <code>FleetOps.Domain</code> with an empty <code>DrivingTimeValidator</code> and <code>MaintenanceSlotPlanner</code>; <code>docs/specs/driving-time.md</code> (Trakia policy restating EU driving and rest rules with examples, including multi-day and week-boundary cases, plus numbered invariants such as INV-1 used by the Lab 3 properties).</li>
+<li><strong>Steps:</strong></li>
+<li>Write <code>tests/FleetOps.Tests/Acceptance/DrivingTimeValidatorTests.cs</code> yourself: 15–20 cases from the spec (normal day, 4.5 h without break, split break 15+30, two 10-hour days in a week then a third, 56 h weekly, 90 h fortnight, week boundary in Europe/Sofia with DST). Expected violations are yours.</li>
+<li>Protect the oracle:
+     <div class="highlight"><pre><span></span><code>// .claude/settings.json (verify current permission rule syntax)
+{ "permissions": { "deny": [ "Edit(tests/**/Acceptance/**)", "Write(tests/**/Acceptance/**)",
+                             "Edit(evals/golden/**)" ] } }
+</code></pre></div>
+     plus a <code>PreToolUse</code> hook script that blocks the same paths (defence in depth), and <code>CODEOWNERS</code>: <code>/tests/**/Acceptance/ @trakia/domain-owners</code>.</li>
+<li>New session: "Implement <code>DrivingTimeValidator</code> until the acceptance tests pass. Do not modify tests. Run <code>dotnet test</code> after each change." Record iterations, tokens, time.</li>
+<li>Repeat for <code>MaintenanceSlotPlanner</code> with the roles swapped: the agent drafts acceptance cases from the spec in session A, you review and correct expected values, a fresh session B implements.</li>
+<li><strong>Break it:</strong> Remove the deny rule and hook, and give an underspecified instruction ("make the build green quickly"). Inspect whether the agent edits a test. Restore protections; confirm the CI CODEOWNERS check would have caught it.</li>
+<li><strong>Acceptance criteria:</strong> All acceptance tests green with zero diff under <code>tests/**/Acceptance/**</code> in the implementer's commits (CI check); hook test proves blocked edits; <code>docs/factory/agent-log.md</code> records iterations and any attempted test edits.</li>
+<li><strong>Stretch:</strong> Run the implementer headless in CI (<code>claude -p</code> or Copilot CLI) on a branch and have it open a PR.</li>
+</ul>
+<h3 id="lab-2-generated-tests-under-the-mutation-microscope-25h">Lab 2 — Generated tests under the mutation microscope (≈2.5h)<a class="headerlink" href="#lab-2-generated-tests-under-the-mutation-microscope-25h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> Measure the real strength of AI-generated tests and fix it with an agent.</li>
+<li><strong>Start state:</strong> <code>c11/lab2-start</code> — existing untested components from earlier modules: <code>CitationValidator</code> (C7), <code>RetrievalMetrics</code> (C6), <code>SqlValidator</code> and <code>ResultSetComparer</code> (C10), <code>BudgetMiddleware</code> (C9).</li>
+<li><strong>Steps:</strong></li>
+<li>Generate tests for these components with the VS 2026 <code>@Test</code> agent targeting 80% coverage (or a CLI agent with the same instruction if you lack VS). Record coverage.</li>
+<li>Configure Stryker.NET:
+     <div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"stryker-config"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"project"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FleetOps.Core.csproj"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"thresholds"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"high"</span><span class="p">:</span><span class="w"> </span><span class="mi">85</span><span class="p">,</span><span class="w"> </span><span class="nt">"low"</span><span class="p">:</span><span class="w"> </span><span class="mi">75</span><span class="p">,</span><span class="w"> </span><span class="nt">"break"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">"mutation-level"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Standard"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"reporters"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"html"</span><span class="p">,</span><span class="w"> </span><span class="s2">"json"</span><span class="p">,</span><span class="w"> </span><span class="s2">"progress"</span><span class="w"> </span><span class="p">],</span>
+<span class="w">    </span><span class="nt">"since"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"target"</span><span class="p">:</span><span class="w"> </span><span class="s2">"main"</span><span class="w"> </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+     (verify key names for your Stryker version; <code>break: 70</code> is the same threshold the Lab 5 PR gate enforces). Run a full baseline: record mutation score per component next to coverage.</li>
+<li>Feed the surviving mutants (JSON report) to a coding agent: "Add tests that kill these mutants. Do not change production code. For each mutant you believe is equivalent, explain why and do not add an ignore." Review its equivalence claims yourself.</li>
+<li>Compare with the human-written acceptance tests from Lab 1 on <code>DrivingTimeValidator</code> (coverage vs mutation score).</li>
+<li><strong>Break it:</strong> Introduce a real bug in <code>CitationValidator</code> (accept quotes with similarity ≥ 0.5 instead of 0.9). Which test suite catches it — the 80%-coverage generated suite or the mutation-hardened one?</li>
+<li><strong>Acceptance criteria:</strong> Report table (component · coverage before/after · mutation score before/after · equivalent mutants accepted with reasons); mutation score ≥ 80% on <code>SqlValidator</code> and <code>CitationValidator</code>; injected bug caught by the hardened suite.</li>
+<li><strong>Stretch:</strong> Measure Stryker runtime full vs <code>since</code>-mode on a 3-file PR; set the PR gate accordingly.</li>
+</ul>
+<h3 id="lab-3-properties-that-find-bugs-examples-miss-15h">Lab 3 — Properties that find bugs examples miss (≈1.5h)<a class="headerlink" href="#lab-3-properties-that-find-bugs-examples-miss-15h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> Express domain and component invariants as properties.</li>
+<li><strong>Start state:</strong> <code>c11/lab3-start</code> — FsCheck.Xunit and CsCheck both referenced; pick one.</li>
+<li><strong>Steps:</strong></li>
+<li>Driving-time properties:
+     <div class="highlight"><pre><span></span><code><span class="c1">// INV-1 in docs/specs/driving-time.md — daily-rule violations deliberately excluded (see Concepts)</span>
+<span class="na">[Property(MaxTest = 500)]</span>
+<span class="k">public</span><span class="w"> </span><span class="n">Property</span><span class="w"> </span><span class="nf">Driving_to_rest_never_adds_weekly_or_continuous_violations</span><span class="p">(</span><span class="n">Shift</span><span class="w"> </span><span class="n">shift</span><span class="p">,</span><span class="w"> </span><span class="n">NonNegativeInt</span><span class="w"> </span><span class="n">pick</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">drives</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shift</span><span class="p">.</span><span class="n">DrivingSegments</span><span class="p">;</span><span class="w">                              </span><span class="c1">// generator guarantees ≥ 1</span>
+<span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">after</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">shift</span><span class="p">.</span><span class="n">ConvertToRest</span><span class="p">(</span><span class="n">drives</span><span class="p">[</span><span class="n">pick</span><span class="p">.</span><span class="n">Get</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">drives</span><span class="p">.</span><span class="n">Count</span><span class="p">]);</span><span class="w"> </span><span class="c1">// same start/end; nothing shifts in time</span>
+<span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">Validator</span><span class="p">.</span><span class="n">Evaluate</span><span class="p">(</span><span class="n">shift</span><span class="p">),</span><span class="w"> </span><span class="n">Validator</span><span class="p">.</span><span class="n">Evaluate</span><span class="p">(</span><span class="n">after</span><span class="p">));</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">WeeklyLimitWeeks</span><span class="p">.</span><span class="n">IsSubsetOf</span><span class="p">(</span><span class="n">b</span><span class="p">.</span><span class="n">WeeklyLimitWeeks</span><span class="p">)</span>
+<span class="w">         </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">FortnightLimitWindows</span><span class="p">.</span><span class="n">IsSubsetOf</span><span class="p">(</span><span class="n">b</span><span class="p">.</span><span class="n">FortnightLimitWindows</span><span class="p">)</span>
+<span class="w">         </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">MaxContinuousDriving</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">MaxContinuousDriving</span><span class="p">).</span><span class="n">ToProperty</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>
+     Add a round-trip property (<code>ActivityLog.Parse(log.ToCsv())</code> yields the same violations) and the time-zone invariance property. Every driving-time property cites the spec clause or invariant ID it encodes.
+     Write custom generators for realistic shifts (activities of driving/rest/other, plausible durations, Europe/Sofia timestamps including DST transitions).</li>
+<li>RRF and <code>ResultSetComparer</code> properties (permutation, symmetry, reflexivity) with CsCheck:
+     <div class="highlight"><pre><span></span><code><span class="n">Gen</span><span class="p">.</span><span class="n">String</span><span class="p">.</span><span class="n">List</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">].</span><span class="n">List</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">].</span><span class="n">Sample</span><span class="p">(</span><span class="n">lists</span><span class="w"> </span><span class="o">=&gt;</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">fused</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Rrf</span><span class="p">(</span><span class="n">lists</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">fused</span><span class="p">.</span><span class="n">ToHashSet</span><span class="p">().</span><span class="n">SetEquals</span><span class="p">(</span><span class="n">lists</span><span class="p">.</span><span class="n">SelectMany</span><span class="p">(</span><span class="n">l</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">l</span><span class="p">));</span>
+<span class="p">});</span>
+</code></pre></div></li>
+<li><code>SqlValidator</code> fuzzing: generate compositions of allowed SELECT fragments with injected forbidden fragments (<code>; DROP</code>, <code>INTO</code>, <code>OPENROWSET</code>, <code>EXEC</code>, comments, nested CTEs); property: any input containing a forbidden construct is rejected.</li>
+<li><strong>Break it:</strong> Let the property find a counterexample (the lab's planner has a seeded DST bug); read the shrunk input; add it as a named example test.</li>
+<li><strong>Acceptance criteria:</strong> ≥ 6 properties across 4 components; at least one shrunk counterexample turned into a regression test; properties run in the fast lane (&lt; 20 s total).</li>
+<li><strong>Stretch:</strong> Ask an agent to propose properties from <code>docs/specs/driving-time.md</code>; accept only those you can justify from the spec.</li>
+</ul>
+<h3 id="lab-4-playwright-planner-generator-and-healer-on-fleet-ops-25h">Lab 4 — Playwright planner, generator and healer on Fleet Ops (≈2.5h)<a class="headerlink" href="#lab-4-playwright-planner-generator-and-healer-on-fleet-ops-25h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> Generate E2E coverage for the UI with agents and keep healing honest.</li>
+<li><strong>Start state:</strong> <code>c11/lab4-start</code> — Fleet Ops UI (chat with citations, approval cards from C9, analyst results from C10) runnable with <code>FLEETOPS_LLM_MODE=Fake</code> (scripted <code>IChatClient</code> responses per scenario), and <code>e2e/</code> Node project with Playwright pinned.</li>
+<li><strong>Steps:</strong></li>
+<li><code>npx playwright init-agents --loop=vscode</code> (or <code>claude</code>); commit the generated agent definitions.</li>
+<li>Write a seed test (login as dispatcher, open chat). Run the <strong>planner</strong> with <code>docs/specs/ui-prd.md</code>; review <code>specs/*.md</code> plans — delete any plan that asserts generated wording.</li>
+<li>Run the <strong>generator</strong>; review tests for selector quality (prefer role/label selectors) and assertions on structure (citation chip count ≥ 1, approval card shows slot ID, error banner on tool failure).</li>
+<li>Add the guard script <code>e2e/tools/healer-guard.mjs</code>: fails CI if a diff in <code>e2e/tests/**</code> changes <code>expect(</code> lines, adds <code>test.skip</code>/<code>test.fixme</code>, or deletes a test, unless the PR carries label <code>e2e-assertion-change</code> approved by CODEOWNERS.</li>
+<li>Live smoke: 3 tests against a real model deployment asserting structure only; run nightly.</li>
+<li><strong>Break it:</strong> (a) Rename the "Одобри" (Approve) button to "Потвърди" — legitimate change; run the healer; accept its locator fix. (b) Introduce a real regression: the approval card no longer shows the slot ID. Run the healer and inspect what it proposes. The guard must block any assertion change or skip.</li>
+<li><strong>Acceptance criteria:</strong> ≥ 12 generated E2E tests passing in Fake mode in &lt; 4 min; guard script blocks case (b) in CI; <code>reports/c11-healer.md</code> documents both healer runs with your decision and reasoning.</li>
+<li><strong>Stretch:</strong> Run the same UI flows under <code>bg-BG</code> and <code>en-US</code> browser locales and catch a formatting bug in analyst results (decimal comma).</li>
+</ul>
+<h3 id="lab-5-contracts-llm-lanes-and-the-full-ci-gate-15h">Lab 5 — Contracts, LLM lanes and the full CI gate (≈1.5h)<a class="headerlink" href="#lab-5-contracts-llm-lanes-and-the-full-ci-gate-15h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> Assemble the product's test system into one pipeline with explicit gates.</li>
+<li><strong>Start state:</strong> <code>c11/lab5-start</code> — <code>.github/workflows/ci.yml</code> with build + unit only.</li>
+<li><strong>Steps:</strong></li>
+<li>OpenAPI contract tests for Ticketing/Scheduling/Parts mocks (schema-validate responses for every operation); MCP <code>tools.snapshot.json</code> test (C8); structured-output schema snapshots (C3).</li>
+<li>Orchestration tests with a fake <code>IChatClient</code> for the Fleet Assistant (C9): scripted tool calls → assert approval request emitted, budget middleware stops, repetition guard triggers — deterministic, fast lane.</li>
+<li>Synthetic data: generate 200 BG/EN incident reports from dimension tuples (seeded), human-review 20; store under <code>data/synthetic/</code> with generator version.</li>
+<li>Pipeline jobs: <code>build</code> → <code>unit-property</code> → <code>integration</code> (Testcontainers) → <code>contracts</code> → <code>mutation-changed</code> (break 70 on changed code) → <code>evals-cached</code> (C5/C7/C9/C10 gates) → <code>e2e-smoke-fake</code>; nightly: <code>mutation-full</code>, <code>evals-live</code>, <code>e2e-full</code>, <code>e2e-live-smoke</code>. Branch protection requires all PR jobs; CODEOWNERS on protected paths; dependency allow-list check.
+     <div class="highlight"><pre><span></span><code><span class="nt">mutation-changed</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">needs</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">unit-property</span>
+<span class="w">  </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+<span class="w">  </span><span class="nt">steps</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v4</span>
+<span class="w">      </span><span class="nt">with</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> fetch-depth</span><span class="p">:</span><span class="w"> </span><span class="nv">0</span><span class="w"> </span><span class="p p-Indicator">}</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dotnet tool restore</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dotnet stryker --config-file stryker-config.json</span><span class="w">   </span><span class="c1"># since-mode vs main; break threshold enforced</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/upload-artifact@v4</span>
+<span class="w">      </span><span class="nt">with</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> name</span><span class="p">:</span><span class="w"> </span><span class="nv">mutation-report</span><span class="p p-Indicator">,</span><span class="nt"> path</span><span class="p">:</span><span class="w"> </span><span class="s">"**/StrykerOutput/**/reports/*"</span><span class="w"> </span><span class="p p-Indicator">}</span>
+</code></pre></div></li>
+<li><strong>Break it:</strong> Open an agent PR that weakens a golden-set threshold in <code>evals/thresholds.json</code> "to fix flaky CI". The pipeline must require CODEOWNERS approval; record how it surfaced.</li>
+<li><strong>Acceptance criteria:</strong> Full pipeline green on main; every PR job required; protected-path rule demonstrated; median PR pipeline ≤ 15 min; <code>docs/testing-strategy.md</code> (one page) describes lanes, gates, cadences and owners.</li>
+<li><strong>Stretch:</strong> Equivalent Azure Pipelines YAML with <code>dotnet aieval</code> and Stryker reports published as pipeline artifacts.</li>
+</ul>
+<h2 id="kata">Kata<a class="headerlink" href="#kata" title="Permanent link">&para;</a></h2>
+<p><strong>Mutant hunt (25 min, repeat 4×).</strong> Take one component and its current surviving-mutant list. Pick the three most dangerous survivors (business impact, not count), write the minimal tests that kill them — by hand — then compare with what an agent produces for the same three in a separate session. Score: mutants killed, test readability, assertions per test, time. Variations: a component where one survivor is genuinely equivalent; a property-based solution allowed; the agent works first and you review.</p>
+<h2 id="product-increment-fleet-ops-copilot">Product increment — Fleet Ops Copilot<a class="headerlink" href="#product-increment-fleet-ops-copilot" title="Permanent link">&para;</a></h2>
+<p>The product now has a <strong>full test pyramid maintained with agents</strong>: human-owned acceptance tests for domain rules (driving time, slot planning); agent-generated and mutation-hardened unit tests for validators and middleware; property-based tests for retrieval fusion, SQL validation and comparers; Testcontainers integration tests; OpenAPI and MCP contract tests; deterministic orchestration tests with a fake chat client; cached eval lanes for RAG, agent and SQL features; and <strong>Playwright E2E tests generated by planner/generator agents</strong> with governed healing. <strong>Mutation score ≥ 70% on changed code</strong> gates every PR.</p>
+<h2 id="factory-increment-your-agentic-sdlc">Factory increment — your agentic SDLC<a class="headerlink" href="#factory-increment-your-agentic-sdlc" title="Permanent link">&para;</a></h2>
+<p>This is the largest Factory increment of Level 2:</p>
+<ul>
+<li><strong>Test-first spec workflow</strong>: skill <code>tdd-feature</code> — interview → SPEC.md (ceremony scaled to the change) → acceptance tests (human-approved) → fresh implementer session with protected paths → mutation run → mutant-killing session → PR with reports.</li>
+<li><strong>Subagents</strong>: <code>test-writer</code> (may only write under <code>tests/**</code> except <code>tests/**/Acceptance/**</code>), <code>mutant-killer</code> (reads Stryker JSON, may only add tests), <code>implementer</code> (denied all test and golden paths).</li>
+<li><strong>Hooks</strong>: post-edit <code>dotnet build</code> + fast lane; Stop hook that refuses "done" unless the fast lane and cached evals are green; pre-tool hook guarding protected paths.</li>
+<li><strong><code>@Test</code> agent</strong> policy documented: allowed for characterization and long-tail coverage; output must pass the mutation gate.</li>
+<li><strong>Playwright agents</strong> initialized for your coding agent of choice, with the healer guard in CI.</li>
+<li><strong>Metrics</strong> start being collected for C19: first-pass acceptance of agent PRs, mutation score trend, healer skip/assertion-change rate, flaky rate.</li>
+</ul>
+<h2 id="assessment">Assessment<a class="headerlink" href="#assessment" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th>Novice</th>
+<th>Competent</th>
+<th>Proficient</th>
+<th>Expert</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Test strategy</td>
+<td>One undifferentiated test project</td>
+<td>Unit vs integration split</td>
+<td>Lanes for deterministic, contract, LLM evals, E2E with cadences and owners</td>
+<td>Strategy justified by risk; inner-loop speed engineered for agents</td>
+</tr>
+<tr>
+<td>AI-driven TDD</td>
+<td>Agent writes code then tests</td>
+<td>Tests first, same session</td>
+<td>Separate sessions, protected oracle (permissions + hook + CODEOWNERS)</td>
+<td>Ceremony scaled per change; agent attempts to bypass detected and logged</td>
+</tr>
+<tr>
+<td>Test strength</td>
+<td>Coverage reported</td>
+<td>Mutation run once</td>
+<td>Mutation gate on changed code; survivors analysed; equivalents justified</td>
+<td>Uses mutation + properties to find a real bug; teaches agent to kill mutants efficiently</td>
+</tr>
+<tr>
+<td>E2E with agents</td>
+<td>Manual UI tests</td>
+<td>Generated Playwright tests</td>
+<td>Fake-LLM mode, structure assertions, healer guard enforced</td>
+<td>Healer decisions documented; locale/regression cases caught; live smoke kept minimal</td>
+</tr>
+<tr>
+<td>CI &amp; governance</td>
+<td>Tests run locally</td>
+<td>CI runs tests</td>
+<td>Full gated pipeline ≤ 15 min, protected paths, dependency allow-list</td>
+<td>Quality metrics tracked and acted on; nightly drift lanes feed issues</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Auto-checked:</strong> acceptance suite unchanged by implementer commits; mutation score ≥ 70% on changed code and ≥ 80% on <code>SqlValidator</code>/<code>CitationValidator</code>; property tests present and fast; contract tests; healer guard blocks the seeded regression; pipeline required checks configured. <strong>Human-reviewed:</strong> <code>docs/testing-strategy.md</code>, healer report, equivalent-mutant justifications. This module's artefacts are inputs to <strong>Gate G2</strong>.</p>
+<h2 id="common-pitfalls">Common pitfalls<a class="headerlink" href="#common-pitfalls" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Gating on line coverage; celebrating 90% with a 40% mutation score.</li>
+<li>Letting the implementer session edit tests or golden sets "to fix the build".</li>
+<li>Bulk-ignoring surviving mutants as "equivalent" on an agent's word.</li>
+<li>Asserting LLM-generated wording in E2E tests; running E2E against a live model on every PR.</li>
+<li>Accepting healer changes to assertions or new skips without review.</li>
+<li>Culture-dependent tests (<code>bg-BG</code> decimal comma, date formats) that pass only on the build agent.</li>
+<li>Non-deterministic test data (no seeds, real clock) causing flaky lanes.</li>
+<li>Agents adding unvetted test packages (slopsquatting risk) — enforce the allow-list.</li>
+<li>Running full mutation testing on every PR and then disabling it because it's slow.</li>
+</ul>
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Claude Code best practices (failing test first, separate sessions, hooks, Stop gates): https://code.claude.com/docs/en/best-practices</li>
+<li>GitHub Copilot testing for .NET in Visual Studio (<code>@Test</code>, GA 11 Feb 2026): https://devblogs.microsoft.com/dotnet/github-copilot-testing-for-dotnet-available-in-visual-studio/</li>
+<li>Playwright test agents (planner, generator, healer; <code>init-agents</code>): https://playwright.dev/docs/test-agents</li>
+<li>Thoughtworks Technology Radar Vol. 34 digest (mutation testing Trial, feedback sensors Trial, cognitive debt Caution): https://agentic-ai.readthedocs.io/en/latest/AgenticTechStack/thoughtworks-radar-vol34/</li>
+<li>Böckeler — Exploring spec-driven development tools: https://www.martinfowler.com/articles/exploring-gen-ai/sdd-3-tools.html</li>
+<li>Kiro research note (property-based testing in GA): https://rywalker.com/research/kiro</li>
+<li>MEAI Evaluation libraries (response caching, <code>dotnet aieval</code>): https://learn.microsoft.com/en-us/dotnet/ai/evaluation/libraries</li>
+<li>Hamel Husain — Evals FAQ (synthetic data via dimension tuples): https://hamel.dev/blog/posts/evals-faq/</li>
+<li>CSA research note on slopsquatting: https://labs.cloudsecurityalliance.org/research/csa-research-note-slopsquatting-ai-supply-chain-20260419/</li>
+<li>Stryker.NET documentation: https://stryker-mutator.io/docs/stryker-net/introduction/ (general knowledge; verify current config reference)</li>
+<li>FsCheck: https://fscheck.github.io/FsCheck/ · CsCheck: https://github.com/AnthonyLloyd/CsCheck (general knowledge; verify versions)</li>
+<li>DORA 2025 report (AI as amplifier): https://blog.google/technology/developers/dora-report-2025/</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../c10-agents-over-structured-data-text-to-sql-on-sql-server/" class="md-footer__link md-footer__link--prev" aria-label="Previous: C10 — Agents over structured data: text-to-SQL on SQL Server">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                C10 — Agents over structured data: text-to-SQL on SQL Server
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../part-3-production/c12-workflows-and-multi-agent-orchestration/" class="md-footer__link md-footer__link--next" aria-label="Next: C12 — Workflows &amp; multi-agent orchestration">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                C12 — Workflows & multi-agent orchestration
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.top", "navigation.footer", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

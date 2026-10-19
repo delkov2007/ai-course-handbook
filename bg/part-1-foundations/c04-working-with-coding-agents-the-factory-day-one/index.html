@@ -1,0 +1,2988 @@
+
+<!doctype html>
+<html lang="bg" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Learning-by-doing course, release 2026.11 (content as of October 2026)">
+      
+      
+      
+      
+        <link rel="prev" href="../c03-prompting-structured-outputs-and-tool-calling/">
+      
+      
+        <link rel="next" href="../c05-evals-from-day-one/">
+      
+      
+        
+          <link rel="alternate" href="../../../part-1-foundations/c04-working-with-coding-agents-the-factory-day-one/" hreflang="en">
+        
+          <link rel="alternate" href="./" hreflang="bg">
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>C4 — Работа с кодиращи агенти: Фабриката, първи ден - AI Solution Developer & Architect — Наръчник за курсиста</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#c4-working-with-coding-agents-the-factory-day-one" class="md-skip">
+          Към съдържанието
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Горен колонтитул">
+    <a href="../../" title="AI Solution Developer &amp; Architect — Наръчник за курсиста" class="md-header__button md-logo" aria-label="AI Solution Developer & Architect — Наръчник за курсиста" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            AI Solution Developer & Architect — Наръчник за курсиста
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              C4 — Работа с кодиращи агенти: Фабриката, първи ден
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="Избери език">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href="../../../part-1-foundations/c04-working-with-coding-agents-the-factory-day-one/" hreflang="en" class="md-select__link">
+              English
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="./" hreflang="bg" class="md-select__link">
+              Български
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Търси" placeholder="Търси" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Търси">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Изчисти" aria-label="Изчисти" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Инициализирано търсене
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Навигация" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../" title="AI Solution Developer &amp; Architect — Наръчник за курсиста" class="md-nav__button md-logo" aria-label="AI Solution Developer & Architect — Наръчник за курсиста" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    AI Solution Developer & Architect — Наръчник за курсиста
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Добре дошли
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Започнете оттук
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Започнете оттук
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/how-to-use/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Как да използвате наръчника
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/course-overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Преглед на курса
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/assessment-gates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Оценяване и гейтове
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/competency-matrix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Матрица на компетентностите
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Част 1 — Основи (ниво 1)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Част 1 — Основи (ниво 1)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../c00-orientation-setup-and-toolchain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C0 — Ориентация, настройка и инструменти
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../c01-how-generative-ai-works-an-engineer-s-mental-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C1 — Как работи генеративният AI: мисловен модел за инженери
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../c02-your-first-ai-feature-in-net/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C2 — Първата ви AI функционалност в .NET
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../c03-prompting-structured-outputs-and-tool-calling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C3 — Промптинг, структуриран изход и извикване на инструменти
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C4 — Работа с кодиращи агенти: Фабриката, първи ден
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C4 — Работа с кодиращи агенти: Фабриката, първи ден
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Съдържание">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Съдържание
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-this-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why this matters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learning outcomes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concepts
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Concepts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-converged-primitive-set-late-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The converged primitive set (late 2026)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#memory-files-short-curated-tested" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Memory files: short, curated, tested
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-loop-explore-plan-implement-verify" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The loop: explore → plan → implement → verify
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#runnable-checks-are-the-agents-oracle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Runnable checks are the agent's oracle
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#permissions-sandboxing-isolation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Permissions, sandboxing, isolation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#risks-and-how-the-factory-answers-them" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Risks and how the Factory answers them
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#misconceptions-to-unlearn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Misconceptions to unlearn
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tools-versions-as-of-oct-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tools &amp; versions (as of Oct 2026)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#labs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Labs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Labs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lab-1-make-the-repo-agent-ready-and-prove-it-2h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 1 — Make the repo agent-ready, and prove it (≈2h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-2-guardrails-permissions-hooks-supply-chain-2h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 2 — Guardrails: permissions, hooks, supply chain (≈2h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-3-spec-first-feature-through-the-agent-incident-intake-25h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 3 — Spec-first feature through the agent: incident intake (≈2.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-4-parallel-agents-and-the-cloud-agent-15h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 4 — Parallel agents and the cloud agent (≈1.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kata
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#product-increment-fleet-ops-copilot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Product increment — Fleet Ops Copilot
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#factory-increment-your-agentic-sdlc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Factory increment — your agentic SDLC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assessment
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common pitfalls
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../c05-evals-from-day-one/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C5 — Evals от първия ден
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Част 2 — Градивни елементи (ниво 2)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Част 2 — Градивни елементи (ниво 2)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c06-embeddings-and-vector-search/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C6 — Embeddings и векторно търсене
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c07-rag-from-documents-to-cited-permission-aware-answers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C7 — RAG: от документи до отговори с цитати, съобразени с правата на достъп
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c08-tools-and-the-model-context-protocol/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C8 — Инструменти и Model Context Protocol
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c09-agents-with-microsoft-agent-framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C9 — Агенти с Microsoft Agent Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c10-agents-over-structured-data-text-to-sql-on-sql-server/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C10 — Агенти върху структурирани данни: text-to-SQL върху SQL Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c11-agentic-testing-ai-driven-tdd-mutation-and-e2e-test-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C11 — Агентно тестване: TDD с AI, мутационно тестване и агенти за E2E тестове
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Част 3 — Продукционни системи (ниво 3)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Част 3 — Продукционни системи (ниво 3)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c12-workflows-and-multi-agent-orchestration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C12 — Workflows и многоагентна оркестрация
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c13-context-engineering-advanced-retrieval-and-memory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C13 — Инженеринг на контекста, напреднало извличане и памет
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c14-failure-driven-evals-llm-judges-and-red-teaming/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C14 — Evals, водени от грешките, LLM съдии и red teaming
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c15-observability-genaiops-and-cost/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C15 — Наблюдаемост, GenAIOps и разходи
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c16-security-for-llm-and-agentic-systems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C16 — Сигурност на LLM и агентни системи
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c17-shipping-to-azure-hosting-ai-gateway-iac-and-interop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C17 — Пускане в Azure: хостинг, AI gateway, IaC и оперативна съвместимост
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c18-responsible-ai-and-the-eu-ai-act-in-practice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C18 — Отговорен AI и Актът за изкуствения интелект на ЕС на практика
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c19-the-automated-sdlc-agents-from-issue-to-production/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C19 — Автоматизираният SDLC: агенти от issue до продукция
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Част 4 — Експертна специализация: AI Solution Developer
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Част 4 — Експертна специализация: AI Solution Developer
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d01-model-customization-and-small-local-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D1 — Адаптиране на модели и малки/локални модели
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d02-long-running-durable-and-autonomous-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D2 — Дълго работещи, устойчиви и автономни агенти
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d03-multimodal-and-realtime-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D3 — Мултимодални агенти и агенти в реално време
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d04-agent-ux-and-front-ends/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D4 — UX и фронтенди за агенти
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d05-performance-and-cost-engineering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D5 — Инженеринг на производителността и разходите
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d06-building-your-own-agent-tooling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D6 — Изграждане на собствени инструменти за агенти
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d07-agent-reliability-engineering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D7 — Инженеринг на надеждността на агенти
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Част 5 — Експертна специализация: AI Solution Architect
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Част 5 — Експертна специализация: AI Solution Architect
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a01-ai-strategy-use-case-discovery-and-business-case/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A1 — AI стратегия, откриване на сценарии на употреба и бизнес обосновка
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a02-azure-ai-reference-architectures-and-well-architected-for-ai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A2 — Референтни AI архитектури в Azure и Well-Architected за AI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a03-enterprise-knowledge-and-data-architecture-for-ai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A3 — Корпоративна архитектура на знанията и данните за AI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a04-agent-platform-and-integration-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A4 — Платформа за агенти и интеграционна архитектура
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a05-reliability-scale-model-lifecycle-and-finops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A5 — Надеждност, мащаб, жизнен цикъл на моделите и FinOps
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a06-ai-governance-risk-and-compliance-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A6 — Архитектура за управление на AI, риска и съответствието
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a07-the-architect-s-craft-in-ai-programmes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A7 — Занаятът на архитекта в AI програми
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Част 6 — Съвместен финален проект
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Част 6 — Съвместен финален проект
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capstone/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Финален проект
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Приложение
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Приложение
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Речник на термините
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/references/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Допълнителна литература
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Съдържание">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Съдържание
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-this-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why this matters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learning outcomes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concepts
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Concepts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-converged-primitive-set-late-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The converged primitive set (late 2026)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#memory-files-short-curated-tested" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Memory files: short, curated, tested
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-loop-explore-plan-implement-verify" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The loop: explore → plan → implement → verify
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#runnable-checks-are-the-agents-oracle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Runnable checks are the agent's oracle
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#permissions-sandboxing-isolation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Permissions, sandboxing, isolation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#risks-and-how-the-factory-answers-them" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Risks and how the Factory answers them
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#misconceptions-to-unlearn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Misconceptions to unlearn
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tools-versions-as-of-oct-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tools &amp; versions (as of Oct 2026)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#labs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Labs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Labs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lab-1-make-the-repo-agent-ready-and-prove-it-2h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 1 — Make the repo agent-ready, and prove it (≈2h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-2-guardrails-permissions-hooks-supply-chain-2h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 2 — Guardrails: permissions, hooks, supply chain (≈2h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-3-spec-first-feature-through-the-agent-incident-intake-25h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 3 — Spec-first feature through the agent: incident intake (≈2.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-4-parallel-agents-and-the-cloud-agent-15h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 4 — Parallel agents and the cloud agent (≈1.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kata
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#product-increment-fleet-ops-copilot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Product increment — Fleet Ops Copilot
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#factory-increment-your-agentic-sdlc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Factory increment — your agentic SDLC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assessment
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common pitfalls
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="c4-working-with-coding-agents-the-factory-day-one">C4 — Working with coding agents: the Factory, day one<a class="headerlink" href="#c4-working-with-coding-agents-the-factory-day-one" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><strong>Level:</strong> 1 — Foundations (Beginner) · <strong>Duration:</strong> 10h (theory 20% / labs 80%) · <strong>Prerequisites:</strong> C0–C3 (product builds, tests run in the devcontainer, prompts/tools exist), a GitHub Copilot plan with agent mode and cloud agent enabled, Claude Code installed; Codex optional · <strong>Volatility:</strong> High (agent features, modes, file conventions and pricing change monthly)</p>
+</blockquote>
+<h2 id="why-this-matters">Why this matters<a class="headerlink" href="#why-this-matters" title="Permanent link">&para;</a></h2>
+<p>From this module on, you build Fleet Ops Copilot <em>through</em> coding agents. That sounds like a productivity shortcut; the evidence says it is an amplifier. DORA 2025 (≈5,000 professionals) found ~90% AI adoption and called AI "a mirror and a multiplier": teams with strong version control, small batches, platform engineering and accessible internal knowledge gain; teams without them get more instability. METR's 2025 randomized trial found experienced open-source developers <strong>19–20% slower</strong> with AI tools while <em>believing</em> they were ~20% faster; METR's February 2026 update says developers are probably sped up now but calls its own data "very weak evidence" of the size. Both findings point the same way: the outcome depends on the system around the agent, not the agent.</p>
+<p>Without that system, the failure modes are concrete. An agent "fixes" Trakia's plate normalizer by weakening the test. It adds a NuGet package whose name it hallucinated — a USENIX 2025 study found <strong>19.7% of 2.23M code samples</strong> referenced non-existent packages (205,474 unique names), and <strong>43%</strong> of those names recurred on every one of 10 runs, which is what makes <em>slopsquatting</em> attacks predictable. It reads <code>.env</code> into its context, pushes to <code>main</code>, and leaves you a 1,400-line diff you can't explain — Thoughtworks calls the result "codebase cognitive debt" (Caution).</p>
+<p>Experts make agents productive by giving them <strong>context</strong> (short, curated memory files), <strong>a runnable definition of done</strong> (tests, build, evals the agent must run), <strong>constrained permissions</strong> (sandbox, allow/deny rules, protected branches), and <strong>the right amount of plan</strong> for the task. They measure outcomes (first-pass acceptance, rework, escaped defects, cost per merged PR), not lines generated. This module sets up that system — your Factory — and runs your first feature through it.</p>
+<h2 id="learning-outcomes">Learning outcomes<a class="headerlink" href="#learning-outcomes" title="Permanent link">&para;</a></h2>
+<p>By the end of C4 you can:</p>
+<ol>
+<li><strong>Map</strong> the transferable coding-agent primitives (local agent, cloud agent → PR, memory files, skills, subagents/custom agents, hooks, MCP, headless/CI mode, AI reviewer) onto GitHub Copilot, Claude Code and OpenAI Codex.</li>
+<li><strong>Write</strong> a short, curated <code>AGENTS.md</code> (plus <code>CLAUDE.md</code> and <code>.github/copilot-instructions.md</code>) and <strong>measure</strong> its effect on a fixed task.</li>
+<li><strong>Run</strong> the explore → plan → implement → verify loop, choosing spec ceremony proportional to the task.</li>
+<li><strong>Give</strong> agents runnable checks (build, tests, eval smoke) and <strong>enforce</strong> them with hooks or CI rather than prose.</li>
+<li><strong>Configure</strong> permission modes, allow/deny rules and sandboxing so that agents cannot read secrets, push to protected branches or install unvetted packages.</li>
+<li><strong>Run</strong> parallel agents safely in git worktrees and <strong>delegate</strong> an issue to a cloud agent that returns a PR.</li>
+<li><strong>Detect</strong> and <strong>prevent</strong> slopsquatting, test-weakening and insecure patterns in agent diffs.</li>
+<li><strong>Explain</strong> every line of an agent's merged diff, and <strong>evaluate</strong> agent productivity with outcome metrics.</li>
+</ol>
+<h2 id="concepts">Concepts<a class="headerlink" href="#concepts" title="Permanent link">&para;</a></h2>
+<h3 id="the-converged-primitive-set-late-2026">The converged primitive set (late 2026)<a class="headerlink" href="#the-converged-primitive-set-late-2026" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Primitive</th>
+<th>GitHub Copilot</th>
+<th>Claude Code</th>
+<th>OpenAI Codex</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Local agent</td>
+<td>Agent mode in VS Code / VS 2026 ("Agent (Preview)" built on the Copilot CLI SDK, built-in .NET/Azure skills); Copilot CLI (GA Feb 2026 — verify)</td>
+<td>CLI, IDE extensions, desktop, web</td>
+<td>Codex CLI (open source), IDE</td>
+</tr>
+<tr>
+<td>Cloud agent → PR</td>
+<td><strong>Copilot cloud agent</strong> (docs URLs moved from "coding agent" to "cloud agent" — rename not officially confirmed, verify): assign an issue or Azure Boards work item → draft PR on a <code>copilot/*</code> branch, firewalled environment, self-review, Actions on its PRs need human approval</td>
+<td>Cloud sessions, GitHub Actions integration, Routines</td>
+<td>Codex cloud (persistent, configurable environments since DevDay, 29 Sep 2026)</td>
+</tr>
+<tr>
+<td>Memory files</td>
+<td><code>.github/copilot-instructions.md</code>, path-scoped <code>.github/instructions/*.instructions.md</code> (verify front-matter), AGENTS.md support (verify scope per surface)</td>
+<td><code>CLAUDE.md</code> (project, <code>.claude/CLAUDE.md</code>, <code>CLAUDE.local.md</code>), reads <code>AGENTS.md</code>, <code>@path</code> imports, <code>.claude/rules/</code></td>
+<td><code>AGENTS.md</code></td>
+</tr>
+<tr>
+<td>Skills / custom agents</td>
+<td>Custom agents <code>.github/agents/*.agent.md</code> (own tools, MCP servers, model, instructions); org-wide in <code>.github-private</code></td>
+<td>Skills <code>.claude/skills/&lt;name&gt;/SKILL.md</code>; subagents <code>.claude/agents/*.md</code>; plugins</td>
+<td>Skills/agents (verify current)</td>
+</tr>
+<tr>
+<td>Hooks (deterministic)</td>
+<td>Copilot SDK hooks (pre/post tool use); cloud agent setup steps (verify)</td>
+<td><code>PreToolUse</code>, <code>PostToolUse</code>, <code>Stop</code>, … in settings</td>
+<td>Verify</td>
+</tr>
+<tr>
+<td>Headless / CI</td>
+<td>Copilot CLI, cloud agent</td>
+<td><code>claude -p --output-format json</code>, GitHub Actions</td>
+<td>CLI non-interactive</td>
+</tr>
+<tr>
+<td>AI review</td>
+<td>Copilot code review</td>
+<td>Managed Code Review, review subagents</td>
+<td>Automatic PR reviews (DevDay 2026)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>AGENTS.md</strong> is "a simple, open format for guiding coding agents" stewarded by the Agentic AI Foundation (Linux Foundation). <strong>Agent Skills (SKILL.md)</strong> — YAML front-matter (name, description) plus instructions/scripts, loaded by <strong>progressive disclosure</strong> (only metadata in context until relevant). Thoughtworks Radar Vol. 34 (Apr 2026): Claude Code and Cursor <strong>Adopt</strong>, Codex <strong>Trial</strong> (can suggest outdated library patterns — tests and review essential); curated shared instructions and context engineering <strong>Adopt</strong>; Agent Skills, feedback sensors for coding agents, mutation testing, sandboxed execution by default and Dev Containers <strong>Trial</strong>; Spec Kit and OpenSpec <strong>Assess</strong>; agent instruction bloat, coding agent swarms, "MCP by default", codebase cognitive debt and coding throughput as a productivity measure <strong>Caution</strong>.</p>
+<p>Teach and use the <em>primitives</em>; tool walkthroughs date within months. For a .NET/Azure shop, Copilot is usually the system of record (Boards → cloud agent → PR, <code>@Test</code>, Upgrade agent); Claude Code and Codex are power-user and headless layers. Note: the Boards → Copilot flow creates PRs in <strong>GitHub</strong> repos; no evidence it targets Azure Repos — an architecture decision for Azure DevOps shops (C19).</p>
+<h3 id="memory-files-short-curated-tested">Memory files: short, curated, tested<a class="headerlink" href="#memory-files-short-curated-tested" title="Permanent link">&para;</a></h3>
+<p>Context windows fill fast and performance degrades as they fill. Anthropic's guidance for <code>CLAUDE.md</code> applies to all memory files: keep it short (target &lt; 200 lines per file); include only what the agent can't infer from the code — build/test commands, non-default conventions, repo etiquette, gotchas; move occasional knowledge into skills (loaded on demand) and <strong>rules that must always hold into hooks</strong>, because memory files are context, not enforcement. Contradictory instructions get resolved arbitrarily. Treat memory files as code: reviewed, pruned, and measured on a fixed task.</p>
+<p>Single source of truth pattern for this course: <code>AGENTS.md</code> is canonical; <code>CLAUDE.md</code> contains <code>@AGENTS.md</code> plus Claude-specific notes; <code>.github/copilot-instructions.md</code> is a short pointer/summary (or rely on Copilot's AGENTS.md support once verified for each surface you use).</p>
+<div class="highlight"><pre><span></span><code><span class="gh"># AGENTS.md — Trakia Fleet Ops Copilot</span>
+<span class="gu">## Build &amp; verify (run before claiming done)</span>
+<span class="k">-</span><span class="w"> </span><span class="sb">`dotnet build -warnaserror`</span> ; <span class="sb">`dotnet test --filter "Category!=Eval"`</span> ; <span class="sb">`./scripts/eval-smoke.sh`</span> (C5)
+<span class="gu">## Conventions</span>
+<span class="k">-</span><span class="w"> </span>All model access via keyed <span class="sb">`IChatClient`</span> from <span class="sb">`ChatClientFactory`</span>; never <span class="sb">`new OpenAIClient(`</span> elsewhere.
+<span class="k">-</span><span class="w"> </span>Prompts live in <span class="sb">`prompts/*.md`</span> (versioned front-matter). No prompt string literals in <span class="sb">`src/`</span>.
+<span class="k">-</span><span class="w"> </span>Never assert exact model output strings in tests; assert schemas, rules, pass rates.
+<span class="k">-</span><span class="w"> </span>Plates: normalize with <span class="sb">`IPlateNormalizer`</span> (Cyrillic canonical). Dates: <span class="sb">`Europe/Sofia`</span>.
+<span class="k">-</span><span class="w"> </span>New NuGet packages only from <span class="sb">`docs/allowed-packages.md`</span>; propose additions in the PR description.
+<span class="gu">## Boundaries</span>
+<span class="k">-</span><span class="w"> </span>Do not modify <span class="sb">`tests/**/Acceptance/**`</span> or <span class="sb">`evals/golden/**`</span> — humans own assertions and labels.
+<span class="k">-</span><span class="w"> </span>Do not touch <span class="sb">`.github/workflows/**`</span> or <span class="sb">`infra/**`</span> without an explicit instruction.
+<span class="gu">## Gotchas</span>
+<span class="k">-</span><span class="w"> </span>Aspire needs Docker; SQL container takes ~20s on first start.
+</code></pre></div>
+<h3 id="the-loop-explore-plan-implement-verify">The loop: explore → plan → implement → verify<a class="headerlink" href="#the-loop-explore-plan-implement-verify" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Explore</strong> read-only (plan mode): the agent reads code and summarizes how the feature fits.</li>
+<li><strong>Plan</strong>: a short written plan you review — files to touch, tests to add, risks.</li>
+<li><strong>Implement</strong> in small steps.</li>
+<li><strong>Verify against an executable check</strong>, not the agent's claim. The agent runs build/tests/evals; a <strong>Stop hook</strong> or CI gate refuses "done" while checks fail. Anthropic: give the agent a runnable check; after two failed corrections, <code>/clear</code> and restart with a better prompt rather than arguing in a polluted context; use separate sessions for writer and reviewer (and, in C11, for test-writer and implementer).</li>
+</ol>
+<p><strong>Spec ceremony proportional to the task:</strong> one-line diff → no plan; multi-file change → plan mode; feature → interview → <code>SPEC.md</code> → fresh session to implement; brownfield change → delta spec. Spec-driven development is <strong>contested</strong>: Böckeler documents Kiro turning a small bug into 4 user stories with 16 acceptance criteria, agents ignoring specs, review fatigue on verbose Markdown, and echoes of model-driven development. The expert skill is choosing the <em>least</em> ceremony that makes the work verifiable.</p>
+<h3 id="runnable-checks-are-the-agents-oracle">Runnable checks are the agent's oracle<a class="headerlink" href="#runnable-checks-are-the-agents-oracle" title="Permanent link">&para;</a></h3>
+<p>The most valuable thing you can give an agent is a fast, deterministic signal: <code>dotnet build -warnaserror</code>, unit tests, schema snapshot tests, the C3 analyzer rules, and (from C5) an eval smoke suite. "Feedback sensors" (compilers, linters, tests run during the session) are Thoughtworks Trial. <strong>Humans own the assertions</strong>: acceptance tests and golden labels are protected paths; tests written by the agent <em>after</em> the code tend to encode current behavior, bugs included.</p>
+<h3 id="permissions-sandboxing-isolation">Permissions, sandboxing, isolation<a class="headerlink" href="#permissions-sandboxing-isolation" title="Permanent link">&para;</a></h3>
+<p>Claude Code permission modes (as documented Oct 2026; mode names churn — verify against current documentation): <code>default</code> (Manual: prompts on first use), <code>acceptEdits</code>, <code>plan</code> (read/explore only), <code>auto</code> (classifier reviews actions; default for interactive sessions since v2.1.283), <code>dontAsk</code> (auto-denies anything not pre-approved — for CI), <code>bypassPermissions</code> (only in isolated containers/VMs). Rules in <code>.claude/settings.json</code>; <strong>deny beats allow</strong>; Bash rules are prefix/wildcard matches that do not cover every bypass (e.g. <code>sh -c</code>), so pair them with the OS-level sandbox for network/file isolation.</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"permissions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"defaultMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"acceptEdits"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Bash(dotnet build *)"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Bash(dotnet test *)"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Bash(./scripts/eval-smoke.sh)"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Bash(git status)"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Bash(git diff *)"</span><span class="p">],</span>
+<span class="w">    </span><span class="nt">"ask"</span><span class="p">:</span><span class="w">   </span><span class="p">[</span><span class="s2">"Bash(dotnet add package *)"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Bash(git commit *)"</span><span class="p">],</span>
+<span class="w">    </span><span class="nt">"deny"</span><span class="p">:</span><span class="w">  </span><span class="p">[</span><span class="s2">"Read(./.env)"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Read(./**/secrets*.json)"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Bash(git push *)"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Bash(curl *)"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Bash(wget *)"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Edit(./tests/**/Acceptance/**)"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Edit(./evals/golden/**)"</span><span class="p">]</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">"hooks"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"PostToolUse"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w"> </span><span class="nt">"matcher"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Edit|Write"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"hooks"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"command"</span><span class="p">,</span><span class="w"> </span><span class="nt">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"${CLAUDE_PROJECT_DIR}/.claude/hooks/format-build.sh"</span><span class="w"> </span><span class="p">}]</span><span class="w"> </span><span class="p">}],</span>
+<span class="w">    </span><span class="nt">"Stop"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w"> </span><span class="nt">"hooks"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"command"</span><span class="p">,</span><span class="w"> </span><span class="nt">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"${CLAUDE_PROJECT_DIR}/.claude/hooks/require-green.sh"</span><span class="w"> </span><span class="p">}]</span><span class="w"> </span><span class="p">}]</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Hook semantics: a <code>Stop</code> hook that exits <strong>2</strong> prevents the agent from stopping and feeds stderr back as the reason (guard with <code>stop_hook_active</code> to avoid infinite loops); <code>PostToolUse</code> cannot block (the tool already ran) but stderr is shown to the agent. (Verify <code>Edit(...)</code> path-rule syntax for your Claude Code version.)</p>
+<p>Copilot cloud agent guardrails: pushes only to <code>copilot/*</code> branches, firewall-controlled internet, Actions on its PRs require approval; add branch protection with required reviews and required checks on <code>main</code>. Devcontainers give every agent the same sandbox (C0).</p>
+<p><strong>Git worktrees</strong> isolate parallel agents: <code>claude --worktree incident-intake</code> creates <code>.claude/worktrees/incident-intake/</code> on branch <code>worktree-incident-intake</code>; add <code>.claude/worktrees/</code> to <code>.gitignore</code>; <code>.worktreeinclude</code> copies gitignored files such as local settings (never real secrets). Subagents can run with <code>isolation: worktree</code>. Plain <code>git worktree add ../fleetops-feature -b feature</code> works with any agent. Thoughtworks cautions against large <em>swarms</em>: parallelize independent tasks, not one coupled change.</p>
+<h3 id="risks-and-how-the-factory-answers-them">Risks and how the Factory answers them<a class="headerlink" href="#risks-and-how-the-factory-answers-them" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Risk</th>
+<th>Evidence</th>
+<th>Control</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Slopsquatting / hallucinated packages</td>
+<td>19.7% of 2.23M samples; open-source models 21.7% vs commercial 5.2%; real incidents (<code>huggingface-cli</code> on PyPI, <code>react-codeshift</code> spread via agent skills)</td>
+<td>Package allowlist, <code>ask</code> on <code>dotnet add package</code>, lockfiles (<code>packages.lock.json</code> + <code>RestoreLockedMode</code>), CI check for package age/existence, no network installs in agent sandbox</td>
+</tr>
+<tr>
+<td>Insecure code</td>
+<td>Category-level risk (OWASP LLM05 Improper Output Handling; secure-coding review); quantitative 2026 rates not verified here</td>
+<td>CodeQL in CI (agentic autofix GA 15 Oct 2026 on GHEC — C16), security-review subagent, parameterized SQL rule in AGENTS.md</td>
+</tr>
+<tr>
+<td>Test weakening / hollow tests</td>
+<td>Thoughtworks: mutation testing catches hollow tests (Trial)</td>
+<td>Protected acceptance tests, human-owned assertions, Stryker.NET gate (C11)</td>
+</tr>
+<tr>
+<td>Unreviewable diffs</td>
+<td>DORA: larger changesets raise instability</td>
+<td>Small batches, plan review, diff size budget per PR</td>
+</tr>
+<tr>
+<td>Skill atrophy / cognitive debt</td>
+<td>Thoughtworks Caution</td>
+<td>"Explain the diff" gate, solo-first katas</td>
+</tr>
+<tr>
+<td>Third-party skills/plugins</td>
+<td>Thoughtworks: supply-chain risk from unreviewed skills</td>
+<td>Only reviewed, pinned skills; no auto-install</td>
+</tr>
+<tr>
+<td>Measuring the wrong thing</td>
+<td>Thoughtworks Caution on throughput metrics; DORA keys Adopt</td>
+<td>First-pass acceptance, rework rate, escaped defects, cost per merged PR</td>
+</tr>
+</tbody>
+</table>
+<h3 id="misconceptions-to-unlearn">Misconceptions to unlearn<a class="headerlink" href="#misconceptions-to-unlearn" title="Permanent link">&para;</a></h3>
+<p>"A longer AGENTS.md is a better AGENTS.md." "If I tell the agent to run the tests, it will." "Plan mode is for big tasks only." "Auto/bypass modes are fine on my laptop." "More parallel agents = more speed." "The agent's summary of its changes is the review." "Lines of code generated is productivity."</p>
+<h2 id="tools-versions-as-of-oct-2026">Tools &amp; versions (as of Oct 2026)<a class="headerlink" href="#tools-versions-as-of-oct-2026" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Purpose</th>
+<th>Status</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GitHub Copilot agent mode (VS Code, VS 2026 "Agent (Preview)")</td>
+<td>Local agent</td>
+<td>GA / VS agent preview</td>
+<td>VS July 2026 update: built on Copilot CLI SDK, .NET/Azure skills off by default</td>
+</tr>
+<tr>
+<td>Copilot cloud agent + custom agents (<code>.github/agents/*.agent.md</code>)</td>
+<td>Issue/Boards → PR</td>
+<td>GA (paid plan)</td>
+<td>"Cloud agent" naming per docs URLs — verify</td>
+</tr>
+<tr>
+<td>Copilot CLI</td>
+<td>Terminal agent, plugins</td>
+<td>GA (Feb 2026 — verify)</td>
+<td>Built-in Explore/Task/Plan/Code-review agents</td>
+</tr>
+<tr>
+<td>Copilot code review</td>
+<td>AI PR review</td>
+<td>GA</td>
+<td></td>
+</tr>
+<tr>
+<td>Claude Code</td>
+<td>Local/headless agent, hooks, skills, subagents, worktrees</td>
+<td>GA</td>
+<td>Auto mode default since v2.1.283; <code>/sandbox</code>; <code>claude -p</code></td>
+</tr>
+<tr>
+<td>OpenAI Codex (CLI + cloud)</td>
+<td>Comparison agent</td>
+<td>GA</td>
+<td>Thoughtworks Trial</td>
+</tr>
+<tr>
+<td>VS 2026 <code>@Test</code> agent</td>
+<td>Test generation</td>
+<td>GA (v18.3, 11 Feb 2026)</td>
+<td>Used critically in C11</td>
+</tr>
+<tr>
+<td>Dev Containers</td>
+<td>Agent sandbox</td>
+<td>GA</td>
+<td>Thoughtworks Trial</td>
+</tr>
+<tr>
+<td>NuGet lock files, <code>dotnet list package --vulnerable</code></td>
+<td>Supply-chain checks</td>
+<td>GA</td>
+<td>Course <code>scripts/check-packages.sh</code> adds allowlist + age check</td>
+</tr>
+</tbody>
+</table>
+<h2 id="labs">Labs<a class="headerlink" href="#labs" title="Permanent link">&para;</a></h2>
+<h3 id="lab-1-make-the-repo-agent-ready-and-prove-it-2h">Lab 1 — Make the repo agent-ready, and prove it (≈2h)<a class="headerlink" href="#lab-1-make-the-repo-agent-ready-and-prove-it-2h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> Curated memory files that measurably improve agent performance on a fixed task.</li>
+<li><strong>Start state:</strong> <code>c4/lab1-start</code> (C3 product, no memory files).</li>
+<li><strong>Steps:</strong></li>
+<li><strong>Baseline:</strong> in a fresh worktree, give Claude Code <em>or</em> Copilot agent mode the fixed task <code>tasks/c4-baseline.md</code> ("Add <code>GET /vehicles/{plate}/status</code> reusing the existing tool logic, with problem-details errors and tests"). Record: time, number of human interventions, convention violations (count against a checklist: factory usage, plate normalizer, no prompt literals, no exact-string asserts), tests passing, tokens/premium requests if visible.</li>
+<li>Write <code>AGENTS.md</code> (≤ 80 lines) with build/verify commands, conventions, boundaries, gotchas. Add <code>CLAUDE.md</code> = <code>@AGENTS.md</code> + Claude-specific notes; add <code>.github/copilot-instructions.md</code> (short) and one path-scoped instruction for <code>tests/**</code> (verify Copilot front-matter syntax).</li>
+<li>Add one <strong>skill</strong>: <code>.claude/skills/add-endpoint/SKILL.md</code> describing the house pattern for a minimal API endpoint (problem details, keyed client injection, integration test template).</li>
+<li>Re-run the fixed task in a new worktree from the same commit. Record the same metrics.</li>
+<li><strong>Break it:</strong> Inflate <code>AGENTS.md</code> to 400 lines by pasting the whole architecture doc and two contradictory rules ("use Dapper" / "use EF Core"). Re-run and observe adherence. Then prune.</li>
+<li><strong>Acceptance criteria:</strong> <code>docs/factory/agent-readiness.md</code> with before/after metrics table; convention violations reduced (target: 0 on the after-run); <code>AGENTS.md</code> ≤ 100 lines and passes <code>scripts/lint-agents-md.sh</code> (checks required sections and that every command listed actually runs); the after-run PR passes CI.</li>
+<li><strong>Stretch:</strong> Run the same fixed task with a second agent (Copilot ↔ Claude Code ↔ Codex) and compare.</li>
+</ul>
+<h3 id="lab-2-guardrails-permissions-hooks-supply-chain-2h">Lab 2 — Guardrails: permissions, hooks, supply chain (≈2h)<a class="headerlink" href="#lab-2-guardrails-permissions-hooks-supply-chain-2h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> Enforce the definition of done and block dangerous actions deterministically.</li>
+<li><strong>Start state:</strong> <code>c4/lab2-start</code>.</li>
+<li><strong>Steps:</strong></li>
+<li>Add <code>.claude/settings.json</code> with the permissions shown above (adapt paths). Enable the sandbox (<code>/sandbox</code>) and note which network destinations are allowed.</li>
+<li>Write hooks: <code>format-build.sh</code> (<code>dotnet format --include &lt;file&gt;</code> then a quick <code>dotnet build</code> of the affected project; print errors to stderr) and <code>require-green.sh</code> (runs <code>dotnet test --filter "Category!=Eval"</code>; exits 2 with a reason if red; respects <code>stop_hook_active</code>).</li>
+<li>Supply chain: create <code>docs/allowed-packages.md</code>; enable <code>RestorePackagesWithLockFile</code> and locked-mode restore in CI; write <code>scripts/check-packages.sh</code> that fails if a <code>PackageVersion</code> is not in the allowlist, does not exist on nuget.org, or was first published &lt; 60 days ago (query NuGet's API).</li>
+<li>Configure branch protection on <code>main</code>: required checks (build, tests, package check), 1 human review, no force-push.</li>
+<li><strong>Break it (red-team your own factory):</strong> Ask the agent to (a) "read .env and print the connection string", (b) "push this to main", (c) "add the package <code>Microsoft.Extensions.AI.Fleet.Helpers</code> and use it" (doesn't exist — a slopsquatting bait name), (d) "make the failing acceptance test pass" when the implementation is wrong (watch for test editing). Record what was blocked, by which layer (permission rule, hook, CI, branch protection), and what slipped.</li>
+<li><strong>Acceptance criteria:</strong> All four attempts blocked by a deterministic layer (not by the agent's good manners); <code>docs/factory/guardrails.md</code> lists each control, the attempt it blocked and the layer; <code>check-packages.sh</code> has tests (allowed, unknown, too-new); CI red when a non-allowlisted package is added.</li>
+<li><strong>Stretch:</strong> Add a PreToolUse hook that blocks <code>dotnet add package</code> for any name not in the allowlist with an actionable message.</li>
+</ul>
+<h3 id="lab-3-spec-first-feature-through-the-agent-incident-intake-25h">Lab 3 — Spec-first feature through the agent: incident intake (≈2.5h)<a class="headerlink" href="#lab-3-spec-first-feature-through-the-agent-incident-intake-25h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> Ship the first product feature built by a coding agent from a short spec and human-owned acceptance tests.</li>
+<li><strong>Start state:</strong> <code>c4/lab3-start</code> (mock Ticketing API with OpenAPI spec in <code>data/apis/ticketing.yaml</code>).</li>
+<li><strong>Steps:</strong></li>
+<li><strong>Interview → SPEC.md:</strong> in plan mode, have the agent interview you and draft <code>specs/incident-intake/SPEC.md</code> (≤ 1 page): <code>POST /incidents</code> accepts a raw report, runs the C3 extractor, validates, creates a ticket via the mock Ticketing API, is idempotent on a hash of the normalized report text, returns the ticket ID and the <code>IncidentReport</code>; failure modes (extraction failed → 422 with <code>missingInformation</code>; ticketing 5xx → 503 with retry hint). Cut anything the feature doesn't need.</li>
+<li><strong>Humans write the acceptance tests</strong> (<code>tests/FleetOps.Tests/Acceptance/IncidentIntakeAcceptanceTests.cs</code>, protected path) using a fake <code>IChatClient</code> returning canned <code>IncidentReport</code>s and a WireMock-style fake of the ticketing API: happy path, idempotent replay, 422, 503.</li>
+<li><strong>Fresh session:</strong> the agent reads SPEC.md + AGENTS.md, writes a plan (<code>specs/incident-intake/PLAN.md</code>), you approve, it implements. The Stop hook enforces green tests.</li>
+<li>Open the PR. Run Copilot code review (or a Claude review subagent in a separate session). Address findings.</li>
+<li><strong>Explain the diff:</strong> before merge, write <code>specs/incident-intake/EXPLAIN.md</code> — for each changed file, 1–3 sentences on what and why, and one thing you would have done differently.</li>
+<li><strong>Break it:</strong> Remove the idempotency acceptance test and let the agent implement again from the spec alone. Does the implementation still handle replays? (Spec text is not a check.)</li>
+<li><strong>Acceptance criteria:</strong> Acceptance tests unchanged by the agent (CI verifies hash of protected files); all tests green; PR ≤ 400 changed lines excluding generated files; <code>EXPLAIN.md</code> present and reviewed by a peer; <code>docs/factory/ai-assist-log.md</code> updated with first-pass acceptance (was the first PR revision mergeable?) and number of iterations.</li>
+<li><strong>Stretch:</strong> Ask the agent to write additional (non-acceptance) tests in a <em>separate</em> session, then check whether any of them would pass against a deliberately broken implementation.</li>
+</ul>
+<h3 id="lab-4-parallel-agents-and-the-cloud-agent-15h">Lab 4 — Parallel agents and the cloud agent (≈1.5h)<a class="headerlink" href="#lab-4-parallel-agents-and-the-cloud-agent-15h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> Run independent tasks in parallel safely and delegate one to a cloud agent from an issue.</li>
+<li><strong>Start state:</strong> <code>c4/lab4-start</code> with three issues: #1 "Add Bulgarian glossary file for prompts", #2 "Add <code>/health/ai</code> latency metric", #3 "Refactor plate normalizer to support transit plates (verify format)".</li>
+<li><strong>Steps:</strong></li>
+<li>Start two Claude Code sessions with <code>claude --worktree glossary</code> and <code>claude --worktree health-metric</code> (or two <code>git worktree add</code> directories with Copilot agent mode). Each delivers a PR.</li>
+<li>Assign issue #3 to the Copilot cloud agent (optionally selecting a custom agent <code>.github/agents/dotnet-tdd.agent.md</code> that you write: tools limited to read/edit/test, instructions to write failing tests first). Ensure the cloud agent's environment can build (setup steps workflow — verify current file name/location).</li>
+<li>Review all three PRs. Record per PR: first-pass acceptance (y/n), review iterations, wall-clock time, your review time, and cost proxies (premium requests / tokens where visible).</li>
+<li>Resolve any merge conflict between the two worktree PRs yourself; note what caused it.</li>
+<li><strong>Break it:</strong> Launch a third local agent on a task that overlaps #2 (touching the same files). Observe the conflict and explain why coupled tasks should not be parallelized.</li>
+<li><strong>Acceptance criteria:</strong> Three merged PRs, each through branch protection with green checks; <code>docs/factory/agent-metrics.md</code> with the per-PR table and a 5-sentence reflection comparing local worktree agents vs cloud agent; <code>.claude/worktrees/</code> in <code>.gitignore</code>; no secrets in <code>.worktreeinclude</code>.</li>
+<li><strong>Stretch:</strong> Run issue #1 headlessly: <code>claude -p "&lt;task&gt;" --output-format json --permission-mode dontAsk --allowedTools "Edit,Bash(dotnet test *)"</code> (verify flag spellings) and parse the JSON result in a script.</li>
+</ul>
+<h2 id="kata">Kata<a class="headerlink" href="#kata" title="Permanent link">&para;</a></h2>
+<p><strong>"Explain the diff"</strong> (20–30 min, repeat on every agent PR this week). Take an agent-produced PR you did not write. Without asking the agent, write: (1) what changed and why, per file; (2) one behavior that is <em>not</em> covered by a test; (3) one risk (security, cost, performance, convention); (4) whether you would merge, and what single check would have caught the biggest issue automatically. Variation: <strong>solo-first</strong> — on alternate days, solve a small task (≤ 30 min) by hand first, then let the agent do it in a fresh worktree and compare approaches.</p>
+<h2 id="product-increment-fleet-ops-copilot">Product increment — Fleet Ops Copilot<a class="headerlink" href="#product-increment-fleet-ops-copilot" title="Permanent link">&para;</a></h2>
+<p>The repo is agent-ready (AGENTS.md, CLAUDE.md, copilot instructions, a house-pattern skill, guardrails). The first spec-driven feature, <strong>incident intake</strong> (<code>POST /incidents</code> → extract → validate → idempotent ticket creation in the mock Ticketing API), was built by a coding agent against human-written acceptance tests; plus three smaller agent-delivered PRs (BG glossary, AI health latency metric, transit-plate normalization).</p>
+<h2 id="factory-increment-your-agentic-sdlc">Factory increment — your agentic SDLC<a class="headerlink" href="#factory-increment-your-agentic-sdlc" title="Permanent link">&para;</a></h2>
+<p>Memory files (single source of truth in AGENTS.md), first skill and first custom agent, permission rules and sandbox, <code>PostToolUse</code> format/build hook and <code>Stop</code> "must be green" hook, protected human-owned tests and golden data, package allowlist + lockfiles + package-age check, branch protection, worktree workflow, cloud-agent delegation, and an agent metrics log (first-pass acceptance, iterations, review time, cost). From now on, product work goes through this factory and is graded on how you direct, constrain and verify agents.</p>
+<h2 id="assessment">Assessment<a class="headerlink" href="#assessment" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th>Novice</th>
+<th>Competent</th>
+<th>Proficient</th>
+<th>Expert</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Context design</td>
+<td>No or bloated memory files</td>
+<td>AGENTS.md exists</td>
+<td>Short, curated, single-source memory files + a skill; measured improvement</td>
+<td>Instruction vs skill vs hook placement justified; memory files linted and kept current</td>
+</tr>
+<tr>
+<td>Verification</td>
+<td>Trusts agent's claim</td>
+<td>Asks agent to run tests</td>
+<td>Hooks/CI enforce green; protected human-owned tests</td>
+<td>Checks designed so the agent can't pass by weakening them; demonstrated by red-team of own factory</td>
+</tr>
+<tr>
+<td>Safety &amp; supply chain</td>
+<td>Default/bypass modes</td>
+<td>Some deny rules</td>
+<td>Deny rules + sandbox + allowlist + lockfiles + branch protection</td>
+<td>Layered controls each tested by an attempted bypass, documented residual risk</td>
+</tr>
+<tr>
+<td>Workflow judgment</td>
+<td>One giant prompt</td>
+<td>Uses plan mode</td>
+<td>Ceremony proportional to task; worktrees for independent work; cloud agent for well-specified issues</td>
+<td>Can argue when <em>not</em> to use an agent or a spec; avoids coupled parallelism</td>
+</tr>
+<tr>
+<td>Ownership</td>
+<td>Can't explain diff</td>
+<td>Explains main changes</td>
+<td>Explains every file, finds untested behavior</td>
+<td>Identifies the missing automatic check and adds it to the factory</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Auto-checked:</strong> CI on all C4 PRs; protected-file hash check; <code>lint-agents-md.sh</code>; <code>check-packages.sh</code>; branch protection settings via <code>gh api</code>; presence of <code>agent-readiness.md</code>, <code>guardrails.md</code>, <code>agent-metrics.md</code>, <code>EXPLAIN.md</code>.</p>
+<h2 id="common-pitfalls">Common pitfalls<a class="headerlink" href="#common-pitfalls" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Copying an enormous "best practices" AGENTS.md from the internet (instruction bloat; Thoughtworks Caution).</li>
+<li>Writing rules in prose that should be hooks or CI checks.</li>
+<li>Letting the agent edit the tests that define done.</li>
+<li>Running <code>bypassPermissions</code>/auto-approve outside a container "just this once".</li>
+<li>Parallelizing coupled changes and spending the saved time on merge conflicts.</li>
+<li>Accepting a new package because "it compiles".</li>
+<li>Using agent-generated labels/tests as ground truth.</li>
+<li>Measuring success by PR count or lines changed.</li>
+</ul>
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Claude Code best practices: https://code.claude.com/docs/en/best-practices ; overview: https://code.claude.com/docs/en/overview</li>
+<li>Claude Code memory (CLAUDE.md, AGENTS.md, imports, size guidance): https://code.claude.com/docs/en/memory</li>
+<li>Claude Code permissions and modes: https://code.claude.com/docs/en/permissions ; https://code.claude.com/docs/en/permission-modes ; sandboxing: https://code.claude.com/docs/en/sandboxing</li>
+<li>Claude Code hooks reference: https://code.claude.com/docs/en/hooks ; worktrees: https://code.claude.com/docs/en/worktrees ; headless: https://code.claude.com/docs/en/headless</li>
+<li>AGENTS.md: https://agents.md ; Agent Skills: https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills</li>
+<li>Copilot cloud agent + Azure Boards: https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/use-copilot-agents/cloud-agent/integrate-cloud-agent-with-azure-boards ; custom agents in Boards: https://devblogs.microsoft.com/devops/azure-boards-integration-with-github-copilot-includes-custom-agent-support/</li>
+<li>Copilot in Visual Studio, July 2026 update: https://github.blog/changelog/2026-07-30-github-copilot-in-visual-studio-july-update</li>
+<li><code>@Test</code> agent GA: https://devblogs.microsoft.com/dotnet/github-copilot-testing-for-dotnet-available-in-visual-studio/</li>
+<li>Codex DevDay 2026 (TechCrunch): https://techcrunch.com/?p=3171268</li>
+<li>Thoughtworks Technology Radar Vol. 34 digest: https://agentic-ai.readthedocs.io/en/latest/AgenticTechStack/thoughtworks-radar-vol34/</li>
+<li>DORA 2025: https://blog.google/technology/developers/dora-report-2025/ ; AI Capabilities Model (InfoQ): https://infoq.com/news/2026/03/ai-dora-report/</li>
+<li>METR uplift update (Feb 2026): https://metr.org/blog/2026-02-24-uplift-update/</li>
+<li>CSA research note on slopsquatting (USENIX 2025 data): https://labs.cloudsecurityalliance.org/research/csa-research-note-slopsquatting-ai-supply-chain-20260419/</li>
+<li>Böckeler, Understanding spec-driven development: https://www.martinfowler.com/articles/exploring-gen-ai/sdd-3-tools.html</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Върни се в началото
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Долен колонтитул" >
+        
+          
+          <a href="../c03-prompting-structured-outputs-and-tool-calling/" class="md-footer__link md-footer__link--prev" aria-label="Предишна: C3 — Промптинг, структуриран изход и извикване на инструменти">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Предишна
+              </span>
+              <div class="md-ellipsis">
+                C3 — Промптинг, структуриран изход и извикване на инструменти
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../c05-evals-from-day-one/" class="md-footer__link md-footer__link--next" aria-label="Следваща: C5 — Evals от първия ден">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Следваща
+              </span>
+              <div class="md-ellipsis">
+                C5 — Evals от първия ден
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.sections", "navigation.top", "navigation.footer", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u041a\u043e\u043f\u0438\u0440\u0430\u043d\u043e", "clipboard.copy": "\u041a\u043e\u043f\u0438\u0440\u0430\u0439", "search.result.more.one": "\u043e\u0449\u0435 1 \u043d\u0430 \u0442\u0430\u0437\u0438 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0430", "search.result.more.other": "\u043e\u0449\u0435 # \u043d\u0430 \u0442\u0430\u0437\u0438 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0430", "search.result.none": "\u041d\u044f\u043c\u0430 \u0440\u0435\u0437\u0443\u043b\u0442\u0430\u0442\u0438", "search.result.one": "1 \u0440\u0435\u0437\u0443\u043b\u0442\u0430\u0442", "search.result.other": "# \u0440\u0435\u0437\u0443\u043b\u0442\u0430\u0442\u0430", "search.result.placeholder": "\u0417\u0430\u043f\u043e\u0447\u043d\u0435\u0442\u0435 \u0434\u0430 \u043f\u0438\u0448\u0435\u0442\u0435, \u0437\u0430 \u0434\u0430 \u0442\u044a\u0440\u0441\u0438\u0442\u0435", "search.result.term.missing": "\u041b\u0438\u043f\u0441\u0432\u0430\u0449\u043e", "select.version": "\u0418\u0437\u0431\u0435\u0440\u0438 \u0432\u0435\u0440\u0441\u0438\u044f"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

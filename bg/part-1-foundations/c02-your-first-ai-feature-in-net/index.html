@@ -1,0 +1,3065 @@
+
+<!doctype html>
+<html lang="bg" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Learning-by-doing course, release 2026.11 (content as of October 2026)">
+      
+      
+      
+      
+        <link rel="prev" href="../c01-how-generative-ai-works-an-engineer-s-mental-model/">
+      
+      
+        <link rel="next" href="../c03-prompting-structured-outputs-and-tool-calling/">
+      
+      
+        
+          <link rel="alternate" href="../../../part-1-foundations/c02-your-first-ai-feature-in-net/" hreflang="en">
+        
+          <link rel="alternate" href="./" hreflang="bg">
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>C2 — Първата ви AI функционалност в .NET - AI Solution Developer & Architect — Наръчник за курсиста</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#c2-your-first-ai-feature-in-net" class="md-skip">
+          Към съдържанието
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Горен колонтитул">
+    <a href="../../" title="AI Solution Developer &amp; Architect — Наръчник за курсиста" class="md-header__button md-logo" aria-label="AI Solution Developer & Architect — Наръчник за курсиста" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            AI Solution Developer & Architect — Наръчник за курсиста
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              C2 — Първата ви AI функционалност в .NET
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="Избери език">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href="../../../part-1-foundations/c02-your-first-ai-feature-in-net/" hreflang="en" class="md-select__link">
+              English
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="./" hreflang="bg" class="md-select__link">
+              Български
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Търси" placeholder="Търси" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Търси">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Изчисти" aria-label="Изчисти" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Инициализирано търсене
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Навигация" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../" title="AI Solution Developer &amp; Architect — Наръчник за курсиста" class="md-nav__button md-logo" aria-label="AI Solution Developer & Architect — Наръчник за курсиста" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    AI Solution Developer & Architect — Наръчник за курсиста
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Добре дошли
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Започнете оттук
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Започнете оттук
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/how-to-use/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Как да използвате наръчника
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/course-overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Преглед на курса
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/assessment-gates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Оценяване и гейтове
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/competency-matrix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Матрица на компетентностите
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Част 1 — Основи (ниво 1)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Част 1 — Основи (ниво 1)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../c00-orientation-setup-and-toolchain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C0 — Ориентация, настройка и инструменти
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../c01-how-generative-ai-works-an-engineer-s-mental-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C1 — Как работи генеративният AI: мисловен модел за инженери
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C2 — Първата ви AI функционалност в .NET
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C2 — Първата ви AI функционалност в .NET
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Съдържание">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Съдържание
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-this-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why this matters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learning outcomes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concepts
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Concepts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-net-ai-stack-layered" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The .NET AI stack, layered
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ichatclient-in-one-screen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IChatClient in one screen
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#two-endpoint-paths-to-foundry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Two endpoint paths to Foundry
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-middleware-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The middleware pipeline
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#observability-with-aspire" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Observability with Aspire
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#provider-swap-and-capability-drift" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Provider swap and capability drift
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#keyless-auth-and-secrets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Keyless auth and secrets
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rate-limits-429s-and-retries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rate limits, 429s and retries
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#misconceptions-to-unlearn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Misconceptions to unlearn
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tools-versions-as-of-oct-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tools &amp; versions (as of Oct 2026)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#labs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Labs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Labs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lab-1-ask-fleet-ops-console-on-ichatclient-25h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 1 — "Ask Fleet Ops" console on IChatClient (≈2.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-2-the-middleware-pipeline-logging-otel-cache-cost-25h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 2 — The middleware pipeline: logging, OTel, cache, cost (≈2.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-3-minimal-api-di-aspire-and-the-provider-swap-25h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 3 — Minimal API, DI, Aspire and the provider swap (≈2.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-4-resilience-429s-timeouts-concurrency-15h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 4 — Resilience: 429s, timeouts, concurrency (≈1.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kata
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#product-increment-fleet-ops-copilot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Product increment — Fleet Ops Copilot
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#factory-increment-your-agentic-sdlc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Factory increment — your agentic SDLC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assessment
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common pitfalls
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../c03-prompting-structured-outputs-and-tool-calling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C3 — Промптинг, структуриран изход и извикване на инструменти
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../c04-working-with-coding-agents-the-factory-day-one/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C4 — Работа с кодиращи агенти: Фабриката, първи ден
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../c05-evals-from-day-one/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C5 — Evals от първия ден
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Част 2 — Градивни елементи (ниво 2)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Част 2 — Градивни елементи (ниво 2)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c06-embeddings-and-vector-search/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C6 — Embeddings и векторно търсене
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c07-rag-from-documents-to-cited-permission-aware-answers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C7 — RAG: от документи до отговори с цитати, съобразени с правата на достъп
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c08-tools-and-the-model-context-protocol/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C8 — Инструменти и Model Context Protocol
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c09-agents-with-microsoft-agent-framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C9 — Агенти с Microsoft Agent Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c10-agents-over-structured-data-text-to-sql-on-sql-server/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C10 — Агенти върху структурирани данни: text-to-SQL върху SQL Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c11-agentic-testing-ai-driven-tdd-mutation-and-e2e-test-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C11 — Агентно тестване: TDD с AI, мутационно тестване и агенти за E2E тестове
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Част 3 — Продукционни системи (ниво 3)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Част 3 — Продукционни системи (ниво 3)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c12-workflows-and-multi-agent-orchestration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C12 — Workflows и многоагентна оркестрация
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c13-context-engineering-advanced-retrieval-and-memory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C13 — Инженеринг на контекста, напреднало извличане и памет
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c14-failure-driven-evals-llm-judges-and-red-teaming/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C14 — Evals, водени от грешките, LLM съдии и red teaming
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c15-observability-genaiops-and-cost/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C15 — Наблюдаемост, GenAIOps и разходи
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c16-security-for-llm-and-agentic-systems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C16 — Сигурност на LLM и агентни системи
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c17-shipping-to-azure-hosting-ai-gateway-iac-and-interop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C17 — Пускане в Azure: хостинг, AI gateway, IaC и оперативна съвместимост
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c18-responsible-ai-and-the-eu-ai-act-in-practice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C18 — Отговорен AI и Актът за изкуствения интелект на ЕС на практика
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c19-the-automated-sdlc-agents-from-issue-to-production/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C19 — Автоматизираният SDLC: агенти от issue до продукция
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Част 4 — Експертна специализация: AI Solution Developer
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Част 4 — Експертна специализация: AI Solution Developer
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d01-model-customization-and-small-local-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D1 — Адаптиране на модели и малки/локални модели
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d02-long-running-durable-and-autonomous-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D2 — Дълго работещи, устойчиви и автономни агенти
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d03-multimodal-and-realtime-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D3 — Мултимодални агенти и агенти в реално време
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d04-agent-ux-and-front-ends/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D4 — UX и фронтенди за агенти
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d05-performance-and-cost-engineering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D5 — Инженеринг на производителността и разходите
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d06-building-your-own-agent-tooling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D6 — Изграждане на собствени инструменти за агенти
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d07-agent-reliability-engineering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D7 — Инженеринг на надеждността на агенти
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Част 5 — Експертна специализация: AI Solution Architect
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Част 5 — Експертна специализация: AI Solution Architect
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a01-ai-strategy-use-case-discovery-and-business-case/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A1 — AI стратегия, откриване на сценарии на употреба и бизнес обосновка
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a02-azure-ai-reference-architectures-and-well-architected-for-ai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A2 — Референтни AI архитектури в Azure и Well-Architected за AI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a03-enterprise-knowledge-and-data-architecture-for-ai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A3 — Корпоративна архитектура на знанията и данните за AI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a04-agent-platform-and-integration-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A4 — Платформа за агенти и интеграционна архитектура
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a05-reliability-scale-model-lifecycle-and-finops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A5 — Надеждност, мащаб, жизнен цикъл на моделите и FinOps
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a06-ai-governance-risk-and-compliance-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A6 — Архитектура за управление на AI, риска и съответствието
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a07-the-architect-s-craft-in-ai-programmes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A7 — Занаятът на архитекта в AI програми
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Част 6 — Съвместен финален проект
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Част 6 — Съвместен финален проект
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capstone/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Финален проект
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Приложение
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Приложение
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Речник на термините
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/references/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Допълнителна литература
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Съдържание">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Съдържание
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-this-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why this matters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learning outcomes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concepts
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Concepts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-net-ai-stack-layered" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The .NET AI stack, layered
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ichatclient-in-one-screen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IChatClient in one screen
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#two-endpoint-paths-to-foundry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Two endpoint paths to Foundry
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-middleware-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The middleware pipeline
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#observability-with-aspire" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Observability with Aspire
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#provider-swap-and-capability-drift" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Provider swap and capability drift
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#keyless-auth-and-secrets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Keyless auth and secrets
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rate-limits-429s-and-retries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rate limits, 429s and retries
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#misconceptions-to-unlearn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Misconceptions to unlearn
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tools-versions-as-of-oct-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tools &amp; versions (as of Oct 2026)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#labs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Labs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Labs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lab-1-ask-fleet-ops-console-on-ichatclient-25h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 1 — "Ask Fleet Ops" console on IChatClient (≈2.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-2-the-middleware-pipeline-logging-otel-cache-cost-25h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 2 — The middleware pipeline: logging, OTel, cache, cost (≈2.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-3-minimal-api-di-aspire-and-the-provider-swap-25h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 3 — Minimal API, DI, Aspire and the provider swap (≈2.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-4-resilience-429s-timeouts-concurrency-15h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 4 — Resilience: 429s, timeouts, concurrency (≈1.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kata
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#product-increment-fleet-ops-copilot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Product increment — Fleet Ops Copilot
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#factory-increment-your-agentic-sdlc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Factory increment — your agentic SDLC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assessment
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common pitfalls
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="c2-your-first-ai-feature-in-net">C2 — Your first AI feature in .NET<a class="headerlink" href="#c2-your-first-ai-feature-in-net" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><strong>Level:</strong> 1 — Foundations (Beginner) · <strong>Duration:</strong> 12h (theory 25% / labs 75%) · <strong>Prerequisites:</strong> C0 (env, Foundry project, model roles), C1 (tokens, sampling, cost per task) · <strong>Volatility:</strong> Med (MEAI 10.x is GA and stable; OpenAI/Foundry SDK surface and Responses adapters move quarterly)</p>
+</blockquote>
+<h2 id="why-this-matters">Why this matters<a class="headerlink" href="#why-this-matters" title="Permanent link">&para;</a></h2>
+<p>Trakia's first copilot prototype was written in an afternoon: an <code>HttpClient</code> posting JSON to a model endpoint, a hard-coded model name, an API key in <code>appsettings.json</code>, string concatenation for the conversation, and no logging. It demoed well. Then the model was deprecated (60-day notice, <code>410 Gone</code> after retirement), the security review rejected the key, the first load test produced a wall of <code>429 Too Many Requests</code> that the code treated as fatal, and nobody could answer "what did that conversation cost?" because token usage was never captured.</p>
+<p>The fix is not "more code" but the right abstraction. <strong>Microsoft.Extensions.AI (MEAI)</strong> gives .NET a provider-agnostic <code>IChatClient</code> with a composable <strong>middleware pipeline</strong> — the same shape ASP.NET Core developers know from HTTP middleware. Logging, OpenTelemetry, caching, tool invocation, cost accounting and guardrails become decorators you add in DI, and the provider (Foundry cloud model, Foundry Local, any OpenAI-compatible endpoint) becomes configuration. Microsoft Agent Framework (C9) and the MCP SDK (C8) are built on these same abstractions, so everything you learn here carries forward.</p>
+<p>Experts ship the <em>boring</em> parts on day one: keyless auth, retries that honor <code>Retry-After</code>, cancellation, streaming with back-pressure, usage capture per call, and traces that show every model call in the Aspire dashboard. That is what makes the later modules — evals, cost dashboards, model migrations — possible at all.</p>
+<h2 id="learning-outcomes">Learning outcomes<a class="headerlink" href="#learning-outcomes" title="Permanent link">&para;</a></h2>
+<p>By the end of C2 you can:</p>
+<ol>
+<li><strong>Implement</strong> a chat feature on <code>IChatClient</code> with conversation state, <code>ChatOptions</code> and streaming (<code>GetStreamingResponseAsync</code>) in a console app and an ASP.NET Core minimal API.</li>
+<li><strong>Connect</strong> to Foundry via the OpenAI v1 endpoint and via the Foundry project endpoint (Responses API), and <strong>justify</strong> which path to use.</li>
+<li><strong>Compose</strong> a middleware pipeline with <code>ChatClientBuilder</code>: logging, OpenTelemetry, distributed caching, function invocation, plus a custom cost-logging/budget middleware.</li>
+<li><strong>Register</strong> chat clients in DI (including keyed clients per model role) and orchestrate the app with Aspire, seeing GenAI spans in the dashboard.</li>
+<li><strong>Swap</strong> providers (Foundry ↔ Foundry Local ↔ OpenAI-compatible local runner) by configuration only, and <strong>detect</strong> capability differences between them.</li>
+<li><strong>Configure</strong> keyless authentication (Entra ID locally, managed identity in Azure) and keep secrets out of source.</li>
+<li><strong>Handle</strong> 429s, timeouts and transient faults with bounded retries that honor <code>Retry-After</code>, plus cancellation and concurrency limits.</li>
+<li><strong>Log</strong> token usage and cost per call and per conversation using the C1 cost calculator.</li>
+</ol>
+<h2 id="concepts">Concepts<a class="headerlink" href="#concepts" title="Permanent link">&para;</a></h2>
+<h3 id="the-net-ai-stack-layered">The .NET AI stack, layered<a class="headerlink" href="#the-net-ai-stack-layered" title="Permanent link">&para;</a></h3>
+<p>Microsoft's .NET AI decision guide: <strong>MEAI</strong> (<code>IChatClient</code>, <code>IEmbeddingGenerator</code>, <code>ChatClientBuilder</code>) for AI behavior; <strong>MEVD/MEDI</strong> for your own data (C6–C7); <strong>MCP SDK</strong> to share capabilities (C8); <strong>MAF</strong> or the <strong>Copilot SDK</strong> for agents (C9); <strong>Foundry / Foundry Local / Aspire</strong> for hosting. <code>IChatClient</code> and <code>IEmbeddingGenerator&lt;,&gt;</code> were extracted from Semantic Kernel into MEAI; <code>Microsoft.Extensions.AI.Abstractions</code> is at 10.5.0 (version-aligned with .NET 10).</p>
+<h3 id="ichatclient-in-one-screen"><code>IChatClient</code> in one screen<a class="headerlink" href="#ichatclient-in-one-screen" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">interface</span><span class="w"> </span><span class="n">IChatClient</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IDisposable</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">Task</span><span class="o">&lt;</span><span class="n">ChatResponse</span><span class="o">&gt;</span><span class="w"> </span><span class="n">GetResponseAsync</span><span class="p">(</span><span class="n">IEnumerable</span><span class="o">&lt;</span><span class="n">ChatMessage</span><span class="o">&gt;</span><span class="w"> </span><span class="n">messages</span><span class="p">,</span>
+<span class="w">        </span><span class="n">ChatOptions</span><span class="o">?</span><span class="w"> </span><span class="n">options</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">null</span><span class="p">,</span><span class="w"> </span><span class="n">CancellationToken</span><span class="w"> </span><span class="n">cancellationToken</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">);</span>
+<span class="w">    </span><span class="n">IAsyncEnumerable</span><span class="o">&lt;</span><span class="n">ChatResponseUpdate</span><span class="o">&gt;</span><span class="w"> </span><span class="n">GetStreamingResponseAsync</span><span class="p">(</span><span class="n">IEnumerable</span><span class="o">&lt;</span><span class="n">ChatMessage</span><span class="o">&gt;</span><span class="w"> </span><span class="n">messages</span><span class="p">,</span>
+<span class="w">        </span><span class="n">ChatOptions</span><span class="o">?</span><span class="w"> </span><span class="n">options</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">null</span><span class="p">,</span><span class="w"> </span><span class="n">CancellationToken</span><span class="w"> </span><span class="n">cancellationToken</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">object?</span><span class="w"> </span><span class="n">GetService</span><span class="p">(</span><span class="n">Type</span><span class="w"> </span><span class="n">serviceType</span><span class="p">,</span><span class="w"> </span><span class="kt">object?</span><span class="w"> </span><span class="n">serviceKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">null</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<ul>
+<li><strong>Messages</strong> carry a role (<code>System</code>, <code>User</code>, <code>Assistant</code>, <code>Tool</code>) and a list of <code>AIContent</code> items: <code>TextContent</code>, <code>DataContent</code> (images/audio bytes), <code>UriContent</code>, <code>FunctionCallContent</code>/<code>FunctionResultContent</code> (C3), and approval-request content for human-in-the-loop (C9).</li>
+<li><strong><code>ChatOptions</code></strong>: <code>ModelId</code>, <code>Temperature</code>, <code>TopP</code>, <code>MaxOutputTokens</code>, <code>StopSequences</code>, <code>Seed</code>, <code>ResponseFormat</code>, <code>Tools</code>, <code>ToolMode</code>, plus an escape hatch for provider-specific options (e.g. reasoning effort) via <code>AdditionalProperties</code> or a raw-representation factory — verify the current mechanism for effort on your provider adapter before teaching.</li>
+<li><strong><code>ChatResponse</code></strong>: <code>Messages</code>, <code>Text</code>, <code>FinishReason</code>, <code>ModelId</code>, <strong><code>Usage</code></strong> (<code>InputTokenCount</code>, <code>OutputTokenCount</code>, <code>TotalTokenCount</code>, plus provider extras in <code>AdditionalCounts</code>, where reasoning/cached tokens may appear — inspect per provider), <code>RawRepresentation</code> (the provider's object, for debugging).</li>
+<li><strong>Streaming</strong> yields <code>ChatResponseUpdate</code>s; <code>updates.ToChatResponse()</code> reassembles a full response (including usage, if the provider sends it at the end).</li>
+<li><strong>Statelessness:</strong> with Chat Completions you send the whole history every call (and pay for it — C1). The Responses API can hold conversation state server-side; MEAI surfaces this via a conversation/response ID on options/response (verify property names in your MEAI version). Server-side state cuts payload size but couples you to the provider and its retention policy — a GDPR question (C18).</li>
+</ul>
+<h3 id="two-endpoint-paths-to-foundry">Two endpoint paths to Foundry<a class="headerlink" href="#two-endpoint-paths-to-foundry" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>OpenAI v1 endpoint</th>
+<th>Foundry project endpoint</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>URL</td>
+<td><code>https://&lt;res&gt;.openai.azure.com/openai/v1/</code></td>
+<td><code>https://&lt;res&gt;.services.ai.azure.com/api/projects/&lt;project&gt;</code></td>
+</tr>
+<tr>
+<td>.NET package</td>
+<td><code>OpenAI</code> + <code>Microsoft.Extensions.AI.OpenAI</code> adapter</td>
+<td><code>Azure.AI.Projects</code> 2.0 / <code>Azure.AI.Extensions.OpenAI</code> 2.0 (GA)</td>
+</tr>
+<tr>
+<td>Auth</td>
+<td><code>BearerTokenPolicy(cred, "https://ai.azure.com/.default")</code> (token scope per the SDK overview at release time — some docs still use <code>https://cognitiveservices.azure.com/.default</code>; verify against current documentation)</td>
+<td><code>DefaultAzureCredential</code></td>
+</tr>
+<tr>
+<td>Use when</td>
+<td>Plain model calls; maximum portability (same code hits any OpenAI-compatible server incl. Foundry Local)</td>
+<td>You need project-scoped features: agents, connections, evaluations, tracing in the Foundry Control Plane</td>
+</tr>
+</tbody>
+</table>
+<p>Both expose the <strong>Responses API</strong> (the successor to the Assistants API, retired 26 Aug 2026). Some OpenAI-package APIs require <code>#pragma warning disable OPENAI001</code>. Never mix the preview <code>Azure.AI.Projects.OpenAI</code> with GA <code>Azure.AI.Extensions.OpenAI</code>.</p>
+<h3 id="the-middleware-pipeline">The middleware pipeline<a class="headerlink" href="#the-middleware-pipeline" title="Permanent link">&para;</a></h3>
+<p><code>ChatClientBuilder</code> wraps an inner client in delegating clients; order matters (outermost first in the builder chain):</p>
+<div class="highlight"><pre><span></span><code><span class="n">IChatClient</span><span class="w"> </span><span class="n">client</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ChatClientBuilder</span><span class="p">(</span><span class="n">innerClient</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="n">UseLogging</span><span class="p">(</span><span class="n">loggerFactory</span><span class="p">)</span><span class="w">                 </span><span class="c1">// outermost: sees every request incl. cache hits</span>
+<span class="w">    </span><span class="p">.</span><span class="n">UseDistributedCache</span><span class="p">(</span><span class="n">cache</span><span class="p">)</span><span class="w">                </span><span class="c1">// identical requests served from cache (non-personal prompts only)</span>
+<span class="w">    </span><span class="p">.</span><span class="n">UseFunctionInvocation</span><span class="p">()</span><span class="w">                   </span><span class="c1">// runs tool loops (C3); everything below sees each iteration</span>
+<span class="w">    </span><span class="p">.</span><span class="n">UseOpenTelemetry</span><span class="p">(</span><span class="n">sourceName</span><span class="p">:</span><span class="w"> </span><span class="s">"FleetOps.AI"</span><span class="p">,</span><span class="w"> </span><span class="n">configure</span><span class="p">:</span><span class="w"> </span><span class="n">o</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">EnableSensitiveData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">false</span><span class="p">)</span><span class="w"> </span><span class="c1">// one span per model call</span>
+<span class="w">    </span><span class="p">.</span><span class="n">Use</span><span class="p">(</span><span class="n">inner</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">CostTrackingChatClient</span><span class="p">(</span><span class="n">inner</span><span class="p">,</span><span class="w"> </span><span class="n">pricing</span><span class="p">,</span><span class="w"> </span><span class="n">costSink</span><span class="p">))</span><span class="w">  </span><span class="c1">// custom; closest to the provider</span>
+<span class="w">    </span><span class="p">.</span><span class="n">Build</span><span class="p">(</span><span class="n">services</span><span class="p">);</span>
+</code></pre></div>
+<p>Design rules (the first <code>Use…</code> call is the <em>outermost</em> wrapper; each wrapper only sees calls that pass through it):</p>
+<ul>
+<li><strong>Logging outside the cache</strong> if you want to observe cache hits; <strong>cost tracking inside the cache</strong> so cached responses cost €0.</li>
+<li><strong>Function invocation outside (above) per-call telemetry and cost tracking</strong>, so each tool-loop iteration is individually traced and costed. If you place <code>UseFunctionInvocation()</code> innermost, the outer middleware sees one aggregated call per user request ("tool loops show only one span" — kata below). Caching <em>outside</em> function invocation caches the final answer of a tool loop; never do that for answers built from live data (vehicle status).</li>
+<li><strong>Sensitive data</strong> (prompt/response content) is off by default in OTel; content capture in EU production must be justified in the DPIA. Turn it on in dev only.</li>
+<li><strong>Custom middleware</strong> subclasses <code>DelegatingChatClient</code> and overrides both the non-streaming and streaming methods — forgetting the streaming override is the most common bug.</li>
+<li>Caching LLM responses is safe for deterministic, non-personal prompts (evals, static lookups). <strong>Never</strong> cache user- or time-specific answers across users (leakage).</li>
+</ul>
+<h3 id="observability-with-aspire">Observability with Aspire<a class="headerlink" href="#observability-with-aspire" title="Permanent link">&para;</a></h3>
+<p>Aspire's AppHost starts the API, SQL Server container and any local resources; ServiceDefaults wire OpenTelemetry. Register your MEAI source name with the tracer/meter providers, and model calls appear as GenAI spans (the dashboard marks LLM calls with a "sparkles" indicator). Span/attribute names follow the <strong>OpenTelemetry GenAI semantic conventions</strong>, which are still entirely at "Development" stability and moved to <code>open-telemetry/semantic-conventions-genai</code> in v1.42.0 — attribute names can change (<code>gen_ai.system</code> → <code>gen_ai.provider.name</code> already did). Pin package versions and don't build dashboards on attribute names you haven't verified (C15 goes deep).</p>
+<h3 id="provider-swap-and-capability-drift">Provider swap and capability drift<a class="headerlink" href="#provider-swap-and-capability-drift" title="Permanent link">&para;</a></h3>
+<p>Foundry Local, Ollama, LLamaSharp and ONNX Runtime GenAI all plug into <code>IChatClient</code> (Foundry Local and Ollama via OpenAI-compatible endpoints or dedicated adapters). The <em>code</em> swaps by config; the <em>behavior</em> does not: small local models may lack tool calling, honor JSON schemas less reliably, ignore some options, report usage differently and have far smaller context windows. A provider swap without an eval run (C5) is an untested deployment. Use <code>GetService&lt;ChatClientMetadata&gt;()</code> to log provider and model identity on every call.</p>
+<h3 id="keyless-auth-and-secrets">Keyless auth and secrets<a class="headerlink" href="#keyless-auth-and-secrets" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Local: <code>az login</code> + <code>DefaultAzureCredential</code> (or <code>AzureCliCredential</code> for faster startup and fewer surprises).</li>
+<li>Azure: <strong>managed identity</strong> of the hosting resource (Container Apps/App Service, C17) with a data-plane role on the Foundry resource.</li>
+<li>CI: OIDC federated credential (C5).</li>
+<li>Local OpenAI-compatible runners: dummy key from config; never a real key.</li>
+<li>Config hierarchy: <code>appsettings.json</code> (non-secret), environment/Aspire parameters, user-secrets in dev; Key Vault references only for truly unavoidable secrets.</li>
+</ul>
+<h3 id="rate-limits-429s-and-retries">Rate limits, 429s and retries<a class="headerlink" href="#rate-limits-429s-and-retries" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Deployments have <strong>TPM</strong> (tokens per minute) and request-rate limits. Exceeding them returns <strong>429</strong> with a <code>Retry-After</code> header (Azure also returns remaining-quota headers — verify names before teaching).</li>
+<li>The <code>OpenAI</code>/Azure SDK client pipeline retries transient failures (429, 5xx, timeouts) with exponential backoff by default; configure <code>OpenAIClientOptions.RetryPolicy</code> and <code>NetworkTimeout</code> explicitly rather than trusting defaults (verify default retry count for your package version).</li>
+<li><strong>Do not stack retry layers</strong> (SDK retries × your Polly retries × gateway retries = retry storms).</li>
+<li>Retries are not free: a retried long prompt is re-billed for input; a streaming response that fails mid-way can't be resumed transparently.</li>
+<li>Concurrency control: a <code>SemaphoreSlim</code>/<code>System.Threading.RateLimiting</code> limiter in front of the client keeps you under TPM rather than reacting to 429s.</li>
+<li>Long-term fixes are architectural: APIM AI gateway with token limits and priority backends (C15, C17), Batch for offline work, smaller models for bulk.</li>
+</ul>
+<h3 id="misconceptions-to-unlearn">Misconceptions to unlearn<a class="headerlink" href="#misconceptions-to-unlearn" title="Permanent link">&para;</a></h3>
+<ul>
+<li>"The SDK is the abstraction." The SDK is a provider; <code>IChatClient</code> is the abstraction your code depends on.</li>
+<li>"Streaming makes it faster." It improves <em>perceived</em> latency (TTFT); total time and cost are unchanged.</li>
+<li>"A provider swap is a config change." It's a config change <em>plus an eval run</em>.</li>
+<li>"Retries fix 429s." Retries smooth bursts; sustained 429s mean capacity planning.</li>
+</ul>
+<h2 id="tools-versions-as-of-oct-2026">Tools &amp; versions (as of Oct 2026)<a class="headerlink" href="#tools-versions-as-of-oct-2026" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Tool / package</th>
+<th>Purpose</th>
+<th>Status</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Microsoft.Extensions.AI</code> / <code>.Abstractions</code> 10.5.0</td>
+<td><code>IChatClient</code>, builder, middleware</td>
+<td>GA</td>
+<td>Pin centrally</td>
+</tr>
+<tr>
+<td><code>Microsoft.Extensions.AI.OpenAI</code></td>
+<td>Adapter: OpenAI chat &amp; responses clients → <code>IChatClient</code></td>
+<td>Verify GA/preview of the Responses adapter for your version</td>
+<td><code>AsIChatClient()</code> extension</td>
+</tr>
+<tr>
+<td><code>OpenAI</code> (.NET)</td>
+<td>Client for <code>/openai/v1/</code> and local OpenAI-compatible servers</td>
+<td>GA</td>
+<td><code>#pragma warning disable OPENAI001</code> for some APIs</td>
+</tr>
+<tr>
+<td><code>Azure.AI.Projects</code>, <code>Azure.AI.Extensions.OpenAI</code> 2.0.0</td>
+<td>Foundry project endpoint</td>
+<td>GA</td>
+<td>Don't mix with preview <code>Azure.AI.Projects.OpenAI</code></td>
+</tr>
+<tr>
+<td><code>Azure.Identity</code></td>
+<td>Entra ID / managed identity</td>
+<td>GA</td>
+<td></td>
+</tr>
+<tr>
+<td>Aspire 13.6 (AppHost, ServiceDefaults, dashboard)</td>
+<td>Orchestration, OTel</td>
+<td>GA</td>
+<td>Foundry/Azure OpenAI hosting integrations: verify package names</td>
+</tr>
+<tr>
+<td><code>Microsoft.Extensions.Caching.*</code> (memory/Redis)</td>
+<td><code>UseDistributedCache</code> backing store</td>
+<td>GA</td>
+<td></td>
+</tr>
+<tr>
+<td>Foundry Local / <code>Microsoft.AI.Foundry.Local</code></td>
+<td>Local provider</td>
+<td>GA</td>
+<td></td>
+</tr>
+<tr>
+<td><code>OllamaSharp</code> (optional)</td>
+<td>Ollama <code>IChatClient</code></td>
+<td>Community</td>
+<td>Alternative local runner</td>
+</tr>
+<tr>
+<td>GitHub Copilot / Claude Code</td>
+<td>First AI-assistant use (factory)</td>
+<td>GA</td>
+<td>Explain/scaffold only in C2; full workflow in C4</td>
+</tr>
+</tbody>
+</table>
+<h2 id="labs">Labs<a class="headerlink" href="#labs" title="Permanent link">&para;</a></h2>
+<h3 id="lab-1-ask-fleet-ops-console-on-ichatclient-25h">Lab 1 — "Ask Fleet Ops" console on <code>IChatClient</code> (≈2.5h)<a class="headerlink" href="#lab-1-ask-fleet-ops-console-on-ichatclient-25h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> A streaming console chat over <code>chat-fast</code> with conversation history, usage display and both endpoint paths.</li>
+<li><strong>Start state:</strong> <code>c2/lab1-start</code> (<code>src/FleetOps.Cli</code>, <code>src/FleetOps.Core/AI/ChatClientFactory.cs</code> stub, <code>models.json</code>).</li>
+<li><strong>Steps:</strong></li>
+<li>Implement the factory for the v1 endpoint:
+     <div class="highlight"><pre><span></span><code><span class="cp">#pragma warning disable OPENAI001</span>
+<span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="n">IChatClient</span><span class="w"> </span><span class="nf">CreateFoundryV1</span><span class="p">(</span><span class="n">ModelRole</span><span class="w"> </span><span class="n">role</span><span class="p">,</span><span class="w"> </span><span class="n">TokenCredential</span><span class="w"> </span><span class="n">cred</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">openAi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OpenAIClient</span><span class="p">(</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="nf">BearerTokenPolicy</span><span class="p">(</span><span class="n">cred</span><span class="p">,</span><span class="w"> </span><span class="s">"https://ai.azure.com/.default"</span><span class="p">),</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">OpenAIClientOptions</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">Endpoint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Uri</span><span class="p">(</span><span class="n">role</span><span class="p">.</span><span class="n">Endpoint</span><span class="p">),</span><span class="w">               </span><span class="c1">// .../openai/v1/</span>
+<span class="w">            </span><span class="n">RetryPolicy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ClientRetryPolicy</span><span class="p">(</span><span class="n">maxRetries</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">),</span>
+<span class="w">            </span><span class="n">NetworkTimeout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TimeSpan</span><span class="p">.</span><span class="n">FromSeconds</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span>
+<span class="w">        </span><span class="p">});</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">role</span><span class="p">.</span><span class="n">Api</span><span class="w"> </span><span class="k">switch</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="s">"chat"</span><span class="w">      </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">openAi</span><span class="p">.</span><span class="n">GetChatClient</span><span class="p">(</span><span class="n">role</span><span class="p">.</span><span class="n">Deployment</span><span class="p">).</span><span class="n">AsIChatClient</span><span class="p">(),</span>
+<span class="w">        </span><span class="s">"responses"</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">openAi</span><span class="p">.</span><span class="n">GetOpenAIResponseClient</span><span class="p">(</span><span class="n">role</span><span class="p">.</span><span class="n">Deployment</span><span class="p">).</span><span class="n">AsIChatClient</span><span class="p">(),</span><span class="w"> </span><span class="c1">// verify method name in your OpenAI SDK version</span>
+<span class="w">        </span><span class="n">_</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">NotSupportedException</span><span class="p">(</span><span class="n">role</span><span class="p">.</span><span class="n">Api</span><span class="p">)</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="p">}</span>
+</code></pre></div></li>
+<li>Implement the chat loop with a Trakia system prompt (loaded from <code>prompts/ask-fleet-ops.system.md</code>, introduced properly in C3):
+     <div class="highlight"><pre><span></span><code><span class="n">List</span><span class="o">&lt;</span><span class="n">ChatMessage</span><span class="o">&gt;</span><span class="w"> </span><span class="n">history</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="k">new</span><span class="p">(</span><span class="n">ChatRole</span><span class="p">.</span><span class="n">System</span><span class="p">,</span><span class="w"> </span><span class="n">systemPrompt</span><span class="p">)];</span>
+<span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">Console</span><span class="p">.</span><span class="n">ReadLine</span><span class="p">()</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Length</span><span class="p">:</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="n">input</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">history</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="k">new</span><span class="p">(</span><span class="n">ChatRole</span><span class="p">.</span><span class="n">User</span><span class="p">,</span><span class="w"> </span><span class="n">input</span><span class="p">));</span>
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">ChatResponseUpdate</span><span class="o">&gt;</span><span class="w"> </span><span class="n">updates</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[];</span>
+<span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="nf">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="n">u</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">chat</span><span class="p">.</span><span class="n">GetStreamingResponseAsync</span><span class="p">(</span><span class="n">history</span><span class="p">,</span><span class="w"> </span><span class="n">options</span><span class="p">,</span><span class="w"> </span><span class="n">ct</span><span class="p">))</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Console</span><span class="p">.</span><span class="n">Write</span><span class="p">(</span><span class="n">u</span><span class="p">.</span><span class="n">Text</span><span class="p">);</span>
+<span class="w">        </span><span class="n">updates</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">u</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">updates</span><span class="p">.</span><span class="n">ToChatResponse</span><span class="p">();</span>
+<span class="w">    </span><span class="n">history</span><span class="p">.</span><span class="n">AddMessages</span><span class="p">(</span><span class="n">response</span><span class="p">);</span>
+<span class="w">    </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$"\n[{response.ModelId} in={response.Usage?.InputTokenCount} out={response.Usage?.OutputTokenCount} finish={response.FinishReason}]"</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></li>
+<li>Add a second path via the Foundry project endpoint (<code>AIProjectClient</code> → project OpenAI client → responses client for a model → <code>IChatClient</code>; follow the SDK overview's C# path and verify adapter availability). Switch between paths with <code>--path v1|project</code>.</li>
+<li>Measure TTFT and total latency for streaming vs non-streaming over 10 questions; record in <code>docs/c2/streaming.md</code>.</li>
+<li><strong>Break it:</strong> (a) Remove the history (send only the latest message) and ask a follow-up ("And the Varna depot?") — observe the model losing context. (b) Let the history grow for 30 turns and watch input tokens per call climb (C1 cost model). (c) Press Ctrl+C mid-stream — does the request cancel or keep billing? Wire <code>CancellationToken</code> through and verify the stream stops.</li>
+<li><strong>Acceptance criteria:</strong> <code>dotnet test --filter Lab=C2.L1</code> green (factory selects the correct client per <code>models.json</code>; history reducer test; cancellation test with a fake client); console works on both paths; <code>docs/c2/streaming.md</code> contains TTFT numbers.</li>
+<li><strong>Stretch:</strong> Implement a simple history reducer (keep system + last N turns) and measure the token saving; note the quality risk (C13 does this properly).</li>
+</ul>
+<h3 id="lab-2-the-middleware-pipeline-logging-otel-cache-cost-25h">Lab 2 — The middleware pipeline: logging, OTel, cache, cost (≈2.5h)<a class="headerlink" href="#lab-2-the-middleware-pipeline-logging-otel-cache-cost-25h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> A production-shaped pipeline with a custom cost-tracking and budget-guard middleware, visible in the Aspire dashboard.</li>
+<li><strong>Start state:</strong> <code>c2/lab2-start</code> (AppHost, ServiceDefaults, <code>CostCalculator</code> from C1, <code>pricing.json</code>).</li>
+<li><strong>Steps:</strong></li>
+<li>Write <code>CostTrackingChatClient : DelegatingChatClient</code>:
+     <div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">sealed</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nf">CostTrackingChatClient</span><span class="p">(</span><span class="n">IChatClient</span><span class="w"> </span><span class="n">inner</span><span class="p">,</span><span class="w"> </span><span class="n">IPricingTable</span><span class="w"> </span><span class="n">pricing</span><span class="p">,</span><span class="w"> </span><span class="n">ICostSink</span><span class="w"> </span><span class="n">sink</span><span class="p">)</span>
+<span class="w">    </span><span class="p">:</span><span class="w"> </span><span class="n">DelegatingChatClient</span><span class="p">(</span><span class="n">inner</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="n">Task</span><span class="o">&lt;</span><span class="n">ChatResponse</span><span class="o">&gt;</span><span class="w"> </span><span class="n">GetResponseAsync</span><span class="p">(</span>
+<span class="w">        </span><span class="n">IEnumerable</span><span class="o">&lt;</span><span class="n">ChatMessage</span><span class="o">&gt;</span><span class="w"> </span><span class="n">messages</span><span class="p">,</span><span class="w"> </span><span class="n">ChatOptions</span><span class="o">?</span><span class="w"> </span><span class="n">options</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">null</span><span class="p">,</span><span class="w"> </span><span class="n">CancellationToken</span><span class="w"> </span><span class="n">ct</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="k">base</span><span class="p">.</span><span class="n">GetResponseAsync</span><span class="p">(</span><span class="n">messages</span><span class="p">,</span><span class="w"> </span><span class="n">options</span><span class="p">,</span><span class="w"> </span><span class="n">ct</span><span class="p">);</span>
+<span class="w">        </span><span class="k">await</span><span class="w"> </span><span class="n">sink</span><span class="p">.</span><span class="n">RecordAsync</span><span class="p">(</span><span class="n">Cost</span><span class="p">.</span><span class="n">From</span><span class="p">(</span><span class="n">response</span><span class="p">,</span><span class="w"> </span><span class="n">pricing</span><span class="p">,</span><span class="w"> </span><span class="n">Activity</span><span class="p">.</span><span class="n">Current</span><span class="o">?.</span><span class="n">TraceId</span><span class="p">),</span><span class="w"> </span><span class="n">ct</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">response</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="n">IAsyncEnumerable</span><span class="o">&lt;</span><span class="n">ChatResponseUpdate</span><span class="o">&gt;</span><span class="w"> </span><span class="n">GetStreamingResponseAsync</span><span class="p">(</span>
+<span class="w">        </span><span class="n">IEnumerable</span><span class="o">&lt;</span><span class="n">ChatMessage</span><span class="o">&gt;</span><span class="w"> </span><span class="n">messages</span><span class="p">,</span><span class="w"> </span><span class="n">ChatOptions</span><span class="o">?</span><span class="w"> </span><span class="n">options</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">null</span><span class="p">,</span>
+<span class="w">        </span><span class="na">[EnumeratorCancellation]</span><span class="w"> </span><span class="n">CancellationToken</span><span class="w"> </span><span class="n">ct</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="n">ChatResponseUpdate</span><span class="o">&gt;</span><span class="w"> </span><span class="n">seen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[];</span>
+<span class="w">        </span><span class="k">await</span><span class="w"> </span><span class="nf">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="n">u</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">base</span><span class="p">.</span><span class="n">GetStreamingResponseAsync</span><span class="p">(</span><span class="n">messages</span><span class="p">,</span><span class="w"> </span><span class="n">options</span><span class="p">,</span><span class="w"> </span><span class="n">ct</span><span class="p">))</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">seen</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">u</span><span class="p">);</span>
+<span class="w">            </span><span class="k">yield</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">u</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">await</span><span class="w"> </span><span class="n">sink</span><span class="p">.</span><span class="n">RecordAsync</span><span class="p">(</span><span class="n">Cost</span><span class="p">.</span><span class="n">From</span><span class="p">(</span><span class="n">seen</span><span class="p">.</span><span class="n">ToChatResponse</span><span class="p">(),</span><span class="w"> </span><span class="n">pricing</span><span class="p">,</span><span class="w"> </span><span class="n">Activity</span><span class="p">.</span><span class="n">Current</span><span class="o">?.</span><span class="n">TraceId</span><span class="p">),</span><span class="w"> </span><span class="n">ct</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+     <code>Cost.From</code> uses C1's calculator; record conversation ID, role, model, tokens, € and trace ID. Also emit a metric <code>fleetops.ai.cost</code> (histogram, EUR) with <code>model</code> and <code>feature</code> tags.</li>
+<li>Add a <code>BudgetGuardChatClient</code> that rejects calls when a per-conversation budget (e.g. €0.05) is exceeded, returning a typed error the UI can show.</li>
+<li>Compose the pipeline in DI (Lab 3 moves it to the API); register <code>"FleetOps.AI"</code> as a tracing/metrics source in ServiceDefaults.</li>
+<li>Run via the AppHost; open the Aspire dashboard; find the GenAI spans, token attributes and your cost metric.</li>
+<li>Enable <code>UseDistributedCache</code> with an in-memory distributed cache; ask the same question twice; confirm the second call costs €0 and is fast — then reason about where caching is <em>wrong</em> for Fleet Ops (per-driver questions).</li>
+<li><strong>Break it:</strong> Move <code>CostTrackingChatClient</code> <em>outside</em> the cache and observe cached calls being billed in your ledger. Remove the streaming override and observe streaming calls missing from the ledger.</li>
+<li><strong>Acceptance criteria:</strong> Unit tests with a fake inner client verify: cost recorded once per call (streaming and non-streaming), cache hits cost 0, budget guard trips at the threshold; Aspire dashboard screenshot in <code>docs/c2/</code> showing a GenAI span with token usage; the pipeline order is documented in a code comment explaining <em>why</em>.</li>
+<li><strong>Stretch:</strong> Write a <code>PiiRedactingChatClient</code> that masks Bulgarian mobile numbers (<code>+359 8x…</code>) and EGN-like 10-digit sequences in outgoing user messages; unit-test with BG examples.</li>
+</ul>
+<h3 id="lab-3-minimal-api-di-aspire-and-the-provider-swap-25h">Lab 3 — Minimal API, DI, Aspire and the provider swap (≈2.5h)<a class="headerlink" href="#lab-3-minimal-api-di-aspire-and-the-provider-swap-25h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> <code>POST /ask</code> with server-sent-event streaming, keyed clients per model role, and Foundry ↔ Foundry Local ↔ OpenAI-compatible swap by configuration.</li>
+<li><strong>Start state:</strong> <code>c2/lab3-start</code> (<code>src/FleetOps.Api</code>).</li>
+<li><strong>Steps:</strong></li>
+<li>Register keyed clients:
+     <div class="highlight"><pre><span></span><code><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="p">(</span><span class="n">roleName</span><span class="p">,</span><span class="w"> </span><span class="n">role</span><span class="p">)</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">models</span><span class="p">.</span><span class="n">Roles</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">builder</span><span class="p">.</span><span class="n">Services</span><span class="p">.</span><span class="n">AddKeyedChatClient</span><span class="p">(</span><span class="n">roleName</span><span class="p">,</span><span class="w"> </span><span class="n">sp</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">ChatClientFactory</span><span class="p">.</span><span class="n">Create</span><span class="p">(</span><span class="n">role</span><span class="p">,</span><span class="w"> </span><span class="n">sp</span><span class="p">))</span>
+<span class="w">        </span><span class="p">.</span><span class="n">UseLogging</span><span class="p">()</span>
+<span class="w">        </span><span class="p">.</span><span class="n">UseFunctionInvocation</span><span class="p">()</span>
+<span class="w">        </span><span class="p">.</span><span class="n">UseOpenTelemetry</span><span class="p">(</span><span class="n">sourceName</span><span class="p">:</span><span class="w"> </span><span class="s">"FleetOps.AI"</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="n">Use</span><span class="p">((</span><span class="n">inner</span><span class="p">,</span><span class="w"> </span><span class="n">sp</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">CostTrackingChatClient</span><span class="p">(</span><span class="n">inner</span><span class="p">,</span><span class="w"> </span><span class="n">sp</span><span class="p">.</span><span class="n">GetRequiredService</span><span class="o">&lt;</span><span class="n">IPricingTable</span><span class="o">&gt;</span><span class="p">(),</span><span class="w"> </span><span class="n">sp</span><span class="p">.</span><span class="n">GetRequiredService</span><span class="o">&lt;</span><span class="n">ICostSink</span><span class="o">&gt;</span><span class="p">()));</span>
+<span class="p">}</span>
+</code></pre></div>
+     (Verify the exact <code>Use</code> overload signatures in your MEAI version.)</li>
+<li>Endpoint with streaming:
+     <div class="highlight"><pre><span></span><code><span class="n">app</span><span class="p">.</span><span class="n">MapPost</span><span class="p">(</span><span class="s">"/ask"</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">AskRequest</span><span class="w"> </span><span class="n">req</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">FromKeyedServices</span><span class="p">(</span><span class="s">"chat-fast"</span><span class="p">)]</span><span class="w"> </span><span class="n">IChatClient</span><span class="w"> </span><span class="n">chat</span><span class="p">,</span>
+<span class="w">                     </span><span class="n">IConversationStore</span><span class="w"> </span><span class="n">store</span><span class="p">,</span><span class="w"> </span><span class="n">CancellationToken</span><span class="w"> </span><span class="n">ct</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">async</span><span class="w"> </span><span class="n">IAsyncEnumerable</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Stream</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">history</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">store</span><span class="p">.</span><span class="n">LoadAsync</span><span class="p">(</span><span class="n">req</span><span class="p">.</span><span class="n">ConversationId</span><span class="p">,</span><span class="w"> </span><span class="n">ct</span><span class="p">);</span>
+<span class="w">        </span><span class="n">history</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="k">new</span><span class="p">(</span><span class="n">ChatRole</span><span class="p">.</span><span class="n">User</span><span class="p">,</span><span class="w"> </span><span class="n">req</span><span class="p">.</span><span class="n">Question</span><span class="p">));</span>
+<span class="w">        </span><span class="k">await</span><span class="w"> </span><span class="nf">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="n">u</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">chat</span><span class="p">.</span><span class="n">GetStreamingResponseAsync</span><span class="p">(</span><span class="n">history</span><span class="p">,</span><span class="w"> </span><span class="n">cancellationToken</span><span class="p">:</span><span class="w"> </span><span class="n">ct</span><span class="p">))</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="kt">string</span><span class="p">.</span><span class="n">IsNullOrEmpty</span><span class="p">(</span><span class="n">u</span><span class="p">.</span><span class="n">Text</span><span class="p">))</span><span class="w"> </span><span class="k">yield</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">u</span><span class="p">.</span><span class="n">Text</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">TypedResults</span><span class="p">.</span><span class="n">ServerSentEvents</span><span class="p">(</span><span class="n">Stream</span><span class="p">());</span><span class="w"> </span><span class="c1">// .NET 10 SSE result; verify overload</span>
+<span class="p">});</span>
+</code></pre></div>
+     Persist the assistant reply after the stream completes (think about partial replies on cancel).</li>
+<li>In the AppHost, add a parameter <code>ModelProvider</code> (<code>foundry</code> | <code>foundry-local</code> | <code>openai-compatible</code>) that selects the role mapping. Start Foundry Local (or Ollama) outside Aspire and point <code>chat-local</code> at it.</li>
+<li>Run the same 15 smoke questions (BG + EN, from <code>evals/smoke.jsonl</code>) against each provider. Record answer, latency, tokens, cost and <em>capability failures</em> (e.g. unsupported option errors).</li>
+<li>Add <code>GET /health/ai</code> that calls each configured role with a 1-token prompt and reports provider metadata.</li>
+<li><strong>Break it:</strong> Configure <code>chat-fast</code> to a model name that doesn't exist on Foundry Local; set <code>Temperature</code> on a reasoning deployment that rejects it; send a 40k-token history to a local model with a small context window. Make each failure surface as a clear problem-details response, not a 500 with a stack trace.</li>
+<li><strong>Acceptance criteria:</strong> Integration tests (WebApplicationFactory + fake keyed clients) green; <code>curl -N</code> shows SSE streaming; switching <code>ModelProvider</code> requires zero code changes (CI job runs the smoke suite against a fake OpenAI-compatible server to prove it); <code>docs/c2/provider-swap.md</code> with the comparison table and a recommendation for which roles may run locally.</li>
+<li><strong>Stretch:</strong> Add a minimal Blazor or static HTML page consuming the SSE stream.</li>
+</ul>
+<h3 id="lab-4-resilience-429s-timeouts-concurrency-15h">Lab 4 — Resilience: 429s, timeouts, concurrency (≈1.5h)<a class="headerlink" href="#lab-4-resilience-429s-timeouts-concurrency-15h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> Behave well under rate limiting and transient faults without retry storms.</li>
+<li><strong>Start state:</strong> <code>c2/lab4-start</code> (includes <code>FaultInjectionHandler</code> that returns 429 with <code>Retry-After</code>, 503s and slow responses on a schedule).</li>
+<li><strong>Steps:</strong></li>
+<li>Insert the fault handler into the OpenAI client's transport (custom <code>HttpClient</code> via <code>HttpClientPipelineTransport</code>, or a pipeline policy — verify the cleanest hook for your SDK version).</li>
+<li>Fire 200 concurrent <code>/ask</code> requests with a small load script (<code>k6</code> or a C# <code>Parallel.ForEachAsync</code>). Observe default SDK retry behavior, total attempts, and p95 latency.</li>
+<li>Configure: SDK retries = 3 with exponential backoff honoring <code>Retry-After</code>; per-attempt timeout; overall request timeout; a <code>ConcurrencyLimiter</code> (e.g. 8 in-flight model calls per instance) as middleware; a fallback to <code>chat-local</code> <em>only</em> for a non-critical feature (summaries), never silently for everything.</li>
+<li>Emit metrics: attempts per request, 429 count, limiter queue length.</li>
+<li><strong>Break it:</strong> Add a Polly retry (5 attempts) on top of SDK retries and a client-side retry in the load script. Count total upstream attempts per user request (expect multiplication). Remove the extra layers and document the single owner of retries.</li>
+<li><strong>Acceptance criteria:</strong> Under the fault schedule, ≥ 95% of requests succeed, upstream attempts per request ≤ 4, no request exceeds the overall timeout; tests verify <code>Retry-After</code> is honored (fake clock); <code>docs/adr/0002-retry-ownership.md</code> states who retries, where, and why.</li>
+<li><strong>Stretch:</strong> Model the capacity you'd need (TPM) for 600 drivers at peak (07:00–08:00 dispatch window) using C1's token report; compare with your deployment's quota.</li>
+</ul>
+<h2 id="kata">Kata<a class="headerlink" href="#kata" title="Permanent link">&para;</a></h2>
+<p><strong>"Pipeline surgery"</strong> (25–35 min, repeat 3×). Given a pipeline and a bug report ("cached answers show up in the cost ledger", "streaming calls have no traces", "tool loops show only one span", "PII appears in logs"), reorder or add middleware to fix it, and write the fake-client unit test that proves the fix. Variations: a new custom middleware (rate limiter, PII redactor, model-identity tagger); a provider that emits usage only at stream end; a provider with no usage at all.</p>
+<h2 id="product-increment-fleet-ops-copilot">Product increment — Fleet Ops Copilot<a class="headerlink" href="#product-increment-fleet-ops-copilot" title="Permanent link">&para;</a></h2>
+<p><strong>"Ask Fleet Ops" v0</strong>: console and minimal API chat over a model; streaming via SSE; conversation history; keyed clients per model role; provider swap (Foundry cloud ↔ Foundry Local ↔ OpenAI-compatible) by configuration; usage and cost recorded per call and conversation; traces in the Aspire dashboard; resilient to 429s. It has no access to Trakia data yet — it must say so when asked about specific trucks or policies (C3 adds the first tool; C7 adds documents).</p>
+<h2 id="factory-increment-your-agentic-sdlc">Factory increment — your agentic SDLC<a class="headerlink" href="#factory-increment-your-agentic-sdlc" title="Permanent link">&para;</a></h2>
+<p>First deliberate use of an AI coding assistant (Copilot agent mode in VS/VS Code, or Claude Code): use it to (1) <em>explain</em> the MEAI pipeline code and the order of middleware, (2) <em>scaffold</em> the integration tests for Lab 3, and (3) <em>review</em> your <code>CostTrackingChatClient</code> for the streaming bug. Rules for C2: you must read and be able to explain every line it produces; log each session in <code>docs/factory/ai-assist-log.md</code> (task, prompt, what you accepted/rejected, why). This log is the baseline against which C4 measures your agent workflow.</p>
+<h2 id="assessment">Assessment<a class="headerlink" href="#assessment" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th>Novice</th>
+<th>Competent</th>
+<th>Proficient</th>
+<th>Expert</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Abstraction &amp; DI</td>
+<td>Calls SDK directly in endpoints</td>
+<td>Uses <code>IChatClient</code> via DI</td>
+<td>Keyed clients per role; zero-code provider swap</td>
+<td>Capability-aware swap with metadata logging and documented per-role provider policy</td>
+</tr>
+<tr>
+<td>Middleware design</td>
+<td>None</td>
+<td>Logging/OTel added</td>
+<td>Custom middleware with correct streaming override and ordering</td>
+<td>Ordering justified (cache vs cost vs telemetry), fully unit-tested with fake clients</td>
+</tr>
+<tr>
+<td>Resilience</td>
+<td>429 crashes</td>
+<td>SDK default retries</td>
+<td>Single retry owner, timeouts, cancellation, concurrency limit</td>
+<td>Retry budget + capacity model + graceful degradation policy in ADR</td>
+</tr>
+<tr>
+<td>Security</td>
+<td>Keys in config</td>
+<td>user-secrets</td>
+<td>Entra ID, no secrets in repo</td>
+<td>Managed-identity-ready config, PII redaction middleware, content capture off by default</td>
+</tr>
+<tr>
+<td>Cost visibility</td>
+<td>None</td>
+<td>Prints tokens</td>
+<td>Per-call and per-conversation cost ledger + metric</td>
+<td>Budget guard, cache economics explained, cost visible in dashboard</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Auto-checked:</strong> <code>Lab=C2.*</code> tests; CI smoke suite against a fake OpenAI-compatible server; secret scan; analyzer rule forbidding <code>new OpenAIClient(</code> outside <code>ChatClientFactory</code>; presence of ADR-0002.</p>
+<h2 id="common-pitfalls">Common pitfalls<a class="headerlink" href="#common-pitfalls" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Implementing a <code>DelegatingChatClient</code> without overriding the streaming method — half your traffic bypasses it.</li>
+<li>Reassembling streamed text but losing <code>Usage</code> (some providers send usage only in the final update; some only if requested).</li>
+<li>Persisting partial assistant messages on cancellation, corrupting history.</li>
+<li>Caching per-user answers globally.</li>
+<li>Building a "factory" that leaks provider types into endpoints, making the swap a refactor.</li>
+<li>Stacking retries in SDK, Polly, gateway and client.</li>
+<li>Turning on <code>EnableSensitiveData</code> and shipping prompts with driver names into App Insights.</li>
+<li>Following a sample that uses the Assistants API or dated <code>api-version</code> query strings.</li>
+</ul>
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<ul>
+<li>.NET AI ecosystem decision guide: https://learn.microsoft.com/en-us/dotnet/ai/dotnet-ai-ecosystem</li>
+<li>.NET AI essentials (MEAI building blocks, <code>UseOpenTelemetry</code>, Aspire sparkles): https://devblogs.microsoft.com/dotnet/dotnet-ai-essentials-the-core-building-blocks-explained/</li>
+<li>Microsoft.Extensions.AI docs: https://learn.microsoft.com/en-us/dotnet/ai/microsoft-extensions-ai</li>
+<li><code>Microsoft.Extensions.AI.Abstractions</code> on NuGet: https://www-1.nuget.org/packages/Microsoft.Extensions.AI.Abstractions</li>
+<li>Foundry SDK overview (endpoints, <code>BearerTokenPolicy</code>, OPENAI001, package warning): https://learn.microsoft.com/en-us/azure/foundry/how-to/develop/sdk-overview</li>
+<li>What is Microsoft Foundry: https://learn.microsoft.com/en-us/azure/ai-foundry/what-is-azure-ai-foundry</li>
+<li>Foundry Local GA: https://devblogs.microsoft.com/foundry/foundry-local-ga/</li>
+<li>Local LLMs in C# (Foundry Local, LLamaSharp, ONNX Runtime GenAI, Ollama via <code>IChatClient</code>; practitioner blog): https://www.managed-code.com/blog-post/running-local-llms-csharp-llamasharp-vs-onnx-vs-foundry-local</li>
+<li>Aspire blog: https://devblogs.microsoft.com/aspire/</li>
+<li>OTel GenAI semconv status (Development; secondary): https://dev.to/azena-ai/opentelemetrys-genai-semantic-conventions-are-not-stable-yet-heres-what-actually-shipped-in-2026-3mke</li>
+<li>Model retirements (410 Gone, notice periods): https://learn.microsoft.com/en-us/azure/foundry/openai/concepts/model-retirements</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Върни се в началото
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Долен колонтитул" >
+        
+          
+          <a href="../c01-how-generative-ai-works-an-engineer-s-mental-model/" class="md-footer__link md-footer__link--prev" aria-label="Предишна: C1 — Как работи генеративният AI: мисловен модел за инженери">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Предишна
+              </span>
+              <div class="md-ellipsis">
+                C1 — Как работи генеративният AI: мисловен модел за инженери
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../c03-prompting-structured-outputs-and-tool-calling/" class="md-footer__link md-footer__link--next" aria-label="Следваща: C3 — Промптинг, структуриран изход и извикване на инструменти">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Следваща
+              </span>
+              <div class="md-ellipsis">
+                C3 — Промптинг, структуриран изход и извикване на инструменти
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.sections", "navigation.top", "navigation.footer", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u041a\u043e\u043f\u0438\u0440\u0430\u043d\u043e", "clipboard.copy": "\u041a\u043e\u043f\u0438\u0440\u0430\u0439", "search.result.more.one": "\u043e\u0449\u0435 1 \u043d\u0430 \u0442\u0430\u0437\u0438 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0430", "search.result.more.other": "\u043e\u0449\u0435 # \u043d\u0430 \u0442\u0430\u0437\u0438 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0430", "search.result.none": "\u041d\u044f\u043c\u0430 \u0440\u0435\u0437\u0443\u043b\u0442\u0430\u0442\u0438", "search.result.one": "1 \u0440\u0435\u0437\u0443\u043b\u0442\u0430\u0442", "search.result.other": "# \u0440\u0435\u0437\u0443\u043b\u0442\u0430\u0442\u0430", "search.result.placeholder": "\u0417\u0430\u043f\u043e\u0447\u043d\u0435\u0442\u0435 \u0434\u0430 \u043f\u0438\u0448\u0435\u0442\u0435, \u0437\u0430 \u0434\u0430 \u0442\u044a\u0440\u0441\u0438\u0442\u0435", "search.result.term.missing": "\u041b\u0438\u043f\u0441\u0432\u0430\u0449\u043e", "select.version": "\u0418\u0437\u0431\u0435\u0440\u0438 \u0432\u0435\u0440\u0441\u0438\u044f"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,3276 @@
+
+<!doctype html>
+<html lang="bg" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Learning-by-doing course, release 2026.11 (content as of October 2026)">
+      
+      
+      
+      
+        <link rel="prev" href="../a06-ai-governance-risk-and-compliance-architecture/">
+      
+      
+        <link rel="next" href="../../capstone/">
+      
+      
+        
+          <link rel="alternate" href="../../../part-5-architect-track/a07-the-architect-s-craft-in-ai-programmes/" hreflang="en">
+        
+          <link rel="alternate" href="./" hreflang="bg">
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>A7 — Занаятът на архитекта в AI програми - AI Solution Developer & Architect — Наръчник за курсиста</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#a7-the-architects-craft-in-ai-programmes" class="md-skip">
+          Към съдържанието
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Горен колонтитул">
+    <a href="../../" title="AI Solution Developer &amp; Architect — Наръчник за курсиста" class="md-header__button md-logo" aria-label="AI Solution Developer & Architect — Наръчник за курсиста" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            AI Solution Developer & Architect — Наръчник за курсиста
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              A7 — Занаятът на архитекта в AI програми
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="Избери език">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href="../../../part-5-architect-track/a07-the-architect-s-craft-in-ai-programmes/" hreflang="en" class="md-select__link">
+              English
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="./" hreflang="bg" class="md-select__link">
+              Български
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Търси" placeholder="Търси" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Търси">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Изчисти" aria-label="Изчисти" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Инициализирано търсене
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Навигация" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../" title="AI Solution Developer &amp; Architect — Наръчник за курсиста" class="md-nav__button md-logo" aria-label="AI Solution Developer & Architect — Наръчник за курсиста" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    AI Solution Developer & Architect — Наръчник за курсиста
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Добре дошли
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Започнете оттук
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Започнете оттук
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/how-to-use/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Как да използвате наръчника
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/course-overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Преглед на курса
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/assessment-gates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Оценяване и гейтове
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/competency-matrix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Матрица на компетентностите
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Част 1 — Основи (ниво 1)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Част 1 — Основи (ниво 1)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c00-orientation-setup-and-toolchain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C0 — Ориентация, настройка и инструменти
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c01-how-generative-ai-works-an-engineer-s-mental-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C1 — Как работи генеративният AI: мисловен модел за инженери
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c02-your-first-ai-feature-in-net/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C2 — Първата ви AI функционалност в .NET
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c03-prompting-structured-outputs-and-tool-calling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C3 — Промптинг, структуриран изход и извикване на инструменти
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c04-working-with-coding-agents-the-factory-day-one/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C4 — Работа с кодиращи агенти: Фабриката, първи ден
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c05-evals-from-day-one/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C5 — Evals от първия ден
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Част 2 — Градивни елементи (ниво 2)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Част 2 — Градивни елементи (ниво 2)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c06-embeddings-and-vector-search/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C6 — Embeddings и векторно търсене
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c07-rag-from-documents-to-cited-permission-aware-answers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C7 — RAG: от документи до отговори с цитати, съобразени с правата на достъп
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c08-tools-and-the-model-context-protocol/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C8 — Инструменти и Model Context Protocol
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c09-agents-with-microsoft-agent-framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C9 — Агенти с Microsoft Agent Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c10-agents-over-structured-data-text-to-sql-on-sql-server/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C10 — Агенти върху структурирани данни: text-to-SQL върху SQL Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c11-agentic-testing-ai-driven-tdd-mutation-and-e2e-test-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C11 — Агентно тестване: TDD с AI, мутационно тестване и агенти за E2E тестове
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Част 3 — Продукционни системи (ниво 3)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Част 3 — Продукционни системи (ниво 3)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c12-workflows-and-multi-agent-orchestration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C12 — Workflows и многоагентна оркестрация
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c13-context-engineering-advanced-retrieval-and-memory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C13 — Инженеринг на контекста, напреднало извличане и памет
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c14-failure-driven-evals-llm-judges-and-red-teaming/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C14 — Evals, водени от грешките, LLM съдии и red teaming
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c15-observability-genaiops-and-cost/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C15 — Наблюдаемост, GenAIOps и разходи
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c16-security-for-llm-and-agentic-systems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C16 — Сигурност на LLM и агентни системи
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c17-shipping-to-azure-hosting-ai-gateway-iac-and-interop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C17 — Пускане в Azure: хостинг, AI gateway, IaC и оперативна съвместимост
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c18-responsible-ai-and-the-eu-ai-act-in-practice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C18 — Отговорен AI и Актът за изкуствения интелект на ЕС на практика
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c19-the-automated-sdlc-agents-from-issue-to-production/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C19 — Автоматизираният SDLC: агенти от issue до продукция
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Част 4 — Експертна специализация: AI Solution Developer
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Част 4 — Експертна специализация: AI Solution Developer
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d01-model-customization-and-small-local-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D1 — Адаптиране на модели и малки/локални модели
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d02-long-running-durable-and-autonomous-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D2 — Дълго работещи, устойчиви и автономни агенти
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d03-multimodal-and-realtime-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D3 — Мултимодални агенти и агенти в реално време
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d04-agent-ux-and-front-ends/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D4 — UX и фронтенди за агенти
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d05-performance-and-cost-engineering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D5 — Инженеринг на производителността и разходите
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d06-building-your-own-agent-tooling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D6 — Изграждане на собствени инструменти за агенти
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d07-agent-reliability-engineering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D7 — Инженеринг на надеждността на агенти
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Част 5 — Експертна специализация: AI Solution Architect
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Част 5 — Експертна специализация: AI Solution Architect
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../a01-ai-strategy-use-case-discovery-and-business-case/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A1 — AI стратегия, откриване на сценарии на употреба и бизнес обосновка
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../a02-azure-ai-reference-architectures-and-well-architected-for-ai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A2 — Референтни AI архитектури в Azure и Well-Architected за AI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../a03-enterprise-knowledge-and-data-architecture-for-ai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A3 — Корпоративна архитектура на знанията и данните за AI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../a04-agent-platform-and-integration-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A4 — Платформа за агенти и интеграционна архитектура
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../a05-reliability-scale-model-lifecycle-and-finops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A5 — Надеждност, мащаб, жизнен цикъл на моделите и FinOps
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../a06-ai-governance-risk-and-compliance-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A6 — Архитектура за управление на AI, риска и съответствието
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A7 — Занаятът на архитекта в AI програми
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A7 — Занаятът на архитекта в AI програми
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Съдържание">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Съдържание
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-this-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why this matters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learning outcomes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concepts
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Concepts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-adrs-for-ai-decisions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. ADRs for AI decisions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-architecture-reviews-and-fitness-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Architecture reviews and fitness functions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-stakeholder-communication-by-audience" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Stakeholder communication by audience
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-estimation-under-uncertainty" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Estimation under uncertainty
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-pre-sales-and-solution-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Pre-sales and solution design
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-leading-ai-augmented-teams-and-governing-the-factory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Leading AI-augmented teams and governing the factory
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-a-technology-radar-for-your-organisation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. A technology radar for your organisation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-keeping-current-without-drowning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Keeping current without drowning
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tools-versions-as-of-oct-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tools &amp; versions (as of Oct 2026)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#labs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Labs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Labs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lab-1-adr-set-and-an-adr-driven-change-through-the-factory-3h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 1 — ADR set and an ADR-driven change through the factory (≈3h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-2-fitness-functions-and-an-architecture-review-board-3h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 2 — Fitness functions and an architecture review board (≈3h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-3-one-architecture-four-audiences-3h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 3 — One architecture, four audiences (≈3h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-4-pre-sales-rhodope-haulage-proposal-25h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 4 — Pre-sales: Rhodope Haulage proposal (≈2.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-5-govern-the-factory-policy-metrics-operating-model-and-radar-25h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 5 — Govern the factory: policy, metrics, operating model and radar (≈2.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kata
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#product-increment-fleet-ops-copilot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Product increment — Fleet Ops Copilot
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#factory-increment-your-agentic-sdlc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Factory increment — your agentic SDLC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assessment
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common pitfalls
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Част 6 — Съвместен финален проект
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Част 6 — Съвместен финален проект
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capstone/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Финален проект
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Приложение
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Приложение
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Речник на термините
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/references/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Допълнителна литература
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Съдържание">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Съдържание
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-this-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why this matters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learning outcomes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concepts
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Concepts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-adrs-for-ai-decisions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. ADRs for AI decisions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-architecture-reviews-and-fitness-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Architecture reviews and fitness functions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-stakeholder-communication-by-audience" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Stakeholder communication by audience
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-estimation-under-uncertainty" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Estimation under uncertainty
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-pre-sales-and-solution-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Pre-sales and solution design
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-leading-ai-augmented-teams-and-governing-the-factory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Leading AI-augmented teams and governing the factory
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-a-technology-radar-for-your-organisation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. A technology radar for your organisation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-keeping-current-without-drowning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Keeping current without drowning
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tools-versions-as-of-oct-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tools &amp; versions (as of Oct 2026)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#labs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Labs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Labs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lab-1-adr-set-and-an-adr-driven-change-through-the-factory-3h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 1 — ADR set and an ADR-driven change through the factory (≈3h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-2-fitness-functions-and-an-architecture-review-board-3h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 2 — Fitness functions and an architecture review board (≈3h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-3-one-architecture-four-audiences-3h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 3 — One architecture, four audiences (≈3h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-4-pre-sales-rhodope-haulage-proposal-25h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 4 — Pre-sales: Rhodope Haulage proposal (≈2.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-5-govern-the-factory-policy-metrics-operating-model-and-radar-25h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 5 — Govern the factory: policy, metrics, operating model and radar (≈2.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kata
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#product-increment-fleet-ops-copilot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Product increment — Fleet Ops Copilot
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#factory-increment-your-agentic-sdlc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Factory increment — your agentic SDLC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assessment
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common pitfalls
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="a7-the-architects-craft-in-ai-programmes">A7 — The architect's craft in AI programmes<a class="headerlink" href="#a7-the-architects-craft-in-ai-programmes" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><strong>Level:</strong> Expert — AI Solution Architect track · <strong>Duration:</strong> 14h (theory 30% / labs 70%) · <strong>Prerequisites:</strong> A1–A6; C19 (automated SDLC); your factory from C4–C19 · <strong>Volatility:</strong> Med (the craft is durable; tool landscapes, radar placements and productivity evidence change every few months)</p>
+</blockquote>
+<h2 id="why-this-matters">Why this matters<a class="headerlink" href="#why-this-matters" title="Permanent link">&para;</a></h2>
+<p><strong>What separates an expert architect from a proficient one here:</strong> a proficient architect produces good designs. An expert produces good <em>decisions</em> in a programme: decisions that are recorded, testable, communicated so each audience can act on them, estimated honestly under uncertainty, and continuously verified by fitness functions. The expert also leads the team and the agentic factory that implement those decisions, measuring outcomes rather than output and governing what the agents may do. In AI programmes the gap between the two shows quickly, because:</p>
+<ul>
+<li>the technology changes quarterly;</li>
+<li>quality is statistical;</li>
+<li>costs scale with behaviour;</li>
+<li>stakeholders range from the CFO to a works council that worries about drivers being watched.</li>
+</ul>
+<p>Trakia is now an AI programme, not a project. It runs an internal rollout across three depots, a SaaS business with prospects asking for proposals, a governance board, a platform team and a product team whose code is mostly written by agents. The architect's week has five different jobs in it:</p>
+<ul>
+<li>an ADR on whether to adopt a preview feature;</li>
+<li>an architecture review where a team claims its design "meets the quality bar";</li>
+<li>an executive steering meeting about a delayed milestone;</li>
+<li>a works-council session about the driver-coaching pilot;</li>
+<li>a pre-sales workshop with a 120-truck fleet in the Rhodopes.</li>
+</ul>
+<p>There is also the agentic factory to govern. DORA 2025 found about 90% AI adoption among developers and describes AI as "a mirror and a multiplier": it amplifies whatever discipline exists. METR's early-2025 trial found experienced developers <strong>19–20% slower</strong> with AI while they <em>believed</em> they were faster. METR's February 2026 update says developers are probably sped up now, but calls its own evidence "very weak" on the size. An architect who governs the factory on vibes will get vibes.</p>
+<p>This closing module of the architect track (not to be confused with the joint capstone) trains the craft: ADRs for AI, fitness functions with evals at their core, communication by audience, estimation under uncertainty, pre-sales solution design, governing AI-augmented teams, an organisational technology radar and a personal system for keeping current.</p>
+<h2 id="learning-outcomes">Learning outcomes<a class="headerlink" href="#learning-outcomes" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Write</strong> ADRs for AI decisions that record evidence, volatility, reversibility, cost of change and review triggers tied to model lifecycles and preview status.</li>
+<li><strong>Define and automate</strong> architecture fitness functions (quality evals, cost per task, latency, ASR, isolation, dependency rules) and <strong>run</strong> an architecture review that uses them as evidence.</li>
+<li><strong>Communicate</strong> one architecture to executives, legal/DPO, a works council and engineers, adapting content, risk framing and asks to each audience.</li>
+<li><strong>Estimate</strong> AI work under uncertainty with ranges, reference classes, spikes and eval-gated milestones, and <strong>explain</strong> estimates to sponsors without false precision.</li>
+<li><strong>Lead</strong> pre-sales solution design: discovery, a solution blueprint, PoC/pilot design with success criteria, and a priced proposal with stated assumptions and risks.</li>
+<li><strong>Govern</strong> the agentic factory: permission and sandbox policies, model and data policies, DORA plus AI-specific metrics, and an operating model with clear roles.</li>
+<li><strong>Build and maintain</strong> an organisational technology radar with evidence-based placements and a quarterly cadence aligned to vendor event cycles.</li>
+<li><strong>Operate</strong> a personal and team system for keeping current that distinguishes signal (lifecycle notices, GA changes) from noise (leaderboards, launch hype).</li>
+</ol>
+<h2 id="concepts">Concepts<a class="headerlink" href="#concepts" title="Permanent link">&para;</a></h2>
+<h3 id="1-adrs-for-ai-decisions">1. ADRs for AI decisions<a class="headerlink" href="#1-adrs-for-ai-decisions" title="Permanent link">&para;</a></h3>
+<p>No authoritative standard for "AI ADRs" exists, so the format here is a <strong>course convention</strong> built on the classic ADR shape (context, options, decision, consequences), with <strong>≥ 3 options considered (incl. "do nothing / status quo" where meaningful)</strong>; the ADR linter enforces this. It adds fields that AI decisions specifically need:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Why AI needs it</th>
+<th>Example (Trakia)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Evidence</strong></td>
+<td>Statistical quality claims need eval reports, not opinions</td>
+<td>"pass^4 = 0.86 vs 0.71 (report link)"</td>
+</tr>
+<tr>
+<td><strong>Volatility</strong></td>
+<td>Preview features and model versions change under you</td>
+<td>"Depends on AI Search <code>2026-08-01-preview</code> (query planning)"</td>
+</tr>
+<tr>
+<td><strong>Reversibility / cost of change</strong></td>
+<td>Some choices are config (model role), some are migrations (embedding model, vector store)</td>
+<td>"Embedding change = full re-index, ~6h at year-1 scale"</td>
+</tr>
+<tr>
+<td><strong>Review triggers</strong></td>
+<td>Decisions expire with model retirements, GA moves and cost thresholds</td>
+<td>"Revisit at GA of knowledge-source ACLs, or if cost/task &gt; €0.06, or at retirement of model X (date)"</td>
+</tr>
+<tr>
+<td><strong>Assumptions &amp; owners</strong></td>
+<td>Business-case assumptions (A1) drive design</td>
+<td>"Adoption ≥ 60% (owner: product)"</td>
+</tr>
+<tr>
+<td><strong>Compliance impact</strong></td>
+<td>Changes can re-tier a system (A6)</td>
+<td>"No change to risk tier"</td>
+</tr>
+</tbody>
+</table>
+<p><strong>ADRs as agent context.</strong> An ADR-driven repo (<code>docs/adr/</code>, C4 DSL, <code>architecture.md</code>) doubles as context for coding agents. Agents read the decisions, and architecture tests (ArchUnitNET/NetArchTest) catch drift. Keep ADRs short, link evidence, and supersede them rather than edit them.</p>
+<h3 id="2-architecture-reviews-and-fitness-functions">2. Architecture reviews and fitness functions<a class="headerlink" href="#2-architecture-reviews-and-fitness-functions" title="Permanent link">&para;</a></h3>
+<p>A <strong>fitness function</strong> is an objective, automated check that an architectural characteristic holds. For AI systems, <strong>evals are fitness functions</strong> for quality:</p>
+<table>
+<thead>
+<tr>
+<th>Characteristic</th>
+<th>Fitness function</th>
+<th>Where it runs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Answer quality</td>
+<td>Failure-mode pass rates with judges validated by TPR/TNR (C14)</td>
+<td>PR (cached), nightly (uncached)</td>
+</tr>
+<tr>
+<td>Agent reliability</td>
+<td>pass^k on τ-bench-style scenarios; tool-call accuracy</td>
+<td>Nightly</td>
+</tr>
+<tr>
+<td>Safety</td>
+<td>Red-team ASR ≤ threshold (C16/A6)</td>
+<td>Weekly / release</td>
+</tr>
+<tr>
+<td>Isolation &amp; permissions</td>
+<td>Canary leak tests, permission matrix (A3)</td>
+<td>Every PR</td>
+</tr>
+<tr>
+<td>Cost</td>
+<td>Cost per successful task ≤ budget (A1/A5)</td>
+<td>Nightly from telemetry</td>
+</tr>
+<tr>
+<td>Latency</td>
+<td>TTFT p95 under load (A5)</td>
+<td>Release</td>
+</tr>
+<tr>
+<td>Structure</td>
+<td>Dependency rules: no unfiltered retriever; agents only call tools via gateway (ArchUnitNET/NetArchTest)</td>
+<td>Every PR</td>
+</tr>
+<tr>
+<td>Lifecycle</td>
+<td>No model role retiring within the release window without a migration ticket (A5/A6)</td>
+<td>Every PR</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Running an architecture review:</strong></p>
+<ul>
+<li><strong>Bring evidence, not slides.</strong> The package contains the WAF AI assessment (A2), C4 with the AI profile, ADRs, fitness-function results, the cost model and the DR test report.</li>
+<li><strong>Review the decision record and the risks</strong>, not the diagram aesthetics.</li>
+<li><strong>Outcome:</strong> approve / approve with conditions / rework, with conditions written as new fitness functions where possible.</li>
+<li><strong>Watch for "reviewer always finds something".</strong> Anthropic notes that review agents asked to find gaps will always find some, which pushes toward over-engineering. The same holds for human boards. Weigh findings by risk and cost.</li>
+</ul>
+<h3 id="3-stakeholder-communication-by-audience">3. Stakeholder communication by audience<a class="headerlink" href="#3-stakeholder-communication-by-audience" title="Permanent link">&para;</a></h3>
+<p>The same architecture is presented to each audience as different arguments:</p>
+<table>
+<thead>
+<tr>
+<th>Audience</th>
+<th>What they decide</th>
+<th>What they need</th>
+<th>Trakia example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Executives / steering</td>
+<td>Funding, priorities, risk appetite</td>
+<td>Outcome vs plan, P50/P90 ranges, top risks with mitigations, explicit asks</td>
+<td>"Pilot met 7 of 9 gates; cost/task 18% over; ask: approve 6-week extension for adoption work"</td>
+</tr>
+<tr>
+<td>CFO</td>
+<td>Investment, pricing</td>
+<td>Unit economics, margin per tenant tier, sensitivity</td>
+<td>A5 price floor per isolation tier</td>
+</tr>
+<tr>
+<td>Legal / DPO</td>
+<td>Lawfulness, contracts, regulatory exposure</td>
+<td>Data flows, roles (provider/deployer), DPIA, residency, sub-processors, evidence</td>
+<td>A3 data-location register + A6 evidence pack</td>
+</tr>
+<tr>
+<td><strong>Works council / employee representatives</strong></td>
+<td>Consent or consultation on monitoring and workplace technology</td>
+<td>Purpose, what is <em>not</em> done (no rankings, no HR use), data minimisation, who sees what, retention, worker rights, oversight, how to complain, the trial and review plan</td>
+<td>Driver-coaching pilot: private feedback, depot aggregates ≥ N, no individual manager view</td>
+</tr>
+<tr>
+<td>Engineers / product teams</td>
+<td>How to build</td>
+<td>ADRs, paved road, fitness functions, examples</td>
+<td>Golden agent template, gateway onboarding</td>
+</tr>
+<tr>
+<td>Customers (SaaS)</td>
+<td>Buy / trust</td>
+<td>System card, security and residency, SLOs, roadmap, AI Act role split</td>
+<td>Deployer-support pack (A6)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Communication rules:</strong></p>
+<ul>
+<li><strong>Lead with the decision you need.</strong></li>
+<li><strong>Express uncertainty as ranges and probabilities</strong>, never as unearned precision.</li>
+<li><strong>Show what the system will <em>not</em> do.</strong> This is especially powerful with works councils and legal teams.</li>
+<li><strong>Separate facts, estimates and opinions.</strong></li>
+<li><strong>Bring evidence links.</strong></li>
+</ul>
+<p>For driver monitoring, labour-law consultation duties (and Art. 26(7)-style worker information for high-risk systems; verify) make the works council a <em>gate</em>, not a courtesy. Plan it into the timeline.</p>
+<h3 id="4-estimation-under-uncertainty">4. Estimation under uncertainty<a class="headerlink" href="#4-estimation-under-uncertainty" title="Permanent link">&para;</a></h3>
+<p>AI work carries unknowns that conventional estimation ignores:</p>
+<ul>
+<li><strong>Reachability of the quality bar.</strong> You do not know whether 90% groundedness on Bulgarian table questions is achievable until error analysis.</li>
+<li><strong>Data readiness surprises</strong> (A1 Lab 2).</li>
+<li><strong>Model behaviour changes</strong> across migrations.</li>
+<li><strong>Adoption.</strong></li>
+<li><strong>Preview feature timing.</strong></li>
+</ul>
+<p>Techniques:</p>
+<ul>
+<li><strong>Ranges and reference classes.</strong> Estimate P50/P90 from your own history of similar work (the C-track increments are your first reference class), not from bottom-up optimism.</li>
+<li><strong>Spikes as uncertainty purchases.</strong> A 3-day spike that answers "can we reach 85% on table questions?" is worth more than 3 weeks of detailed planning. Price the spike against the value of the information.</li>
+<li><strong>Eval-gated milestones.</strong> Plan in stages that end with a measurable eval result: "M2: error analysis complete, failure taxonomy, baseline pass rates". Re-estimate at each gate. Commit to the next gate firmly and to the whole programme only in ranges.</li>
+<li><strong>Monte Carlo on task ranges</strong> (reuse A1's engine) to produce delivery-date distributions.</li>
+<li><strong>Make the cone of uncertainty visible</strong> to sponsors. Report "P(done by date)" and what would move it.</li>
+<li><strong>Agent-augmented estimates.</strong> Agent speed-ups vary by task type and team discipline (DORA "amplifier"; METR's evidence is mixed). Calibrate from <em>your</em> factory metrics (§6), not vendor claims.</li>
+</ul>
+<h3 id="5-pre-sales-and-solution-design">5. Pre-sales and solution design<a class="headerlink" href="#5-pre-sales-and-solution-design" title="Permanent link">&para;</a></h3>
+<p>The architect in pre-sales converts a prospect's ambiguity into a credible, bounded proposal:</p>
+<ol>
+<li><strong>Discovery.</strong> Run A1's workshop, compressed into 1–2 days. Assess data readiness and constraints (residency, isolation demands, integration with the prospect's telematics provider and TMS).</li>
+<li><strong>Solution blueprint.</strong> Context diagram, tenant tier (pooled/bridge/silo), integration points (MCP/A2A), oversight design, AI Act role split, SLOs.</li>
+<li><strong>PoC vs pilot vs MVP:</strong></li>
+<li>A <strong>PoC</strong> answers one technical question (time-boxed, disposable).</li>
+<li>A <strong>pilot</strong> tests value with real users under production-like controls.</li>
+<li>An <strong>MVP</strong> is the first sellable increment.</li>
+</ol>
+<p>Never let a PoC become production by drift. Avoid the <strong>demo trap</strong>, where a scripted happy path sets expectations the eval suite will not support. Demo against the prospect's own sampled data with eval scores shown.
+4. <strong>Success criteria agreed in writing:</strong> eval thresholds on the prospect's golden set, adoption, cost per task, SLOs.
+5. <strong>Proposal.</strong> Scope, assumptions (each with an owner), exclusions, risks, a pricing basis from A5 unit economics, a ranged timeline, and the change process.</p>
+<h3 id="6-leading-ai-augmented-teams-and-governing-the-factory">6. Leading AI-augmented teams and governing the factory<a class="headerlink" href="#6-leading-ai-augmented-teams-and-governing-the-factory" title="Permanent link">&para;</a></h3>
+<p><strong>Evidence to calibrate expectations:</strong></p>
+<ul>
+<li><strong>DORA 2025:</strong> ~90% AI adoption. AI use is linked to higher throughput, but ensuring software works before delivery remains a challenge. The <strong>AI Capabilities Model</strong> names seven practices:</li>
+<li>clear AI policy;</li>
+<li>healthy data ecosystem;</li>
+<li>accessible internal knowledge;</li>
+<li>strong version control and code review;</li>
+<li>user-centric focus;</li>
+<li>platform engineering;</li>
+<li>small batches.</li>
+</ul>
+<p>Larger changesets raise instability.
+- <strong>Thoughtworks Radar Vol. 34 (Apr 2026):</strong>
+  - <em>Caution:</em> coding throughput as a productivity measure, agent instruction bloat, coding agent swarms, "MCP by default", codebase cognitive debt.
+  - <em>Adopt:</em> DORA metrics ("lines of code generated is misleading; rework rate exposes blind spots"), context engineering, curated shared instructions.
+  - <em>Trial:</em> mutation testing, feedback sensors, sandboxed execution as default.
+- <strong>Slopsquatting.</strong> 19.7% of 2.23M AI code samples referenced hallucinated packages, and 43% of the hallucinated names recurred on every run. That makes package allow-lists a governance must.</p>
+<p><strong>The factory governance policy</strong> (one document, enforced by configuration):</p>
+<ul>
+<li><strong>Permissions and sandboxing:</strong></li>
+<li>coding agents run in sandboxes/devcontainers with egress allow-lists;</li>
+<li>cloud agents push only to agent branches;</li>
+<li>CI on agent PRs needs human approval;</li>
+<li>production credentials are never available to coding agents.</li>
+<li><strong>Model and data policy:</strong></li>
+<li>approved models and providers for coding agents (BYOK to Foundry where required);</li>
+<li>what code and data may leave the tenant;</li>
+<li>no production personal data in agent contexts.</li>
+<li><strong>Supply chain:</strong></li>
+<li>package allow-lists;</li>
+<li>lockfiles with hash verification;</li>
+<li>new-package age rules;</li>
+<li>skills, plugins and MCP servers vetted and pinned (A4 registry applies to the factory too).</li>
+<li><strong>Quality gates:</strong> human-owned acceptance tests, mutation score, eval gates, AI review <em>plus</em> human review. "Explain the diff" is required for high-risk changes.</li>
+<li><strong>Accountability:</strong> a human is accountable for every merged line. Agent-authored changes are attributable (assess Agent Trace-style attribution).</li>
+</ul>
+<p><strong>Metrics.</strong> Pair the DORA keys (deployment frequency, lead time, change failure rate, time to restore; plus rework rate) with factory-specific measures:</p>
+<ul>
+<li>first-pass acceptance rate of agent PRs;</li>
+<li>iterations per PR;</li>
+<li>mutation score;</li>
+<li>escaped defects;</li>
+<li>eval regression rate;</li>
+<li><strong>agent cost per merged PR</strong>;</li>
+<li>review time per PR (a cognitive-load signal).</li>
+</ul>
+<p><strong>Reject</strong> lines of code, PR counts and "% code written by AI" as goals.</p>
+<p><strong>Operating model.</strong> The roles:
+- product teams owning agents and evals;
+- the platform team owning the paved road (A4);
+- governance owning tiers and boards (A6);
+- the architect owning decisions and fitness functions.</p>
+<p>Add <strong>deliberate-practice rituals</strong> against skill atrophy: unaided katas, and diff-defence reviews where the human explains the agent's change.</p>
+<h3 id="7-a-technology-radar-for-your-organisation">7. A technology radar for your organisation<a class="headerlink" href="#7-a-technology-radar-for-your-organisation" title="Permanent link">&para;</a></h3>
+<p>A radar records <em>your</em> organisation's positions, with evidence. It is not a copy of an industry radar.</p>
+<ul>
+<li><strong>Rings:</strong></li>
+<li><strong>Adopt:</strong> default, paved road.</li>
+<li><strong>Trial:</strong> use on real work with an owner and exit criteria.</li>
+<li><strong>Assess:</strong> spike only.</li>
+<li><strong>Hold:</strong> don't start new work.</li>
+<li><strong>Quadrants for Trakia:</strong> platforms, tools, techniques, protocols/standards.</li>
+<li><strong>Every blip has:</strong> an owner, evidence (spike report, eval delta, cost), the date, the status of the underlying feature (GA/preview), and a review trigger.</li>
+<li><strong>Cadence:</strong> quarterly, plus extra passes after Microsoft Build (May/June) and <strong>Ignite (November)</strong>, when previews typically move. Ignite 2026 is imminent at the time of writing.</li>
+<li><strong>Seed blips, from this course:</strong></li>
+<li>Adopt: MAF 1.0; APIM AI gateway policies; AI Search GA extractive KBs; failure-driven evals; mutation testing.</li>
+<li>Trial: Foundry hosted agents (GA 9 Jul 2026); Foundry Toolboxes (GA); MCP C# SDK 2.0 (experimental APIs).</li>
+<li>Assess: Foundry memory / Routines (preview); AI Search query planning (preview); ASSERT / Agent Control Specification; agentgateway; Spec Kit / OpenSpec.</li>
+<li>Hold: Assistants API (retired); MCP sessions/SSE/sampling patterns; coding agent swarms.</li>
+</ul>
+<h3 id="8-keeping-current-without-drowning">8. Keeping current without drowning<a class="headerlink" href="#8-keeping-current-without-drowning" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Signals that demand action:</strong></li>
+<li>model lifecycle notices (A5 watcher);</li>
+<li>GA/preview transitions of features you depend on;</li>
+<li>SDK major versions;</li>
+<li>protocol revisions (MCP deprecation windows end ≥ 28 Jul 2027);</li>
+<li>regulatory dates and guidance (A6);</li>
+<li>security advisories.</li>
+<li><strong>Noise:</strong> leaderboards (saturating and largely vendor-run), launch-day benchmark claims, "X is dead" posts.</li>
+<li><strong>System:</strong></li>
+<li>an automated watch for lifecycle and release notes;</li>
+<li>a monthly 2-hour "currency review" with the team;</li>
+<li>quarterly radar updates;</li>
+<li>nightly lab and product CI against live models (the course itself does this) to detect real breakage;</li>
+<li>a personal reading list of primary sources: Learn "What's new" pages, the Architecture Center, protocol changelogs, the Hamel/Shankar evals FAQ, Anthropic engineering posts, DORA, Thoughtworks Radar.</li>
+<li><strong>Credentials as a forcing function.</strong> AB-100 for architects and AI-103 for developers both changed in 2026. Use them to check breadth, not as proof of depth.</li>
+</ul>
+<h2 id="tools-versions-as-of-oct-2026">Tools &amp; versions (as of Oct 2026)<a class="headerlink" href="#tools-versions-as-of-oct-2026" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Tool / resource</th>
+<th>Purpose</th>
+<th>Status</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ADR template (course convention) + ADR linter</td>
+<td>Decision records</td>
+<td>Course asset</td>
+<td>Extended AI fields</td>
+</tr>
+<tr>
+<td>ArchUnitNET / NetArchTest</td>
+<td>Structural fitness functions</td>
+<td>OSS</td>
+<td>Verify current versions</td>
+</tr>
+<tr>
+<td><code>Microsoft.Extensions.AI.Evaluation</code> + <code>dotnet aieval</code></td>
+<td>Quality fitness functions</td>
+<td>GA (verify versions)</td>
+<td></td>
+</tr>
+<tr>
+<td>WAF AI Assessment Review Tool</td>
+<td>Review instrument</td>
+<td>GA</td>
+<td>From A2</td>
+</tr>
+<tr>
+<td>GitHub REST/GraphQL API, Azure DevOps Analytics</td>
+<td>Factory metrics extraction</td>
+<td>GA</td>
+<td></td>
+</tr>
+<tr>
+<td>GitHub Copilot (cloud agent, custom agents, code review), Claude Code (hooks, subagents, headless), Codex</td>
+<td>Factory agents</td>
+<td>GA (features vary)</td>
+<td>Teach primitives; map per tool</td>
+</tr>
+<tr>
+<td>Agentic autofix for code scanning</td>
+<td>Security remediation</td>
+<td>GA 15 Oct 2026 (GitHub); ADO limited preview</td>
+<td></td>
+</tr>
+<tr>
+<td>Azure SRE Agent</td>
+<td>Ops agent</td>
+<td>GA per secondary source (verify)</td>
+<td>Reader / Privileged modes</td>
+</tr>
+<tr>
+<td>Thoughtworks Technology Radar (Vol. 34)</td>
+<td>External reference</td>
+<td>Published Apr 2026</td>
+<td>Use as input, not as your radar</td>
+</tr>
+<tr>
+<td>DORA 2025 report, AI Capabilities Model</td>
+<td>Metrics framework</td>
+<td>Published</td>
+<td></td>
+</tr>
+<tr>
+<td>Radar tooling (e.g., BYOR-style generator or Markdown + Mermaid)</td>
+<td>Org radar</td>
+<td>—</td>
+<td>Keep data in Git</td>
+</tr>
+<tr>
+<td>Monte Carlo engine from A1 (<code>Trakia.CostModel</code>)</td>
+<td>Delivery forecasts</td>
+<td>Course asset</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="labs">Labs<a class="headerlink" href="#labs" title="Permanent link">&para;</a></h2>
+<h3 id="lab-1-adr-set-and-an-adr-driven-change-through-the-factory-3h">Lab 1 — ADR set and an ADR-driven change through the factory (≈3h)<a class="headerlink" href="#lab-1-adr-set-and-an-adr-driven-change-through-the-factory-3h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> Write AI ADRs that hold up under review, then have an agent implement one under an architecture fitness gate.</li>
+<li><strong>Start state:</strong> branch <code>a7/start</code>. Contains all ADRs from A1–A6, the ADR linter with AI fields, and ArchUnitNET test project skeleton.</li>
+<li><strong>Steps:</strong></li>
+<li>Audit your existing ADRs against the AI fields (evidence, volatility, reversibility, review triggers). Fix the three weakest.</li>
+<li>Write <strong>ADR-A7-001 "Adopt AI Search query planning for the manuals domain?"</strong> (preview). Use the A3 evidence and decide: assess / trial behind a flag / hold. Set triggers (GA date, eval delta ≥ X, latency budget).</li>
+<li>Write <strong>ADR-A7-002 "Coding agents may not access production data stores"</strong>. Encode it as fitness functions: an ArchUnitNET rule that no factory tool assembly references production connection configuration, plus a CI check on agent sandbox network policy.</li>
+<li>Hand ADR-A7-003 ("move the 'similar incidents' helper behind the tenant-scoped retriever factory", from A3) to a coding agent (Copilot cloud agent or Claude Code headless). The agent must read the ADR, implement, and pass the fitness functions. Review and defend the diff yourself.</li>
+<li><strong>Break it:</strong> Instruct the agent (in a separate run) to "make the test pass quickly". Observe whether it weakens the architecture test or adds an exception. Your CODEOWNERS and hook configuration must block changes to fitness-function files without architect approval.</li>
+<li><strong>Acceptance criteria:</strong></li>
+<li>All ADRs pass the linter.</li>
+<li>The agent PR passes all fitness functions without modifying them.</li>
+<li>The tamper attempt is blocked.</li>
+<li>Your diff-defence note explains every changed line.</li>
+<li><strong>Stretch:</strong> Have an agent propose an ADR from an issue (context + options + evidence links) for a human to decide. Measure how often its option analysis misses a constraint you consider essential.</li>
+</ul>
+<h3 id="lab-2-fitness-functions-and-an-architecture-review-board-3h">Lab 2 — Fitness functions and an architecture review board (≈3h)<a class="headerlink" href="#lab-2-fitness-functions-and-an-architecture-review-board-3h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> Turn the A-track's quality bars into continuously evaluated fitness functions, and run a review with them.</li>
+<li><strong>Start state:</strong> <code>a7/lab2-start</code>.</li>
+<li><strong>Steps:</strong></li>
+<li>Create <code>fitness.yaml</code> with all functions from Concepts §2, each with a threshold, source, frequency and owner. Wire them into CI (PR, nightly, release) and a single dashboard.</li>
+<li>Prepare an <strong>architecture review package</strong> for the SaaS GA release: WAF AI assessment delta, C4, ADR index, fitness status, cost model, DR report, evidence pack (A6).</li>
+<li>Run the <strong>ARB</strong> for another team's package (peer exchange, as in peer review of 3 projects). Use the WAF AI assessment and the fitness dashboard. Produce findings classified by risk, with conditions written as new or tightened fitness functions.</li>
+<li>Receive your own review and respond with accept/rebut per finding.</li>
+<li><strong>Break it:</strong> The instructor slips a "quality claim without evidence" into one package: "Bulgarian groundedness meets bar" with no judge validation. Reviewers must catch it. The rebuttal must not rely on unvalidated judge scores.</li>
+<li><strong>Acceptance criteria:</strong></li>
+<li>Every fitness function runs automatically at its declared frequency.</li>
+<li>The dashboard shows status.</li>
+<li>Review findings are risk-rated with ≥ 2 conditions turned into fitness functions.</li>
+<li>The evidence-free claim is caught.</li>
+<li><strong>Stretch:</strong> Compute the "fitness debt": functions failing or missing per characteristic. Present it as a single page for the steering committee.</li>
+</ul>
+<h3 id="lab-3-one-architecture-four-audiences-3h">Lab 3 — One architecture, four audiences (≈3h)<a class="headerlink" href="#lab-3-one-architecture-four-audiences-3h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> Communicate the driver-coaching pilot and the SaaS GA decision to executives, legal/DPO, the works council and engineers.</li>
+<li><strong>Start state:</strong> <code>a7/lab3-start</code>. Contains A6 DPIA, A5 unit economics, A2 C4 and the persona cards (CFO, DPO, works-council representative, lead engineer) with hidden concerns.</li>
+<li><strong>Steps:</strong></li>
+<li>Executive one-pager: decision asked, P50/P90 outcomes, top risks, asks.</li>
+<li>Legal/DPO brief (2 pages): roles (provider/deployer), data flows, DPIA status, residency, sub-processors, open legal questions <em>for them</em>.</li>
+<li>Works-council session (10 slides max, BG or EN): purpose, what the system will <strong>not</strong> do, who sees what, aggregation thresholds, retention, worker rights and complaint path, oversight, trial period and joint review. Prepare answers for "can managers see my score?" and "will this be used in dismissals?".</li>
+<li>Engineering briefing: ADRs, paved-road changes, fitness functions.</li>
+<li>Present to role-played stakeholders (instructor + peers, or the A1 persona simulator agents loaded with the new cards). Capture objections and update the artefacts.</li>
+<li><strong>Break it:</strong> The "CFO" asks to add per-driver insurance-risk scores to the pilot "since the data is there anyway". Respond in writing within 10 minutes, covering purpose limitation, A6 classification change, works-council impact and the alternative you can offer.</li>
+<li><strong>Acceptance criteria:</strong></li>
+<li>All four artefacts are in <code>architecture/comms/</code>.</li>
+<li>The audience rubric is ≥ Proficient for each.</li>
+<li>Every factual claim links evidence.</li>
+<li>The works-council deck has an explicit "will not do" section mirrored by enforced controls (A6 tests).</li>
+<li><strong>Stretch:</strong> Run the works-council deck through a Bulgarian-language readability and terminology review with an LLM judge calibrated on your glossary. Fix flagged jargon.</li>
+</ul>
+<h3 id="lab-4-pre-sales-rhodope-haulage-proposal-25h">Lab 4 — Pre-sales: Rhodope Haulage proposal (≈2.5h)<a class="headerlink" href="#lab-4-pre-sales-rhodope-haulage-proposal-25h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> Turn a prospect's RFP into a bounded, priced, honest proposal.</li>
+<li><strong>Start state:</strong> <code>a7/lab4-start</code>. RFP from <strong>Rhodope Haulage</strong> (fictional): 120 trucks, cross-border to Greece, wants incident triage and Bulgarian/Greek driver Q&amp;A, insists on "dedicated data" and a 4-week go-live. Includes a 200-document sample corpus and 2 weeks of telematics.</li>
+<li><strong>Steps:</strong></li>
+<li>Run a compressed discovery with the simulated customer personas (A1 simulator). Assess data readiness on the sample: language mix and token counts. Note that Greek language support affects your Bulgarian-calibrated judges and the English-only safety services.</li>
+<li>Write the solution blueprint: tenant tier (bridge vs silo given "dedicated data"), integrations, oversight, residency, AI Act role split.</li>
+<li>Run a 2-hour <strong>PoC spike</strong> on the sample corpus: retrieval quality on 30 SME questions (prospect-provided reference answers). Report the eval scores honestly.</li>
+<li>Estimate with ranges (Monte Carlo) and produce P(go-live in 4 weeks). Propose an eval-gated plan: a PoC gate, a pilot gate, and GA.</li>
+<li>Write the proposal: scope, assumptions with owners, exclusions, risks, price from A5 unit economics plus onboarding effort, SLOs, change process.</li>
+<li><strong>Break it:</strong> The sales lead wants to promise "95% accuracy" in the proposal. Replace it with measurable, testable acceptance criteria tied to the prospect's golden set, and explain why in two sentences.</li>
+<li><strong>Acceptance criteria:</strong></li>
+<li>The blueprint passes the AI-profile validator (A2).</li>
+<li>PoC eval results are attached.</li>
+<li>The estimate shows P50/P90 and P(4 weeks).</li>
+<li>The proposal lists ≥ 8 assumptions with owners.</li>
+<li>The price is traceable to the unit-economics model with margin shown.</li>
+<li><strong>Stretch:</strong> Prepare a one-page "why not 4 weeks" explanation for the prospect's CEO that keeps the deal alive. Offer a 4-week PoC/pilot milestone with what it will and won't deliver.</li>
+</ul>
+<h3 id="lab-5-govern-the-factory-policy-metrics-operating-model-and-radar-25h">Lab 5 — Govern the factory: policy, metrics, operating model and radar (≈2.5h)<a class="headerlink" href="#lab-5-govern-the-factory-policy-metrics-operating-model-and-radar-25h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> Put the agentic SDLC under explicit governance with measured outcomes, and publish Trakia's technology radar.</li>
+<li><strong>Start state:</strong> <code>a7/lab5-start</code>. Your C19 factory, GitHub/ADO access for metrics, and the radar template.</li>
+<li><strong>Steps:</strong></li>
+<li>Write <code>factory-governance.md</code> (Concepts §6) and <strong>enforce</strong> it:<ul>
+<li>devcontainer/sandbox egress allow-list;</li>
+<li>agent branch protections;</li>
+<li>required human approval for agent-PR CI;</li>
+<li>package allow-list plus lockfile hash verification;</li>
+<li>pinned MCP servers and skills;</li>
+<li>prohibited production credentials (secret scanning plus environment rules).</li>
+</ul>
+</li>
+<li>Build the factory metrics dashboard from the GitHub/ADO APIs and telemetry: DORA keys, rework rate, first-pass acceptance of agent PRs, iterations per PR, mutation score, eval regression rate, escaped defects, agent cost per merged PR. Include 4 weeks of history from your own work.</li>
+<li>Interpret the data: where does the factory amplify discipline, and where does it amplify chaos? Write three improvement actions tied to DORA AI Capabilities (e.g., smaller batches, better internal knowledge).</li>
+<li>Define the operating model: roles and RACI (product, platform, governance, architect), rituals (currency review, radar review, diff-defence, unaided katas), escalation paths.</li>
+<li>Publish <strong>Trakia Radar 2026-Q4</strong>: ≥ 16 blips across 4 quadrants, each with an owner, evidence, GA/preview status and a review trigger, plus the post-Ignite review date.</li>
+<li><strong>Break it:</strong> An agent run attempts to install a package not on the allow-list, with a plausible hallucinated name (slopsquatting drill). It must be blocked and logged, and the metrics must record the blocked event.</li>
+<li><strong>Acceptance criteria:</strong></li>
+<li>Policy enforcement is demonstrated by negative tests (egress, branch, package, credentials).</li>
+<li>The dashboard renders from live data.</li>
+<li>No vanity metric is used as a goal.</li>
+<li>The radar passes the schema check (all fields) and is versioned in Git.</li>
+<li><strong>Stretch:</strong> Compare one month of agent cost per merged PR against first-pass acceptance by task type. Propose a routing policy (which tasks go to cloud agents, which to interactive work, which stay human-first).</li>
+</ul>
+<h2 id="kata">Kata<a class="headerlink" href="#kata" title="Permanent link">&para;</a></h2>
+<p><strong>"30-minute AI ADR"</strong> (repeat weekly through the capstone).</p>
+<p>You receive a decision prompt. Write a complete ADR in 30 minutes, with ≥ 3 options considered (incl. "do nothing / status quo" where meaningful), evidence needed (and what spike would produce it), volatility, reversibility, cost of change, review triggers and compliance impact.</p>
+<p>Prompts rotate:
+- hosted agent vs self-hosted for a new SaaS feature;
+- adopt Foundry memory (preview) for driver preferences;
+- semantic cache for the analyst;
+- pin vs auto-upgrade for the judge model;
+- Bicep vs Terraform for tenant stamps;
+- A2A vs REST for a supplier integration;
+- move Fleet Analyst to a cheaper model role;
+- allow tenants to bring their own MCP servers.</p>
+<p>A peer scores it with the ADR rubric in 5 minutes. <strong>Variation B ("estimation drill"):</strong> in 20 minutes, produce a P50/P90 range and the top 3 uncertainty drivers for a feature, plus the cheapest spike that would narrow the range most.</p>
+<h2 id="product-increment-fleet-ops-copilot">Product increment — Fleet Ops Copilot<a class="headerlink" href="#product-increment-fleet-ops-copilot" title="Permanent link">&para;</a></h2>
+<p>The A-track deliverable set is complete: a <strong>defended architecture package</strong> for Fleet Ops Copilot's enterprise rollout and SaaS business:</p>
+<ul>
+<li>business case (A1);</li>
+<li>reference architecture and landing zone (A2);</li>
+<li>knowledge platform (A3);</li>
+<li>agent platform (A4);</li>
+<li>reliability and FinOps (A5);</li>
+<li>governance system (A6);</li>
+<li>ADRs with AI fields, a continuously evaluated fitness-function suite, audience-specific communication artefacts, a priced pre-sales proposal template and the Trakia technology radar.</li>
+</ul>
+<p>This package is the architect's half of the capstone baseline.</p>
+<h2 id="factory-increment-your-agentic-sdlc">Factory increment — your agentic SDLC<a class="headerlink" href="#factory-increment-your-agentic-sdlc" title="Permanent link">&para;</a></h2>
+<p>The architect now <strong>governs the factory</strong>:</p>
+<ul>
+<li>an enforced governance policy (sandbox, egress, branches, packages, credentials, pinned skills and MCP servers);</li>
+<li>a metrics dashboard combining DORA keys and AI-specific measures;</li>
+<li>fitness functions protected by CODEOWNERS and hooks against agent tampering;</li>
+<li>ADR-driven agent work;</li>
+<li>a defined operating model with deliberate-practice rituals.</li>
+</ul>
+<p>The factory is now an audited, measured system, and the A6 inventory references its coding agents.</p>
+<h2 id="assessment">Assessment<a class="headerlink" href="#assessment" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th>Novice</th>
+<th>Competent</th>
+<th>Proficient</th>
+<th>Expert</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Decision records</td>
+<td>Undocumented decisions</td>
+<td>ADRs with options</td>
+<td>ADRs with evidence, volatility, reversibility, review triggers</td>
+<td>Plus ADRs drive agent work and are enforced by fitness functions; superseded cleanly as evidence changes</td>
+</tr>
+<tr>
+<td>Fitness functions &amp; reviews</td>
+<td>Manual checklist</td>
+<td>Some automated tests</td>
+<td>Full fitness suite incl. evals, cost, ASR, isolation, structure; risk-rated review with conditions</td>
+<td>Plus conditions automatically become fitness functions; "fitness debt" reported to steering</td>
+</tr>
+<tr>
+<td>Stakeholder communication</td>
+<td>One deck for all</td>
+<td>Adjusted tone</td>
+<td>Audience-specific artefacts with evidence links and explicit asks; works-council "will not do" backed by controls</td>
+<td>Plus handles live objections (e.g., scope creep into insurance scoring) with principled, documented responses</td>
+</tr>
+<tr>
+<td>Estimation &amp; pre-sales</td>
+<td>Single-point estimates</td>
+<td>Ranges</td>
+<td>Monte Carlo, eval-gated milestones, PoC with honest scores, priced proposal with assumptions</td>
+<td>Plus value-of-information reasoning for spikes; proposal keeps the deal and the integrity</td>
+</tr>
+<tr>
+<td>Factory governance &amp; currency</td>
+<td>Tool enthusiasm</td>
+<td>Some rules</td>
+<td>Enforced policy, outcome metrics (DORA + AI-specific), operating model, evidence-based radar</td>
+<td>Plus improvement actions linked to DORA capabilities; currency system with automated signals; radar used in decisions</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Auto-checked:</strong>
+- ADR linter;
+- fitness-function wiring and frequency;
+- agent PR fitness pass and tamper block;
+- dashboard data freshness;
+- policy negative tests (egress, branches, packages, credentials);
+- slopsquatting block;
+- radar schema;
+- proposal traceability (price → unit-economics model);
+- PoC eval report presence.</p>
+<h2 id="common-pitfalls">Common pitfalls<a class="headerlink" href="#common-pitfalls" title="Permanent link">&para;</a></h2>
+<ul>
+<li>ADRs that record the decision but not the evidence, or that never expire. AI decisions need review triggers.</li>
+<li>Quality claims without validated judges ("the LLM judge says 94%").</li>
+<li>One presentation for every audience. Treating the works council as a formality.</li>
+<li>Single-point estimates for AI work. Promising accuracy percentages instead of testable criteria.</li>
+<li>PoCs that drift into production. Demos on curated happy paths.</li>
+<li>Measuring the factory by lines of code, PR counts or "% AI-written". Ignoring rework and review load.</li>
+<li>Agents allowed to edit the tests and fitness functions that judge them.</li>
+<li>Copying an industry radar instead of recording your own evidence.</li>
+<li>Chasing every launch; missing the one lifecycle notice that matters.</li>
+</ul>
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<ul>
+<li>DORA 2025 (Google blog): https://blog.google/technology/developers/dora-report-2025/ ; AI Capabilities Model (InfoQ): https://infoq.com/news/2026/03/ai-dora-report/</li>
+<li>METR uplift update (Feb 2026): https://metr.org/blog/2026-02-24-uplift-update/</li>
+<li>Thoughtworks Radar Vol. 34 digest: https://agentic-ai.readthedocs.io/en/latest/AgenticTechStack/thoughtworks-radar-vol34/</li>
+<li>Claude Code best practices (verification, hooks, reviewers finding gaps): https://code.claude.com/docs/en/best-practices</li>
+<li>Böckeler, spec-driven development tools (martinfowler.com): https://www.martinfowler.com/articles/exploring-gen-ai/sdd-3-tools.html</li>
+<li>CSA research note on slopsquatting: https://labs.cloudsecurityalliance.org/research/csa-research-note-slopsquatting-ai-supply-chain-20260419/</li>
+<li>Agentic autofix GA (GitHub changelog): https://github.blog/changelog/2026-10-15-agentic-autofix-for-code-scanning-alerts-general-availability</li>
+<li>Azure Boards → Copilot cloud agent: https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/use-copilot-agents/cloud-agent/integrate-cloud-agent-with-azure-boards</li>
+<li>Azure SRE Agent FAQ: https://learn.microsoft.com/en-us/azure/sre-agent/faq</li>
+<li>WAF AI workloads: https://learn.microsoft.com/azure/well-architected/ai/get-started</li>
+<li>Hamel Husain &amp; Shreya Shankar, evals FAQ (judge validation): https://hamel.dev/blog/posts/evals-faq/</li>
+<li>AB-100 study guide: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/ab-100</li>
+<li>SFIA 9 AI skills (responsibility levels 5–6 for architects): https://sfia-online.org/en/sfia-9/sfia-9-release-notes/ai-skills-framework</li>
+<li>Foundry model retirements (review triggers): https://learn.microsoft.com/en-us/azure/foundry/openai/concepts/model-retirements</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Върни се в началото
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Долен колонтитул" >
+        
+          
+          <a href="../a06-ai-governance-risk-and-compliance-architecture/" class="md-footer__link md-footer__link--prev" aria-label="Предишна: A6 — Архитектура за управление на AI, риска и съответствието">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Предишна
+              </span>
+              <div class="md-ellipsis">
+                A6 — Архитектура за управление на AI, риска и съответствието
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../capstone/" class="md-footer__link md-footer__link--next" aria-label="Следваща: Финален проект">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Следваща
+              </span>
+              <div class="md-ellipsis">
+                Финален проект
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.sections", "navigation.top", "navigation.footer", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u041a\u043e\u043f\u0438\u0440\u0430\u043d\u043e", "clipboard.copy": "\u041a\u043e\u043f\u0438\u0440\u0430\u0439", "search.result.more.one": "\u043e\u0449\u0435 1 \u043d\u0430 \u0442\u0430\u0437\u0438 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0430", "search.result.more.other": "\u043e\u0449\u0435 # \u043d\u0430 \u0442\u0430\u0437\u0438 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0430", "search.result.none": "\u041d\u044f\u043c\u0430 \u0440\u0435\u0437\u0443\u043b\u0442\u0430\u0442\u0438", "search.result.one": "1 \u0440\u0435\u0437\u0443\u043b\u0442\u0430\u0442", "search.result.other": "# \u0440\u0435\u0437\u0443\u043b\u0442\u0430\u0442\u0430", "search.result.placeholder": "\u0417\u0430\u043f\u043e\u0447\u043d\u0435\u0442\u0435 \u0434\u0430 \u043f\u0438\u0448\u0435\u0442\u0435, \u0437\u0430 \u0434\u0430 \u0442\u044a\u0440\u0441\u0438\u0442\u0435", "search.result.term.missing": "\u041b\u0438\u043f\u0441\u0432\u0430\u0449\u043e", "select.version": "\u0418\u0437\u0431\u0435\u0440\u0438 \u0432\u0435\u0440\u0441\u0438\u044f"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

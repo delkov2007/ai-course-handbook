@@ -1,0 +1,3256 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Learning-by-doing course, release 2026.11 (content as of October 2026)">
+      
+      
+      
+      
+        <link rel="prev" href="../a01-ai-strategy-use-case-discovery-and-business-case/">
+      
+      
+        <link rel="next" href="../a03-enterprise-knowledge-and-data-architecture-for-ai/">
+      
+      
+        
+          <link rel="alternate" href="./" hreflang="en">
+        
+          <link rel="alternate" href="../../bg/part-5-architect-track/a02-azure-ai-reference-architectures-and-well-architected-for-ai/" hreflang="bg">
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>A2 — Azure AI reference architectures & Well-Architected for AI - AI Solution Developer & Architect — Learner Handbook</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#a2-azure-ai-reference-architectures-well-architected-for-ai" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="AI Solution Developer &amp; Architect — Learner Handbook" class="md-header__button md-logo" aria-label="AI Solution Developer & Architect — Learner Handbook" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            AI Solution Developer & Architect — Learner Handbook
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              A2 — Azure AI reference architectures & Well-Architected for AI
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="Select language">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href="./" hreflang="en" class="md-select__link">
+              English
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="../../bg/part-5-architect-track/a02-azure-ai-reference-architectures-and-well-architected-for-ai/" hreflang="bg" class="md-select__link">
+              Български
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="AI Solution Developer &amp; Architect — Learner Handbook" class="md-nav__button md-logo" aria-label="AI Solution Developer & Architect — Learner Handbook" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    AI Solution Developer & Architect — Learner Handbook
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Welcome
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Start here
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Start here
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/how-to-use/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How to use this handbook
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/course-overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Course overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/assessment-gates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Assessment and gates
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/competency-matrix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Competency matrix
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 1 — Foundations (Level 1)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part 1 — Foundations (Level 1)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c00-orientation-setup-and-toolchain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C0 — Orientation, setup & toolchain
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c01-how-generative-ai-works-an-engineer-s-mental-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C1 — How generative AI works: an engineer's mental model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c02-your-first-ai-feature-in-net/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C2 — Your first AI feature in .NET
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c03-prompting-structured-outputs-and-tool-calling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C3 — Prompting, structured outputs & tool calling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c04-working-with-coding-agents-the-factory-day-one/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C4 — Working with coding agents: the Factory, day one
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c05-evals-from-day-one/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C5 — Evals from day one
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 2 — Building blocks (Level 2)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part 2 — Building blocks (Level 2)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c06-embeddings-and-vector-search/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C6 — Embeddings & vector search
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c07-rag-from-documents-to-cited-permission-aware-answers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C7 — RAG: from documents to cited, permission-aware answers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c08-tools-and-the-model-context-protocol/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C8 — Tools & the Model Context Protocol
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c09-agents-with-microsoft-agent-framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C9 — Agents with Microsoft Agent Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c10-agents-over-structured-data-text-to-sql-on-sql-server/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C10 — Agents over structured data: text-to-SQL on SQL Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c11-agentic-testing-ai-driven-tdd-mutation-and-e2e-test-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C11 — Agentic testing: AI-driven TDD, mutation & E2E test agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 3 — Production systems (Level 3)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part 3 — Production systems (Level 3)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c12-workflows-and-multi-agent-orchestration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C12 — Workflows & multi-agent orchestration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c13-context-engineering-advanced-retrieval-and-memory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C13 — Context engineering, advanced retrieval & memory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c14-failure-driven-evals-llm-judges-and-red-teaming/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C14 — Failure-driven evals, LLM judges & red teaming
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c15-observability-genaiops-and-cost/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C15 — Observability, GenAIOps & cost
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c16-security-for-llm-and-agentic-systems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C16 — Security for LLM & agentic systems
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c17-shipping-to-azure-hosting-ai-gateway-iac-and-interop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C17 — Shipping to Azure: hosting, AI gateway, IaC & interop
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c18-responsible-ai-and-the-eu-ai-act-in-practice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C18 — Responsible AI & the EU AI Act in practice
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c19-the-automated-sdlc-agents-from-issue-to-production/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C19 — The automated SDLC: agents from issue to production
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 4 — Expert track: AI Solution Developer
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part 4 — Expert track: AI Solution Developer
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d01-model-customization-and-small-local-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D1 — Model customization & small/local models
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d02-long-running-durable-and-autonomous-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D2 — Long-running, durable & autonomous agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d03-multimodal-and-realtime-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D3 — Multimodal & realtime agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d04-agent-ux-and-front-ends/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D4 — Agent UX & front-ends
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d05-performance-and-cost-engineering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D5 — Performance & cost engineering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d06-building-your-own-agent-tooling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D6 — Building your own agent tooling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d07-agent-reliability-engineering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D7 — Agent reliability engineering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 5 — Expert track: AI Solution Architect
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part 5 — Expert track: AI Solution Architect
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../a01-ai-strategy-use-case-discovery-and-business-case/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A1 — AI strategy, use-case discovery & business case
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A2 — Azure AI reference architectures & Well-Architected for AI
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A2 — Azure AI reference architectures & Well-Architected for AI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-this-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why this matters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learning outcomes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concepts
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Concepts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-well-architected-framework-for-ai-workloads" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Well-Architected Framework for AI workloads
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-the-baseline-microsoft-foundry-chat-reference-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. The baseline Microsoft Foundry chat reference architecture
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-ai-landing-zones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. AI Landing Zones
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-networking-decisions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Networking decisions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-identity-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Identity architecture
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-orchestration-pattern-selection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Orchestration pattern selection
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-c4-modelling-for-ai-systems-the-course-profile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. C4 modelling for AI systems: the course profile
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-cloud-agnostic-thinking-aws-and-google-equivalents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Cloud-agnostic thinking: AWS and Google equivalents
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tools-versions-as-of-oct-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tools &amp; versions (as of Oct 2026)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#labs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Labs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Labs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lab-1-waf-ai-assessment-of-your-c17-deployment-35h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 1 — WAF AI assessment of your C17 deployment (≈3.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-2-c4-with-the-ai-profile-validated-as-code-35h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 2 — C4 with the AI profile, validated as code (≈3.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-3-deploy-an-ai-application-landing-zone-and-break-its-network-5h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 3 — Deploy an AI application landing zone and break its network (≈5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-4-identity-and-the-bola-hole-35h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 4 — Identity and the BOLA hole (≈3.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-5-orchestration-pattern-spike-and-portability-map-45h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 5 — Orchestration pattern spike and portability map (≈4.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kata
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#product-increment-fleet-ops-copilot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Product increment — Fleet Ops Copilot
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#factory-increment-your-agentic-sdlc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Factory increment — your agentic SDLC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assessment
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common pitfalls
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../a03-enterprise-knowledge-and-data-architecture-for-ai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A3 — Enterprise knowledge & data architecture for AI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../a04-agent-platform-and-integration-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A4 — Agent platform & integration architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../a05-reliability-scale-model-lifecycle-and-finops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A5 — Reliability, scale, model lifecycle & FinOps
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../a06-ai-governance-risk-and-compliance-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A6 — AI governance, risk & compliance architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../a07-the-architect-s-craft-in-ai-programmes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A7 — The architect's craft in AI programmes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 6 — Joint capstone
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part 6 — Joint capstone
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capstone/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Capstone
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Appendix
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Appendix
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/references/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Further reading
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-this-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why this matters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learning outcomes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concepts
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Concepts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-well-architected-framework-for-ai-workloads" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Well-Architected Framework for AI workloads
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-the-baseline-microsoft-foundry-chat-reference-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. The baseline Microsoft Foundry chat reference architecture
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-ai-landing-zones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. AI Landing Zones
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-networking-decisions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Networking decisions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-identity-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Identity architecture
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-orchestration-pattern-selection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Orchestration pattern selection
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-c4-modelling-for-ai-systems-the-course-profile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. C4 modelling for AI systems: the course profile
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-cloud-agnostic-thinking-aws-and-google-equivalents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Cloud-agnostic thinking: AWS and Google equivalents
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tools-versions-as-of-oct-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tools &amp; versions (as of Oct 2026)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#labs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Labs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Labs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lab-1-waf-ai-assessment-of-your-c17-deployment-35h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 1 — WAF AI assessment of your C17 deployment (≈3.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-2-c4-with-the-ai-profile-validated-as-code-35h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 2 — C4 with the AI profile, validated as code (≈3.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-3-deploy-an-ai-application-landing-zone-and-break-its-network-5h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 3 — Deploy an AI application landing zone and break its network (≈5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-4-identity-and-the-bola-hole-35h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 4 — Identity and the BOLA hole (≈3.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-5-orchestration-pattern-spike-and-portability-map-45h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 5 — Orchestration pattern spike and portability map (≈4.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kata
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#product-increment-fleet-ops-copilot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Product increment — Fleet Ops Copilot
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#factory-increment-your-agentic-sdlc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Factory increment — your agentic SDLC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assessment
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common pitfalls
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="a2-azure-ai-reference-architectures-well-architected-for-ai">A2 — Azure AI reference architectures &amp; Well-Architected for AI<a class="headerlink" href="#a2-azure-ai-reference-architectures-well-architected-for-ai" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><strong>Level:</strong> Expert — AI Solution Architect track · <strong>Duration:</strong> 20h (theory 30% / labs 70%) · <strong>Prerequisites:</strong> A1; C16 (threat model), C17 (deployed Fleet Ops Copilot with APIM, private networking, Bicep) · <strong>Volatility:</strong> High (Foundry Agent Service features, AI Landing Zones and Entra Agent ID move quarterly; WAF principles are stable)</p>
+</blockquote>
+<h2 id="why-this-matters">Why this matters<a class="headerlink" href="#why-this-matters" title="Permanent link">&para;</a></h2>
+<p><strong>What separates an expert architect from a proficient one here:</strong> a proficient architect can deploy a reference architecture. An expert knows <em>why each component is there</em>, which guarantees it does <strong>not</strong> give, and where it has to be bent for this workload. They can show a review board the gaps between "the reference architecture" and "our production system", with evidence. For Foundry today those gaps are no built-in DR, no native load balancing, no per-user conversation authorization, and single-region standard deployments.</p>
+<p>Trakia's C17 deployment works, but it grew one decision at a time. Customer fleets will now send security questionnaires: how is our data isolated, where are prompts processed, which identities do agents run as, what happens when a region fails? "App Service → OpenAI" answers none of that. Architects who never internalised the baseline Foundry chat architecture miss its warning that Agent Service does not enforce per-user conversation ownership (a BOLA hole in a multi-tenant product). They assume Foundry has DR, leave public data planes open "for the portal", and reach for multi-agent designs that Microsoft's own guidance says are often unnecessary.</p>
+<p>Experts use the Well-Architected Framework (WAF) AI guidance and the reference architectures as a <em>checklist of decisions</em>, not a template to clone. They:</p>
+<ul>
+<li>model AI-specific elements (models, agents, tools, knowledge, guardrails, trust boundaries) in C4;</li>
+<li>land workloads in a governed landing zone;</li>
+<li>pick orchestration patterns from spike evidence;</li>
+<li>can restate the design in AWS or Google terms.</li>
+</ul>
+<h2 id="learning-outcomes">Learning outcomes<a class="headerlink" href="#learning-outcomes" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Assess</strong> an existing AI workload against the WAF AI workload guidance (10 design areas, pillar-mapped principles), using the Assessment Review Tool. <strong>Produce</strong> a prioritised findings register.</li>
+<li><strong>Explain and adapt</strong> the baseline Microsoft Foundry chat reference architecture, component by component, including its documented limitations, and <strong>justify</strong> each deviation for Trakia.</li>
+<li><strong>Deploy</strong> an AI application landing zone from <code>Azure/AI-Landing-Zones</code> (preview, Bicep, AVM). <strong>Validate</strong> it with policy and rule-based IaC checks.</li>
+<li><strong>Design</strong> hub-spoke private networking for Foundry, AI Search, Cosmos DB and APIM, with private DNS and egress allow-listing, and <strong>diagnose</strong> private-endpoint and egress failures.</li>
+<li><strong>Design</strong> the identity architecture: managed identities per component, keyless auth, Entra Agent ID for agents, persona RBAC, OBO for user-context tool calls. <strong>Close</strong> the BOLA gap in code.</li>
+<li><strong>Select</strong> an orchestration pattern (single prompt → single agent → workflow → multi-agent) from spike evidence measured with your C14 evals, and <strong>record</strong> the decision.</li>
+<li><strong>Model</strong> the system in C4 with an AI profile (models, agents, tools, knowledge, guardrails, trust boundaries, untrusted-content flows), validated as code.</li>
+<li><strong>Map</strong> the design onto AWS and Google equivalents and <strong>identify</strong> the portability seams.</li>
+</ol>
+<h2 id="concepts">Concepts<a class="headerlink" href="#concepts" title="Permanent link">&para;</a></h2>
+<h3 id="1-well-architected-framework-for-ai-workloads">1. Well-Architected Framework for AI workloads<a class="headerlink" href="#1-well-architected-framework-for-ai-workloads" title="Permanent link">&para;</a></h3>
+<p>WAF's AI workload guidance (updated May 2026; verify against current documentation) organises the problem into <strong>10 design areas</strong>:</p>
+<ol>
+<li>application design;</li>
+<li>application platform;</li>
+<li>training data design;</li>
+<li>grounding data design;</li>
+<li>data platform;</li>
+<li>MLOps/GenAIOps;</li>
+<li>workload operations;</li>
+<li>testing and evaluation;</li>
+<li>workload personas;</li>
+<li>responsible AI.</li>
+</ol>
+<p>Design principles are mapped to the five pillars (reliability, security, cost optimisation, operational excellence, performance efficiency). An <strong>Assessment Review Tool</strong> turns this into a production-readiness questionnaire. In this track the tool is your review instrument. Every architecture package you submit from now on includes a WAF AI assessment with findings, severity and an owner.</p>
+<p><strong>What is different about AI workloads under WAF:</strong></p>
+<ul>
+<li><strong>Nondeterminism means testing becomes evaluation.</strong> Regression suites, statistical pass rates and LLM judges validated against humans (C14) replace exact-match tests.</li>
+<li><strong>Data is part of the runtime.</strong> Grounding data has freshness, permission and residency properties that act as availability and security properties.</li>
+<li><strong>Dependencies have expiry dates.</strong> Model lifecycle policies force planned change (A5).</li>
+<li><strong>Cost has a new variable axis.</strong> Tokens scale with <em>behaviour</em>, not just traffic. Prompts, tool loops, reasoning effort and agent count all move the bill.</li>
+<li><strong>"Workload personas"</strong> is its own design area. Who is the user, who is the operator, who is the data owner, and which actions can each take?</li>
+</ul>
+<h3 id="2-the-baseline-microsoft-foundry-chat-reference-architecture">2. The baseline Microsoft Foundry chat reference architecture<a class="headerlink" href="#2-the-baseline-microsoft-foundry-chat-reference-architecture" title="Permanent link">&para;</a></h3>
+<p>This is the most important reference for the track (Architecture Center, updated Aug 2026, verify against current documentation; implementation <code>Azure-Samples/microsoft-foundry-baseline</code>; a landing-zone variant <code>baseline-microsoft-foundry-landing-zone</code> exists). Learn it component by component.</p>
+<p><strong>Topology.</strong></p>
+<ul>
+<li><strong>Agent runtime:</strong></li>
+<li>A Foundry Agent Service <strong>prompt agent</strong> in <strong>standard setup with BYO VNet</strong>.</li>
+<li>Standard setup means agent state lives in <strong>customer-owned</strong> Cosmos DB (conversations and agent definitions; <code>enterprise_memory</code>), Storage and AI Search, all <em>dedicated</em> to Agent Service.</li>
+<li><strong>Front end:</strong></li>
+<li>A <strong>zone-redundant App Service</strong> hosts the chat UI.</li>
+<li><strong>Ingress and egress:</strong></li>
+<li><strong>Application Gateway with WAF</strong> is the <em>only</em> ingress. WAF exclusions are needed for the chat body, otherwise prompts trip OWASP rules.</li>
+<li><strong>Azure Firewall</strong> handles egress with <strong>FQDN allow-lists</strong>. Agent traffic leaves via a delegated agent subnet and a UDR.</li>
+<li><strong>Private access:</strong></li>
+<li><strong>Private endpoints</strong> everywhere, with <strong>public data planes blocked</strong>.</li>
+<li>Portal access goes through <strong>Bastion + jump box</strong>.</li>
+</ul>
+<p><strong>Identity.</strong>
+- Separate <strong>system-assigned managed identities</strong> per component.
+- Entra ID connections.
+- RBAC mapped to personas.
+- <strong>Project-level connections only.</strong>
+- <strong>One Foundry resource per production workload.</strong></p>
+<p><strong>Security warning to memorise.</strong> Agent Service does <strong>not</strong> enforce per-user conversation authorization. If your API accepts a conversation or thread ID from the client and passes it to the agent, any authenticated user who obtains another user's ID can read or continue that conversation. This is classic Broken Object Level Authorization (BOLA). The application must store ownership (user, tenant → conversation ID) and check it on every call. In SaaS, the check is user <strong>and</strong> tenant.</p>
+<p><strong>Reliability, as documented.</strong>
+- Standard model deployments are single-region. Use <strong>Data Zone provisioned with spillover</strong>, or Global deployments.
+- Foundry has <strong>no native load balancing or circuit breaking</strong>, so APIM is the suggested option.
+- Agent Service has <strong>no built-in DR</strong>. Recovery is by <strong>reconstruction</strong>: agents-as-code, backups and delete locks.
+- <strong>Multi-region is out of scope</strong> of the baseline. You design it in A5.</p>
+<p><strong>Cost, as documented.</strong>
+- The largest costs are Cosmos DB, AI Search and DDoS Protection.
+- Agents may call tools unnecessarily, so limit tools.
+- Use the cheapest model that meets requirements.
+- Use PAYG for variable load and PTU for a stable baseline.</p>
+<p><strong>Operations.</strong>
+- <strong>Agents as code</strong> via CI/CD.
+- Immutable agent versions.
+- Regression suites, because behaviour is nondeterministic.
+- MAF (C#/Python) for runtime.
+- Azure Policy to disable local auth and require private endpoints.</p>
+<p><strong>The expert move is the gap analysis.</strong> For Trakia the gaps are:</p>
+<ol>
+<li>SaaS needs tenant isolation, which the baseline does not cover.</li>
+<li>The C12 workflow needs a code-first runtime, so you deviate to a <strong>hosted agent</strong> or self-hosted MAF.</li>
+<li>Bulgarian users need a Bulgarian-calibrated groundedness judge, because Content Safety groundedness detection is English-only.</li>
+<li>EU residency needs Data Zone EU deployments.</li>
+<li>Customer-facing availability needs multi-region (A5).</li>
+<li>APIM moves from "optional" to mandatory as the AI gateway (A4).</li>
+</ol>
+<h3 id="3-ai-landing-zones">3. AI Landing Zones<a class="headerlink" href="#3-ai-landing-zones" title="Permanent link">&para;</a></h3>
+<p>The CAF "AI ready" phase places AI workloads into an Azure landing zone. <code>Azure/AI-Landing-Zones</code> (GitHub, <strong>preview</strong>, MIT) is an <em>application</em> landing zone for AI apps and agents in two parts:</p>
+<ul>
+<li>the <strong>AI Foundry Landing Zone</strong>;</li>
+<li>the <strong>AI Gateway Landing Zone</strong> (APIM).</li>
+</ul>
+<p>Both are implemented in <strong>Bicep and Terraform on Azure Verified Modules (AVM)</strong>, with a legacy Bicep branch.</p>
+<p>Keep the platform/application split clear:
+- The <strong>platform landing zone</strong> (connectivity hub, identity, management, policy, owned by the platform team) provides hub networking, DNS, firewall and central logging.
+- The <strong>application landing zone</strong> (owned by the workload team, under platform guardrails) holds Foundry, Search, Cosmos, APIM instances and app compute.</p>
+<p>For Trakia's SaaS, decide whether APIM is a <em>shared</em> AI gateway (platform-owned, many workloads) or a <em>workload</em> gateway (tenant-aware, product-owned). Most products end up with both: a central gateway for model access and quota, and a product gateway for tenant APIs. Record the choice in an ADR.</p>
+<p><strong>Preview means:</strong>
+- pin a commit SHA;
+- read the changelog before upgrading;
+- expect breaking changes;
+- keep your own deviations as overlays, never as edits to the upstream module.</p>
+<h3 id="4-networking-decisions">4. Networking decisions<a class="headerlink" href="#4-networking-decisions" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Hub-spoke.</strong> The hub holds Firewall, Bastion and the DNS resolver. Spokes hold the AI app landing zones. Private DNS zones for each private-link service are linked to the hub. Verify the exact zone names for Foundry/AI Services, AI Search, Cosmos DB, Storage and Key Vault against current docs, because Foundry endpoints use several hostnames.</li>
+<li><strong>Public network access disabled</strong> on Foundry, Search, Cosmos, Storage and Key Vault, enforced by Azure Policy (A6).</li>
+<li><strong>Egress allow-listing.</strong> List the FQDNs your agents and tools must reach (supplier API, telematics provider, Microsoft endpoints). <strong>Hosted agents' network egress controls are preview.</strong> For self-hosted agents in Container Apps, egress goes through the Firewall via UDR.</li>
+<li><strong>Service-to-search traffic.</strong> AI Search indexers reaching private data sources need shared private links. Budget for them and test them, because they are a classic silent failure.</li>
+<li><strong>Developer access.</strong> A jump box or Bastion, or a dev environment in a peered VNet. "Temporarily enabling public access" is how data planes stay open forever.</li>
+</ul>
+<h3 id="5-identity-architecture">5. Identity architecture<a class="headerlink" href="#5-identity-architecture" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Workloads</strong> use <strong>managed identities</strong>, keyless auth to Foundry, Search, Cosmos and Storage, and local auth disabled. Each component gets its own identity so that blast radius and audit trails stay separable.</li>
+<li><strong>Agents as principals.</strong> <strong>Microsoft Entra Agent ID is GA.</strong></li>
+<li>Agents get their own identities, created from <strong>agent identity blueprints</strong> (design guidance is available; the blueprint and identity creation wizard is preview).</li>
+<li><strong>Conditional Access templates for agents</strong> can block high-risk agent identities, autonomous agent access and on-behalf-of agent access.</li>
+<li>Sponsor lifecycle governance gives each agent an accountable human.</li>
+<li>Registry convergence under <strong>Microsoft Agent 365</strong>.</li>
+<li>Federation patterns for AWS and GCP, and integrations with Bedrock and n8n.</li>
+<li>Per-feature GA/preview status is ambiguous on the what's-new page, so verify against current documentation.</li>
+<li><strong>User context.</strong></li>
+<li>Tools that act <em>as the user</em>, such as reading the user's calendar or SharePoint, use <strong>OBO</strong>.</li>
+<li>Tools that act <em>as the system</em>, such as creating a work order, use the agent identity with least privilege. The approval is recorded under the user.</li>
+<li>Never let the model choose which identity to use.</li>
+<li><strong>Personas → RBAC.</strong> Map Trakia roles (dispatcher, mechanic, fleet manager, HR, auditor; in SaaS also tenant admin and Trakia operator) to data-plane roles and app roles. Auditors get read access to traces and evidence, not to agent configuration.</li>
+</ul>
+<h3 id="6-orchestration-pattern-selection">6. Orchestration pattern selection<a class="headerlink" href="#6-orchestration-pattern-selection" title="Permanent link">&para;</a></h3>
+<p>The Architecture Center's ladder:</p>
+<ol>
+<li><strong>Direct model call.</strong></li>
+<li><strong>Single agent with tools.</strong> Often the right enterprise default, with iteration limits.</li>
+<li><strong>Multi-agent.</strong> Only for cross-domain problems, <strong>security boundaries</strong> or parallel specialisation.</li>
+</ol>
+<p>The patterns are sequential, concurrent, group chat (≤ 3 agents), handoff and Magentic. The listed pitfalls are over-engineering and adding agents without real specialisation.</p>
+<p>The evidence is nuanced:</p>
+<ul>
+<li><strong>For multi-agent:</strong> Anthropic's lead-plus-subagents research system beat a single agent by 90.2% on its internal eval, at ~15× chat tokens. The task was read-heavy and parallel.</li>
+<li><strong>Against:</strong> Cognition shows that parallel agents with partial context make conflicting decisions on write-heavy, coupled tasks.</li>
+</ul>
+<p><strong>Decision rule:</strong>
+- Use a deterministic <strong>workflow</strong> when the process is known (Trakia's incident flow mostly is).
+- Use a single agent for open-ended assistance.
+- Use multi-agent when there is a real boundary. Example: the Fleet Analyst holds SQL read access that the customer-notification agent must never have.</p>
+<p>A security boundary is often the <em>best</em> reason for a second agent, and "it's more modular" is the worst.</p>
+<h3 id="7-c4-modelling-for-ai-systems-the-course-profile">7. C4 modelling for AI systems: the course profile<a class="headerlink" href="#7-c4-modelling-for-ai-systems-the-course-profile" title="Permanent link">&para;</a></h3>
+<p>No authoritative standard exists for C4 extensions for AI, so this is a <strong>course-designer convention</strong>. Use it consistently and say so in reviews. Model with Structurizr DSL (diagrams as code) and use these element tags with mandatory properties:</p>
+<table>
+<thead>
+<tr>
+<th>Tag</th>
+<th>Mandatory properties</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Model Deployment</code></td>
+<td>model role, provider, version, deployment type (Global / Data Zone / Regional Standard, PTU, Batch), region(s), auto-upgrade policy, retirement date</td>
+</tr>
+<tr>
+<td><code>Agent</code></td>
+<td>kind (prompt / hosted / self-hosted MAF / Copilot Studio), identity (Agent ID), autonomy level (inform / recommend / act-with-approval / act), tools, max iterations and token budget, HITL points, owner/sponsor</td>
+</tr>
+<tr>
+<td><code>Tool</code> / <code>MCP Server</code></td>
+<td>side effect (read / write / irreversible), auth mode (MI / OBO), data classification, first- or third-party, pinned version/hash</td>
+</tr>
+<tr>
+<td><code>Knowledge Base</code></td>
+<td>sources, ACL mode (query-time filter / native propagation), freshness SLA, residency</td>
+</tr>
+<tr>
+<td><code>Guardrail</code></td>
+<td>intervention points (input / tool call / tool response / output), risks covered, action</td>
+</tr>
+<tr>
+<td><code>Trust boundary</code></td>
+<td>a group around elements sharing an identity and network boundary</td>
+</tr>
+</tbody>
+</table>
+<p>Also tag relationships that carry <strong>untrusted content</strong> (web pages, customer emails, uploaded documents, third-party tool output).</p>
+<p><strong>A validation script checks the lethal trifecta per agent.</strong> If an agent has (private data) + (an untrusted-content inbound relationship) + (an external-communication tool), the build fails unless the agent element references a mitigation ADR.</p>
+<p>Add a <strong>dynamic diagram</strong> for the incident workflow trajectory and a <strong>deployment diagram</strong> per environment.</p>
+<h3 id="8-cloud-agnostic-thinking-aws-and-google-equivalents">8. Cloud-agnostic thinking: AWS and Google equivalents<a class="headerlink" href="#8-cloud-agnostic-thinking-aws-and-google-equivalents" title="Permanent link">&para;</a></h3>
+<p>An expert can explain the design without product names: a managed agent runtime, a retrieval service, a gateway, workload identity for agents, and policy enforcement. The mapping below is <strong>indicative and must be verified before teaching</strong>. Only the A2A integration of Bedrock AgentCore and Google ADK's native A2A support were verified in the research for this course.</p>
+<table>
+<thead>
+<tr>
+<th>Capability</th>
+<th>Azure</th>
+<th>AWS (verify)</th>
+<th>Google Cloud (verify)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Model catalogue / serving</td>
+<td>Microsoft Foundry models (multi-vendor; Gemini not sold on Azure)</td>
+<td>Amazon Bedrock</td>
+<td>Vertex AI (Gemini)</td>
+</tr>
+<tr>
+<td>Managed agent runtime</td>
+<td>Foundry Agent Service (prompt and hosted agents)</td>
+<td>Bedrock AgentCore (A2A integrated — verified)</td>
+<td>Vertex AI Agent Engine (verify name)</td>
+</tr>
+<tr>
+<td>Agent framework</td>
+<td>MAF (connectors for Bedrock and Gemini too)</td>
+<td>Strands / Bedrock Agents (verify)</td>
+<td>ADK (native A2A — verified)</td>
+</tr>
+<tr>
+<td>Retrieval</td>
+<td>AI Search / Foundry IQ</td>
+<td>Bedrock Knowledge Bases / OpenSearch (verify)</td>
+<td>Vertex AI Search (verify)</td>
+</tr>
+<tr>
+<td>AI gateway</td>
+<td>APIM AI gateway</td>
+<td>API Gateway + custom (no direct equivalent verified)</td>
+<td>Apigee (verify AI features)</td>
+</tr>
+<tr>
+<td>Agent identity</td>
+<td>Entra Agent ID (federates to AWS/GCP)</td>
+<td>IAM roles / AgentCore identity (verify)</td>
+<td>Service accounts / workload identity</td>
+</tr>
+<tr>
+<td>Well-architected guidance</td>
+<td>WAF AI workload</td>
+<td>Well-Architected Generative AI Lens (unverified)</td>
+<td>Architecture Center GenAI guidance (unverified)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Portability seams</strong> are what keep exit cost low:
+- <code>IChatClient</code> and MEAI for model access;
+- MCP for tools;
+- A2A for agents;
+- OTel GenAI semantic conventions for telemetry;
+- agents-as-code (declarative YAML / MAF code) in Git;
+- evals in your own harness.</p>
+<p>Anything outside these seams is lock-in you choose deliberately, and that choice should be recorded in an ADR.</p>
+<h2 id="tools-versions-as-of-oct-2026">Tools &amp; versions (as of Oct 2026)<a class="headerlink" href="#tools-versions-as-of-oct-2026" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Tool / package</th>
+<th>Purpose</th>
+<th>Status</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>WAF AI workload guidance + Assessment Review Tool</td>
+<td>Review instrument</td>
+<td>GA (guidance updated 2026-05-07; verify against current documentation)</td>
+<td>Use for every architecture package</td>
+</tr>
+<tr>
+<td><code>Azure-Samples/microsoft-foundry-baseline</code></td>
+<td>Baseline reference implementation</td>
+<td>Sample</td>
+<td>Compare your C17 deployment</td>
+</tr>
+<tr>
+<td><code>Azure/AI-Landing-Zones</code></td>
+<td>Foundry LZ + AI Gateway LZ (Bicep/Terraform on AVM)</td>
+<td><strong>Preview</strong></td>
+<td>Pin commit SHA</td>
+</tr>
+<tr>
+<td>Bicep + Azure Verified Modules</td>
+<td>IaC</td>
+<td>GA</td>
+<td><code>az bicep</code> version pinned in devcontainer</td>
+</tr>
+<tr>
+<td><code>azd</code></td>
+<td>Environment provisioning</td>
+<td>GA</td>
+<td>From C17</td>
+</tr>
+<tr>
+<td>PSRule for Azure</td>
+<td>Rule-based IaC validation incl. WAF rules</td>
+<td>OSS</td>
+<td>Verify current version and rule coverage for Foundry</td>
+</tr>
+<tr>
+<td>Azure Policy</td>
+<td>Deny public network, require private endpoints, disable local auth</td>
+<td>GA</td>
+<td>Built-in definitions for AI services exist; verify names</td>
+</tr>
+<tr>
+<td>Foundry Agent Service (prompt agents, standard setup, BYO VNet)</td>
+<td>Agent runtime</td>
+<td>GA</td>
+<td>No built-in DR; no per-user conversation auth</td>
+</tr>
+<tr>
+<td>Foundry hosted agents</td>
+<td>Code-first agent runtime</td>
+<td><strong>GA</strong> (9 Jul 2026)</td>
+<td>Egress controls preview</td>
+</tr>
+<tr>
+<td>Microsoft Entra Agent ID</td>
+<td>Agent identities, CA templates</td>
+<td>GA (blueprint wizard preview)</td>
+<td>Agent 365 registry convergence</td>
+</tr>
+<tr>
+<td>MAF 1.0 (<code>Microsoft.Agents.AI</code>)</td>
+<td>Orchestration spike</td>
+<td>GA</td>
+<td>Five orchestration patterns</td>
+</tr>
+<tr>
+<td>Structurizr DSL + CLI/Lite</td>
+<td>C4 as code</td>
+<td>OSS</td>
+<td>Validation script in lab repo</td>
+</tr>
+<tr>
+<td>Mermaid C4</td>
+<td>Lightweight alternative</td>
+<td>Experimental in Mermaid</td>
+<td>Use for docs, not as source of truth</td>
+</tr>
+<tr>
+<td><code>Microsoft.Extensions.AI.Evaluation</code></td>
+<td>Evidence for the pattern ADR</td>
+<td>GA (verify versions)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="labs">Labs<a class="headerlink" href="#labs" title="Permanent link">&para;</a></h2>
+<h3 id="lab-1-waf-ai-assessment-of-your-c17-deployment-35h">Lab 1 — WAF AI assessment of your C17 deployment (≈3.5h)<a class="headerlink" href="#lab-1-waf-ai-assessment-of-your-c17-deployment-35h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> Produce an evidence-backed findings register for the current Fleet Ops Copilot.</li>
+<li><strong>Start state:</strong> branch <code>a2/start</code> (your G3 baseline deployed in your sandbox subscription) and <code>architecture/waf/</code> templates.</li>
+<li><strong>Steps:</strong></li>
+<li>Run the WAF AI Assessment Review Tool for the workload and export the results.</li>
+<li>For each of the 10 design areas, attach evidence. The evidence types are: a Bicep path, an Azure Resource Graph query result, a KQL query, an eval report, or a screenshot only as a last resort. Example Resource Graph query:
+     <div class="highlight"><pre><span></span><code><span class="n">resources</span>
+<span class="p">|</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="n">in</span><span class="err">~</span><span class="w"> </span><span class="p">(</span><span class="s">'microsoft.cognitiveservices/accounts'</span><span class="p">,</span><span class="s">'microsoft.search/searchservices'</span><span class="p">,</span><span class="s">'microsoft.documentdb/databaseaccounts'</span><span class="p">)</span>
+<span class="p">|</span><span class="w"> </span><span class="k">project</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="p">,</span><span class="w"> </span><span class="n">publicNetworkAccess</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">tostring</span><span class="p">(</span><span class="n">properties</span><span class="p">.</span><span class="n">publicNetworkAccess</span><span class="p">),</span>
+<span class="w">          </span><span class="n">disableLocalAuth</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">tostring</span><span class="p">(</span><span class="n">properties</span><span class="p">.</span><span class="n">disableLocalAuth</span><span class="p">)</span>
+</code></pre></div></li>
+<li>Diff your deployment against <code>microsoft-foundry-baseline</code>: ingress, egress, private endpoints, identities, standard setup, agents-as-code. List each difference as <em>intentional</em> (with an ADR) or a <em>gap</em> (with a finding).</li>
+<li>Build the findings register (<code>waf/findings.csv</code>): ID, design area, pillar, severity (Critical / High / Med / Low), evidence, owner, remediation, target date.</li>
+<li>Pick the top 5 findings and estimate remediation in t-shirt sizes with the uncertainty stated (A7 revisits estimation).</li>
+<li><strong>Break it:</strong> The instructor flips one Cosmos DB account to <code>publicNetworkAccess: Enabled</code> and adds a key-based connection in a Foundry project. Your Resource Graph checks must detect both, and the register must classify them as Critical.</li>
+<li><strong>Acceptance criteria:</strong></li>
+<li>All 10 design areas have ≥ 1 evidence item.</li>
+<li>The register passes the schema check.</li>
+<li>The injected misconfigurations are detected by your queries (CI job <code>waf-drift</code> runs them).</li>
+<li>Every "intentional deviation" links to an ADR.</li>
+<li><strong>Stretch:</strong> Turn your Resource Graph queries into PSRule custom rules and run them in CI on the Bicep before deployment, as a shift-left complement to post-deployment detection.</li>
+</ul>
+<h3 id="lab-2-c4-with-the-ai-profile-validated-as-code-35h">Lab 2 — C4 with the AI profile, validated as code (≈3.5h)<a class="headerlink" href="#lab-2-c4-with-the-ai-profile-validated-as-code-35h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> A C4 model that a security reviewer, a customer's architect and a coding agent can all read, and that fails the build when the design is unsafe.</li>
+<li><strong>Start state:</strong> <code>a2/lab2-start</code> with <code>architecture/c4/workspace.dsl</code> skeleton, tag definitions and <code>validate-ai-profile</code> (.NET console).</li>
+<li><strong>Steps:</strong></li>
+<li>Model the <strong>System Context</strong>: Fleet Ops Copilot, the Trakia user personas, customer fleets (SaaS), the telematics provider, the parts supplier, M365/Teams and model providers through Foundry.</li>
+<li>Model the <strong>Containers</strong>: web/Teams front ends, the agent API, the Fleet Assistant, Fleet Analyst and incident workflow agents, the MCP servers (tickets, scheduling, parts), the knowledge bases, model deployments, APIM, Cosmos DB, SQL <code>TrakiaOps</code>, and App Insights. Apply the AI profile tags with all mandatory properties.</li>
+<li>Draw the trust boundaries: Trakia internal, the per-tenant boundary for SaaS, third-party tools, and model providers.</li>
+<li>Mark untrusted-content relationships: customer emails into the incident workflow, supplier API responses, uploaded delivery notes.</li>
+<li>Add a <strong>dynamic view</strong> of the incident workflow, from fault event through triage, diagnostics, policy check, booking with approval and customer notification. Add <strong>deployment views</strong> for dev and prod.</li>
+<li>Run <code>validate-ai-profile</code>. It checks the mandatory properties, finds trifecta agents, flags <code>Model Deployment</code> elements whose retirement date falls within 6 months, and flags tools with <code>irreversible</code> side effects that lack a HITL point.</li>
+<li><strong>Break it:</strong> Add a "customer email auto-reply" tool to the Fleet Assistant (which already reads private incident data and ingests customer emails). The validator must fail with a trifecta violation. Fix it with one of two options, each with an ADR: (a) move email drafting to a separate agent with no private-data tools, or (b) require human approval before send.</li>
+<li><strong>Acceptance criteria:</strong></li>
+<li><code>structurizr validate</code> passes and <code>validate-ai-profile</code> exits 0.</li>
+<li>The rendered diagrams are committed.</li>
+<li>The trifecta break is detected and fixed with an ADR.</li>
+<li>Every agent element names an Entra Agent ID or managed identity.</li>
+<li><strong>Stretch:</strong> Make the C4 DSL agent-readable context. Add it to <code>AGENTS.md</code> and have your coding agent answer "which agents can write to <code>TrakiaOps</code>?" from the model alone. Check the answer against the code.</li>
+</ul>
+<h3 id="lab-3-deploy-an-ai-application-landing-zone-and-break-its-network-5h">Lab 3 — Deploy an AI application landing zone and break its network (≈5h)<a class="headerlink" href="#lab-3-deploy-an-ai-application-landing-zone-and-break-its-network-5h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> Land Fleet Ops Copilot in a governed landing zone and learn the failure signatures of private networking.</li>
+<li><strong>Start state:</strong> <code>a2/lab3-start</code> contains:</li>
+<li>a fork reference to <code>Azure/AI-Landing-Zones</code> pinned at a course-tested SHA;</li>
+<li>a platform-hub stub (Firewall, Bastion, DNS resolver, Log Analytics);</li>
+<li>parameter files for <code>trakia-prod-weu</code> (or a course-assigned EU region).</li>
+<li><strong>Steps:</strong></li>
+<li>Deploy the hub stub, then the <strong>AI Foundry Landing Zone</strong> and the <strong>AI Gateway Landing Zone</strong> with your parameters (EU region, private endpoints on, public access off, standard agent setup, BYO VNet).</li>
+<li>Add your overlays as separate Bicep modules, not upstream edits:<ul>
+<li>per-component managed identities;</li>
+<li>project-level connections only;</li>
+<li>diagnostic settings to central Log Analytics;</li>
+<li>delete locks on Cosmos DB and the Foundry resource.</li>
+</ul>
+</li>
+<li>Wire the private DNS zones to the hub resolver. Verify name resolution from the agent subnet and the jump box: <code>nslookup &lt;search&gt;.search.windows.net</code> must return a private IP. Verify Foundry hostnames against the docs.</li>
+<li>Configure the Firewall application rules: allow-list the supplier API, the telematics provider and the required Microsoft FQDNs (document each with its reason).</li>
+<li>Assign the policy initiative: deny public network access, require private endpoints, disable local auth (definitions in <code>policy/</code>; A6 extends them).</li>
+<li>Redeploy Fleet Ops Copilot into the landing zone via <code>azd</code> and run the C14 smoke eval suite through App Gateway.</li>
+<li><strong>Break it:</strong> Run these three induced faults one at a time and record symptom → diagnosis → fix in <code>runbooks/network-faults.md</code>:</li>
+<li>(a) delete the DNS zone link for AI Search. The agent's retrieval fails with timeouts or name-resolution errors. Find it via the dependency failures in App Insights.</li>
+<li>(b) remove the supplier FQDN from the Firewall. The parts tool fails with a 403/connection error. Find it in the Firewall logs.</li>
+<li>(c) attempt to deploy a Storage account with public access. Azure Policy must deny it, and you capture the deny event.</li>
+<li><strong>Acceptance criteria:</strong></li>
+<li>PSRule for Azure passes on the overlays with no Critical findings.</li>
+<li>The policy compliance scan shows 100% compliance on the AI resources.</li>
+<li>The smoke eval suite passes through the private path.</li>
+<li>All three faults are diagnosed in the runbook with the KQL used.</li>
+<li><code>az resource list</code> shows no AI resource with public access enabled.</li>
+<li><strong>Stretch:</strong> Run Terraform from the same repo as a parallel deployment in a second resource group. Write a half-page "Bicep vs Terraform for Trakia" ADR that weighs team skills, AVM parity and state management.</li>
+</ul>
+<h3 id="lab-4-identity-and-the-bola-hole-35h">Lab 4 — Identity and the BOLA hole (≈3.5h)<a class="headerlink" href="#lab-4-identity-and-the-bola-hole-35h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> Prove the per-user conversation authorization gap exists, close it, and move agents to first-class identities.</li>
+<li><strong>Start state:</strong> <code>a2/lab4-start</code>. The agent API accepts <code>conversationId</code> from the client (the deliberately naive C9 shape).</li>
+<li><strong>Steps:</strong></li>
+<li><strong>Exploit.</strong> As user <code>mechanic-varna-02</code>, obtain <code>conversationId</code> values: they are logged in a debug header and are guessable from a sequential test fixture. Call the API with another user's ID and read that conversation. Write the exploit as an xUnit security test that <em>currently passes</em>.</li>
+<li><strong>Fix.</strong> Add a conversation ownership store (Cosmos container <code>conversationOwnership</code>, partition key <code>/tenantId</code>, keyed by conversation ID → <code>{tenantId, userObjectId, createdAt}</code>). Enforce it in middleware before any agent call. Return 404, not 403, to avoid leaking existence. Use non-guessable IDs.
+     <div class="highlight"><pre><span></span><code><span class="n">app</span><span class="p">.</span><span class="n">Use</span><span class="p">(</span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span><span class="w"> </span><span class="n">next</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ctx</span><span class="p">.</span><span class="n">Request</span><span class="p">.</span><span class="n">RouteValues</span><span class="p">.</span><span class="n">TryGetValue</span><span class="p">(</span><span class="s">"conversationId"</span><span class="p">,</span><span class="w"> </span><span class="k">out</span><span class="w"> </span><span class="kt">var</span><span class="w"> </span><span class="n">id</span><span class="p">))</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">principal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ctx</span><span class="p">.</span><span class="n">User</span><span class="p">;</span><span class="w"> </span><span class="c1">// Entra token: oid + tid (+ app role)</span>
+<span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">owner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">ownership</span><span class="p">.</span><span class="n">GetAsync</span><span class="p">(</span><span class="n">principal</span><span class="p">.</span><span class="n">TenantId</span><span class="p">(),</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="p">)</span><span class="n">id</span><span class="o">!</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">owner</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">null</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">owner</span><span class="p">.</span><span class="n">UserObjectId</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">principal</span><span class="p">.</span><span class="n">ObjectId</span><span class="p">())</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="n">ctx</span><span class="p">.</span><span class="n">Response</span><span class="p">.</span><span class="n">StatusCode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">StatusCodes</span><span class="p">.</span><span class="n">Status404NotFound</span><span class="p">;</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="nf">next</span><span class="p">();</span>
+<span class="p">});</span>
+</code></pre></div></li>
+<li>Flip the exploit test to assert 404. Add a cross-<em>tenant</em> variant using the SaaS tenant claim.</li>
+<li><strong>Agent identity.</strong> Register the Fleet Assistant and the incident workflow agents with <strong>Entra Agent ID</strong> (blueprint wizard in preview; scripted path if available, otherwise portal; verify). Grant least-privilege roles (ticket MCP: write; <code>TrakiaOps</code>: none for the assistant). Apply a Conditional Access template that blocks high-risk agent identities.</li>
+<li><strong>OBO path.</strong> The "my upcoming shifts" tool calls the scheduling API on behalf of the user. Verify in the logs that the downstream call carries the user's identity and the agent's identity, and that a disabled user cannot be impersonated.</li>
+<li><strong>Break it:</strong> Grant the Fleet Assistant identity <code>Contributor</code> on the resource group "to fix a permission error". Your access review query must flag it. Write the finding and revert.</li>
+<li><strong>Acceptance criteria:</strong></li>
+<li>The BOLA tests (same-tenant and cross-tenant) pass in CI.</li>
+<li>No agent identity holds roles beyond the least-privilege matrix (<code>identity/matrix.yaml</code>, checked by a script that reads role assignments).</li>
+<li>Sign-in and audit logs show the agent identity for agent actions.</li>
+<li>The OBO evidence is captured.</li>
+<li><strong>Stretch:</strong> Register each MCP server as a protected resource with distinct scopes. Show that the incident agent's token cannot call the HR knowledge MCP server.</li>
+</ul>
+<h3 id="lab-5-orchestration-pattern-spike-and-portability-map-45h">Lab 5 — Orchestration pattern spike and portability map (≈4.5h)<a class="headerlink" href="#lab-5-orchestration-pattern-spike-and-portability-map-45h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> Choose the incident workflow's orchestration pattern from measured evidence, and show the design survives a cloud change on paper.</li>
+<li><strong>Start state:</strong> <code>a2/lab5-start</code> with your C12 multi-agent workflow, the C14 trajectory and outcome eval suite (60 incident scenarios, incl. 10 adversarial customer emails) and the τ-bench-style end-state checks.</li>
+<li><strong>Steps:</strong></li>
+<li>Implement three variants behind one interface:<ul>
+<li>(A) a <strong>single agent</strong> with all tools and an iteration cap of 12;</li>
+<li>(B) a <strong>deterministic sequential workflow</strong> (MAF <code>WorkflowBuilder</code>) with an LLM step only at triage and drafting;</li>
+<li>(C) a <strong>handoff multi-agent</strong> design (triage → diagnostics → policy → scheduling → notification) with per-agent tool scopes.</li>
+</ul>
+</li>
+<li>Run the suite 4× per variant (pass^4 for reliability). Collect task success, the trajectory evaluators (tool-call accuracy), tokens and cost per task (A1 model), p95 latency, the injection ASR on the adversarial emails, and the number of identities holding write tools.</li>
+<li>Fill the decision matrix and write <strong>ADR-A2-003 "Incident orchestration pattern"</strong>. Expected insight (do not assume it, measure it): (B) usually wins on cost, latency and reliability for a known process, while (C) or a B/C hybrid may be justified <em>only</em> by the security boundary around customer-email handling.</li>
+<li><strong>Portability map:</strong> annotate your C4 containers with the AWS and Google equivalents (Concepts §8 table, verified where you can). List every non-portable dependency with an exit cost estimate.</li>
+<li><strong>Break it:</strong> Add a fourth "group chat with 5 agents" variant because "the business liked the demo". Measure it. Then write the two-sentence answer to the sponsor explaining why it doesn't ship. Microsoft's guidance keeps group chat at ≤ 3 agents.</li>
+<li><strong>Acceptance criteria:</strong></li>
+<li>Eval reports for all variants are committed.</li>
+<li>The ADR cites the measured pass^4, cost and ASR.</li>
+<li>The chosen variant meets the G3 thresholds.</li>
+<li>The portability map lists ≥ 6 dependencies, each with seam/no-seam status.</li>
+<li><strong>Stretch:</strong> Re-implement variant B's triage step as a Copilot Studio agent that calls the rest via A2A. Measure the added latency and the governance implications.</li>
+</ul>
+<h2 id="kata">Kata<a class="headerlink" href="#kata" title="Permanent link">&para;</a></h2>
+<p><strong>"Reference architecture gap hunt"</strong> (30 min, repeat with variations).</p>
+<p>You get a one-page architecture description and diagram. Within 30 minutes, list the top 7 gaps against the baseline Foundry chat RA and the WAF AI design areas. For each gap, name the risk, the evidence that would confirm it, and the fix.</p>
+<p>Variations:
+- a public-endpoint RAG app with API keys;
+- a multi-tenant agent passing <code>threadId</code> from the browser;
+- a hosted agent with unrestricted egress and a web-browse tool;
+- a "multi-region" design whose second region has no model quota;
+- a design on Global Standard deployments for EU personal data;
+- a 6-agent group chat for invoice approval.</p>
+<p>The score is the share of reference gaps found, plus a bonus for gaps the reference missed and you justified.</p>
+<h2 id="product-increment-fleet-ops-copilot">Product increment — Fleet Ops Copilot<a class="headerlink" href="#product-increment-fleet-ops-copilot" title="Permanent link">&para;</a></h2>
+<p>Fleet Ops Copilot now runs in an <strong>AI application landing zone</strong> that has:</p>
+<ul>
+<li>private networking;</li>
+<li>Firewall egress allow-listing;</li>
+<li>policy-enforced private endpoints and keyless auth;</li>
+<li>per-component managed identities;</li>
+<li>agents registered with Entra Agent ID;</li>
+<li>the BOLA gap closed for users and tenants.</li>
+</ul>
+<p>It is described by a <strong>validated C4 model with the AI profile</strong>, assessed with a <strong>WAF AI findings register</strong>, and the incident workflow's orchestration pattern is chosen by ADR from measured evidence.</p>
+<h2 id="factory-increment-your-agentic-sdlc">Factory increment — your agentic SDLC<a class="headerlink" href="#factory-increment-your-agentic-sdlc" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Architecture-as-code gates in CI:</strong></li>
+<li><code>structurizr validate</code>;</li>
+<li><code>validate-ai-profile</code> (trifecta, HITL on irreversible tools, model retirement horizon);</li>
+<li>PSRule on Bicep;</li>
+<li><code>waf-drift</code> Resource Graph checks after deploy.</li>
+<li><strong>An "architecture reviewer" custom agent</strong> (<code>.github/agents/arch-reviewer.agent.md</code> or a Claude Code subagent). It reads PR diffs plus the C4 DSL and flags drift: a new outbound dependency missing from the model, a tool added without a side-effect tag, a public endpoint. It comments only; humans decide.</li>
+<li><strong>Security regression tests (BOLA)</strong> in the default test suite.</li>
+</ul>
+<h2 id="assessment">Assessment<a class="headerlink" href="#assessment" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th>Novice</th>
+<th>Competent</th>
+<th>Proficient</th>
+<th>Expert</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>WAF AI assessment</td>
+<td>Questionnaire answered without evidence</td>
+<td>Evidence for some areas</td>
+<td>All 10 areas evidenced; prioritised register; deviations vs baseline classified</td>
+<td>Plus automated drift detection, and findings tied to business impact and A1 costs</td>
+</tr>
+<tr>
+<td>Reference architecture fluency</td>
+<td>Copies the baseline</td>
+<td>Explains components</td>
+<td>Explains limits (no DR, no native LB, BOLA, single-region standard) and adapts them with ADRs</td>
+<td>Plus anticipates SaaS-specific gaps and designs mitigations before they are asked for</td>
+</tr>
+<tr>
+<td>Network &amp; identity design</td>
+<td>Public endpoints / keys</td>
+<td>Private endpoints, some MI</td>
+<td>Landing zone, policy-enforced, per-component MI, Agent ID, OBO, BOLA fixed and tested</td>
+<td>Plus fault diagnosis runbook, least-privilege matrix enforced by script, cross-tenant tests</td>
+</tr>
+<tr>
+<td>Orchestration choice</td>
+<td>Picks multi-agent by default</td>
+<td>Justifies by intuition</td>
+<td>Measured spike (pass^k, cost, ASR, latency) and ADR</td>
+<td>Plus security-boundary reasoning, hybrid designs, explicit "when to revisit" triggers</td>
+</tr>
+<tr>
+<td>Architecture communication (C4 + portability)</td>
+<td>Boxes and arrows</td>
+<td>C4 levels correct</td>
+<td>AI profile complete; validated as code; dynamic view</td>
+<td>Plus portability seams and exit costs quantified; the model is used by agents and reviewers</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Auto-checked:</strong>
+- Structurizr and AI-profile validation;
+- PSRule;
+- policy compliance;
+- <code>waf-drift</code> queries;
+- BOLA tests;
+- identity matrix script;
+- eval reports and thresholds for the spike;
+- ADR linter.</p>
+<h2 id="common-pitfalls">Common pitfalls<a class="headerlink" href="#common-pitfalls" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Treating the baseline as complete: <strong>no built-in DR</strong>, <strong>no native load balancing</strong>, multi-region out of scope.</li>
+<li>Passing client-supplied conversation IDs to Agent Service (BOLA), or forgetting the tenant dimension of the check.</li>
+<li>Public access left on "for the portal".</li>
+<li>Private endpoints without DNS: everything deploys, nothing resolves.</li>
+<li>Editing upstream landing-zone modules instead of overlaying, or upgrading a preview repo without pinning.</li>
+<li>One shared identity for all agents.</li>
+<li>Multi-agent for modularity's sake; group chats with more than 3 agents.</li>
+<li>C4 diagrams without models, tools and untrusted-content flows, which is exactly where the AI risks live.</li>
+<li>Unverified AWS/Google equivalence claims.</li>
+</ul>
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<ul>
+<li>WAF AI workloads — get started (10 design areas, Assessment Review Tool): https://learn.microsoft.com/azure/well-architected/ai/get-started</li>
+<li>Baseline Microsoft Foundry chat reference architecture: https://learn.microsoft.com/en-us/azure/architecture/ai-ml/architecture/baseline-microsoft-foundry-chat</li>
+<li>Implementation: https://github.com/Azure-Samples/microsoft-foundry-baseline</li>
+<li>AI Landing Zones (preview): https://github.com/Azure/AI-Landing-Zones</li>
+<li>CAF AI adoption scenario: https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/scenarios/ai/</li>
+<li>AI agent orchestration patterns: https://learn.microsoft.com/en-us/azure/architecture/ai-ml/guide/ai-agent-design-patterns</li>
+<li>APIM AI gateway capabilities: https://learn.microsoft.com/en-us/azure/api-management/genai-gateway-capabilities</li>
+<li>What's new in Entra Agent ID: https://learn.microsoft.com/en-us/entra/agent-id/whats-new-agent-id ; Agent identity blueprints: https://learn.microsoft.com/en-us/entra/agent-id/agent-blueprint</li>
+<li>Foundry Agent Service at Build 2026 (hosted agents, previews): https://devblogs.microsoft.com/foundry/agent-service-build2026/</li>
+<li>What's new in Microsoft Foundry July–August 2026 (hosted agents GA 9 Jul 2026; Toolboxes GA): https://devblogs.microsoft.com/foundry/whats-new-in-microsoft-foundry-july-august-2026/</li>
+<li>Foundry guardrails (tool-call/response controls preview; egress controls preview): https://learn.microsoft.com/en-us/azure/foundry/guardrails/guardrails-overview</li>
+<li>Anthropic, multi-agent research system: https://www.anthropic.com/engineering/multi-agent-research-system ; Cognition, Don't Build Multi-Agents: https://cognition.ai/blog/dont-build-multi-agents</li>
+<li>Simon Willison, the lethal trifecta: https://simonwillison.net/2025/Jun/16/the-lethal-trifecta/</li>
+<li>Linux Foundation A2A press release (Bedrock AgentCore, Foundry, Copilot Studio): https://linuxfoundation.org/press/a2a-protocol-surpasses-150-organizations-lands-in-major-cloud-platforms-and-sees-enterprise-production-use-in-first-year</li>
+<li>Content Safety language/region limits (groundedness English-only): https://learn.microsoft.com/en-gb/azure/ai-services/content-safety/overview</li>
+<li>C4 model: https://c4model.com ; Structurizr DSL: https://docs.structurizr.com/dsl (AI profile is a course convention, not a standard)</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../a01-ai-strategy-use-case-discovery-and-business-case/" class="md-footer__link md-footer__link--prev" aria-label="Previous: A1 — AI strategy, use-case discovery &amp; business case">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                A1 — AI strategy, use-case discovery & business case
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../a03-enterprise-knowledge-and-data-architecture-for-ai/" class="md-footer__link md-footer__link--next" aria-label="Next: A3 — Enterprise knowledge &amp; data architecture for AI">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                A3 — Enterprise knowledge & data architecture for AI
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.top", "navigation.footer", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

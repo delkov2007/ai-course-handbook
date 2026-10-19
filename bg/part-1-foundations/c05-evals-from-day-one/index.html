@@ -1,0 +1,2993 @@
+
+<!doctype html>
+<html lang="bg" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Learning-by-doing course, release 2026.11 (content as of October 2026)">
+      
+      
+      
+      
+        <link rel="prev" href="../c04-working-with-coding-agents-the-factory-day-one/">
+      
+      
+        <link rel="next" href="../../part-2-building-blocks/c06-embeddings-and-vector-search/">
+      
+      
+        
+          <link rel="alternate" href="../../../part-1-foundations/c05-evals-from-day-one/" hreflang="en">
+        
+          <link rel="alternate" href="./" hreflang="bg">
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>C5 — Evals от първия ден - AI Solution Developer & Architect — Наръчник за курсиста</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#c5-evals-from-day-one" class="md-skip">
+          Към съдържанието
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Горен колонтитул">
+    <a href="../../" title="AI Solution Developer &amp; Architect — Наръчник за курсиста" class="md-header__button md-logo" aria-label="AI Solution Developer & Architect — Наръчник за курсиста" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            AI Solution Developer & Architect — Наръчник за курсиста
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              C5 — Evals от първия ден
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="Избери език">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href="../../../part-1-foundations/c05-evals-from-day-one/" hreflang="en" class="md-select__link">
+              English
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="./" hreflang="bg" class="md-select__link">
+              Български
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Търси" placeholder="Търси" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Търси">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Изчисти" aria-label="Изчисти" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Инициализирано търсене
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Навигация" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../" title="AI Solution Developer &amp; Architect — Наръчник за курсиста" class="md-nav__button md-logo" aria-label="AI Solution Developer & Architect — Наръчник за курсиста" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    AI Solution Developer & Architect — Наръчник за курсиста
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Добре дошли
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Започнете оттук
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Започнете оттук
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/how-to-use/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Как да използвате наръчника
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/course-overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Преглед на курса
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/assessment-gates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Оценяване и гейтове
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/competency-matrix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Матрица на компетентностите
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Част 1 — Основи (ниво 1)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Част 1 — Основи (ниво 1)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../c00-orientation-setup-and-toolchain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C0 — Ориентация, настройка и инструменти
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../c01-how-generative-ai-works-an-engineer-s-mental-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C1 — Как работи генеративният AI: мисловен модел за инженери
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../c02-your-first-ai-feature-in-net/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C2 — Първата ви AI функционалност в .NET
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../c03-prompting-structured-outputs-and-tool-calling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C3 — Промптинг, структуриран изход и извикване на инструменти
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../c04-working-with-coding-agents-the-factory-day-one/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C4 — Работа с кодиращи агенти: Фабриката, първи ден
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C5 — Evals от първия ден
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C5 — Evals от първия ден
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Съдържание">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Съдържание
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-this-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why this matters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learning outcomes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concepts
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Concepts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#error-analysis-first" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Error analysis first
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#golden-dataset-v1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Golden dataset v1
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#code-based-checks-vs-llm-as-judge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Code-based checks vs LLM-as-judge
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#microsoftextensionsaievaluation-in-practice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Microsoft.Extensions.AI.Evaluation in practice
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#statistics-for-nondeterministic-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Statistics for nondeterministic tests
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ci-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CI design
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-not-to-do" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What NOT to do
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tools-versions-as-of-oct-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tools &amp; versions (as of Oct 2026)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#labs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Labs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Labs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lab-1-look-at-the-data-error-analysis-on-100-traces-25h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 1 — Look at the data: error analysis on 100 traces (≈2.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-2-golden-dataset-v1-and-code-based-evals-in-xunit-25h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 2 — Golden dataset v1 and code-based evals in xUnit (≈2.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-3-one-binary-llm-judge-validated-175h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 3 — One binary LLM judge, validated (≈1.75h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-4-ci-gate-with-statistics-and-agents-that-run-evals-125h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 4 — CI gate with statistics, and agents that run evals (≈1.25h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kata
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#product-increment-fleet-ops-copilot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Product increment — Fleet Ops Copilot
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#factory-increment-your-agentic-sdlc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Factory increment — your agentic SDLC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assessment
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common pitfalls
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Част 2 — Градивни елементи (ниво 2)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Част 2 — Градивни елементи (ниво 2)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c06-embeddings-and-vector-search/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C6 — Embeddings и векторно търсене
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c07-rag-from-documents-to-cited-permission-aware-answers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C7 — RAG: от документи до отговори с цитати, съобразени с правата на достъп
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c08-tools-and-the-model-context-protocol/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C8 — Инструменти и Model Context Protocol
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c09-agents-with-microsoft-agent-framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C9 — Агенти с Microsoft Agent Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c10-agents-over-structured-data-text-to-sql-on-sql-server/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C10 — Агенти върху структурирани данни: text-to-SQL върху SQL Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c11-agentic-testing-ai-driven-tdd-mutation-and-e2e-test-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C11 — Агентно тестване: TDD с AI, мутационно тестване и агенти за E2E тестове
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Част 3 — Продукционни системи (ниво 3)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Част 3 — Продукционни системи (ниво 3)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c12-workflows-and-multi-agent-orchestration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C12 — Workflows и многоагентна оркестрация
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c13-context-engineering-advanced-retrieval-and-memory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C13 — Инженеринг на контекста, напреднало извличане и памет
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c14-failure-driven-evals-llm-judges-and-red-teaming/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C14 — Evals, водени от грешките, LLM съдии и red teaming
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c15-observability-genaiops-and-cost/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C15 — Наблюдаемост, GenAIOps и разходи
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c16-security-for-llm-and-agentic-systems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C16 — Сигурност на LLM и агентни системи
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c17-shipping-to-azure-hosting-ai-gateway-iac-and-interop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C17 — Пускане в Azure: хостинг, AI gateway, IaC и оперативна съвместимост
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c18-responsible-ai-and-the-eu-ai-act-in-practice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C18 — Отговорен AI и Актът за изкуствения интелект на ЕС на практика
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c19-the-automated-sdlc-agents-from-issue-to-production/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C19 — Автоматизираният SDLC: агенти от issue до продукция
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Част 4 — Експертна специализация: AI Solution Developer
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Част 4 — Експертна специализация: AI Solution Developer
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d01-model-customization-and-small-local-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D1 — Адаптиране на модели и малки/локални модели
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d02-long-running-durable-and-autonomous-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D2 — Дълго работещи, устойчиви и автономни агенти
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d03-multimodal-and-realtime-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D3 — Мултимодални агенти и агенти в реално време
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d04-agent-ux-and-front-ends/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D4 — UX и фронтенди за агенти
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d05-performance-and-cost-engineering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D5 — Инженеринг на производителността и разходите
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d06-building-your-own-agent-tooling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D6 — Изграждане на собствени инструменти за агенти
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d07-agent-reliability-engineering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D7 — Инженеринг на надеждността на агенти
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Част 5 — Експертна специализация: AI Solution Architect
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Част 5 — Експертна специализация: AI Solution Architect
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a01-ai-strategy-use-case-discovery-and-business-case/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A1 — AI стратегия, откриване на сценарии на употреба и бизнес обосновка
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a02-azure-ai-reference-architectures-and-well-architected-for-ai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A2 — Референтни AI архитектури в Azure и Well-Architected за AI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a03-enterprise-knowledge-and-data-architecture-for-ai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A3 — Корпоративна архитектура на знанията и данните за AI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a04-agent-platform-and-integration-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A4 — Платформа за агенти и интеграционна архитектура
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a05-reliability-scale-model-lifecycle-and-finops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A5 — Надеждност, мащаб, жизнен цикъл на моделите и FinOps
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a06-ai-governance-risk-and-compliance-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A6 — Архитектура за управление на AI, риска и съответствието
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a07-the-architect-s-craft-in-ai-programmes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A7 — Занаятът на архитекта в AI програми
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Част 6 — Съвместен финален проект
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Част 6 — Съвместен финален проект
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capstone/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Финален проект
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Приложение
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Приложение
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Речник на термините
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/references/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Допълнителна литература
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Съдържание">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Съдържание
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-this-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why this matters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learning outcomes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concepts
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Concepts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#error-analysis-first" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Error analysis first
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#golden-dataset-v1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Golden dataset v1
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#code-based-checks-vs-llm-as-judge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Code-based checks vs LLM-as-judge
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#microsoftextensionsaievaluation-in-practice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Microsoft.Extensions.AI.Evaluation in practice
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#statistics-for-nondeterministic-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Statistics for nondeterministic tests
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ci-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CI design
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-not-to-do" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What NOT to do
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tools-versions-as-of-oct-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tools &amp; versions (as of Oct 2026)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#labs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Labs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Labs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lab-1-look-at-the-data-error-analysis-on-100-traces-25h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 1 — Look at the data: error analysis on 100 traces (≈2.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-2-golden-dataset-v1-and-code-based-evals-in-xunit-25h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 2 — Golden dataset v1 and code-based evals in xUnit (≈2.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-3-one-binary-llm-judge-validated-175h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 3 — One binary LLM judge, validated (≈1.75h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-4-ci-gate-with-statistics-and-agents-that-run-evals-125h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 4 — CI gate with statistics, and agents that run evals (≈1.25h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kata
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#product-increment-fleet-ops-copilot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Product increment — Fleet Ops Copilot
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#factory-increment-your-agentic-sdlc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Factory increment — your agentic SDLC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assessment
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common pitfalls
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="c5-evals-from-day-one">C5 — Evals from day one<a class="headerlink" href="#c5-evals-from-day-one" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><strong>Level:</strong> 1 — Foundations (Beginner) · <strong>Duration:</strong> 10h (theory 20% / labs 80%) · <strong>Prerequisites:</strong> C1 (nondeterminism, sampling harness), C2 (pipeline, traces in Aspire), C3 (extraction, tool), C4 (factory, hooks, protected paths) · <strong>Volatility:</strong> Low for method; Med for <code>Microsoft.Extensions.AI.Evaluation</code> APIs and CI tooling</p>
+</blockquote>
+<h2 id="why-this-matters">Why this matters<a class="headerlink" href="#why-this-matters" title="Permanent link">&para;</a></h2>
+<p>Trakia's dispatch lead tried Fleet Ops Copilot for a week and reported "it's mostly fine, but sometimes it makes up policies." The team responded the way most teams do: they tweaked the system prompt, eyeballed three answers, and shipped. The next week a model-version upgrade silently increased Bulgarian extraction errors, and a prompt change that fixed policy fabrication broke vehicle-status tool routing. Nobody noticed for nine days, because nothing measured it.</p>
+<p>The opposite failure is just as common: a team installs an eval framework, wires up twelve generic metrics ("helpfulness 4.1/5, coherence 4.3/5"), builds dashboards, and still can't say whether the product got better — because none of those numbers correspond to a failure a user actually experienced. Hamel Husain and Shreya Shankar, whose evals method is the most influential practitioner guidance in 2026, put it bluntly: "avoid eval-driven development in general" — don't write speculative evaluators, and don't trust generic metrics. They report spending 60–80% of development time on error analysis and evaluation.</p>
+<p>This course therefore teaches <strong>failure-driven evals</strong>: look at real outputs and traces first; name the failures you actually see (open coding → axial coding); write the cheapest check that catches each one (code first, a binary LLM judge only where judgment is needed); put those checks in your test suite with statistics that respect nondeterminism; and gate CI on them. From this module on, every product feature ships with evals, your coding agents must keep them green, and the hidden suite behind Gate G1 uses exactly this machinery.</p>
+<h2 id="learning-outcomes">Learning outcomes<a class="headerlink" href="#learning-outcomes" title="Permanent link">&para;</a></h2>
+<p>By the end of C5 you can:</p>
+<ol>
+<li><strong>Perform</strong> error analysis on ~100 Fleet Ops traces: open-code the first failure per trace and axial-code the notes into a failure taxonomy with counts.</li>
+<li><strong>Build</strong> golden dataset v1 (50 stratified, versioned, human-labeled cases across features and languages) with dev/held-out splits.</li>
+<li><strong>Choose</strong> between code-based checks and an LLM-as-judge for each failure mode, and <strong>justify</strong> the choice.</li>
+<li><strong>Implement</strong> custom <code>IEvaluator</code>s and run them with <code>Microsoft.Extensions.AI.Evaluation</code> inside xUnit/MSTest, with response caching and <code>dotnet aieval</code> reports.</li>
+<li><strong>Write</strong> one binary pass/fail LLM judge for one failure mode and <strong>validate</strong> it against human labels (TPR/TNR).</li>
+<li><strong>Apply</strong> statistics for nondeterministic tests: N runs, per-case pass rates, confidence intervals, pass@k vs pass^k, and gating rules that distinguish regressions from noise.</li>
+<li><strong>Configure</strong> CI (GitHub Actions with OIDC) to run cached evals on PRs and uncached N-run evals nightly / on prompt or model change, publishing reports as artifacts.</li>
+<li><strong>Instruct</strong> coding agents to run evals before claiming done, and <strong>prevent</strong> them from editing golden labels.</li>
+</ol>
+<h2 id="concepts">Concepts<a class="headerlink" href="#concepts" title="Permanent link">&para;</a></h2>
+<h3 id="error-analysis-first">Error analysis first<a class="headerlink" href="#error-analysis-first" title="Permanent link">&para;</a></h3>
+<p>The Husain/Shankar method (evals FAQ, updated 21 Sep 2026):</p>
+<ol>
+<li><strong>Collect diverse traces.</strong> Review ~100; annotate at least the first 30 yourself before letting any LLM suggest failure categories. Keep going until new traces stop revealing new failure modes ("theoretical saturation").</li>
+<li><strong>Open coding:</strong> a free-text note on the <em>first</em> (most upstream) failure in each trace — "invented a 'Trakia night-driving policy' that doesn't exist", "Latin plate not normalized before tool call", "answered in English to a Bulgarian question". First failure only, because downstream errors are often consequences.</li>
+<li><strong>Axial coding:</strong> group notes into a taxonomy of failure modes with counts. An LLM may help cluster; you decide.</li>
+<li><strong>Prioritize</strong> by frequency × impact (a rare injury-severity misclassification can outrank a frequent formatting nit).</li>
+<li><strong>Write evaluators only for observed failure modes.</strong> Refresh with 100+ new traces every 2–4 weeks plus 10–20 outliers weekly; record non-model problems (missing features, bad data) too.</li>
+<li><strong>One "benevolent dictator"</strong> — a domain expert (here: Trakia's dispatch lead persona, played by your peer or instructor) — makes quality calls; with several annotators, label independently and measure agreement first.</li>
+<li><strong>Build your own viewer.</strong> A simple tool showing the trace next to the outcome, with keyboard shortcuts for labels, beats a generic UI. Don't outsource core error analysis.</li>
+</ol>
+<h3 id="golden-dataset-v1">Golden dataset v1<a class="headerlink" href="#golden-dataset-v1" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Purpose:</strong> a regression suite for <em>known</em> failure modes and core behaviors, not a benchmark of general intelligence.</li>
+<li><strong>Stratify</strong> on the dimensions that matter for Trakia: feature (extraction / vehicle status / out-of-scope), language (BG Cyrillic, BG Latin-script, EN), expected behavior (answer, tool call, abstain, refuse/contain injection), difficulty (missing fields, two plates, relative dates).</li>
+<li><strong>Sources:</strong> real traces from your dogfooding (C2–C4) first; synthetic cases to fill gaps using the dimensions → hand-written tuples → generated queries method (generate tuples, then turn each tuple into natural language in a separate step). Synthetic data cannot tell you how <em>common</em> a failure is in production.</li>
+<li><strong>Labels are human-owned</strong> (protected path from C4). Generated labels are drafts until a human signs off.</li>
+<li><strong>Splits:</strong> <code>dev</code> (you iterate on it) vs <code>heldout</code> (you look at it rarely). Iterating prompts until dev passes turns dev into training data (C1); Gate G1's hidden suite exists for the same reason.</li>
+<li><strong>Versioned</strong> (<code>evals/golden/v1/*.jsonl</code> + <code>CHANGELOG.md</code>): adding a case is a reviewed PR with the trace that motivated it.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="nt">"id"</span><span class="p">:</span><span class="s2">"ext-017"</span><span class="p">,</span><span class="nt">"feature"</span><span class="p">:</span><span class="s2">"extract"</span><span class="p">,</span><span class="nt">"lang"</span><span class="p">:</span><span class="s2">"bg-latn"</span><span class="p">,</span><span class="nt">"split"</span><span class="p">:</span><span class="s2">"dev"</span><span class="p">,</span><span class="nt">"critical"</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">"input"</span><span class="p">:</span><span class="s2">"Kamion PB4521KH, guma spuknala na AM Trakia km 142 dnes 06:40, nqma postradali"</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">"expected"</span><span class="p">:{</span><span class="nt">"category"</span><span class="p">:</span><span class="s2">"Tyre"</span><span class="p">,</span><span class="nt">"plate"</span><span class="p">:</span><span class="s2">"РВ 4521 КН"</span><span class="p">,</span><span class="nt">"roadKm"</span><span class="p">:</span><span class="mi">142</span><span class="p">,</span><span class="nt">"injuriesReported"</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span><span class="nt">"cargoDamaged"</span><span class="p">:</span><span class="kc">null</span><span class="p">},</span>
+<span class="w"> </span><span class="nt">"checks"</span><span class="p">:[</span><span class="s2">"schema"</span><span class="p">,</span><span class="s2">"fields"</span><span class="p">,</span><span class="s2">"nulls"</span><span class="p">],</span><span class="nt">"failureMode"</span><span class="p">:</span><span class="s2">"latin-plate-not-normalized"</span><span class="p">,</span><span class="nt">"source"</span><span class="p">:</span><span class="s2">"trace:2026-10-14/7f3c"</span><span class="p">}</span>
+</code></pre></div>
+<h3 id="code-based-checks-vs-llm-as-judge">Code-based checks vs LLM-as-judge<a class="headerlink" href="#code-based-checks-vs-llm-as-judge" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Prefer code-based checks when…</th>
+<th>Use an LLM judge when…</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Output is typed (schema valid, enum fields, normalized plate, ±1 km)</td>
+<td>The failure is semantic: "fabricates a Trakia policy", "answer not in the user's language register", "summary omits the injury"</td>
+</tr>
+<tr>
+<td>A tool must/mustn't be called with specific arguments (inspect <code>FunctionCallContent</code>)</td>
+<td>Many phrasings are acceptable and rules can't enumerate them</td>
+</tr>
+<tr>
+<td>Abstention can be detected structurally (typed <code>abstained: true</code>, or a refusal code)</td>
+<td>Abstention is expressed in free text and must be recognized</td>
+</tr>
+<tr>
+<td>Forbidden content is lexical (system-prompt fragments, PII patterns)</td>
+<td>Judgment requires reading context and output together</td>
+</tr>
+</tbody>
+</table>
+<p>Rules for judges: <strong>binary pass/fail</strong> (not 1–5 Likert scales, which are hard to calibrate, drift and hide disagreement), <strong>one judge per failure mode</strong> (not one omnibus "quality" judge), a short rubric with pass and fail examples, a required one-sentence reason, and <strong>validation against human labels</strong> — report <strong>TPR</strong> and <strong>TNR</strong> separately because classes are imbalanced. Course convention (same as C14, used by all gates): <strong>Pass is the positive class</strong> — TPR = judge says Pass when humans say Pass; TNR = judge says Fail when humans say Fail. TNR is therefore the "catches failures" number; a judge that always says Pass has TPR 1.0 and TNR 0. Full calibration (100–200 labels per failure mode, train/dev/test splits for judge prompts) is C14; in C5 you do a first, smaller validation. The same model may serve as app and judge if it agrees with humans. Don't use BLEU/ROUGE/BERTScore for LLM answers; don't adopt generic "helpfulness/coherence" scores as quality measures.</p>
+<h3 id="microsoftextensionsaievaluation-in-practice">Microsoft.Extensions.AI.Evaluation in practice<a class="headerlink" href="#microsoftextensionsaievaluation-in-practice" title="Permanent link">&para;</a></h3>
+<p>Packages: <code>Microsoft.Extensions.AI.Evaluation</code> (core: <code>IEvaluator</code>, metrics), <code>.Quality</code> (LLM-judged: Relevance, Completeness, Groundedness, Equivalence, Coherence, Fluency, Retrieval, and agent evaluators IntentResolution, TaskAdherence, ToolCallAccuracy), <code>.NLP</code> (BLEU/GLEU/F1), <code>.Safety</code> (calls the Foundry Evaluation service: GroundednessPro, ProtectedMaterial, IndirectAttack, CodeVulnerability, content harms), <code>.Reporting</code> (response caching, result storage, reports), <code>.Reporting.Azure</code> (Azure Storage), <code>.Console</code> (the <code>dotnet aieval</code> tool). Works under MSTest, xUnit and NUnit; reports can be published in Azure DevOps or as GitHub artifacts.</p>
+<p>The built-in quality evaluators are convenient but generic; in this course you use them only where they map to an observed failure mode (e.g., Groundedness in C7). Your C5 evaluators are custom.</p>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">sealed</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">IncidentFieldsEvaluator</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IEvaluator</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Metric</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"incident.fields"</span><span class="p">;</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">IReadOnlyCollection</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">EvaluationMetricNames</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">[</span><span class="n">Metric</span><span class="p">];</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">ValueTask</span><span class="o">&lt;</span><span class="n">EvaluationResult</span><span class="o">&gt;</span><span class="w"> </span><span class="n">EvaluateAsync</span><span class="p">(</span>
+<span class="w">        </span><span class="n">IEnumerable</span><span class="o">&lt;</span><span class="n">ChatMessage</span><span class="o">&gt;</span><span class="w"> </span><span class="n">messages</span><span class="p">,</span><span class="w"> </span><span class="n">ChatResponse</span><span class="w"> </span><span class="n">modelResponse</span><span class="p">,</span>
+<span class="w">        </span><span class="n">ChatConfiguration</span><span class="o">?</span><span class="w"> </span><span class="n">chatConfiguration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">null</span><span class="p">,</span>
+<span class="w">        </span><span class="n">IEnumerable</span><span class="o">&lt;</span><span class="n">EvaluationContext</span><span class="o">&gt;?</span><span class="w"> </span><span class="n">additionalContext</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">null</span><span class="p">,</span><span class="w"> </span><span class="n">CancellationToken</span><span class="w"> </span><span class="n">ct</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">expected</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">additionalContext</span><span class="o">!</span><span class="p">.</span><span class="n">OfType</span><span class="o">&lt;</span><span class="n">ExpectedIncidentContext</span><span class="o">&gt;</span><span class="p">().</span><span class="n">Single</span><span class="p">().</span><span class="n">Expected</span><span class="p">;</span>
+<span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="p">(</span><span class="n">pass</span><span class="p">,</span><span class="w"> </span><span class="n">reason</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">IncidentChecks</span><span class="p">.</span><span class="n">Compare</span><span class="p">(</span><span class="n">modelResponse</span><span class="p">.</span><span class="n">Text</span><span class="p">,</span><span class="w"> </span><span class="n">expected</span><span class="p">);</span><span class="w"> </span><span class="c1">// schema + fields + null-correctness</span>
+<span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">metric</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BooleanMetric</span><span class="p">(</span><span class="n">Metric</span><span class="p">,</span><span class="w"> </span><span class="n">pass</span><span class="p">,</span><span class="w"> </span><span class="n">reason</span><span class="p">);</span>
+<span class="w">        </span><span class="n">metric</span><span class="p">.</span><span class="n">Interpretation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">EvaluationMetricInterpretation</span><span class="p">(</span>
+<span class="w">            </span><span class="n">pass</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">EvaluationRating</span><span class="p">.</span><span class="n">Good</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">EvaluationRating</span><span class="p">.</span><span class="n">Unacceptable</span><span class="p">,</span><span class="w"> </span><span class="n">failed</span><span class="p">:</span><span class="w"> </span><span class="o">!</span><span class="n">pass</span><span class="p">,</span><span class="w"> </span><span class="n">reason</span><span class="p">:</span><span class="w"> </span><span class="n">reason</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nf">new</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">EvaluationResult</span><span class="p">(</span><span class="n">metric</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">// Shared fixture (xUnit). Verify factory/method names against your package version.</span>
+<span class="n">Reporting</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DiskBasedReportingConfiguration</span><span class="p">.</span><span class="n">Create</span><span class="p">(</span>
+<span class="w">    </span><span class="n">storageRootPath</span><span class="p">:</span><span class="w"> </span><span class="n">Paths</span><span class="p">.</span><span class="n">EvalResults</span><span class="p">,</span>
+<span class="w">    </span><span class="n">evaluators</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="k">new</span><span class="w"> </span><span class="n">IncidentFieldsEvaluator</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ToolRoutingEvaluator</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">PolicyFabricationJudge</span><span class="p">()],</span>
+<span class="w">    </span><span class="n">chatConfiguration</span><span class="p">:</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ChatConfiguration</span><span class="p">(</span><span class="n">judgeClient</span><span class="p">),</span>
+<span class="w">    </span><span class="n">enableResponseCaching</span><span class="p">:</span><span class="w"> </span><span class="k">true</span><span class="p">,</span>
+<span class="w">    </span><span class="n">executionName</span><span class="p">:</span><span class="w"> </span><span class="n">Env</span><span class="p">(</span><span class="s">"GITHUB_RUN_ID"</span><span class="p">)</span><span class="w"> </span><span class="o">??</span><span class="w"> </span><span class="s">$"local-{DateTime.UtcNow:yyyyMMdd-HHmm}"</span><span class="p">);</span>
+
+<span class="na">[Theory, Trait("Category", "Eval")]</span>
+<span class="na">[MemberData(nameof(Golden.Extraction), MemberType = typeof(Golden))]</span>
+<span class="k">public</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="n">Task</span><span class="w"> </span><span class="nf">Extraction</span><span class="p">(</span><span class="n">GoldenCase</span><span class="w"> </span><span class="n">c</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="nn">ScenarioRun</span><span class="w"> </span><span class="n">run</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">_fx</span><span class="p">.</span><span class="n">Reporting</span><span class="p">.</span><span class="n">CreateScenarioRunAsync</span><span class="p">(</span><span class="s">$"extract/{c.Id}"</span><span class="p">,</span><span class="w"> </span><span class="n">iterationName</span><span class="p">:</span><span class="w"> </span><span class="n">_fx</span><span class="p">.</span><span class="n">Iteration</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">messages</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">IncidentPrompt</span><span class="p">.</span><span class="n">Build</span><span class="p">(</span><span class="n">c</span><span class="p">.</span><span class="n">Input</span><span class="p">);</span><span class="w">                       </span><span class="c1">// the product's real prompt template</span>
+<span class="w">    </span><span class="n">ChatResponse</span><span class="w"> </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">_fx</span><span class="p">.</span><span class="n">AppClient</span><span class="p">(</span><span class="n">run</span><span class="p">).</span><span class="n">GetResponseAsync</span><span class="p">(</span><span class="n">messages</span><span class="p">,</span><span class="w"> </span><span class="n">IncidentPrompt</span><span class="p">.</span><span class="n">Options</span><span class="p">);</span>
+<span class="w">    </span><span class="n">EvaluationResult</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">run</span><span class="p">.</span><span class="n">EvaluateAsync</span><span class="p">(</span><span class="n">messages</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="p">,</span>
+<span class="w">        </span><span class="n">additionalContext</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="k">new</span><span class="w"> </span><span class="n">ExpectedIncidentContext</span><span class="p">(</span><span class="n">c</span><span class="p">.</span><span class="n">Expected</span><span class="p">)]);</span>
+<span class="w">    </span><span class="n">_fx</span><span class="p">.</span><span class="n">Record</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">);</span><span class="w">                                              </span><span class="c1">// aggregate for statistics &amp; gating</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>Response caching:</strong> while the request (prompt, options, model) is unchanged, responses — app and judge calls routed through the reporting configuration's chat client — are replayed from disk, so repeated CI runs are cheap and deterministic. That is perfect for catching <em>code</em> regressions and useless for measuring <em>model</em> variance. Hence two run types (below). Reports: <code>dotnet aieval report --path &lt;storageRoot&gt; --output report.html</code> (verify flags for your tool version).</p>
+<h3 id="statistics-for-nondeterministic-tests">Statistics for nondeterministic tests<a class="headerlink" href="#statistics-for-nondeterministic-tests" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>One run is an anecdote.</strong> Run each case N times (N = 3 for PR-adjacent uncached runs, 5–10 nightly for critical slices).</li>
+<li><strong>Per-case pass rate</strong> p̂ᵢ = passes/N; classify cases as <em>stable pass</em>, <em>stable fail</em> or <em>flaky</em>. Flaky cases are information (ambiguous spec, borderline prompt), not noise to suppress.</li>
+<li><strong>Suite metrics:</strong> <em>pass-all rate</em> (share of cases passing all their checks) plus per-check and per-failure-mode rates. Report per slice (BG vs EN!).</li>
+<li><strong>Confidence intervals:</strong> with 50 cases and an observed 90% pass rate, the 95% Wilson interval is ≈ 79%–96%. A drop from 90% to 86% on 50 cases is <em>not</em> evidence of regression. Use paired comparisons (same cases, before vs after; McNemar's test or simply count cases that flipped pass→fail vs fail→pass) instead of comparing two percentages.</li>
+<li><strong>pass@k vs pass^k:</strong> pass@k = at least one of k attempts succeeds (fine for "can it ever do this?"); <strong>pass^k</strong> = all k succeed (τ-bench's reliability measure, the right one for production behavior). Critical cases (injury → severity ≥ High; never fabricate policy) should be gated on pass^k.</li>
+<li><strong>Gating rules</strong> that work at small n: (1) every <code>critical</code> case passes all N runs; (2) no stable-pass case flips to stable-fail; (3) suite pass-all rate's Wilson lower bound ≥ agreed floor; (4) cost per run within budget.</li>
+</ul>
+<h3 id="ci-design">CI design<a class="headerlink" href="#ci-design" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Trigger</th>
+<th>Cache</th>
+<th>Runs</th>
+<th>Gate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PR touching <code>src/**</code></td>
+<td>On (replay)</td>
+<td>1</td>
+<td>All critical pass; pass-all ≥ floor; no stable flips (vs baseline results)</td>
+</tr>
+<tr>
+<td>PR touching <code>prompts/**</code>, <code>models.json</code>, <code>evals/**</code></td>
+<td>Off for affected slices</td>
+<td>N = 3</td>
+<td>Rules 1–4 above</td>
+</tr>
+<tr>
+<td>Nightly</td>
+<td>Off</td>
+<td>N = 5</td>
+<td>Report + open issue on regression (detects provider-side drift)</td>
+</tr>
+</tbody>
+</table>
+<p>Use OIDC (<code>azure/login</code> with a federated credential) — no stored keys. Publish the <code>dotnet aieval</code> HTML report and a Markdown summary (per slice, per failure mode, flips) as artifacts and as a PR comment. Keep the golden set small and fast; G1's hidden suite is larger.</p>
+<h3 id="what-not-to-do">What NOT to do<a class="headerlink" href="#what-not-to-do" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Writing evaluators for imagined failures before reading traces.</li>
+<li>1–5 Likert judges and "overall quality" scores.</li>
+<li>Generic metrics (helpfulness, coherence, BLEU/ROUGE) as release gates.</li>
+<li>Exact-string assertions on model output.</li>
+<li>Tuning prompts against the held-out split.</li>
+<li>Letting an LLM (or a coding agent) write the expected labels unsupervised.</li>
+<li>Treating a 2–4 point change on 50 cases as signal.</li>
+<li>Running N repetitions with response caching on and calling it a variance measurement.</li>
+</ul>
+<h2 id="tools-versions-as-of-oct-2026">Tools &amp; versions (as of Oct 2026)<a class="headerlink" href="#tools-versions-as-of-oct-2026" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Tool / package</th>
+<th>Purpose</th>
+<th>Status</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Microsoft.Extensions.AI.Evaluation</code> (+ <code>.Quality</code>, <code>.NLP</code>, <code>.Safety</code>, <code>.Reporting</code>, <code>.Reporting.Azure</code>)</td>
+<td>Evaluators, caching, reports</td>
+<td>Package versions/status: verify on NuGet before teaching</td>
+<td><code>.Safety</code> calls the Foundry Evaluation service (Entra ID)</td>
+</tr>
+<tr>
+<td><code>Microsoft.Extensions.AI.Evaluation.Console</code> (<code>dotnet aieval</code>)</td>
+<td>HTML reports from stored results</td>
+<td>Verify</td>
+<td>Install as local dotnet tool</td>
+</tr>
+<tr>
+<td>xUnit / MSTest</td>
+<td>Test host</td>
+<td>GA</td>
+<td>Trait/Category <code>Eval</code> separates eval tests</td>
+</tr>
+<tr>
+<td>GitHub Actions (<code>azure/login</code> OIDC, <code>actions/cache</code>, <code>actions/upload-artifact</code>)</td>
+<td>CI</td>
+<td>GA</td>
+<td>Azure DevOps equivalent shown in C19</td>
+</tr>
+<tr>
+<td>Foundry evaluations (cloud, continuous)</td>
+<td>Later (C14/C15)</td>
+<td>GA (evals/monitoring/tracing Mar 2026, per practitioner blog); some evaluators preview</td>
+<td>Authoring samples largely <strong>[Python]</strong> (<code>azure-ai-evaluation</code>)</td>
+</tr>
+<tr>
+<td>Course <code>tools/TraceViewer</code> (Blazor) + <code>tools/EvalGate</code></td>
+<td>Error analysis UI, gating logic</td>
+<td>Course code</td>
+<td>You extend both</td>
+</tr>
+</tbody>
+</table>
+<h2 id="labs">Labs<a class="headerlink" href="#labs" title="Permanent link">&para;</a></h2>
+<h3 id="lab-1-look-at-the-data-error-analysis-on-100-traces-25h">Lab 1 — Look at the data: error analysis on 100 traces (≈2.5h)<a class="headerlink" href="#lab-1-look-at-the-data-error-analysis-on-100-traces-25h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> A failure taxonomy for Fleet Ops grounded in real outputs.</li>
+<li><strong>Start state:</strong> <code>c5/lab1-start</code> (<code>tools/TraceViewer</code>, <code>scripts/traffic.ps1</code> that replays 120 realistic BG/EN driver and dispatcher messages through Ask Fleet Ops and <code>/incidents/extract</code>, storing prompt id/version, messages, tool calls, outputs and cost per trace in <code>evals/traces/*.jsonl</code>).</li>
+<li><strong>Steps:</strong></li>
+<li>Run the traffic script against your C4 product (<code>chat-fast</code>). Add 20+ traces from your own dogfooding.</li>
+<li>In the TraceViewer, review traces in random order. For each: pass/fail and, if fail, a one-line open code for the <strong>first</strong> failure. Annotate the first 30 without any AI help.</li>
+<li>Continue to ~100 or until saturation. Export notes.</li>
+<li>Axial coding: group into 5–10 failure modes with counts and examples (you may ask an LLM to <em>propose</em> clusters; you decide). Expected candidates: policy fabrication; abstention phrased as fabrication-with-disclaimer; Latin-script plate handling; wrong reply language; relative date resolution; tool not called / called for general questions; injury inferred without evidence; injection followed.</li>
+<li>Prioritize by frequency × impact; pick the top 3 for Labs 2–3.</li>
+<li>Peer calibration: exchange 20 traces with a peer, label independently, compute raw agreement and discuss disagreements (Cohen's kappa optional).</li>
+<li><strong>Break it:</strong> Ask an LLM to produce a failure taxonomy <em>without</em> you reading traces, then compare it with yours. Mark categories it invented that never occurred and real ones it missed.</li>
+<li><strong>Acceptance criteria:</strong> <code>evals/error-analysis/2026-xx-taxonomy.md</code> with ≥ 100 coded traces, 5–10 failure modes with counts, examples (trace IDs), priority ranking and the LLM-taxonomy comparison; peer-agreement number recorded.</li>
+<li><strong>Stretch:</strong> Add keyboard shortcuts and a "first failure" field to the TraceViewer; time your labeling speed before/after.</li>
+</ul>
+<h3 id="lab-2-golden-dataset-v1-and-code-based-evals-in-xunit-25h">Lab 2 — Golden dataset v1 and code-based evals in xUnit (≈2.5h)<a class="headerlink" href="#lab-2-golden-dataset-v1-and-code-based-evals-in-xunit-25h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> 50 stratified cases with code-based evaluators running under MEAI.Evaluation with caching and reports.</li>
+<li><strong>Start state:</strong> <code>c5/lab2-start</code> (<code>tests/FleetOps.Evals</code> with fixture skeleton; <code>evals/golden/v1/</code> empty).</li>
+<li><strong>Steps:</strong></li>
+<li>Build 50 cases (≥ 50% Bulgarian, ≥ 6 Latin-script): 20 extraction (incl. 4 adversarial, 4 with missing fields), 15 vehicle status (10 requiring the tool, 5 invalid/nonexistent plates), 10 out-of-scope policy questions that must be abstained from (Fleet Ops has no documents until C7), 5 general/safety. Mark ≥ 8 as <code>critical</code>. Assign ~70% <code>dev</code>, ~30% <code>heldout</code>. Every case cites the trace or tuple it came from.</li>
+<li>Implement evaluators: <code>IncidentFieldsEvaluator</code> (schema, fields, null-correctness — reuse C3 checks), <code>ToolRoutingEvaluator</code> (inspects <code>FunctionCallContent</code> in the response messages: tool called iff expected, normalized plate argument), <code>AbstentionCheck</code> (structural: the product now returns a typed <code>answerKind: Answer|Abstain|Refuse</code> alongside text — add it if missing; this is a product improvement driven by evals).</li>
+<li>Wire the fixture with <code>DiskBasedReportingConfiguration</code>, response caching on, execution name from env.</li>
+<li>Run <code>dotnet test --filter Category=Eval</code>; generate <code>dotnet aieval report</code>; open the HTML report.</li>
+<li>Re-run: confirm the second run is fast and costs ~€0 (cache hits visible in your C2 cost ledger as zero-cost — or absent, depending on where caching sits; explain which).</li>
+<li><strong>Break it:</strong> Change one word in the extraction prompt template and re-run: confirm cache misses only for affected scenarios. Then point <code>chat-fast</code> to Foundry Local via config and run — record per-slice deltas.</li>
+<li><strong>Acceptance criteria:</strong> 50 cases validate against <code>evals/golden/schema.json</code> (CI check); stratification report auto-generated (<code>tools/EvalGate stats</code>) shows required quotas; eval tests run in &lt; 5 min cached; HTML report artifact produced; <code>evals/golden/**</code> is a protected path in AGENTS.md and Claude settings (C4).</li>
+<li><strong>Stretch:</strong> Add a <code>Category=EvalSmoke</code> subset (10 cases, &lt; 60 s) for the agent's Stop hook.</li>
+</ul>
+<h3 id="lab-3-one-binary-llm-judge-validated-175h">Lab 3 — One binary LLM judge, validated (≈1.75h)<a class="headerlink" href="#lab-3-one-binary-llm-judge-validated-175h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> A judge for the top semantic failure mode — <strong>policy fabrication</strong> — that agrees with humans.</li>
+<li><strong>Start state:</strong> <code>c5/lab3-start</code> (<code>evals/judges/policy-fabrication/labels.jsonl</code> — 60 traces labeled by the instructor-as-domain-expert; you add 20 of your own).</li>
+<li><strong>Steps:</strong></li>
+<li>Write the judge prompt as a versioned template (<code>prompts/judges/policy-fabrication.md</code>): definition of failure ("states or implies a specific Trakia policy, rule, number or procedure not provided in context"), 2 pass and 2 fail examples (BG and EN), output schema <code>{ "pass": bool, "reason": string }</code> via structured output.</li>
+<li>Implement <code>PolicyFabricationJudge : IEvaluator</code> using <code>chatConfiguration.ChatClient</code> and <code>GetResponseAsync&lt;JudgeVerdict&gt;</code>.</li>
+<li>Split labels: 20 for prompt iteration (dev), 60 held out. Measure TPR and TNR on dev, iterate the judge prompt (≤ 3 iterations), then measure once on held-out.</li>
+<li>Compare judge models: <code>chat-fast</code> vs <code>chat-reasoning</code> (cost per 100 judgments vs TPR/TNR).</li>
+<li><strong>Break it:</strong> Replace the binary rubric with "rate fabrication risk 1–5" and threshold at ≥ 3. Measure agreement and stability across 3 runs. Explain why it's worse.</li>
+<li><strong>Acceptance criteria:</strong> <code>evals/judges/policy-fabrication/validation.md</code> with dev and held-out TPR/TNR (target held-out TPR ≥ 0.85 and TNR ≥ 0.85; if not reached, document the disagreement analysis instead of tuning on held-out); judge wired into the golden suite for the 10 out-of-scope cases; judge prompt hash recorded in results.</li>
+<li><strong>Stretch:</strong> Have a peer label 20 cases blind; compute human–human agreement and compare it with judge–human agreement.</li>
+</ul>
+<h3 id="lab-4-ci-gate-with-statistics-and-agents-that-run-evals-125h">Lab 4 — CI gate with statistics, and agents that run evals (≈1.25h)<a class="headerlink" href="#lab-4-ci-gate-with-statistics-and-agents-that-run-evals-125h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> Evals gate PRs and run nightly with N-run statistics; agents can't claim done without them.</li>
+<li><strong>Start state:</strong> <code>c5/lab4-start</code> (<code>tools/EvalGate</code> computes pass-all, Wilson bounds, flips vs a baseline file).</li>
+<li><strong>Steps:</strong></li>
+<li>Create <code>.github/workflows/evals.yml</code>:
+     <div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">evals</span>
+<span class="nt">on</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">pull_request</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> paths</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">'src/**'</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">'prompts/**'</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">'evals/**'</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">'models.json'</span><span class="p p-Indicator">]</span><span class="w"> </span><span class="p p-Indicator">}</span>
+<span class="w">  </span><span class="nt">schedule</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[{</span><span class="nt"> cron</span><span class="p">:</span><span class="w"> </span><span class="s">'17</span><span class="nv"> </span><span class="s">2</span><span class="nv"> </span><span class="s">*</span><span class="nv"> </span><span class="s">*</span><span class="nv"> </span><span class="s">*'</span><span class="w"> </span><span class="p p-Indicator">}]</span>
+<span class="nt">permissions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> id-token</span><span class="p">:</span><span class="w"> </span><span class="nv">write</span><span class="p p-Indicator">,</span><span class="nt"> contents</span><span class="p">:</span><span class="w"> </span><span class="nv">read</span><span class="p p-Indicator">,</span><span class="nt"> pull-requests</span><span class="p">:</span><span class="w"> </span><span class="nv">write</span><span class="w"> </span><span class="p p-Indicator">}</span>
+<span class="nt">jobs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">eval</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+<span class="w">    </span><span class="nt">env</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">EVAL_RUNS</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ github.event_name == 'schedule' &amp;&amp; '5' || '1' }}</span>
+<span class="w">      </span><span class="nt">EVAL_DISABLE_CACHE</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ github.event_name == 'schedule' &amp;&amp; 'true' || 'false' }}</span>
+<span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v4</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/setup-dotnet@v4</span>
+<span class="w">        </span><span class="nt">with</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> global-json-file</span><span class="p">:</span><span class="w"> </span><span class="nv">global.json</span><span class="w"> </span><span class="p p-Indicator">}</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">azure/login@v2</span>
+<span class="w">        </span><span class="nt">with</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> client-id</span><span class="p">:</span><span class="w"> </span><span class="nv">$</span><span class="p p-Indicator">{{</span><span class="w"> </span><span class="nv">vars.AZURE_CLIENT_ID</span><span class="w"> </span><span class="p p-Indicator">}},</span><span class="nt"> tenant-id</span><span class="p">:</span><span class="w"> </span><span class="nv">$</span><span class="p p-Indicator">{{</span><span class="w"> </span><span class="nv">vars.AZURE_TENANT_ID</span><span class="w"> </span><span class="p p-Indicator">}},</span><span class="nt"> subscription-id</span><span class="p">:</span><span class="w"> </span><span class="nv">$</span><span class="p p-Indicator">{{</span><span class="w"> </span><span class="nv">vars.AZURE_SUBSCRIPTION_ID</span><span class="w"> </span><span class="p p-Indicator">}}</span><span class="w"> </span><span class="p p-Indicator">}</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/cache@v4</span>
+<span class="w">        </span><span class="nt">if</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">github.event_name == 'pull_request'</span>
+<span class="w">        </span><span class="nt">with</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> path</span><span class="p">:</span><span class="w"> </span><span class="nv">eval-results/cache</span><span class="p p-Indicator">,</span><span class="nt"> key</span><span class="p">:</span><span class="w"> </span><span class="nv">evalcache-$</span><span class="p p-Indicator">{{</span><span class="w"> </span><span class="nv">hashFiles('prompts/**'</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">'models.json'</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">'evals/golden/**'</span><span class="nv">)</span><span class="w"> </span><span class="p p-Indicator">}},</span><span class="nt"> restore-keys</span><span class="p">:</span><span class="w"> </span><span class="nv">evalcache-</span><span class="w"> </span><span class="p p-Indicator">}</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dotnet test tests/FleetOps.Evals --filter Category=Eval</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dotnet tool restore &amp;&amp; dotnet aieval report --path eval-results --output eval-report.html</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dotnet run --project tools/EvalGate -- --results eval-results --baseline evals/baseline.json --min-wilson-lower 0.80 --critical-pass-all</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/upload-artifact@v4</span>
+<span class="w">        </span><span class="nt">if</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">always()</span>
+<span class="w">        </span><span class="nt">with</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> name</span><span class="p">:</span><span class="w"> </span><span class="nv">eval-report</span><span class="p p-Indicator">,</span><span class="nt"> path</span><span class="p">:</span><span class="w"> </span><span class="nv">eval-report.html</span><span class="w"> </span><span class="p p-Indicator">}</span>
+</code></pre></div>
+     (Pin action versions per course release; for prompt/model-change PRs, a path filter job sets <code>EVAL_RUNS=3</code> and disables cache for affected slices.)</li>
+<li>Add a federated credential for the repo on a dedicated app registration with only the model-calling role on the Foundry resource.</li>
+<li>Make <code>EvalGate</code> post a PR comment: per-slice pass rates with Wilson intervals, critical failures, stable flips.</li>
+<li>Update AGENTS.md: "Before claiming done on any change under <code>src/</code>, <code>prompts/</code> or <code>models.json</code>, run <code>dotnet test --filter Category=EvalSmoke</code> and report the summary. Never edit <code>evals/golden/**</code> or <code>evals/baseline.json</code>." Extend the C4 Stop hook to run <code>EvalSmoke</code> when prompts changed.</li>
+<li>Have your coding agent implement a small prompt improvement for your #1 failure mode via the factory; the PR must pass the gate.</li>
+<li><strong>Break it:</strong> Introduce a deliberate regression (remove the plate normalizer call). Confirm the PR gate fails with a clear message. Then run the suite uncached with N=1 three times on an unchanged commit and show that suite-level percentage moves within the Wilson interval — and that your gate did not flap.</li>
+<li><strong>Acceptance criteria:</strong> <code>evals.yml</code> green on a clean PR, red on the regression PR with critical case named; nightly run produces a report artifact; <code>evals/baseline.json</code> committed; Stop hook runs <code>EvalSmoke</code> on prompt changes; agent-made PR merged through the gate.</li>
+<li><strong>Stretch:</strong> Open an issue automatically from the nightly run when any stable-pass case becomes flaky, assigning it to triage.</li>
+</ul>
+<h2 id="kata">Kata<a class="headerlink" href="#kata" title="Permanent link">&para;</a></h2>
+<p><strong>"Trace → check"</strong> (20–30 min, repeat weekly for the rest of the course). Pull 10 fresh traces (random + 2 lowest-rated). Open-code first failures. For any <em>new</em> failure mode: write one golden case from the trace, decide code-check vs judge in one sentence, implement the cheapest check, run it N=3. Variations: a Bulgarian-only batch; traces from a different model role; traces produced by your coding agent's recent change.</p>
+<h2 id="product-increment-fleet-ops-copilot">Product increment — Fleet Ops Copilot<a class="headerlink" href="#product-increment-fleet-ops-copilot" title="Permanent link">&para;</a></h2>
+<p><strong>Golden dataset v1</strong> (50 stratified BG/EN cases with dev/held-out splits and critical flags), code-based evaluators for extraction, tool routing and abstention, one validated binary judge for policy fabrication, and eval tests in CI (cached on PRs, uncached N-run nightly) with HTML reports. Driven by error analysis, the product gained a typed <code>answerKind</code> (Answer/Abstain/Refuse) and at least one prompt fix for the top failure mode. Ready for <strong>Gate G1</strong>.</p>
+<h2 id="factory-increment-your-agentic-sdlc">Factory increment — your agentic SDLC<a class="headerlink" href="#factory-increment-your-agentic-sdlc" title="Permanent link">&para;</a></h2>
+<p>Eval tests are runnable by agents (<code>dotnet test --filter Category=EvalSmoke|Eval</code> + <code>dotnet aieval report</code>); AGENTS.md instructs agents to run them before claiming done; the Stop hook enforces <code>EvalSmoke</code> on prompt changes; golden labels and baselines are protected paths; <code>EvalGate</code> posts statistics to PRs; OIDC-only access from CI. The TraceViewer and the weekly trace kata are your standing error-analysis loop.</p>
+<h2 id="assessment">Assessment<a class="headerlink" href="#assessment" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th>Novice</th>
+<th>Competent</th>
+<th>Proficient</th>
+<th>Expert</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Error analysis</td>
+<td>Skims a few outputs</td>
+<td>Codes traces, ad-hoc categories</td>
+<td>≥ 100 traces, first-failure open coding, axial taxonomy with counts and priorities</td>
+<td>Saturation argued; peer agreement measured; non-model problems captured; taxonomy drives roadmap</td>
+</tr>
+<tr>
+<td>Dataset design</td>
+<td>Random examples</td>
+<td>Covers features</td>
+<td>Stratified, BG-heavy, sourced, split, versioned, critical flags</td>
+<td>Explicit coverage rationale; held-out discipline; change log tied to traces</td>
+</tr>
+<tr>
+<td>Evaluator choice &amp; quality</td>
+<td>Generic metrics / Likert</td>
+<td>Some custom checks</td>
+<td>Code checks first; one binary judge per mode validated with TPR/TNR</td>
+<td>Judge validated on held-out without leakage; cost/accuracy of judge models compared</td>
+</tr>
+<tr>
+<td>Statistics &amp; gating</td>
+<td>Single run, exact thresholds</td>
+<td>Repeated runs</td>
+<td>Per-case rates, Wilson intervals, pass^k for critical cases, paired flips</td>
+<td>Gate demonstrated not to flap on noise yet catch real regressions; cache vs variance trade-off explained</td>
+</tr>
+<tr>
+<td>Factory integration</td>
+<td>Manual runs</td>
+<td>CI runs evals</td>
+<td>PR + nightly + reports + agent instructions</td>
+<td>Agents demonstrably blocked by gates; protected labels; regressions auto-ticketed</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Auto-checked:</strong> golden schema and stratification quotas; <code>evals.yml</code> status on the clean and regression PRs; presence and format of taxonomy and judge validation files; protected-path rules; EvalGate thresholds; G1's hidden suite runs against this harness.</p>
+<h2 id="common-pitfalls">Common pitfalls<a class="headerlink" href="#common-pitfalls" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Starting with the eval framework instead of the traces.</li>
+<li>Coding <em>all</em> failures in a trace instead of the first one.</li>
+<li>A single omnibus judge; numeric scores without calibration.</li>
+<li>Validating a judge on the same examples used to write its prompt.</li>
+<li>Golden sets that are 80% English for a 60% Bulgarian user base.</li>
+<li>Forgetting that response caching makes repeated runs identical.</li>
+<li>Gating on tiny percentage changes; or the opposite — no gate at all because "LLMs are nondeterministic".</li>
+<li>Letting the coding agent "fix" an eval failure by editing the expected output.</li>
+<li>Long-lived Azure keys in CI secrets instead of OIDC.</li>
+</ul>
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Hamel Husain &amp; Shreya Shankar, LLM evals FAQ (updated 21 Sep 2026): https://hamel.dev/blog/posts/evals-faq/</li>
+<li>Hamel Husain, Using LLM-as-a-Judge: https://hamel.dev/blog/posts/llm-judge/</li>
+<li>Microsoft.Extensions.AI.Evaluation libraries (packages, evaluators, caching, <code>dotnet aieval</code>): https://learn.microsoft.com/en-us/dotnet/ai/evaluation/libraries</li>
+<li>How to evaluate AI agents in Microsoft Foundry (practitioner blog; GA status claims): https://jannikreinhard.com/microsoft-foundry-agent-evaluations/</li>
+<li>τ-bench (pass^k reliability): https://arxiv.org/abs/2406.12045</li>
+<li>Thinking Machines Lab, nondeterminism in LLM inference: https://thinkingmachines.ai/blog/defeating-nondeterminism-in-llm-inference/</li>
+<li>OpenAI, Why language models hallucinate (rewarding abstention): https://openai.com/index/why-language-models-hallucinate/</li>
+<li>Chip Huyen, <em>AI Engineering</em> (two chapters on evaluation): https://github.com/chiphuyen/aie-book/blob/main/ToC.md</li>
+<li>Wilson score interval (background): https://en.wikipedia.org/wiki/Binomial_proportion_confidence_interval#Wilson_score_interval</li>
+<li>GitHub Actions OIDC with Azure (<code>azure/login</code>): https://learn.microsoft.com/en-us/azure/developer/github/connect-from-azure-openid-connect</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Върни се в началото
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Долен колонтитул" >
+        
+          
+          <a href="../c04-working-with-coding-agents-the-factory-day-one/" class="md-footer__link md-footer__link--prev" aria-label="Предишна: C4 — Работа с кодиращи агенти: Фабриката, първи ден">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Предишна
+              </span>
+              <div class="md-ellipsis">
+                C4 — Работа с кодиращи агенти: Фабриката, първи ден
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../part-2-building-blocks/c06-embeddings-and-vector-search/" class="md-footer__link md-footer__link--next" aria-label="Следваща: C6 — Embeddings и векторно търсене">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Следваща
+              </span>
+              <div class="md-ellipsis">
+                C6 — Embeddings и векторно търсене
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.sections", "navigation.top", "navigation.footer", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u041a\u043e\u043f\u0438\u0440\u0430\u043d\u043e", "clipboard.copy": "\u041a\u043e\u043f\u0438\u0440\u0430\u0439", "search.result.more.one": "\u043e\u0449\u0435 1 \u043d\u0430 \u0442\u0430\u0437\u0438 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0430", "search.result.more.other": "\u043e\u0449\u0435 # \u043d\u0430 \u0442\u0430\u0437\u0438 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0430", "search.result.none": "\u041d\u044f\u043c\u0430 \u0440\u0435\u0437\u0443\u043b\u0442\u0430\u0442\u0438", "search.result.one": "1 \u0440\u0435\u0437\u0443\u043b\u0442\u0430\u0442", "search.result.other": "# \u0440\u0435\u0437\u0443\u043b\u0442\u0430\u0442\u0430", "search.result.placeholder": "\u0417\u0430\u043f\u043e\u0447\u043d\u0435\u0442\u0435 \u0434\u0430 \u043f\u0438\u0448\u0435\u0442\u0435, \u0437\u0430 \u0434\u0430 \u0442\u044a\u0440\u0441\u0438\u0442\u0435", "search.result.term.missing": "\u041b\u0438\u043f\u0441\u0432\u0430\u0449\u043e", "select.version": "\u0418\u0437\u0431\u0435\u0440\u0438 \u0432\u0435\u0440\u0441\u0438\u044f"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

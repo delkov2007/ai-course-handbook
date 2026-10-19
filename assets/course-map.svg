@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 880" width="760" height="880" font-family="Helvetica, Arial, sans-serif" font-size="12">
+<rect width="760" height="880" fill="#ffffff"/>
+<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#8a8f98"/></marker></defs>
+<text x="24" y="34" font-size="15" font-weight="600" fill="#1f2328" text-anchor="start">One shared core, three gates, then two expert tracks meet in a team capstone</text>
+<text x="24" y="54" font-size="11.5" font-weight="400" fill="#57606a" text-anchor="start">≈475 h per learner · Azure and .NET labs · the Factory is built alongside the core</text>
+<path d="M292 116V140" fill="none" stroke="#8a8f98" stroke-width="1.25" marker-end="url(#ar)"/>
+<path d="M292 212V224" fill="none" stroke="#8a8f98" stroke-width="1.25" marker-end="url(#ar)"/>
+<path d="M292 264V288" fill="none" stroke="#8a8f98" stroke-width="1.25" marker-end="url(#ar)"/>
+<path d="M292 360V372" fill="none" stroke="#8a8f98" stroke-width="1.25" marker-end="url(#ar)"/>
+<path d="M292 412V436" fill="none" stroke="#8a8f98" stroke-width="1.25" marker-end="url(#ar)"/>
+<path d="M292 524V536" fill="none" stroke="#8a8f98" stroke-width="1.25" marker-end="url(#ar)"/>
+<path d="M292 576V596H154V616" fill="none" stroke="#8a8f98" stroke-width="1.25" marker-end="url(#ar)"/>
+<path d="M292 596H430V616" fill="none" stroke="#8a8f98" stroke-width="1.25" marker-end="url(#ar)"/>
+<path d="M154 768V800" fill="none" stroke="#8a8f98" stroke-width="1.25" marker-end="url(#ar)"/>
+<path d="M430 768V800" fill="none" stroke="#8a8f98" stroke-width="1.25" marker-end="url(#ar)"/>
+<path d="M560 176H584" fill="none" stroke="#8a8f98" stroke-width="1.25" stroke-dasharray="3 3"/>
+<path d="M560 324H584" fill="none" stroke="#8a8f98" stroke-width="1.25" stroke-dasharray="3 3"/>
+<path d="M560 480H584" fill="none" stroke="#8a8f98" stroke-width="1.25" stroke-dasharray="3 3"/>
+<rect x="24" y="76" width="536" height="40" rx="8" fill="none" stroke="#8a8f98" stroke-width="1.25"/>
+<text x="292" y="100" font-size="13" font-weight="400" fill="#1f2328" text-anchor="middle">Entry check (2–3 h) → C0 Orientation, setup and toolchain · 6 h</text>
+<rect x="24" y="140" width="536" height="72" rx="8" fill="none" stroke="#8a8f98" stroke-width="1.25"/>
+<text x="40" y="164" font-size="13" font-weight="600" fill="#1f2328" text-anchor="start">Level 1 — Foundations (beginner) · 54 h</text>
+<text x="40" y="180" font-size="12" font-weight="400" fill="#1f2328" text-anchor="start">C1 How generative AI works · C2 First AI feature in .NET</text>
+<text x="40" y="196" font-size="12" font-weight="400" fill="#1f2328" text-anchor="start">C3 Prompting, structured outputs, tools · C4 Coding agents · C5 Evals</text>
+<polygon points="228,244 292,224 356,244 292,264" fill="#f3f4f6" stroke="#8a8f98" stroke-width="1.25"/>
+<text x="292" y="248" font-size="13" font-weight="600" fill="#1f2328" text-anchor="middle">G1 · 6 h</text>
+<text x="372" y="248" font-size="11.5" font-weight="400" fill="#57606a" text-anchor="start">hidden eval suite · oral</text>
+<rect x="24" y="288" width="536" height="72" rx="8" fill="none" stroke="#8a8f98" stroke-width="1.25"/>
+<text x="40" y="312" font-size="13" font-weight="600" fill="#1f2328" text-anchor="start">Level 2 — Building blocks (intermediate) · 84 h</text>
+<text x="40" y="328" font-size="12" font-weight="400" fill="#1f2328" text-anchor="start">C6 Embeddings, vector search · C7 RAG · C8 Tools and MCP</text>
+<text x="40" y="344" font-size="12" font-weight="400" fill="#1f2328" text-anchor="start">C9 Agents with MAF · C10 Text-to-SQL · C11 Agentic testing</text>
+<polygon points="228,392 292,372 356,392 292,412" fill="#f3f4f6" stroke="#8a8f98" stroke-width="1.25"/>
+<text x="292" y="396" font-size="13" font-weight="600" fill="#1f2328" text-anchor="middle">G2 · 6 h</text>
+<text x="372" y="396" font-size="11.5" font-weight="400" fill="#57606a" text-anchor="start">injected bugs · design defense</text>
+<rect x="24" y="436" width="536" height="88" rx="8" fill="none" stroke="#8a8f98" stroke-width="1.25"/>
+<text x="40" y="460" font-size="13" font-weight="600" fill="#1f2328" text-anchor="start">Level 3 — Production systems (advanced) · 112 h</text>
+<text x="40" y="476" font-size="12" font-weight="400" fill="#1f2328" text-anchor="start">C12 Multi-agent workflows · C13 Context, memory · C14 Evals, red teaming</text>
+<text x="40" y="492" font-size="12" font-weight="400" fill="#1f2328" text-anchor="start">C15 Observability, cost · C16 Security · C17 Shipping to Azure</text>
+<text x="40" y="508" font-size="12" font-weight="400" fill="#1f2328" text-anchor="start">C18 Responsible AI, EU AI Act · C19 Automated SDLC</text>
+<polygon points="228,556 292,536 356,556 292,576" fill="#f3f4f6" stroke="#8a8f98" stroke-width="1.25"/>
+<text x="292" y="560" font-size="13" font-weight="600" fill="#1f2328" text-anchor="middle">G3 · 6 h</text>
+<text x="372" y="560" font-size="11.5" font-weight="400" fill="#57606a" text-anchor="start">incident · red team · migration · board</text>
+<rect x="24" y="616" width="260" height="152" rx="8" fill="none" stroke="#8a8f98" stroke-width="1.25"/>
+<text x="40" y="640" font-size="13" font-weight="600" fill="#1f2328" text-anchor="start">Developer track · 120 h</text>
+<text x="40" y="656" font-size="12" font-weight="400" fill="#1f2328" text-anchor="start">D1 Model customization, local models</text>
+<text x="40" y="672" font-size="12" font-weight="400" fill="#1f2328" text-anchor="start">D2 Durable, autonomous agents</text>
+<text x="40" y="688" font-size="12" font-weight="400" fill="#1f2328" text-anchor="start">D3 Multimodal, realtime agents</text>
+<text x="40" y="704" font-size="12" font-weight="400" fill="#1f2328" text-anchor="start">D4 Agent UX, front-ends</text>
+<text x="40" y="720" font-size="12" font-weight="400" fill="#1f2328" text-anchor="start">D5 Performance, cost</text>
+<text x="40" y="736" font-size="12" font-weight="400" fill="#1f2328" text-anchor="start">D6 Your own agent tooling</text>
+<text x="40" y="752" font-size="12" font-weight="400" fill="#1f2328" text-anchor="start">D7 Agent reliability engineering</text>
+<rect x="300" y="616" width="260" height="152" rx="8" fill="none" stroke="#8a8f98" stroke-width="1.25"/>
+<text x="316" y="640" font-size="13" font-weight="600" fill="#1f2328" text-anchor="start">Architect track · 118 h</text>
+<text x="316" y="656" font-size="12" font-weight="400" fill="#1f2328" text-anchor="start">A1 Strategy, business case</text>
+<text x="316" y="672" font-size="12" font-weight="400" fill="#1f2328" text-anchor="start">A2 Reference architectures, WAF</text>
+<text x="316" y="688" font-size="12" font-weight="400" fill="#1f2328" text-anchor="start">A3 Knowledge, data architecture</text>
+<text x="316" y="704" font-size="12" font-weight="400" fill="#1f2328" text-anchor="start">A4 Agent platform, integration</text>
+<text x="316" y="720" font-size="12" font-weight="400" fill="#1f2328" text-anchor="start">A5 Reliability, lifecycle, FinOps</text>
+<text x="316" y="736" font-size="12" font-weight="400" fill="#1f2328" text-anchor="start">A6 Governance, compliance</text>
+<text x="316" y="752" font-size="12" font-weight="400" fill="#1f2328" text-anchor="start">A7 The architect’s craft</text>
+<rect x="24" y="800" width="536" height="56" rx="8" fill="#2f6feb" fill-opacity="0.12" stroke="#2f6feb" stroke-width="2"/>
+<text x="292" y="824" font-size="13" font-weight="600" fill="#1f2328" text-anchor="middle">Joint capstone · 80 h</text>
+<text x="292" y="840" font-size="12" font-weight="400" fill="#1f2328" text-anchor="middle">Mixed teams of 4–5 · new client domain · red-team swap · board defense</text>
+<rect x="584" y="140" width="152" height="384" rx="8" fill="#f3f4f6" stroke="#8a8f98" stroke-width="1.25"/>
+<text x="660" y="164" font-size="13" font-weight="600" fill="#1f2328" text-anchor="middle">The Factory</text>
+<text x="660" y="188" font-size="11.5" font-weight="400" fill="#1f2328" text-anchor="middle">Your own agentic</text>
+<text x="660" y="204" font-size="11.5" font-weight="400" fill="#1f2328" text-anchor="middle">SDLC, grown with</text>
+<text x="660" y="220" font-size="11.5" font-weight="400" fill="#1f2328" text-anchor="middle">the product.</text>
+<text x="660" y="252" font-size="11.5" font-weight="400" fill="#1f2328" text-anchor="middle">From C4 onward,</text>
+<text x="660" y="268" font-size="11.5" font-weight="400" fill="#1f2328" text-anchor="middle">all product work</text>
+<text x="660" y="284" font-size="11.5" font-weight="400" fill="#1f2328" text-anchor="middle">goes through</text>
+<text x="660" y="300" font-size="11.5" font-weight="400" fill="#1f2328" text-anchor="middle">coding agents.</text>
+</svg>

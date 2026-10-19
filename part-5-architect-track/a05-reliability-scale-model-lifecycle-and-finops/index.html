@@ -1,0 +1,3223 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Learning-by-doing course, release 2026.11 (content as of October 2026)">
+      
+      
+      
+      
+        <link rel="prev" href="../a04-agent-platform-and-integration-architecture/">
+      
+      
+        <link rel="next" href="../a06-ai-governance-risk-and-compliance-architecture/">
+      
+      
+        
+          <link rel="alternate" href="./" hreflang="en">
+        
+          <link rel="alternate" href="../../bg/part-5-architect-track/a05-reliability-scale-model-lifecycle-and-finops/" hreflang="bg">
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>A5 — Reliability, scale, model lifecycle & FinOps - AI Solution Developer & Architect — Learner Handbook</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#a5-reliability-scale-model-lifecycle-finops" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="AI Solution Developer &amp; Architect — Learner Handbook" class="md-header__button md-logo" aria-label="AI Solution Developer & Architect — Learner Handbook" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            AI Solution Developer & Architect — Learner Handbook
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              A5 — Reliability, scale, model lifecycle & FinOps
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="Select language">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href="./" hreflang="en" class="md-select__link">
+              English
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="../../bg/part-5-architect-track/a05-reliability-scale-model-lifecycle-and-finops/" hreflang="bg" class="md-select__link">
+              Български
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="AI Solution Developer &amp; Architect — Learner Handbook" class="md-nav__button md-logo" aria-label="AI Solution Developer & Architect — Learner Handbook" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    AI Solution Developer & Architect — Learner Handbook
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Welcome
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Start here
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Start here
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/how-to-use/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How to use this handbook
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/course-overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Course overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/assessment-gates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Assessment and gates
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/competency-matrix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Competency matrix
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 1 — Foundations (Level 1)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part 1 — Foundations (Level 1)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c00-orientation-setup-and-toolchain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C0 — Orientation, setup & toolchain
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c01-how-generative-ai-works-an-engineer-s-mental-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C1 — How generative AI works: an engineer's mental model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c02-your-first-ai-feature-in-net/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C2 — Your first AI feature in .NET
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c03-prompting-structured-outputs-and-tool-calling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C3 — Prompting, structured outputs & tool calling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c04-working-with-coding-agents-the-factory-day-one/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C4 — Working with coding agents: the Factory, day one
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c05-evals-from-day-one/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C5 — Evals from day one
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 2 — Building blocks (Level 2)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part 2 — Building blocks (Level 2)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c06-embeddings-and-vector-search/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C6 — Embeddings & vector search
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c07-rag-from-documents-to-cited-permission-aware-answers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C7 — RAG: from documents to cited, permission-aware answers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c08-tools-and-the-model-context-protocol/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C8 — Tools & the Model Context Protocol
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c09-agents-with-microsoft-agent-framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C9 — Agents with Microsoft Agent Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c10-agents-over-structured-data-text-to-sql-on-sql-server/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C10 — Agents over structured data: text-to-SQL on SQL Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c11-agentic-testing-ai-driven-tdd-mutation-and-e2e-test-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C11 — Agentic testing: AI-driven TDD, mutation & E2E test agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 3 — Production systems (Level 3)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part 3 — Production systems (Level 3)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c12-workflows-and-multi-agent-orchestration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C12 — Workflows & multi-agent orchestration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c13-context-engineering-advanced-retrieval-and-memory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C13 — Context engineering, advanced retrieval & memory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c14-failure-driven-evals-llm-judges-and-red-teaming/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C14 — Failure-driven evals, LLM judges & red teaming
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c15-observability-genaiops-and-cost/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C15 — Observability, GenAIOps & cost
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c16-security-for-llm-and-agentic-systems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C16 — Security for LLM & agentic systems
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c17-shipping-to-azure-hosting-ai-gateway-iac-and-interop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C17 — Shipping to Azure: hosting, AI gateway, IaC & interop
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c18-responsible-ai-and-the-eu-ai-act-in-practice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C18 — Responsible AI & the EU AI Act in practice
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c19-the-automated-sdlc-agents-from-issue-to-production/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C19 — The automated SDLC: agents from issue to production
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 4 — Expert track: AI Solution Developer
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part 4 — Expert track: AI Solution Developer
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d01-model-customization-and-small-local-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D1 — Model customization & small/local models
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d02-long-running-durable-and-autonomous-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D2 — Long-running, durable & autonomous agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d03-multimodal-and-realtime-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D3 — Multimodal & realtime agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d04-agent-ux-and-front-ends/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D4 — Agent UX & front-ends
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d05-performance-and-cost-engineering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D5 — Performance & cost engineering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d06-building-your-own-agent-tooling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D6 — Building your own agent tooling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-4-developer-track/d07-agent-reliability-engineering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D7 — Agent reliability engineering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 5 — Expert track: AI Solution Architect
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part 5 — Expert track: AI Solution Architect
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../a01-ai-strategy-use-case-discovery-and-business-case/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A1 — AI strategy, use-case discovery & business case
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../a02-azure-ai-reference-architectures-and-well-architected-for-ai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A2 — Azure AI reference architectures & Well-Architected for AI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../a03-enterprise-knowledge-and-data-architecture-for-ai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A3 — Enterprise knowledge & data architecture for AI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../a04-agent-platform-and-integration-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A4 — Agent platform & integration architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A5 — Reliability, scale, model lifecycle & FinOps
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A5 — Reliability, scale, model lifecycle & FinOps
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-this-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why this matters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learning outcomes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concepts
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Concepts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-model-lifecycle-policy-facts-you-design-around" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Model lifecycle: policy facts you design around
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-model-migration-as-a-release" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Model migration as a release
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-multi-region-failover-and-dr-without-native-dr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Multi-region, failover and DR without native DR
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-quotas-ptu-and-capacity-planning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Quotas, PTU and capacity planning
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-graceful-degradation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Graceful degradation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-slos-for-ai-systems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. SLOs for AI systems
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-finops-for-ai" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. FinOps for AI
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tools-versions-as-of-oct-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tools &amp; versions (as of Oct 2026)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#labs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Labs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Labs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lab-1-lifecycle-register-and-an-eval-gated-model-migration-4h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 1 — Lifecycle register and an eval-gated model migration (≈4h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-2-multi-region-dr-by-reconstruction-and-gameday-4h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 2 — Multi-region DR by reconstruction and GameDay (≈4h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-3-capacity-plan-ptu-break-even-and-load-validation-3h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 3 — Capacity plan, PTU break-even and load validation (≈3h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-4-degradation-ladder-and-ai-slos-25h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 4 — Degradation ladder and AI SLOs (≈2.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-5-finops-unit-economics-and-per-tenant-showback-25h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 5 — FinOps: unit economics and per-tenant showback (≈2.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kata
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#product-increment-fleet-ops-copilot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Product increment — Fleet Ops Copilot
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#factory-increment-your-agentic-sdlc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Factory increment — your agentic SDLC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assessment
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common pitfalls
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../a06-ai-governance-risk-and-compliance-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A6 — AI governance, risk & compliance architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../a07-the-architect-s-craft-in-ai-programmes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A7 — The architect's craft in AI programmes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 6 — Joint capstone
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part 6 — Joint capstone
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capstone/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Capstone
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Appendix
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Appendix
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/references/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Further reading
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-this-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why this matters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learning outcomes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concepts
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Concepts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-model-lifecycle-policy-facts-you-design-around" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Model lifecycle: policy facts you design around
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-model-migration-as-a-release" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Model migration as a release
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-multi-region-failover-and-dr-without-native-dr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Multi-region, failover and DR without native DR
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-quotas-ptu-and-capacity-planning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Quotas, PTU and capacity planning
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-graceful-degradation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Graceful degradation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-slos-for-ai-systems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. SLOs for AI systems
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-finops-for-ai" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. FinOps for AI
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tools-versions-as-of-oct-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tools &amp; versions (as of Oct 2026)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#labs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Labs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Labs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lab-1-lifecycle-register-and-an-eval-gated-model-migration-4h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 1 — Lifecycle register and an eval-gated model migration (≈4h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-2-multi-region-dr-by-reconstruction-and-gameday-4h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 2 — Multi-region DR by reconstruction and GameDay (≈4h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-3-capacity-plan-ptu-break-even-and-load-validation-3h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 3 — Capacity plan, PTU break-even and load validation (≈3h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-4-degradation-ladder-and-ai-slos-25h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 4 — Degradation ladder and AI SLOs (≈2.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-5-finops-unit-economics-and-per-tenant-showback-25h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 5 — FinOps: unit economics and per-tenant showback (≈2.5h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kata
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#product-increment-fleet-ops-copilot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Product increment — Fleet Ops Copilot
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#factory-increment-your-agentic-sdlc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Factory increment — your agentic SDLC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assessment
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common pitfalls
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="a5-reliability-scale-model-lifecycle-finops">A5 — Reliability, scale, model lifecycle &amp; FinOps<a class="headerlink" href="#a5-reliability-scale-model-lifecycle-finops" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><strong>Level:</strong> Expert — AI Solution Architect track · <strong>Duration:</strong> 16h (theory 30% / labs 70%) · <strong>Prerequisites:</strong> A1 (cost model), A2 (landing zone), A4 (AI gateway); C14 (eval gates), C15 (OTel, cost per task) · <strong>Volatility:</strong> High (model lifecycle durations, deployment types, PTU terms, prices and router versions change; reliability principles do not)</p>
+</blockquote>
+<h2 id="why-this-matters">Why this matters<a class="headerlink" href="#why-this-matters" title="Permanent link">&para;</a></h2>
+<p><strong>What separates an expert architect from a proficient one here:</strong> a proficient architect makes an AI system highly available <em>today</em>. An expert designs for the fact that <strong>the system's most important dependency has an expiry date</strong>. Every GA model is retired on a published schedule, and the replacement behaves differently. The expert turns that into a routine, eval-gated, budgeted process. They also define reliability in terms users feel (latency to first token, task success, grounded answers) and run the economics per task and per tenant, so the business knows whether every new customer makes or loses money.</p>
+<p>Here is what happens to a team that hasn't built these skills. Fleet Ops Copilot runs well for nine months. Then:</p>
+<ul>
+<li>A retirement notice arrives with the minimum 60 days' warning for the primary model. The prompts, judges and the Bulgarian groundedness calibration were all tuned to that model.</li>
+<li>A Standard deployment set to auto-upgrade quietly moves to a new version, and the incident workflow's tool-call accuracy drops 6 points. Nobody notices for two weeks, because the CI evals use cached responses.</li>
+<li>A Sweden Central capacity event turns into a full outage. Foundry Agent Service has <strong>no built-in DR</strong>, and nobody ever rebuilt the agents from code.</li>
+<li>A large SaaS tenant onboards and doubles TPM at 08:00 on Mondays. The PTU reservation was sized on an average and saturates.</li>
+<li>The CFO asks what Danube Logistics costs to serve, and the answer is a shrug.</li>
+</ul>
+<p>Experts handle each of these in advance:</p>
+<ul>
+<li><strong>Model churn:</strong> they keep a model register with retirement dates and treat migration as a release with pairwise eval gates and a canary.</li>
+<li><strong>Silent drift:</strong> they run an <em>uncached</em> nightly suite that catches provider-side drift.</li>
+<li><strong>Disasters:</strong> they design DR by reconstruction and rehearse it.</li>
+<li><strong>Capacity:</strong> they size capacity from load distributions, not averages.</li>
+<li><strong>Overload:</strong> they build a degradation ladder so that overload degrades the experience instead of failing it.</li>
+<li><strong>Economics:</strong> they publish unit economics (cost per task, per tenant, per truck) and hold cost to an SLO, just like latency.</li>
+</ul>
+<h2 id="learning-outcomes">Learning outcomes<a class="headerlink" href="#learning-outcomes" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Build and operate</strong> a model lifecycle register: lifecycle states, retirement dates, upgrade policies and owner, refreshed automatically from the Models API.</li>
+<li><strong>Execute</strong> a model migration with pairwise eval gates, per-failure-mode pass rates, cost and latency deltas, an APIM weighted canary and a tested rollback.</li>
+<li><strong>Design and rehearse</strong> multi-region DR for an AI workload without native DR: agents-as-code reconstruction, index rebuild RTO, state RPO, gateway failover, all within EU residency constraints.</li>
+<li><strong>Plan capacity</strong> from measured TPM distributions: quotas, PTU vs PAYG vs Batch break-even, spillover sizing and reasoning-token effects. <strong>Validate</strong> with load tests.</li>
+<li><strong>Implement</strong> a graceful degradation ladder with circuit breakers, feature flags and tenant-tier load shedding.</li>
+<li><strong>Define</strong> SLOs for AI (availability, TTFT, task success, quality, safety, cost per task) with error budgets and burn-rate alerts.</li>
+<li><strong>Implement</strong> FinOps unit economics and per-tenant showback/chargeback. <strong>Derive</strong> a SaaS price floor and margin.</li>
+<li><strong>Run</strong> a GameDay and write a postmortem that drives architecture changes.</li>
+</ol>
+<h2 id="concepts">Concepts<a class="headerlink" href="#concepts" title="Permanent link">&para;</a></h2>
+<h3 id="1-model-lifecycle-policy-facts-you-design-around">1. Model lifecycle: policy facts you design around<a class="headerlink" href="#1-model-lifecycle-policy-facts-you-design-around" title="Permanent link">&para;</a></h3>
+<p>From Foundry's model retirement policy (updated Jul 2026):</p>
+<ul>
+<li><strong>Standard GA models:</strong> minimum <strong>18-month</strong> lifetime. Deprecated at 12 months, retired at 18.</li>
+<li><strong>Anthropic, DeepSeek, Fireworks and Mistral GA models:</strong> <strong>12 months</strong>. Some Grok models: 6 months. <strong>Preview models:</strong> about <strong>90 days</strong>.</li>
+<li><strong>Notice:</strong> at least <strong>60 days</strong> before GA retirement. <strong>Retirement dates cannot be extended.</strong> Retired models return <strong><code>410 Gone</code></strong>.</li>
+<li><strong>Auto-upgrade:</strong> controlled by <code>versionUpgradeOption</code>. <strong>Provisioned (PTU) deployments are not auto-upgraded.</strong> PTU is stable until you act, and then you face a hard date.</li>
+<li><strong>Lifecycle API:</strong> state can be read from the Models API, but <strong>terminology conflicts</strong>: API "Deprecated" means <em>retired</em>. Map states explicitly in your tooling.</li>
+</ul>
+<p>Related volatility:</p>
+<ul>
+<li><strong>Model router.</strong> Version <code>2025-11-18</code> is "Active (latest)" and <strong>auto-updates</strong>. Versions <code>2025-08-07</code> and <code>2025-05-19</code> are frozen. The router's pool and behaviour can change under you unless you pin a frozen version. Its effective context window is that of the smallest model in the pool.</li>
+<li><strong>Content Safety API versions.</strong> A new GA version deprecates the previous GA after 90 days (if compatible).</li>
+<li><strong>Embedding models.</strong> A change means a full re-embed (A3 aliases).</li>
+</ul>
+<p><strong>Architecture consequences:</strong></p>
+<ol>
+<li><strong>Indirection.</strong></li>
+<li>Code addresses <em>roles</em> (<code>fleet-reasoning</code>, <code>fleet-fast</code>, <code>fleet-embed</code>, <code>judge-bg</code>) through <code>IChatClient</code> and the gateway.</li>
+<li>Deployment names map to roles in configuration.</li>
+<li>A migration is a config change plus evals, never a code hunt.</li>
+<li><strong>A register with dates.</strong> Each role records model, version, deployment type, region, upgrade policy, lifecycle state, deprecation/retirement dates, owner and the eval suite that gates it.</li>
+<li><strong>Calendar.</strong> With 12–18-month lifetimes and several roles, expect a migration every quarter somewhere. Budget it (A1 ops family).</li>
+<li><strong>Judges migrate too.</strong> Your C14 judges are calibrated to a model. A judge model change requires re-measuring TPR/TNR on the labelled dev/test splits before the judge gates anything.</li>
+<li><strong>Choose upgrade policy deliberately.</strong></li>
+<li><em>Auto-upgrade</em> trades surprise for less toil. Acceptable only with an uncached nightly suite and alerting on <code>gen_ai.response.model</code> changes.</li>
+<li><em>Pinned</em> trades toil for control.</li>
+<li>PTU is effectively pinned.</li>
+</ol>
+<h3 id="2-model-migration-as-a-release">2. Model migration as a release<a class="headerlink" href="#2-model-migration-as-a-release" title="Permanent link">&para;</a></h3>
+<p>The <strong>migration pipeline</strong>:</p>
+<ol>
+<li><strong>Shadow.</strong> Replay a frozen evaluation set plus a sample of recent production traces (content-captured only where the DPIA allows) against old and new models.</li>
+<li><strong>Pairwise judging</strong> (new vs old, position-randomised).</li>
+<li><strong>Per-failure-mode pass rates.</strong> Use the C14 taxonomy, not just the aggregate. A model can improve overall while regressing on "Bulgarian table questions".</li>
+<li><strong>Trajectory evals for agents.</strong> Tool-call accuracy, steps, pass^k.</li>
+<li><strong>Safety.</strong> Red-team ASR re-run.</li>
+<li><strong>Cost and latency deltas.</strong> Tokens per task change with the model; reasoning-token behaviour especially.</li>
+<li><strong>Prompt re-tune loop</strong> if needed, then re-run.</li>
+<li><strong>Canary</strong> via APIM <strong>weighted</strong> backend (5% → 25% → 100%), with online evaluation (Foundry continuous evaluation or MEAI scores published to telemetry) and the success metrics from A1.</li>
+<li><strong>Rollback rule</strong> defined before starting. It works only while the old deployment exists, which is why you migrate early, not at day 59.</li>
+</ol>
+<p><strong>Gate criteria example:</strong>
+- no failure mode regresses &gt; 2 points;
+- pairwise win-or-tie ≥ 55%;
+- ASR not worse;
+- cost per task ≤ +15%;
+- p95 TTFT ≤ +10%.</p>
+<p>The nightly <strong>uncached</strong> suite (C14) catches provider-side drift between migrations. The PR suite stays cached for determinism and cost.</p>
+<h3 id="3-multi-region-failover-and-dr-without-native-dr">3. Multi-region, failover and DR without native DR<a class="headerlink" href="#3-multi-region-failover-and-dr-without-native-dr" title="Permanent link">&para;</a></h3>
+<p>What the baseline reference architecture states:</p>
+<ul>
+<li><strong>Standard deployments are single-region.</strong> Use <strong>Data Zone provisioned with spillover</strong> or global deployments for model availability.</li>
+<li><strong>Foundry has no native load balancing or circuit breaking</strong>, so APIM fills that role.</li>
+<li><strong>Agent Service has no built-in DR.</strong> Recover by <strong>reconstruction</strong>: agents-as-code, backups, delete locks.</li>
+<li><strong>Multi-region is out of scope.</strong></li>
+</ul>
+<p>You design the rest. Classify the <strong>state</strong> first, because DR is about state:</p>
+<table>
+<thead>
+<tr>
+<th>State</th>
+<th>Where</th>
+<th>Recoverability</th>
+<th>Typical RPO / RTO target for Trakia</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Agent definitions, prompts, tool schemas, guardrail config</td>
+<td>Git + IaC</td>
+<td>Rebuild by pipeline</td>
+<td>RPO 0 / RTO ≤ 1h (measured)</td>
+</tr>
+<tr>
+<td>Model deployments</td>
+<td>IaC; needs <strong>quota in DR region</strong></td>
+<td>Rebuild; quota is the risk</td>
+<td>Pre-provisioned in secondary</td>
+</tr>
+<tr>
+<td>Knowledge indexes</td>
+<td>AI Search</td>
+<td>Rebuild from sources (hours at scale) <strong>or</strong> maintain warm secondary index</td>
+<td>Rebuild time is often the RTO driver: measure it</td>
+</tr>
+<tr>
+<td>Conversations / standard-setup state</td>
+<td>Cosmos DB</td>
+<td>Backup/geo-replication (verify current Cosmos backup modes)</td>
+<td>RPO ≤ 15 min for active incidents; history may tolerate 24h</td>
+</tr>
+<tr>
+<td>In-flight workflows and pending HITL approvals</td>
+<td>MAF checkpoints / Durable Task Scheduler</td>
+<td>Must survive; this is the most business-critical state</td>
+<td>RPO ≈ 0 for approvals; replay design</td>
+</tr>
+<tr>
+<td>Memory stores</td>
+<td>Foundry memory (preview) / files</td>
+<td>Verify export and backup capability</td>
+<td>Often acceptable to lose; decide explicitly</td>
+</tr>
+<tr>
+<td>Telemetry, evals, audit logs</td>
+<td>Log Analytics / Storage</td>
+<td>Audit logs need immutability and retention (A6)</td>
+<td>Per policy</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Topologies:</strong></p>
+<ul>
+<li><strong>Active-passive.</strong> The secondary EU region has gateway, quota and a warm index. Failover is by APIM backend priority, or by front-door routing for the app tier. This is the default for Trakia internal.</li>
+<li><strong>Active-active per stamp.</strong> Tenants are pinned to a home region, so failover moves whole stamps. This is the SaaS default, because it keeps tenant data placement explicit.</li>
+<li><strong>Residency constrains pairing.</strong> For EU customers, the failover region must also be EU (e.g., Sweden Central ↔ another EU region). Verify that your models, Data Zone types, safety features and the red-team regions exist there.</li>
+<li><strong>APIM availability and multi-region capabilities depend on tier.</strong> Verify current tier features before designing gateway DR.</li>
+</ul>
+<p><strong>The runbook is the deliverable.</strong> It covers detection, decision authority, steps, verification (smoke evals through the failed-over path) and failback. A DR plan that has not been rehearsed is a hypothesis.</p>
+<h3 id="4-quotas-ptu-and-capacity-planning">4. Quotas, PTU and capacity planning<a class="headerlink" href="#4-quotas-ptu-and-capacity-planning" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Quotas</strong> are TPM/RPM per model, per deployment type, per region and subscription. Request quotas for DR regions <em>before</em> you need them.</li>
+<li><strong>Deployment types:</strong></li>
+<li><strong>PAYG</strong> (Global / Data Zone / Regional Standard): elastic, priced per token.</li>
+<li><strong>PTU</strong> (Provisioned): reserved throughput, predictable latency, not auto-upgraded.</li>
+<li><strong>Batch</strong>: about 50% cheaper with a ~24h target (verify current Azure terms).</li>
+</ul>
+<p>The reference architecture's rule is <strong>PAYG for variable load, PTU for a stable baseline</strong>, implemented as PTU-first priority pools with PAYG spillover (A4).
+- <strong>Sizing from distributions.</strong> Export per-minute token usage by role from gateway metrics, then build business-hours histograms. A practical course heuristic (not a vendor rule): size PTU near the sustained p50–p70 of peak-hours load and let spillover take the bursts. The break-even point depends on the PTU price and throughput per PTU <em>for that model</em>. Use the current Foundry capacity calculator and pricing; numbers are not reproduced here.
+- <strong>Reasoning effort is a capacity knob.</strong> Reasoning tokens are billed and consume the context budget and throughput. Raising effort from low to high can multiply TPM for the same traffic. Every model and effort change triggers a capacity recalculation.
+- <strong>Batch moves offline work off the hot path:</strong>
+  - contextual chunk generation (A3);
+  - nightly uncached eval suites;
+  - monthly SaaS analytics reports;
+  - re-labelling assistance.
+- <strong>Load testing AI workloads:</strong>
+  - Use realistic conversation scripts with think time and a mix of task types: Q&amp;A, analyst, incident workflow (≈15× tokens).
+  - Measure TTFT and end-to-end time, 429 rate, spillover share, the token cost of the test itself, and quality under load (run a sampled eval during the test, because degraded modes change answers).</p>
+<h3 id="5-graceful-degradation">5. Graceful degradation<a class="headerlink" href="#5-graceful-degradation" title="Permanent link">&para;</a></h3>
+<p>Design a <strong>degradation ladder</strong> per capability. Each step is triggered by circuit-breaker state, quota exhaustion, latency SLO burn or a manual switch (feature flags in Azure App Configuration):</p>
+<ol>
+<li><strong>Full experience.</strong> Frontier reasoning model, agentic retrieval, tools.</li>
+<li><strong>Cheaper or faster model role</strong> for non-critical tasks. Planning effort lowered (<code>minimal</code> / extractive retrieval).</li>
+<li><strong>Retrieval-only "search mode"</strong>: cited passages without generation. It is still useful for mechanics.</li>
+<li><strong>Cached or static answers</strong> for FAQs, plus a "queue for later" for analyst queries (Batch).</li>
+<li><strong>Human handoff.</strong> The incident workflow falls back to the manual dispatcher procedure, with the event queue preserved.</li>
+</ol>
+<p><strong>Load shedding by tenant tier.</strong> Premium tenants keep step 1 longest. Internal non-critical agents shed first.</p>
+<p><strong>Always disclose degraded mode to users.</strong> It is a trust issue, and in the EU a transparency expectation.</p>
+<p><strong>Never degrade safety.</strong> Guardrails, permission trimming and HITL are not on the ladder.</p>
+<h3 id="6-slos-for-ai-systems">6. SLOs for AI systems<a class="headerlink" href="#6-slos-for-ai-systems" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>SLI</th>
+<th>Source</th>
+<th>Example SLO (Fleet Assistant, business hours)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Availability (successful responses / valid requests)</td>
+<td>Gateway + app</td>
+<td>99.5% monthly</td>
+</tr>
+<tr>
+<td>TTFT p95</td>
+<td>OTel <code>gen_ai.client.operation.time_to_first_chunk</code> (semconv "Development"; pin version)</td>
+<td>≤ 2.5 s</td>
+</tr>
+<tr>
+<td>Task success (agents)</td>
+<td>Workflow outcome events / state checks</td>
+<td>Incident triage completed without human rework ≥ 85%</td>
+</tr>
+<tr>
+<td>Quality</td>
+<td>Sampled online evaluation: BG-calibrated groundedness judge pass rate</td>
+<td>≥ 92% rolling 7 days</td>
+</tr>
+<tr>
+<td>Safety</td>
+<td>Weekly red-team ASR; guardrail block anomalies</td>
+<td>ASR ≤ 2%</td>
+</tr>
+<tr>
+<td>Cost</td>
+<td>Cost per task P50/P95 from token metrics × price table</td>
+<td>P50 ≤ €0.04 per Q&amp;A</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Error budgets:</strong>
+- Availability budget at 99.5% ≈ 3.6 h/month.
+- Quality budget (8% failing samples) is spent by model drift, index staleness or prompt changes.</p>
+<p><strong>Burn-rate alerts</strong> (fast and slow windows) on availability and quality. When the quality budget is exhausted, feature work pauses for error analysis, just as reliability work does.</p>
+<p><strong>Quality SLIs come from sampling, so state the sample size and confidence.</strong> 200 samples/week gives roughly ±4 points at 90% pass rate (95% CI). Small tenants may need longer windows.</p>
+<h3 id="7-finops-for-ai">7. FinOps for AI<a class="headerlink" href="#7-finops-for-ai" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Unit economics.</strong></li>
+<li>Cost per <strong>task</strong> (not per token): every model call, tool backend, retrieval, judge sampling and allocated fixed cost.</li>
+<li>Aggregated per <strong>tenant</strong> and per <strong>truck</strong> (the SaaS pricing unit).</li>
+<li><strong>Gross margin</strong> = price per truck − variable cost per truck − allocated platform cost.</li>
+<li><strong>Showback/chargeback.</strong></li>
+<li>Token metrics from <code>llm-emit-token-metric</code> with tenant/agent/product dimensions (A4).</li>
+<li>Resource tags (<code>tenant</code>, <code>stamp</code>, <code>ai-system-id</code>) for fixed costs.</li>
+<li>An allocation rule for shared costs (e.g., by token share, or by trucks).</li>
+<li>Monthly showback per internal department; chargeback or margin reports per SaaS tenant.</li>
+<li><strong>Controls:</strong></li>
+<li>per-tenant monthly quotas (<code>llm-token-limit</code>);</li>
+<li>budgets and anomaly alerts;</li>
+<li>a <strong>cost regression gate</strong> in CI (A1 factory increment);</li>
+<li>prompt layout for cache hits (static first);</li>
+<li>model right-sizing per role;</li>
+<li>Batch for offline work;</li>
+<li>cap the tools agents can call. The baseline notes that agents call tools unnecessarily.</li>
+<li><strong>Know where the money goes.</strong> For Trakia internal, the fixed platform (Cosmos DB, AI Search, DDoS Protection per the baseline) plus people dominate. For SaaS at scale, the Fleet Analyst and incident workflows' tokens can dominate variable cost. Your showback must make both visible.</li>
+</ul>
+<p><strong>Misconception to unlearn: "cheaper model = cheaper task".</strong> Per-task cost depends on tokens used, retries and escalations. Measure cost per <em>successful</em> task.</p>
+<h2 id="tools-versions-as-of-oct-2026">Tools &amp; versions (as of Oct 2026)<a class="headerlink" href="#tools-versions-as-of-oct-2026" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Tool / package</th>
+<th>Purpose</th>
+<th>Status</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Foundry model retirements policy + Models API lifecycle status</td>
+<td>Lifecycle register</td>
+<td>GA policy (updated 2026-07-24)</td>
+<td>API "Deprecated" = retired; map explicitly</td>
+</tr>
+<tr>
+<td>Model router <code>2025-11-18</code> (auto-updating), <code>2025-08-07</code>/<code>2025-05-19</code> (frozen)</td>
+<td>Routing; lifecycle risk</td>
+<td>Active / frozen</td>
+<td>Pin frozen version for stability-critical paths</td>
+</tr>
+<tr>
+<td>APIM backend pools (weighted, priority), circuit breaker, <code>llm-emit-token-metric</code>, <code>llm-token-limit</code></td>
+<td>Canary, failover, showback, quotas</td>
+<td>GA</td>
+<td>From A4</td>
+</tr>
+<tr>
+<td>Azure App Configuration feature flags</td>
+<td>Degradation ladder switches</td>
+<td>GA</td>
+<td></td>
+</tr>
+<tr>
+<td>Azure Load Testing (+ k6/NBomber scripts)</td>
+<td>Capacity validation</td>
+<td>GA</td>
+<td>Budget the token cost of tests</td>
+</tr>
+<tr>
+<td><code>Microsoft.Extensions.AI.Evaluation</code> (+ <code>.Reporting</code>, <code>dotnet aieval</code>)</td>
+<td>Pairwise and per-failure-mode gates</td>
+<td>GA (verify versions)</td>
+<td>Cached for PR, uncached nightly</td>
+</tr>
+<tr>
+<td>Foundry continuous evaluation</td>
+<td>Online quality SLI</td>
+<td>Evaluations/monitoring GA Mar 2026 per practitioner source; some evaluators preview</td>
+<td>Requires App Insights</td>
+</tr>
+<tr>
+<td>OTel GenAI semantic conventions</td>
+<td>SLIs (TTFT, tokens)</td>
+<td><strong>Development</strong> (moved to <code>semantic-conventions-genai</code> at v1.42.0)</td>
+<td>Pin; Collector-side mapping</td>
+</tr>
+<tr>
+<td>Azure Monitor / Log Analytics workbooks, KQL</td>
+<td>SLO dashboards, showback</td>
+<td>GA</td>
+<td></td>
+</tr>
+<tr>
+<td>Azure Cost Management + budgets, exports</td>
+<td>FinOps</td>
+<td>GA</td>
+<td>Tag discipline required</td>
+</tr>
+<tr>
+<td>Durable Task Scheduler / MAF checkpoints</td>
+<td>In-flight state recovery</td>
+<td>DTS GA (verify); MAF Durable extension prerelease</td>
+<td></td>
+</tr>
+<tr>
+<td>Azure Chaos Studio</td>
+<td>Fault injection for GameDay</td>
+<td>GA (verify fault coverage for AI services)</td>
+<td>Fallback: gateway policy fault injection</td>
+</tr>
+</tbody>
+</table>
+<h2 id="labs">Labs<a class="headerlink" href="#labs" title="Permanent link">&para;</a></h2>
+<h3 id="lab-1-lifecycle-register-and-an-eval-gated-model-migration-4h">Lab 1 — Lifecycle register and an eval-gated model migration (≈4h)<a class="headerlink" href="#lab-1-lifecycle-register-and-an-eval-gated-model-migration-4h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> Migrate the Fleet Assistant's <code>fleet-reasoning</code> role to a newer model with evidence, a canary and a tested rollback.</li>
+<li><strong>Start state:</strong> branch <code>a5/start</code>. Contains the A4 gateway, the C14 frozen suite (incl. Bulgarian strata and adversarial cases), <code>model-register.yaml</code> (empty), and <strong>your C15 Lab 3 artefacts</strong>: the lifecycle-watcher Actions job, <code>docs/runbooks/model-migration.md</code> and the C17 Lab 5 <code>release/canary-criteria.yaml</code>.</li>
+<li><strong>This lab extends, not re-teaches, the C15 model-retirement drill.</strong> C15 rehearsed one role (A/B, 90/10 weighted backend, runbook, <code>410</code> failover). Here you turn that rehearsal into a fleet-wide, register-driven, multi-stage process. Do not rebuild what already passes; re-run the C15 runbook first (≤ 15 min) and record what it is missing for a SaaS estate.</li>
+<li><strong>Steps:</strong></li>
+<li>Promote the C15 lifecycle-watcher job into <code>lifecycle-watch</code>, a .NET worker. Keep its &lt; 120-day rule and add what C15 lacked: every deployed model (not just pinned roles), explicit state mapping (API "Deprecated" → retired), <code>model-register.yaml</code> filled with deprecation and retirement dates, and an issue on any state change.</li>
+<li>Deploy the candidate model under a new deployment and register it as <code>fleet-reasoning-next</code>.</li>
+<li>Extend the C15 runbook's A/B into the full migration pipeline (new steps beyond C15 are shadow replay, pass^4, ASR and A1 cost deltas):<ul>
+<li>shadow replay of the frozen set plus 300 sampled traces (synthetic or consented);</li>
+<li>pairwise judge;</li>
+<li>per-failure-mode pass rates;</li>
+<li>trajectory evals on the incident workflow (pass^4);</li>
+<li>ASR re-run;</li>
+<li>cost and latency deltas from the A1 model.
+ <div class="highlight"><pre><span></span><code><span class="c1">// Pairwise gate sketch: verify evaluator APIs against current MEAI.Evaluation docs.</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">report</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">MigrationGate</span><span class="p">.</span><span class="n">RunAsync</span><span class="p">(</span>
+<span class="w">    </span><span class="n">baseline</span><span class="p">:</span><span class="w"> </span><span class="n">roles</span><span class="p">[</span><span class="s">"fleet-reasoning"</span><span class="p">],</span><span class="w"> </span><span class="n">candidate</span><span class="p">:</span><span class="w"> </span><span class="n">roles</span><span class="p">[</span><span class="s">"fleet-reasoning-next"</span><span class="p">],</span>
+<span class="w">    </span><span class="n">suite</span><span class="p">:</span><span class="w"> </span><span class="n">FrozenSuite</span><span class="p">.</span><span class="n">Load</span><span class="p">(</span><span class="s">"evals/frozen-v7"</span><span class="p">),</span>
+<span class="w">    </span><span class="n">gates</span><span class="p">:</span><span class="w"> </span><span class="k">new</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">MaxFailureModeRegression</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.02</span><span class="p">,</span><span class="w"> </span><span class="n">MinPairwiseWinOrTie</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.55</span><span class="p">,</span>
+<span class="w">                   </span><span class="n">MaxCostPerTaskIncrease</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.15</span><span class="p">,</span><span class="w"> </span><span class="n">MaxP95TtftIncrease</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.10</span><span class="w"> </span><span class="p">});</span>
+<span class="n">report</span><span class="p">.</span><span class="n">ThrowIfFailed</span><span class="p">();</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>If needed, re-tune the prompt in a branch and re-run. Re-validate the Bulgarian groundedness judge (TPR/TNR) if the judge model changes.</li>
+<li>Canary via the C15/C17 APIM weighted pool, extended from a single 90/10 stage to 5% → 25% → 100%, reusing <code>release/canary-criteria.yaml</code> and adding online eval sampling and A1 success metrics compared per arm. Update <code>docs/runbooks/model-migration.md</code> with the diff from the C15 version.</li>
+<li>Write <code>runbooks/model-migration.md</code> and the migration ADR.</li>
+<li><strong>Break it:</strong> The instructor switches a Standard deployment's version underneath you (simulating auto-upgrade). The PR suite (cached) stays green. Your <strong>nightly uncached suite</strong> and a <code>gen_ai.response.model</code> change alert must catch it within one cycle.</li>
+<li><strong>Acceptance criteria:</strong></li>
+<li><code>lifecycle-watch</code> tests pass, including the state-mapping test.</li>
+<li>The migration report is committed and all gates are evaluated.</li>
+<li>The canary is recorded with per-arm metrics.</li>
+<li>Rollback is executed and timed (&lt; 10 min).</li>
+<li>The silent upgrade is detected by the nightly job.</li>
+<li><strong>Stretch:</strong> Plan the <em>embedding</em> model migration as well (A3 aliases) and the judge-model migration. Produce a 12-month migration calendar for all roles with effort estimates fed back into A1.</li>
+</ul>
+<h3 id="lab-2-multi-region-dr-by-reconstruction-and-gameday-4h">Lab 2 — Multi-region DR by reconstruction and GameDay (≈4h)<a class="headerlink" href="#lab-2-multi-region-dr-by-reconstruction-and-gameday-4h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> Prove you can lose the primary region and restore service within targets, inside the EU.</li>
+<li><strong>Start state:</strong> <code>a5/lab2-start</code>. Contains the A2 landing-zone parameters for a secondary EU region and agents-as-code from C17/A4.</li>
+<li><strong>Steps:</strong></li>
+<li>Classify the state using the Concepts §3 table, set RPO/RTO per state, and get sign-off from the "business" (the instructor).</li>
+<li>Provision the secondary region:<ul>
+<li>gateway backends;</li>
+<li>model deployments with <strong>quota confirmed</strong>;</li>
+<li>a warm AI Search index fed by the same pipeline (or a measured rebuild path);</li>
+<li>Cosmos DB replication/backup per your RPO (verify current modes);</li>
+<li>Durable Task Scheduler/checkpoint store strategy for in-flight approvals.</li>
+</ul>
+</li>
+<li>Script <strong>reconstruction</strong>: a pipeline that recreates Foundry projects, connections, agents and guardrails from code in the secondary region, and runs the smoke evals.</li>
+<li>Configure APIM failover (priority pools across regions) and the front-end routing.</li>
+<li><strong>GameDay.</strong> The instructor "fails" the primary by blocking its private endpoints or disabling backends. Execute the runbook, measure the actual RTO/RPO, run smoke evals through the failed-over path, then fail back.</li>
+<li><strong>Break it:</strong> During the GameDay an incident workflow is waiting on a human approval. After failover the approval must still be pending (not lost, not duplicated), and approving it must complete the booking exactly once.</li>
+<li><strong>Acceptance criteria:</strong></li>
+<li>Measured RTO ≤ target for the Fleet Assistant (e.g., 1h) and the incident workflow.</li>
+<li>The pending approval survives failover.</li>
+<li>Smoke evals pass in the secondary region.</li>
+<li>The runbook is updated with real timings.</li>
+<li>The postmortem (blameless, with ≥ 3 architecture actions) is committed.</li>
+<li><strong>Stretch:</strong> Measure a <em>cold</em> index rebuild at SaaS year-1 scale. Decide per tenant tier whether warm secondary indexes are worth their cost, using the A1 model.</li>
+</ul>
+<h3 id="lab-3-capacity-plan-ptu-break-even-and-load-validation-3h">Lab 3 — Capacity plan, PTU break-even and load validation (≈3h)<a class="headerlink" href="#lab-3-capacity-plan-ptu-break-even-and-load-validation-3h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> Size capacity from data and prove it under load.</li>
+<li><strong>Start state:</strong> <code>a5/lab3-start</code>. Contains 4 weeks of gateway token metrics (synthetic SaaS growth included) and the Azure Load Testing scripts skeleton.</li>
+<li><strong>Steps:</strong></li>
+<li>KQL: per-minute TPM by role and tenant. Build business-hours percentiles (p50/p70/p95/max) and the Monday-08:00 peak.
+     <div class="highlight"><pre><span></span><code><span class="n">customMetrics</span>
+<span class="p">|</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="s">"Total Tokens"</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">customDimensions</span><span class="p">.</span><span class="n">namespace</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="s">"trakia-ai"</span>
+<span class="p">|</span><span class="w"> </span><span class="k">summarize</span><span class="w"> </span><span class="n">tpm</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">sum</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">bin</span><span class="p">(</span><span class="n">timestamp</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="n">m</span><span class="p">),</span><span class="w"> </span><span class="n">role</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">tostring</span><span class="p">(</span><span class="n">customDimensions</span><span class="p">.</span><span class="n">role</span><span class="p">)</span>
+<span class="p">|</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">hourofday</span><span class="p">(</span><span class="n">timestamp</span><span class="p">)</span><span class="w"> </span><span class="k">between</span><span class="w"> </span><span class="p">(</span><span class="mi">6</span><span class="w"> </span><span class="p">..</span><span class="w"> </span><span class="mi">19</span><span class="p">)</span>
+<span class="p">|</span><span class="w"> </span><span class="k">summarize</span><span class="w"> </span><span class="n">p50</span><span class="p">=</span><span class="n">percentile</span><span class="p">(</span><span class="n">tpm</span><span class="p">,</span><span class="mi">50</span><span class="p">),</span><span class="w"> </span><span class="n">p70</span><span class="p">=</span><span class="n">percentile</span><span class="p">(</span><span class="n">tpm</span><span class="p">,</span><span class="mi">70</span><span class="p">),</span><span class="w"> </span><span class="n">p95</span><span class="p">=</span><span class="n">percentile</span><span class="p">(</span><span class="n">tpm</span><span class="p">,</span><span class="mi">95</span><span class="p">),</span><span class="w"> </span><span class="n">peak</span><span class="p">=</span><span class="n">max</span><span class="p">(</span><span class="n">tpm</span><span class="p">)</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">role</span>
+</code></pre></div></li>
+<li>
+<p>Model three options per role in <code>Trakia.CostModel</code>:</p>
+<ul>
+<li>(a) PAYG only;</li>
+<li>(b) PTU sized at p50/p70 + PAYG spillover;</li>
+<li>(c) (b) plus Batch for offline workloads.</li>
+</ul>
+<p>Use current prices and PTU throughput for your model from the official calculator (record the source and date).
+  3. Run the load test at projected year-1 SaaS peak with a realistic task mix. Measure 429s, spillover share, TTFT p95, cost per task and quality on a sampled eval during load.
+  4. Write <strong>ADR-A5-002 "Capacity strategy per model role"</strong>.
+- <strong>Break it:</strong> Raise reasoning effort on the incident workflow from low to high. Re-measure TPM and cost per task, and show the capacity plan breaking. Decide whether the quality gain (from the eval) is worth it, or whether effort should be <code>auto</code>/selective.
+- <strong>Acceptance criteria:</strong>
+  - The capacity model is reproducible from code with sourced prices.
+  - The load test meets TTFT and error SLOs at the projected peak under the chosen option.
+  - The ADR includes break-even analysis and triggers to revisit (e.g., sustained utilisation &gt; 85%).
+- <strong>Stretch:</strong> Add the model router in Cost mode for the Q&amp;A role as a fourth option. Account for its auto-update risk and smallest-context-window constraint.</p>
+</li>
+</ul>
+<h3 id="lab-4-degradation-ladder-and-ai-slos-25h">Lab 4 — Degradation ladder and AI SLOs (≈2.5h)<a class="headerlink" href="#lab-4-degradation-ladder-and-ai-slos-25h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> Overload and dependency failures degrade the experience predictably, and SLOs make quality visible.</li>
+<li><strong>Start state:</strong> <code>a5/lab4-start</code>.</li>
+<li><strong>Steps:</strong></li>
+<li>Implement the ladder for the Fleet Assistant and the incident workflow: App Configuration flags plus automatic triggers (APIM breaker open, quota near exhaustion, TTFT burn). Implement the "search mode" response (citations only) and "queued for later" for analyst queries.</li>
+<li>Show the degraded-mode banner in the UI and Teams card. Log the mode on every span (<code>trakia.degradation.level</code>).</li>
+<li>Define SLOs (Concepts §6) in <code>slo.yaml</code>. Build the workbook and burn-rate alerts (1h/6h windows) for availability, TTFT and quality (sampled online eval).</li>
+<li>Inject faults: gateway policy returning 429/503 for 20% of calls, +3s latency on the knowledge MCP server, an AI Search outage (Chaos Studio where supported; otherwise gateway or app fault injection).</li>
+<li><strong>Break it:</strong> During the latency fault, a well-meaning flag disables the guardrail "to save latency". Your policy test must fail the configuration change, because safety is not on the ladder.</li>
+<li><strong>Acceptance criteria:</strong></li>
+<li>Each fault produces the expected ladder step within 2 minutes.</li>
+<li>User-visible error rate stays ≤ SLO.</li>
+<li>Burn-rate alerts fire for the injected quality regression (instructor swaps in a weak prompt).</li>
+<li>The guardrail-disable change is rejected by CI.</li>
+<li><strong>Stretch:</strong> Make shedding tenant-tier aware. Show premium tenants retain step 1 while standard tenants are on step 2 during a capacity event.</li>
+</ul>
+<h3 id="lab-5-finops-unit-economics-and-per-tenant-showback-25h">Lab 5 — FinOps: unit economics and per-tenant showback (≈2.5h)<a class="headerlink" href="#lab-5-finops-unit-economics-and-per-tenant-showback-25h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> Answer "what does each tenant cost and earn?" from data, monthly, automatically.</li>
+<li><strong>Start state:</strong> <code>a5/lab5-start</code>. Contains gateway metrics with tenant dimensions, cost exports and the tag policy from A6 (preview).</li>
+<li><strong>Steps:</strong></li>
+<li>Join token metrics × price table (variable cost), plus tagged resource costs (stamp and tenant), plus an allocation of shared platform cost (rule documented). Compute cost per task (successful tasks only in the denominator), per tenant, per truck.</li>
+<li>Build the showback workbook with internal departments, SaaS tenants, trend, anomalies (a cost-per-task z-score) and top cost drivers (agent, tool, model role).</li>
+<li>Compute gross margin per SaaS tenant at the A1 price hypothesis. Derive the <strong>price floor</strong> per truck per isolation tier (pooled/bridge/silo from A3).</li>
+<li>Add budgets and anomaly alerts per tenant. Connect the monthly quota (A4) to the plan.</li>
+<li><strong>Break it:</strong> One tenant's integration loops A2A calls overnight. The anomaly alert must fire before the monthly quota is consumed, and the showback must attribute the cost correctly.</li>
+<li><strong>Acceptance criteria:</strong></li>
+<li>Unit-economics numbers reconcile with Cost Management totals (± 5%).</li>
+<li>Every resource carries the required tags (policy compliance).</li>
+<li>The margin report is generated by pipeline.</li>
+<li>The anomaly is detected within 1 hour of onset.</li>
+<li><strong>Stretch:</strong> Present a one-slide "cost to serve" story to the ARB "CFO": where margin comes from, which tier loses money, and which architectural lever fixes it.</li>
+</ul>
+<h2 id="kata">Kata<a class="headerlink" href="#kata" title="Permanent link">&para;</a></h2>
+<p><strong>"Retirement notice in your inbox"</strong> (30 min, repeat).</p>
+<p>You receive a simulated notice: model X retires in 75 days. In 30 minutes, produce:</p>
+<ul>
+<li>the affected roles and agents (from the register);</li>
+<li>the migration plan with dates working backwards from retirement, including canary and buffer;</li>
+<li>the evals to run, including judges that use the model;</li>
+<li>the capacity and cost implications (PTU not auto-upgraded? new token profile?);</li>
+<li>the stakeholder message.</li>
+</ul>
+<p>Variations:
+- a partner model with a 12-month lifecycle;
+- a PTU deployment;
+- an embedding model (re-index);
+- the judge model;
+- the model router's auto-update changing the pool;
+- a preview model your SaaS feature depends on (~90 days).</p>
+<h2 id="product-increment-fleet-ops-copilot">Product increment — Fleet Ops Copilot<a class="headerlink" href="#product-increment-fleet-ops-copilot" title="Permanent link">&para;</a></h2>
+<p>The product is now <strong>operable at scale</strong>:</p>
+<ul>
+<li>model lifecycle register with automated watch, and a rehearsed migration pipeline with pairwise gates and canary;</li>
+<li>active-passive EU DR by reconstruction, with measured RTO/RPO and approvals that survive failover;</li>
+<li>a capacity plan per model role validated by load tests;</li>
+<li>a degradation ladder;</li>
+<li>AI SLOs with error budgets (availability, TTFT, quality, safety, cost);</li>
+<li>per-tenant unit economics with a price floor per isolation tier.</li>
+</ul>
+<h2 id="factory-increment-your-agentic-sdlc">Factory increment — your agentic SDLC<a class="headerlink" href="#factory-increment-your-agentic-sdlc" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong><code>lifecycle-watch</code></strong> opens issues automatically. A <strong>migration agent</strong> (custom Copilot/Claude Code agent) prepares the candidate deployment PR, runs the migration gate and drafts the report and ADR for human review. It never promotes past canary on its own.</li>
+<li><strong>Nightly uncached eval suite</strong> plus the <code>gen_ai.response.model</code> drift alert. A <strong>cost regression gate</strong> and a <strong>capacity recalculation</strong> job run on any model, effort or prompt change.</li>
+<li><strong>Policy tests</strong> prevent configuration changes that put safety controls on the degradation ladder.</li>
+<li><strong>GameDay as code:</strong> fault-injection scripts and a smoke-eval verification step, runnable quarterly from the pipeline.</li>
+</ul>
+<h2 id="assessment">Assessment<a class="headerlink" href="#assessment" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th>Novice</th>
+<th>Competent</th>
+<th>Proficient</th>
+<th>Expert</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Model lifecycle &amp; migration</td>
+<td>Hard-coded model names</td>
+<td>Config-based models</td>
+<td>Register with dates and automated watch; pairwise, per-failure-mode gates; canary and timed rollback</td>
+<td>Plus judge/embedding migrations planned, migration calendar costed, silent-upgrade detection proven</td>
+</tr>
+<tr>
+<td>DR &amp; failover</td>
+<td>"Azure is redundant"</td>
+<td>Backup of some data</td>
+<td>State classified with RPO/RTO; reconstruction pipeline; GameDay with measured results and postmortem</td>
+<td>Plus residency-aware pairing, in-flight approval continuity, tier-based warm/cold decisions priced</td>
+</tr>
+<tr>
+<td>Capacity &amp; degradation</td>
+<td>Average-based sizing</td>
+<td>Quotas requested</td>
+<td>Distribution-based PTU/PAYG/Batch plan validated by load test; degradation ladder with triggers</td>
+<td>Plus reasoning-effort impact quantified, tenant-tier shedding, safety excluded from ladder by policy</td>
+</tr>
+<tr>
+<td>SLOs</td>
+<td>Uptime only</td>
+<td>Latency + availability</td>
+<td>Quality, safety and cost SLOs with error budgets and burn-rate alerts</td>
+<td>Plus sample-size/CI reasoning, quality budget policy that pauses feature work</td>
+</tr>
+<tr>
+<td>FinOps</td>
+<td>Monthly bill</td>
+<td>Token totals</td>
+<td>Cost per successful task, per tenant, per truck; showback; anomaly alerts</td>
+<td>Plus margin and price floor per isolation tier, levers tied to architecture decisions</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Auto-checked:</strong>
+- <code>lifecycle-watch</code> tests;
+- migration gate report;
+- rollback timing;
+- nightly drift detection;
+- GameDay smoke evals and RTO measurement;
+- approval-continuity test;
+- capacity model reproducibility;
+- load-test thresholds;
+- degradation trigger tests;
+- policy rejection;
+- burn-rate alert firing;
+- cost reconciliation (± 5%);
+- tag compliance.</p>
+<h2 id="common-pitfalls">Common pitfalls<a class="headerlink" href="#common-pitfalls" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Hard-coded model or deployment names, so migration becomes a code search.</li>
+<li>Migrating at day 59 of 60, with no time left for a canary or rollback.</li>
+<li>Gating migrations on aggregate scores only, hiding per-failure-mode (e.g., Bulgarian) regressions. Forgetting that judges also need migration.</li>
+<li>Cached CI evals only, so provider drift goes unnoticed.</li>
+<li>Assuming Foundry gives DR. Forgetting quota in the DR region. Losing pending HITL approvals on failover.</li>
+<li>Choosing a non-EU failover region for EU personal data.</li>
+<li>Sizing PTU on averages. Ignoring reasoning tokens.</li>
+<li>Degrading safety controls to meet latency.</li>
+<li>Cost per token instead of cost per successful task. Shared costs left unallocated, so SaaS margins look fictional.</li>
+</ul>
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Foundry model retirements (lifecycle durations, 60-day notice, 410 Gone, PTU not auto-upgraded): https://learn.microsoft.com/en-us/azure/foundry/openai/concepts/model-retirements</li>
+<li>Model router concepts (versions, modes, failover subset): https://learn.microsoft.com/en-us/azure/ai-foundry/openai/concepts/model-router</li>
+<li>Baseline Microsoft Foundry chat RA (reliability, no built-in DR, PAYG vs PTU, cost drivers): https://learn.microsoft.com/en-us/azure/architecture/ai-ml/architecture/baseline-microsoft-foundry-chat</li>
+<li>APIM AI gateway (priority pools, circuit breaker with Retry-After, token metrics): https://learn.microsoft.com/en-us/azure/api-management/genai-gateway-capabilities</li>
+<li>Multitenant AI/ML (noisy neighbours, per-resource limits): https://learn.microsoft.com/en-us/azure/architecture/guide/multitenant/approaches/ai-machine-learning</li>
+<li>MEAI Evaluation libraries (caching, reporting, online evaluation): https://learn.microsoft.com/en-us/dotnet/ai/evaluation/libraries</li>
+<li>Foundry agent evaluations and continuous evaluation (practitioner source): https://jannikreinhard.com/microsoft-foundry-agent-evaluations/</li>
+<li>OTel GenAI semconv status: https://www.dash0.com/knowledge/opentelemetry-genai-semantic-conventions-explained ; https://dev.to/azena-ai/opentelemetrys-genai-semantic-conventions-are-not-stable-yet-heres-what-actually-shipped-in-2026-3mke</li>
+<li>MAF HITL and checkpoints: https://learn.microsoft.com/en-us/agent-framework/workflows/human-in-the-loop ; Durable extension: https://learn.microsoft.com/en-us/agent-framework/hosting/azure-functions</li>
+<li>Content Safety API deprecation policy and regions: https://learn.microsoft.com/en-gb/azure/ai-services/content-safety/overview</li>
+<li>Per-task vs per-token cost (aggregator, indicative): https://www.digitalapplied.com/blog/ai-model-releases-september-2026-tracker</li>
+<li>τ-bench / pass^k: https://arxiv.org/abs/2406.12045</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../a04-agent-platform-and-integration-architecture/" class="md-footer__link md-footer__link--prev" aria-label="Previous: A4 — Agent platform &amp; integration architecture">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                A4 — Agent platform & integration architecture
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../a06-ai-governance-risk-and-compliance-architecture/" class="md-footer__link md-footer__link--next" aria-label="Next: A6 — AI governance, risk &amp; compliance architecture">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                A6 — AI governance, risk & compliance architecture
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.top", "navigation.footer", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

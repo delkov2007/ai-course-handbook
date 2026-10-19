@@ -5,6 +5,8 @@ docs_dir: book
 site_dir: site
 exclude_docs: 'SUMMARY.md
 
+  i18n/
+
   '
 theme:
   name: material
@@ -24,6 +26,7 @@ theme:
     toggle:
       icon: material/weather-sunny
       name: Light mode
+  language: en
 markdown_extensions:
 - tables
 - admonition
@@ -86,3 +89,100 @@ nav:
 - Appendix:
   - Glossary: appendix/glossary.md
   - Further reading: appendix/references.md
+plugins:
+- search
+- i18n:
+    docs_structure: suffix
+    fallback_to_default: true
+    reconfigure_material: true
+    reconfigure_search: true
+    languages:
+    - locale: en
+      default: true
+      name: English
+      build: true
+    - locale: bg
+      name: Български
+      build: true
+      site_name: AI Solution Developer & Architect — Наръчник за курсиста
+      nav_translations:
+        Start here: Започнете оттук
+        How to use this handbook: Как да използвате наръчника
+        Course overview: Преглед на курса
+        Assessment and gates: Оценяване и гейтове
+        Competency matrix: Матрица на компетентностите
+        Part 1 — Foundations (Level 1): Част 1 — Основи (ниво 1)
+        Part 2 — Building blocks (Level 2): Част 2 — Градивни елементи (ниво 2)
+        Part 3 — Production systems (Level 3): Част 3 — Продукционни системи (ниво
+          3)
+        'Part 4 — Expert track: AI Solution Developer': 'Част 4 — Експертна специализация:
+          AI Solution Developer'
+        'Part 5 — Expert track: AI Solution Architect': 'Част 5 — Експертна специализация:
+          AI Solution Architect'
+        Part 6 — Joint capstone: Част 6 — Съвместен финален проект
+        Capstone: Финален проект
+        Appendix: Приложение
+        Glossary: Речник на термините
+        Further reading: Допълнителна литература
+        C0 — Orientation, setup & toolchain: C0 — Ориентация, настройка и инструменти
+        'C1 — How generative AI works: an engineer''s mental model': 'C1 — Как работи
+          генеративният AI: мисловен модел за инженери'
+        C2 — Your first AI feature in .NET: C2 — Първата ви AI функционалност в .NET
+        C3 — Prompting, structured outputs & tool calling: C3 — Промптинг, структуриран
+          изход и извикване на инструменти
+        'C4 — Working with coding agents: the Factory, day one': 'C4 — Работа с кодиращи
+          агенти: Фабриката, първи ден'
+        C5 — Evals from day one: C5 — Evals от първия ден
+        C6 — Embeddings & vector search: C6 — Embeddings и векторно търсене
+        'C7 — RAG: from documents to cited, permission-aware answers': 'C7 — RAG:
+          от документи до отговори с цитати, съобразени с правата на достъп'
+        C8 — Tools & the Model Context Protocol: C8 — Инструменти и Model Context
+          Protocol
+        C9 — Agents with Microsoft Agent Framework: C9 — Агенти с Microsoft Agent
+          Framework
+        'C10 — Agents over structured data: text-to-SQL on SQL Server': 'C10 — Агенти
+          върху структурирани данни: text-to-SQL върху SQL Server'
+        'C11 — Agentic testing: AI-driven TDD, mutation & E2E test agents': 'C11 —
+          Агентно тестване: TDD с AI, мутационно тестване и агенти за E2E тестове'
+        C12 — Workflows & multi-agent orchestration: C12 — Workflows и многоагентна
+          оркестрация
+        C13 — Context engineering, advanced retrieval & memory: C13 — Инженеринг на
+          контекста, напреднало извличане и памет
+        C14 — Failure-driven evals, LLM judges & red teaming: C14 — Evals, водени
+          от грешките, LLM съдии и red teaming
+        C15 — Observability, GenAIOps & cost: C15 — Наблюдаемост, GenAIOps и разходи
+        C16 — Security for LLM & agentic systems: C16 — Сигурност на LLM и агентни
+          системи
+        'C17 — Shipping to Azure: hosting, AI gateway, IaC & interop': 'C17 — Пускане
+          в Azure: хостинг, AI gateway, IaC и оперативна съвместимост'
+        C18 — Responsible AI & the EU AI Act in practice: C18 — Отговорен AI и Актът
+          за изкуствения интелект на ЕС на практика
+        'C19 — The automated SDLC: agents from issue to production': 'C19 — Автоматизираният
+          SDLC: агенти от issue до продукция'
+        D1 — Model customization & small/local models: D1 — Адаптиране на модели и
+          малки/локални модели
+        D2 — Long-running, durable & autonomous agents: D2 — Дълго работещи, устойчиви
+          и автономни агенти
+        D3 — Multimodal & realtime agents: D3 — Мултимодални агенти и агенти в реално
+          време
+        D4 — Agent UX & front-ends: D4 — UX и фронтенди за агенти
+        D5 — Performance & cost engineering: D5 — Инженеринг на производителността
+          и разходите
+        D6 — Building your own agent tooling: D6 — Изграждане на собствени инструменти
+          за агенти
+        D7 — Agent reliability engineering: D7 — Инженеринг на надеждността на агенти
+        A1 — AI strategy, use-case discovery & business case: A1 — AI стратегия, откриване
+          на сценарии на употреба и бизнес обосновка
+        A2 — Azure AI reference architectures & Well-Architected for AI: A2 — Референтни
+          AI архитектури в Azure и Well-Architected за AI
+        A3 — Enterprise knowledge & data architecture for AI: A3 — Корпоративна архитектура
+          на знанията и данните за AI
+        A4 — Agent platform & integration architecture: A4 — Платформа за агенти и
+          интеграционна архитектура
+        A5 — Reliability, scale, model lifecycle & FinOps: A5 — Надеждност, мащаб,
+          жизнен цикъл на моделите и FinOps
+        A6 — AI governance, risk & compliance architecture: A6 — Архитектура за управление
+          на AI, риска и съответствието
+        A7 — The architect's craft in AI programmes: A7 — Занаятът на архитекта в
+          AI програми
+        Welcome: Добре дошли

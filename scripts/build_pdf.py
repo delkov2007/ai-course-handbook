@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """Build the handbook PDF from book/SUMMARY.md order: pandoc (Markdown -> HTML) + headless Chromium (HTML -> PDF).
 
-Usage:  python3 scripts/build_pdf.py            (run from the repo root)
+Usage:  python3 scripts/build_pdf.py [--lang en|bg]   (run from the repo root; default builds both)
 Needs:  pandoc, Python 'playwright' with Chromium installed (pip install playwright && playwright install chromium)
 """
-import re, subprocess, pathlib, html, sys
+import re, subprocess, pathlib, html, sys, argparse
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 BOOK = ROOT / 'book'
@@ -34,7 +34,7 @@ a { color: #0b5cd5; text-decoration: none; }
 .cover h1 { page-break-before: avoid; border: none; font-size: 30pt; }
 .cover .sub { font-size: 14pt; color: #57606a; margin-top: 6pt; }
 nav#TOC { page-break-before: always; }
-nav#TOC::before { content: "Contents"; display: block; font-size: 22pt; font-weight: bold; margin-bottom: 10pt; }
+nav#TOC::before { content: var(--toc-title); display: block; font-size: 22pt; font-weight: bold; margin-bottom: 10pt; }
 nav#TOC ul { list-style: none; padding-left: 0; }
 nav#TOC > ul > li { margin-top: 6pt; }
 nav#TOC ul ul { padding-left: 14pt; }
@@ -53,49 +53,83 @@ def order():
             files.append((current, m.group(2)))
     return files
 
+STRINGS = {
+    'en': {'title': 'AI Solution Developer & Architect — Learner Handbook',
+           'cover1': 'AI Solution Developer &amp; AI Solution Architect',
+           'cover2': 'Learner Handbook · Release 2026.11 · content as of October 2026',
+           'cover3': 'Learning by doing on one evolving product, gated by evals',
+           'footer': 'AI Solution Developer &amp; Architect — Learner Handbook · 2026.11',
+           'toc': 'Contents', 'parts': {}},
+    'bg': {'title': 'AI Solution Developer & Architect — Наръчник за курсиста',
+           'cover1': 'AI Solution Developer &amp; AI Solution Architect',
+           'cover2': 'Наръчник за курсиста · Версия 2026.11 · съдържание към октомври 2026 г.',
+           'cover3': 'Учене чрез правене върху един развиващ се продукт, с гейтове, базирани на evals',
+           'footer': 'AI Solution Developer &amp; Architect — Наръчник за курсиста · 2026.11',
+           'toc': 'Съдържание',
+           'parts': {}},  # filled from book/i18n/ui-bg.yml if present
+}
+
+def localized(rel, lang):
+    if lang == 'en':
+        return rel
+    cand = rel[:-3] + f'.{lang}.md'
+    return cand if (BOOK / cand).exists() else rel
+
 def main():
+    ap = argparse.ArgumentParser(); ap.add_argument('--lang', choices=['en', 'bg'])
+    args = ap.parse_args()
+    for lang in ([args.lang] if args.lang else ['en', 'bg']):
+        build(lang)
+
+def build(lang):
+    S = STRINGS[lang]
+    ui = BOOK / 'i18n' / f'ui-{lang}.yml'
+    if ui.exists():
+        import yaml
+        S['parts'].update((yaml.safe_load(ui.read_text()) or {}).get('parts', {}))
     seq = order()
     md_parts, last_part = [], None
     for part, rel in seq:
         if part and part != last_part and part.startswith('Part'):
-            md_parts.append(f'\n\n# {part} {{.part}}\n\n')
+            md_parts.append(f'\n\n# {S["parts"].get(part, part)} {{.part}}\n\n')
         last_part = part
+        rel = localized(rel, lang)
         text = (BOOK / rel).read_text()
         depth = rel.count('/')
         text = text.replace('../' * depth + 'assets/', 'assets/') if depth else text
         # internal .md links -> plain text targets are not navigable in PDF; keep link text only
         text = re.sub(r'\[([^\]]+)\]\((?!https?://)[^)]+\.md(#[^)]*)?\)', r'\1', text)
         md_parts.append('\n\n' + text + '\n\n')
-    combined = BOOK / '_combined.md'
+    combined = BOOK / f'_combined_{lang}.md'
     combined.write_text(''.join(md_parts))
     html_body = subprocess.run(
         ['pandoc', str(combined), '-f', 'gfm+attributes', '-t', 'html5', '--toc', '--toc-depth=1', '--standalone',
-         '--metadata', 'title=AI Solution Developer & Architect — Learner Handbook', '--highlight-style=tango',
+         '--metadata', f'title={S["title"]}', '--metadata', f'lang={lang}', '--highlight-style=tango',
          '--resource-path', str(BOOK)], capture_output=True, text=True, check=True).stdout
     combined.unlink()
-    cover = ('<div class="cover"><h1>AI Solution Developer &amp; AI Solution Architect</h1>'
-             '<div class="sub">Learner Handbook · Release 2026.11 · content as of October 2026</div>'
-             '<div class="sub">Learning by doing on one evolving product, gated by evals</div></div>')
+    cover = (f'<div class="cover"><h1>{S["cover1"]}</h1>'
+             f'<div class="sub">{S["cover2"]}</div>'
+             f'<div class="sub">{S["cover3"]}</div></div>')
     html_doc = re.sub(r'<header id="title-block-header">.*?</header>', cover, html_body, flags=re.S)
-    html_doc = html_doc.replace('</head>', f'<style>{CSS}</style></head>')
+    html_doc = html_doc.replace('</head>', f'<style>:root{{--toc-title:"{S["toc"]}"}}{CSS}</style></head>')
     html_doc = re.sub(r'<style>\s*html \{.*?</style>', '', html_doc, count=1, flags=re.S)  # drop pandoc default css
-    page = BOOK / '_print.html'
+    page = BOOK / f'_print_{lang}.html'
     page.write_text(html_doc)
     from playwright.sync_api import sync_playwright
     with sync_playwright() as p:
         b = p.chromium.launch()
         pg = b.new_page()
         pg.goto(page.as_uri(), wait_until='load')
-        pg.pdf(path=str(OUT / 'AI-Solution-Developer-Architect-Learner-Handbook.pdf'), format='A4',
+        pg.pdf(path=str(OUT / f'AI-Solution-Developer-Architect-Learner-Handbook-{lang.upper()}.pdf'), format='A4',
                display_header_footer=True, print_background=True, outline=True, tagged=True,
                header_template='<div></div>',
                footer_template='<div style="font-size:7pt;color:#888;width:100%;padding:0 18mm;display:flex;justify-content:space-between">'
-                               '<span>AI Solution Developer &amp; Architect — Learner Handbook · 2026.11</span>'
+                               f'<span>{S["footer"]}</span>'
                                '<span><span class="pageNumber"></span> / <span class="totalPages"></span></span></div>',
                margin={'top': '18mm', 'bottom': '20mm', 'left': '16mm', 'right': '16mm'})
         b.close()
     page.unlink()
-    print('PDF written to', OUT / 'AI-Solution-Developer-Architect-Learner-Handbook.pdf')
+    print('PDF written to', OUT / f'AI-Solution-Developer-Architect-Learner-Handbook-{lang.upper()}.pdf')
 
 if __name__ == '__main__':
     sys.exit(main())

@@ -1,0 +1,6 @@
+# GitBook Git Sync configuration: the book lives in ./book
+root: ./book/
+
+structure:
+  readme: README.md
+  summary: SUMMARY.md
